@@ -69,7 +69,7 @@ Note: Just use the built in visual studio code git stuff, it's easiar. I'm leavi
 Sam Rabb-Jaros  @GethrexFe(Lead programmer 1)
 -------------------------------------------------------
 Jai Setty @IBHishere(Cool deaL Programmer)
-------------------------------------------------------
+_______________________________________________________
 Harrison @Hbg1010 
 _______________________________________________________
 Andrew Makarevich @andrewm24 (Space Programmer)
