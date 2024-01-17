@@ -16,4 +16,30 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+
+public static final int LEFT_FRONT_DRIVE_SPEED_MOTOR_PIN = 0;
+public static final int LEFT_BACK_DRIVE_SPEED_MOTOR_PIN = 0;
+public static final int RIGHT_FRONT_DRIVE_SPEED_MOTOR_PIN = 0;
+public static final int RIGHT_BACK_DRIVE_SPEED_MOTOR_PIN = 0;
+
+public static final int LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN = 0;
+public static final int LEFT_BACK_DRIVE_DIRECTION_MOTOR_PIN = 0;
+public static final int RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN = 0;
+public static final int RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN = 0;
+
+
+public static final int LEFT_FRONT_DRIVE_DISTANCE_ENCODER_PIN = 0;
+public static final int LEFT_BACK_DRIVE_DISTANCE_ENCODER_PIN = 0;
+public static final int RIGHT_FRONT_DRIVE_DISTANCE_ENCODER_PIN = 0;
+public static final int RIGHT_BACK_DRIVE_DISTANCE_ENCODER_PIN = 0;
+
+public static final int LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN = 0;
+public static final int LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN = 0;
+public static final int RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN = 0;
+public static final int RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN = 0;
+public static final int MXP_PORT = 0;
+
+public static final double wheelP = 0.02;
+public static final double wheelI = 0.001;
+public static final double wheelD = 0.0;
 }
