@@ -99,11 +99,10 @@ SwerveDriveWheel RIGHT_BACK_DRIVE_WHEEL;
      RIGHT_BACK_DRIVE_DIRECTION_ENCODER = new CANcoder(Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN);
 
      // Direction encoder wrapper that scales to degrees
-     LEFT_FRONT_DRIVE_DIRECTION_SCALED = () -> { return (LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition % 1)*360;};
-     LEFT_BACK_DRIVE_DIRECTION_SCALED = () -> { return (LEFT_BACK_DRIVE_DIRECTION_ENCODER.getPosition % 1)*360;};
-     RIGHT_FRONT_DRIVE_DIRECTION_SCALED = () -> { return (RIGHT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition % 1)*360;};
-     RIGHT_BACK_DRIVE_DIRECTION_SCALED = () -> { return (RIGHT_BACK_DRIVE_DIRECTION_ENCODER.getPosition % 1)*360;};
-
+     DoubleSupplier LEFT_FRONT_DRIVE_DIRECTION_SCALED = () -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble();
+     DoubleSupplier LEFT_BACK_DRIVE_DIRECTION_SCALED = () -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble();
+     DoubleSupplier RIGHT_FRONT_DRIVE_DIRECTION_SCALED =() -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble();
+     DoubleSupplier RIGHT_BACK_DRIVE_DIRECTION_SCALED = () -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble();
      // Gyro
      DRIVE_GYRO = new Pigeon2(Constants.MXP_PORT);
 
@@ -117,6 +116,25 @@ SwerveDriveWheel RIGHT_BACK_DRIVE_WHEEL;
      SWERVE_DRIVE_COORDINATOR = new SwerveDriveCoordinator(LEFT_FRONT_DRIVE_WHEEL, LEFT_BACK_DRIVE_WHEEL, RIGHT_FRONT_DRIVE_WHEEL, RIGHT_BACK_DRIVE_WHEEL);
     
 }
+public class degreeSupplier{
+public CANcoder encoder;
+public degreeSupplier(CANcoder encoder){
+this.encoder=encoder;
+
+
+} 
+public double getDegrees(){
+return (this.encoder.getPosition().getValueAsDouble() % 1)*360;
+
+}
+public double getAsDouble(){
+return (this.encoder.getPosition().getValueAsDouble() % 1)*360;
+
+}
+
+
+}
+
 
 public class SwerveDriveWheel
 {

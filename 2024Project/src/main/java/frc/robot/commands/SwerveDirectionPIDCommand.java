@@ -11,6 +11,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.SwerveSubsystem;
 
 import frc.robot.subsystems.SwerveSubsystem.SwerveDriveWheel;
+import frc.robot.subsystems.SwerveSubsystem.degreeSupplier;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 
@@ -24,7 +25,7 @@ public class SwerveDirectionPIDCommand extends PIDCommand {
   * @param directionSensor  
   @param m_DriveWheel  
  */
-  DoubleSupplier directionSensor;
+  degreeSupplier directionSensor;
   SwerveDriveWheel m_DriveWheel;
   public SwerveDirectionPIDCommand(DoubleSupplier directionSensor, SwerveDriveWheel m_DriveWheel) {
     super(
@@ -33,7 +34,7 @@ public class SwerveDirectionPIDCommand extends PIDCommand {
         // This should return the measurement
         directionSensor,
         // This should return the setpoint (can also be a constant)
-       m_DriveWheel.getSetpoint(),
+        m_DriveWheel.getSetpoint(),
         // This uses the output
         output -> {
        m_DriveWheel.directionMotors(output);
