@@ -34,7 +34,7 @@ public class SwerveDirectionPIDCommand extends PIDCommand {
         // This should return the measurement
         directionSensor,
         // This should return the setpoint (can also be a constant)
-        m_DriveWheel.getSetpoint(),
+        ()-> m_DriveWheel.getSetpoint(),
         // This uses the output
         output -> {
        m_DriveWheel.directionMotors(output);

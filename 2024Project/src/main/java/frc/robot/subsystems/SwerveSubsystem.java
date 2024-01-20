@@ -157,6 +157,7 @@ public double getSetpoint() {
 
    return this.setpoint;
 }
+
 public void directionMotors(double output) {
     directionMotor.set(output);
 }
