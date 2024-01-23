@@ -16,7 +16,7 @@ public class SwerveTeleopCommand extends Command {
   /** Creates a new MecanumDriveCommand. */
 
   private SwerveSubsystem m_swerveSubsystem;
-  //Change this later
+  // Change this later
   private DoubleSupplier m_getX;
   private DoubleSupplier m_getY;
   private DoubleSupplier m_getTwist;
@@ -25,10 +25,11 @@ public class SwerveTeleopCommand extends Command {
   private NetworkTableInstance inst = NetworkTableInstance.getDefault();
   private NetworkTable table = inst.getTable("MecanumDriveCommand_1");
 
-  public SwerveTeleopCommand(SwerveSubsystem swerveSubsystem, DoubleSupplier getX, DoubleSupplier getY, DoubleSupplier getTwist) {
+  public SwerveTeleopCommand(SwerveSubsystem swerveSubsystem, DoubleSupplier getX, DoubleSupplier getY,
+      DoubleSupplier getTwist) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(swerveSubsystem);
-    
+
     this.table.getEntry("init").setString("done");
     this.m_swerveSubsystem = swerveSubsystem;
     this.m_getX = getX;
@@ -49,16 +50,18 @@ public class SwerveTeleopCommand extends Command {
     this.table.getEntry("countCall").setNumber(this.countCall++);
     double test1 = this.m_getY.getAsDouble();
     this.table.getEntry("m_getLeftY").setNumber(test1);
-    double translatePower = Math.sqrt((Math.pow(this.m_getY.getAsDouble(),2) + Math.pow(this.m_getX.getAsDouble(),2))/2);
+    double translatePower = Math
+        .sqrt((Math.pow(this.m_getY.getAsDouble(), 2) + Math.pow(this.m_getX.getAsDouble(), 2)) / 2);
     double direction = angleFromXY(this.m_getX.getAsDouble(), this.m_getY.getAsDouble());
-    this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(direction, translatePower, this.m_getTwist.getAsDouble());
+    this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(direction, translatePower,
+        this.m_getTwist.getAsDouble());
   }
-  
+
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(0.0, 0.0, 0.0);
-    
+
   }
 
   // Returns true when the command should end.
@@ -69,36 +72,36 @@ public class SwerveTeleopCommand extends Command {
 
   public static double angleFromXY(double x, double y) {
     // ??
-    if (Math.abs(x) > 0.05) {
-        x = 0;
+    if (Math.abs(x) < 0.05) {
+      x = 0;
     }
 
-    if (Math.abs(y) > 0.05) {
-        y = 0;
+    if (Math.abs(y) < 0.05) {
+      y = 0;
     }
 
     // double degree = Math.toDegrees(Math.atan(x/y));
     // double returnVal = 0;
-    double a = Math.toDegrees(Math.atan2(y,x));
+    double a = Math.toDegrees(Math.atan2(y, x));
     // if (x > 0 && y != 0) {
-    //     returnVal = degree;
+    // returnVal = degree;
 
     // } else if (x < 0 && y != 0){
-    //     returnVal = degree + 180;
+    // returnVal = degree + 180;
 
     // } else if (x == 0 && y > 0){
-    //     returnVal =  90;
-        
+    // returnVal = 90;
+
     // } else if (x != 0 && y > 0){
-    //     returnVal = 0;
+    // returnVal = 0;
 
     // } else if (x == 0 && y < 0){
-    //     returnVal =  270;
+    // returnVal = 270;
 
     // } else if (x < 0 && y == 0){
-    //     returnVal =  180;
-    // } 
+    // returnVal = 180;
+    // }
 
     return a;
-}
+  }
 }

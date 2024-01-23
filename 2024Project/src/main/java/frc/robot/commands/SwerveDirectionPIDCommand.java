@@ -10,7 +10,7 @@ import java.util.function.DoubleSupplier;
 import frc.robot.Constants;
 import frc.robot.subsystems.SwerveSubsystem;
 
-import frc.robot.subsystems.SwerveSubsystem.SwerveDriveWheel;
+import frc.robot.subsystems.SwerveDriveWheel;
 import frc.robot.subsystems.SwerveSubsystem.degreeSupplier;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
@@ -33,13 +33,15 @@ public class SwerveDirectionPIDCommand extends PIDCommand {
         // The controller that the command will use
         new PIDController(Constants.DirectionP, Constants.DirectionI, Constants.DirectionD),
         // This should return the measurement
-        directionSensor,
+       directionSensor,
         // This should return the setpoint (can also be a constant)
-        m_DriveWheel.getSetpoint,
+      m_DriveWheel.getSetpoint,
         // This uses the output
         output -> {
        m_DriveWheel.directionMotors(output);
+       System.out.println("PID active");
         });
+addRequirements(m_DriveWheel);
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
   }
