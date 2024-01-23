@@ -41,6 +41,10 @@ public final class Constants {
   public static final int RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN = 6;
   public static final int RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN = 12;
 
+  public static final int BOTTOM_DEVICE_MOTOR = 21;
+public static final int TOP_DEVICE_MOTOR = 22;
+public static final int BACK_DEVICE_MOTOR = 23;
+
   public static final int MXP_PORT = 0;
 
   public static final double DirectionP = 0.02;
