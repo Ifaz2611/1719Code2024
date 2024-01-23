@@ -144,13 +144,16 @@ public class SwerveDriveWheel
     public DoubleSupplier directionSensor;
     public DoubleSupplier directionSetpoint;
     public double setpoint;
+    public DoubleSupplier getSetpoint;
     
 
     public SwerveDriveWheel(DoubleSupplier directionSensor, CANSparkMax directionMotor, CANSparkMax speedMotor)
     {
         this.directionSensor = directionSensor;
         this.directionMotor = directionMotor;
-        this.speedMotor = speedMotor;        
+        this.speedMotor = speedMotor;
+        getSetpoint = ()-> getSetpoint();
+
     }
 
 public double getSetpoint() {
