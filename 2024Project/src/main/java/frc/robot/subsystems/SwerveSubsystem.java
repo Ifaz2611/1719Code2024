@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.commands.SwerveDirectionPIDCommand;
+// import frc.robot.commands.SwerveDirectionPIDCommand;
 // import frc.robot.subsystems.SwerveSubsystem.SwerveDriveWheel.SwerveDriveCoordinator;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -147,10 +147,10 @@ public class SwerveDriveCoordinator
         SwerveDriveWheel rightFrontWheel;
         SwerveDriveWheel rightBackWheel;
 
-    public SwerveDirectionPIDCommand leftFrontWheeldirectionController;
-    public SwerveDirectionPIDCommand leftBackWheeldirectionController;
-    public SwerveDirectionPIDCommand rightFrontWheeldirectionController;
-    public SwerveDirectionPIDCommand rightBackWheeldirectionController;
+    public SwerveDirectionPIDSubsystem leftFrontWheeldirectionController;
+    public SwerveDirectionPIDSubsystem leftBackWheeldirectionController;
+    public SwerveDirectionPIDSubsystem rightFrontWheeldirectionController;
+    public SwerveDirectionPIDSubsystem rightBackWheeldirectionController;
     
         public SwerveDriveCoordinator(SwerveDriveWheel leftFrontWheel, SwerveDriveWheel leftBackWheel, SwerveDriveWheel rightFrontWheel, SwerveDriveWheel rightBackWheel)
         {
@@ -159,10 +159,10 @@ public class SwerveDriveCoordinator
         this.rightFrontWheel = rightFrontWheel;
         this.rightBackWheel = rightBackWheel;
 
-        this.leftFrontWheeldirectionController = new SwerveDirectionPIDCommand( leftFrontWheel.directionSensor,leftFrontWheel );
-        this.leftBackWheeldirectionController = new SwerveDirectionPIDCommand( leftBackWheel.directionSensor,leftBackWheel );
-        this.rightFrontWheeldirectionController = new SwerveDirectionPIDCommand( rightFrontWheel.directionSensor,rightFrontWheel );
-        this.rightBackWheeldirectionController = new SwerveDirectionPIDCommand( rightBackWheel.directionSensor,rightBackWheel );
+        this.leftFrontWheeldirectionController = new SwerveDirectionPIDSubsystem( leftFrontWheel.directionSensor,leftFrontWheel );
+        this.leftBackWheeldirectionController = new SwerveDirectionPIDSubsystem( leftBackWheel.directionSensor,leftBackWheel );
+        this.rightFrontWheeldirectionController = new SwerveDirectionPIDSubsystem( rightFrontWheel.directionSensor,rightFrontWheel );
+        this.rightBackWheeldirectionController = new SwerveDirectionPIDSubsystem( rightBackWheel.directionSensor,rightBackWheel );
         }
         public void setSwerveDrive(double direction, double translatePower, double turnPower)
 {

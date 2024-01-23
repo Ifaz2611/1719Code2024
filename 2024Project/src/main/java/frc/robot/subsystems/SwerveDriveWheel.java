@@ -17,20 +17,21 @@ public class SwerveDriveWheel extends SubsystemBase
     public int directionMotorpin;
     public boolean directionInvert;
     public CANSparkMax speedMotor;
-    public DoubleSupplier directionSensor;
+   public DoubleSupplier directionSensor;
     public DoubleSupplier directionSetpoint;
     public double setpoint;
     public DoubleSupplier getSetpoint;
     public CANSparkMax directionMotor;
     
 
-    public SwerveDriveWheel(DoubleSupplier directionSensor, int directionMotorpin, CANSparkMax speedMotor)
+    public SwerveDriveWheel( DoubleSupplier directionSensor, int directionMotorpin, CANSparkMax speedMotor)
     {
-        this.directionSensor = directionSensor;
+
         this.directionMotorpin = directionMotorpin;
-        this.directionMotor = new CANSparkMax(directionMotorpin, MotorType.kBrushless);
+       // this.directionMotor = new CANSparkMax(directionMotorpin, MotorType.kBrushless);
         this.speedMotor = speedMotor;
         this.getSetpoint = ()-> getSetpointWheel();
+        this.directionSensor = directionSensor;
    
     }
 
@@ -46,9 +47,9 @@ public double getSetpointWheel() {
 public void speedMotors(double output) {
     speedMotor.set(output);
 }
-public void directionMotors(double output) {
-    directionMotor.set(output);
-}
+// public void directionMotors(double output) {
+//     directionMotor.set(output);
+// }
 
  public void setDirection(double setpoint)
     {
