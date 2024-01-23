@@ -77,31 +77,28 @@ public class SwerveTeleopCommand extends Command {
         y = 0;
     }
 
-    double degree = Math.toDegrees(Math.atan(x/y));
-    double returnVal = 0;
+    // double degree = Math.toDegrees(Math.atan(x/y));
+    // double returnVal = 0;
+    double a = Math.toDegrees(Math.atan2(y,x));
+    // if (x > 0 && y != 0) {
+    //     returnVal = degree;
 
-    if (x > 0 && y > 0) {
-        returnVal = (double) degree;
+    // } else if (x < 0 && y != 0){
+    //     returnVal = degree + 180;
 
-    } else if (x > 0 && y < 0){
-        returnVal = 360 - degree;
+    // } else if (x == 0 && y > 0){
+    //     returnVal =  90;
+        
+    // } else if (x != 0 && y > 0){
+    //     returnVal = 0;
 
-    } else if (x < 0 && y < 0){
-        returnVal = degree + 180;
+    // } else if (x == 0 && y < 0){
+    //     returnVal =  270;
 
-    } else if (x < 0 && y >0 ){
-        returnVal =  180 - degree;
+    // } else if (x < 0 && y == 0){
+    //     returnVal =  180;
+    // } 
 
-    } else if (x == 0 && y > 0){
-        returnVal =  90;
-    } else if (x != 0 && y > 0){
-        returnVal =  0;
-    } else if (x == 0 && y < 0){
-        returnVal =  270;
-    } else if (x < 0 && y == 0){
-        returnVal =  180;
-    } 
-
-    return returnVal;
+    return a;
 }
 }
