@@ -28,13 +28,14 @@ public class SwerveDirectionPIDCommand extends PIDCommand {
   degreeSupplier directionSensor;
   SwerveDriveWheel m_DriveWheel;
   public SwerveDirectionPIDCommand(DoubleSupplier directionSensor, SwerveDriveWheel m_DriveWheel) {
+    
     super(
         // The controller that the command will use
         new PIDController(Constants.DirectionP, Constants.DirectionI, Constants.DirectionD),
         // This should return the measurement
         directionSensor,
         // This should return the setpoint (can also be a constant)
-        ()-> m_DriveWheel.getSetpoint(),
+        m_DriveWheel.getSetpoint,
         // This uses the output
         output -> {
        m_DriveWheel.directionMotors(output);

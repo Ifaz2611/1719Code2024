@@ -59,7 +59,7 @@ public class RobotContainer {
         this.m_swerveDrive, m_driverController::getY, m_driverController::getX,
         m_driverController::getTwist);
     this.m_swerveDrive.setDefaultCommand(DriveMode);
-    // Trigger prints limelight distance
+    // Trigger prints limelight
     new JoystickButton(m_driverController, 1)
     .onTrue(new InstantCommand(() -> {
       System.out.println(m_limelight.getDistance());
