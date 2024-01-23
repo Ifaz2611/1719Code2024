@@ -50,7 +50,7 @@ public class SwerveTeleopCommand extends Command {
     double test1 = this.m_getY.getAsDouble();
     this.table.getEntry("m_getLeftY").setNumber(test1);
     double translatePower = Math.sqrt((Math.pow(this.m_getY.getAsDouble(),2) + Math.pow(this.m_getX.getAsDouble(),2))/2);
-    double direction = Math.atan(m_getY.getAsDouble() /  m_getX.getAsDouble());
+    double direction = angleFromXY(this.m_getX.getAsDouble(), this.m_getY.getAsDouble());
     this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(direction, translatePower, this.m_getTwist.getAsDouble());
   }
   
@@ -66,4 +66,42 @@ public class SwerveTeleopCommand extends Command {
   public boolean isFinished() {
     return false;
   }
+
+  public static double angleFromXY(double x, double y) {
+    // ??
+    if (Math.abs(x) > 0.05) {
+        x = 0;
+    }
+
+    if (Math.abs(y) > 0.05) {
+        y = 0;
+    }
+
+    double degree = Math.toDegrees(Math.atan(x/y));
+    double returnVal = 0;
+
+    if (x > 0 && y > 0) {
+        returnVal = (double) degree;
+
+    } else if (x > 0 && y < 0){
+        returnVal = 360 - degree;
+
+    } else if (x < 0 && y < 0){
+        returnVal = degree + 180;
+
+    } else if (x < 0 && y >0 ){
+        returnVal =  180 - degree;
+
+    } else if (x == 0 && y > 0){
+        returnVal =  90;
+    } else if (x != 0 && y > 0){
+        returnVal =  0;
+    } else if (x == 0 && y < 0){
+        returnVal =  270;
+    } else if (x < 0 && y == 0){
+        returnVal =  180;
+    } 
+
+    return returnVal;
+}
 }
