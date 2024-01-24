@@ -46,7 +46,7 @@ public static final int BACK_DEVICE_MOTOR = 23;
   public static final int MXP_PORT = 0;
 
   public static final double DirectionP = 0.002;
-  public static final double DirectionI = 0.00001;
+  public static final double DirectionI = 0.0001;
   public static final double DirectionD = 0.0;
 
 }

@@ -197,11 +197,11 @@ public class SwerveDriveCoordinator
         }
         public void inplaceTurn(double power)
 {
-    leftFrontWheel.setDirection(135.0);
-    leftBackWheel.setDirection(45.0);
-    rightFrontWheel.setDirection(-45.0);
-    rightBackWheel.setDirection(-135.0);
-
+    leftFrontWheel.setDirection(45.0);
+    leftBackWheel.setDirection(135.0);
+    rightFrontWheel.setDirection(315.0);
+    rightBackWheel.setDirection(225.0);
+ 
     leftFrontWheel.speedMotors(power);
     leftBackWheel.speedMotors(power);
     rightFrontWheel.speedMotors(power);

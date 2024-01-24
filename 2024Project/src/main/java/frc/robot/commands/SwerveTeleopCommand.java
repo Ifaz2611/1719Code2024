@@ -53,7 +53,7 @@ public class SwerveTeleopCommand extends Command {
     double translatePower = Math
         .sqrt((Math.pow(this.m_getY.getAsDouble(), 2) + Math.pow(this.m_getX.getAsDouble(), 2)) / 2);
     double direction = angleFromXY(this.m_getX.getAsDouble(), this.m_getY.getAsDouble());
-    this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(direction, translatePower,
+    this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(direction, translatePower/5,
         this.m_getTwist.getAsDouble());
   }
 
