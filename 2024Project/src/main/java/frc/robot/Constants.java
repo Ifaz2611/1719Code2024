@@ -31,15 +31,13 @@ public final class Constants {
   public static final int RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN = 5;
   public static final int RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN = 11;
 
-  public static final int LEFT_FRONT_DRIVE_DISTANCE_ENCODER_PIN = 2;
-  public static final int LEFT_BACK_DRIVE_DISTANCE_ENCODER_PIN = 8;
-  public static final int RIGHT_FRONT_DRIVE_DISTANCE_ENCODER_PIN = 5;
-  public static final int RIGHT_BACK_DRIVE_DISTANCE_ENCODER_PIN = 11;
+
 
   public static final int LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN = 3;
   public static final int LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN = 9;
   public static final int RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN = 6;
   public static final int RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN = 12;
+
 
   public static final int BOTTOM_DEVICE_MOTOR = 21;
 public static final int TOP_DEVICE_MOTOR = 22;
@@ -47,8 +45,8 @@ public static final int BACK_DEVICE_MOTOR = 23;
 
   public static final int MXP_PORT = 0;
 
-  public static final double DirectionP = 0.02;
-  public static final double DirectionI = 0.001;
+  public static final double DirectionP = 0.002;
+  public static final double DirectionI = 0.00001;
   public static final double DirectionD = 0.0;
 
 }

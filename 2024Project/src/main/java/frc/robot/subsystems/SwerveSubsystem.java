@@ -30,7 +30,7 @@ import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkPIDController;
+// import com.revrobotics.SparkPIDController;
 // import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
@@ -44,6 +44,13 @@ public class SwerveSubsystem extends SubsystemBase {
   private static CANSparkMax RIGHT_FRONT_DRIVE_SPEED_MOTOR;
   private static CANSparkMax RIGHT_BACK_DRIVE_SPEED_MOTOR;
 
+  public SwerveDirectionPIDSubsystem m_leftFrontDirection;
+    public SwerveDirectionPIDSubsystem m_rightFrontDirection;
+      public SwerveDirectionPIDSubsystem m_leftBackDirection;
+        public SwerveDirectionPIDSubsystem m_rightBackDirection;
+
+
+
 //   private static CANSparkMax LEFT_FRONT_DRIVE_DIRECTION_MOTOR;
 //   private static CANSparkMax LEFT_BACK_DRIVE_DIRECTION_MOTOR;
 //   private static CANSparkMax RIGHT_FRONT_DRIVE_DIRECTION_MOTOR;
@@ -56,16 +63,16 @@ public class SwerveSubsystem extends SubsystemBase {
 //   public static CANcoder RIGHT_BACK_DRIVE_DISTANCE_ENCODER;
  // public static MedianPIDSource DRIVE_DISTANCE_ENCODERS;
 
-  public static CANcoder LEFT_FRONT_DRIVE_DIRECTION_ENCODER;
-  public static CANcoder LEFT_BACK_DRIVE_DIRECTION_ENCODER;
-  public static CANcoder RIGHT_FRONT_DRIVE_DIRECTION_ENCODER;
-  public static CANcoder RIGHT_BACK_DRIVE_DIRECTION_ENCODER;
+//   public static CANcoder LEFT_FRONT_DRIVE_DIRECTION_ENCODER;
+//   public static CANcoder LEFT_BACK_DRIVE_DIRECTION_ENCODER;
+//   public static CANcoder RIGHT_FRONT_DRIVE_DIRECTION_ENCODER;
+//   public static CANcoder RIGHT_BACK_DRIVE_DIRECTION_ENCODER;
 
   // Direction encoder wrapper that scales to degrees
-  public static DoubleSupplier LEFT_FRONT_DRIVE_DIRECTION_SCALED;
-  public static DoubleSupplier LEFT_BACK_DRIVE_DIRECTION_SCALED;
-  public static DoubleSupplier RIGHT_FRONT_DRIVE_DIRECTION_SCALED;
-  public static DoubleSupplier RIGHT_BACK_DRIVE_DIRECTION_SCALED;
+//   public static DoubleSupplier LEFT_FRONT_DRIVE_DIRECTION_SCALED;
+//   public static DoubleSupplier LEFT_BACK_DRIVE_DIRECTION_SCALED;
+//   public static DoubleSupplier RIGHT_FRONT_DRIVE_DIRECTION_SCALED;
+//   public static DoubleSupplier RIGHT_BACK_DRIVE_DIRECTION_SCALED;
 
 SwerveDriveWheel LEFT_FRONT_DRIVE_WHEEL;
 SwerveDriveWheel LEFT_BACK_DRIVE_WHEEL;
@@ -76,13 +83,18 @@ SwerveDriveWheel RIGHT_BACK_DRIVE_WHEEL;
   public static Pigeon2 DRIVE_GYRO;
   public SwerveDriveCoordinator SWERVE_DRIVE_COORDINATOR;
 
-  public SwerveSubsystem(){
+  public SwerveSubsystem(SwerveDirectionPIDSubsystem  m_leftFrontDirection, SwerveDirectionPIDSubsystem m_leftBackDirection, SwerveDirectionPIDSubsystem  m_rightFrontDirection, SwerveDirectionPIDSubsystem m_rightBackDirection){
      // Motors
      LEFT_FRONT_DRIVE_SPEED_MOTOR = new CANSparkMax(Constants.LEFT_FRONT_DRIVE_SPEED_MOTOR_PIN, MotorType.kBrushless);
      LEFT_BACK_DRIVE_SPEED_MOTOR = new CANSparkMax(Constants.LEFT_BACK_DRIVE_SPEED_MOTOR_PIN, MotorType.kBrushless);
      RIGHT_FRONT_DRIVE_SPEED_MOTOR = new CANSparkMax(Constants.RIGHT_FRONT_DRIVE_SPEED_MOTOR_PIN, MotorType.kBrushless);
      RIGHT_BACK_DRIVE_SPEED_MOTOR = new CANSparkMax(Constants.RIGHT_BACK_DRIVE_SPEED_MOTOR_PIN, MotorType.kBrushless);
 
+
+ this.m_leftFrontDirection=m_leftFrontDirection;
+ this.m_rightFrontDirection=m_rightFrontDirection;
+ this.m_leftBackDirection=m_leftBackDirection;
+this.m_rightBackDirection=m_rightBackDirection;
     //  LEFT_FRONT_DRIVE_DIRECTION_MOTOR = new CANSparkMax(Constants.LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN, MotorType.kBrushless);
     //  LEFT_BACK_DRIVE_DIRECTION_MOTOR = new CANSparkMax(Constants.LEFT_BACK_DRIVE_DIRECTION_MOTOR_PIN, MotorType.kBrushless);
     //  RIGHT_FRONT_DRIVE_DIRECTION_MOTOR = new CANSparkMax(Constants.RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN, MotorType.kBrushless);
@@ -95,25 +107,25 @@ SwerveDriveWheel RIGHT_BACK_DRIVE_WHEEL;
     //  RIGHT_BACK_DRIVE_DISTANCE_ENCODER = new CANcoder(Constants.RIGHT_BACK_DRIVE_DISTANCE_ENCODER_PIN);
 
    //  DRIVE_ENCODERS = new MedianPIDSource(LEFT_FRONT_DRIVE_DISTANCE_ENCODER, LEFT_BACK_DRIVE_DISTANCE_ENCODER, RIGHT_FRONT_DRIVE_DISTANCE_ENCODER, RIGHT_BACK_DRIVE_DISTANCE_ENCODER);
-     LEFT_FRONT_DRIVE_DIRECTION_ENCODER = new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN);
-     LEFT_BACK_DRIVE_DIRECTION_ENCODER = new CANcoder(Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN);
-     RIGHT_FRONT_DRIVE_DIRECTION_ENCODER = new CANcoder(Constants.RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN);
-     RIGHT_BACK_DRIVE_DIRECTION_ENCODER = new CANcoder(Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN);
+    //  LEFT_FRONT_DRIVE_DIRECTION_ENCODER = new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN);
+    //  LEFT_BACK_DRIVE_DIRECTION_ENCODER = new CANcoder(Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN);
+    //  RIGHT_FRONT_DRIVE_DIRECTION_ENCODER = new CANcoder(Constants.RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN);
+    //  RIGHT_BACK_DRIVE_DIRECTION_ENCODER = new CANcoder(Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN);
 
      // Direction encoder wrapper that scales to degrees
-     DoubleSupplier LEFT_FRONT_DRIVE_DIRECTION_SCALED = () -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble() * 360;
-     DoubleSupplier LEFT_BACK_DRIVE_DIRECTION_SCALED = () -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
-     DoubleSupplier RIGHT_FRONT_DRIVE_DIRECTION_SCALED =() -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
-     DoubleSupplier RIGHT_BACK_DRIVE_DIRECTION_SCALED = () -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
+    //  DoubleSupplier LEFT_FRONT_DRIVE_DIRECTION_SCALED = () -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble() * 360;
+    //  DoubleSupplier LEFT_BACK_DRIVE_DIRECTION_SCALED = () -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
+    //  DoubleSupplier RIGHT_FRONT_DRIVE_DIRECTION_SCALED =() -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
+    //  DoubleSupplier RIGHT_BACK_DRIVE_DIRECTION_SCALED = () -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
      
      // Gyro
     // DRIVE_GYRO = new Pigeon2(Constants.MXP_PORT);
 
      // SwerveDriveWheels
-    LEFT_FRONT_DRIVE_WHEEL = new SwerveDriveWheel(LEFT_FRONT_DRIVE_DIRECTION_SCALED, Constants.LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN, LEFT_FRONT_DRIVE_SPEED_MOTOR);
-    LEFT_BACK_DRIVE_WHEEL = new SwerveDriveWheel(LEFT_BACK_DRIVE_DIRECTION_SCALED, Constants.LEFT_BACK_DRIVE_DIRECTION_MOTOR_PIN, LEFT_BACK_DRIVE_SPEED_MOTOR);
-    RIGHT_FRONT_DRIVE_WHEEL = new SwerveDriveWheel( RIGHT_FRONT_DRIVE_DIRECTION_SCALED, Constants.RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN, RIGHT_FRONT_DRIVE_SPEED_MOTOR);
-    RIGHT_BACK_DRIVE_WHEEL = new SwerveDriveWheel(RIGHT_BACK_DRIVE_DIRECTION_SCALED, Constants.RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN, RIGHT_BACK_DRIVE_SPEED_MOTOR);
+    LEFT_FRONT_DRIVE_WHEEL = new SwerveDriveWheel( LEFT_FRONT_DRIVE_SPEED_MOTOR, m_leftFrontDirection);
+    LEFT_BACK_DRIVE_WHEEL = new SwerveDriveWheel( LEFT_BACK_DRIVE_SPEED_MOTOR, m_leftBackDirection);
+    RIGHT_FRONT_DRIVE_WHEEL = new SwerveDriveWheel( RIGHT_FRONT_DRIVE_SPEED_MOTOR, m_rightFrontDirection);
+    RIGHT_BACK_DRIVE_WHEEL = new SwerveDriveWheel( RIGHT_BACK_DRIVE_SPEED_MOTOR, m_rightBackDirection);
     
     // SwerveDriveCoordinator
      SWERVE_DRIVE_COORDINATOR = new SwerveDriveCoordinator(LEFT_FRONT_DRIVE_WHEEL, LEFT_BACK_DRIVE_WHEEL, RIGHT_FRONT_DRIVE_WHEEL, RIGHT_BACK_DRIVE_WHEEL);
@@ -147,10 +159,7 @@ public class SwerveDriveCoordinator
         SwerveDriveWheel rightFrontWheel;
         SwerveDriveWheel rightBackWheel;
 
-    public SwerveDirectionPIDSubsystem leftFrontWheeldirectionController;
-    public SwerveDirectionPIDSubsystem leftBackWheeldirectionController;
-    public SwerveDirectionPIDSubsystem rightFrontWheeldirectionController;
-    public SwerveDirectionPIDSubsystem rightBackWheeldirectionController;
+
     
         public SwerveDriveCoordinator(SwerveDriveWheel leftFrontWheel, SwerveDriveWheel leftBackWheel, SwerveDriveWheel rightFrontWheel, SwerveDriveWheel rightBackWheel)
         {
@@ -159,10 +168,7 @@ public class SwerveDriveCoordinator
         this.rightFrontWheel = rightFrontWheel;
         this.rightBackWheel = rightBackWheel;
 
-        this.leftFrontWheeldirectionController = new SwerveDirectionPIDSubsystem( leftFrontWheel.directionSensor,leftFrontWheel );
-        this.leftBackWheeldirectionController = new SwerveDirectionPIDSubsystem( leftBackWheel.directionSensor,leftBackWheel );
-        this.rightFrontWheeldirectionController = new SwerveDirectionPIDSubsystem( rightFrontWheel.directionSensor,rightFrontWheel );
-        this.rightBackWheeldirectionController = new SwerveDirectionPIDSubsystem( rightBackWheel.directionSensor,rightBackWheel );
+
         }
         public void setSwerveDrive(double direction, double translatePower, double turnPower)
 {
@@ -177,10 +183,12 @@ public class SwerveDriveCoordinator
 }
         public void translate(double direction, double power)
         {
+
             leftFrontWheel.setDirection(direction);
             leftBackWheel.setDirection(direction);
             rightFrontWheel.setDirection(direction);
             rightBackWheel.setDirection(direction);
+
         
             leftFrontWheel.speedMotors(power);
             leftBackWheel.speedMotors(power);
@@ -278,7 +286,7 @@ private static double modulo(double b, double d) {
 
   @Override
   public void periodic() {
-    
+
     // This method will be called once per scheduler run
   }
 

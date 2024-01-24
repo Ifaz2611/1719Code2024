@@ -38,13 +38,12 @@
 //       m_DriveWheel.getSetpoint,
 //         // This uses the output
 //         output -> {
-//        m_DriveWheel.directionMotors(output);
+//        m_DriveWheel.directionMotor.set(output);
 //        System.out.println("PID active");
 //         }
         
 //         );
 // addRequirements(m_DriveWheel);
-// getController().enableContinuousInput(0, 360);
 //     // Use addRequirements() here to declare subsystem dependencies.
 //     // Configure additional PID options by calling `getController` here.
 //   }

@@ -17,21 +17,23 @@ public class SwerveDriveWheel extends SubsystemBase
     public int directionMotorpin;
     public boolean directionInvert;
     public CANSparkMax speedMotor;
-   public DoubleSupplier directionSensor;
+
     public DoubleSupplier directionSetpoint;
     public double setpoint;
-    public DoubleSupplier getSetpoint;
     public CANSparkMax directionMotor;
+    SwerveDirectionPIDSubsystem directionController;
     
 
-    public SwerveDriveWheel( DoubleSupplier directionSensor, int directionMotorpin, CANSparkMax speedMotor)
+    public SwerveDriveWheel(CANSparkMax speedMotor, SwerveDirectionPIDSubsystem directionController)
     {
 
-        this.directionMotorpin = directionMotorpin;
+      //  this.directionMotorpin = directionMotorpin;
+
        // this.directionMotor = new CANSparkMax(directionMotorpin, MotorType.kBrushless);
         this.speedMotor = speedMotor;
-        this.getSetpoint = ()-> getSetpointWheel();
-        this.directionSensor = directionSensor;
+this.directionController = directionController;
+directionController.enable();
+        
    
     }
 
@@ -47,34 +49,14 @@ public double getSetpointWheel() {
 public void speedMotors(double output) {
     speedMotor.set(output);
 }
+public void setDirection(double angle){
+directionController.setDirection(angle);
+
+}
 // public void directionMotors(double output) {
 //     directionMotor.set(output);
 // }
 
- public void setDirection(double setpoint)
-    {
-
-        double currentAngle = directionSensor.getAsDouble();
-        // find closest angle to setpoint
-        double setpointAngle = SwerveSubsystem.closestAngle(currentAngle, setpoint);
-        // find closest angle to setpoint + 180
-        double setpointAngleFlipped = SwerveSubsystem.closestAngle(currentAngle, setpoint + 180.0);
-        // if the closest angle to setpoint is shorter
-        if (Math.abs(setpointAngle) <= Math.abs(setpointAngleFlipped))
-        {
-            // unflip the motor direction use the setpoint
-           // this.directionInvert = (false); TODO: get invert to work
-            this.setpoint = (currentAngle + setpointAngle);
-        }
-        // if the closest angle to setpoint + 180 is shorter
-        else
-        {
-            // flip the motor direction and use the setpoint + 180
-          //  this.directionInvert = (true);
-            this.setpoint = currentAngle + setpointAngleFlipped;
-        }
-
-
-    }
+ 
     
 }
