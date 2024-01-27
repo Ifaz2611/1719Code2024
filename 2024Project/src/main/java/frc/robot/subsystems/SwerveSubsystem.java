@@ -19,12 +19,12 @@ import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
 
 // import frc.lib.util.SwerveModuleConstants;
+
 // import frc.lib.util.CANSparkMaxUtil.Usage;
 // import frc.lib.util.CANSparkMaxUtil;
 // import frc.lib.math.OnboardModuleState;
 // import frc.lib.util.CANCoderUtil;
 // import frc.lib.util.CANCoderUtil.CCUsage;
-
 
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.Pigeon2;
@@ -34,261 +34,264 @@ import com.revrobotics.RelativeEncoder;
 // import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-
 public class SwerveSubsystem extends SubsystemBase {
-  /** Creates a new SwerveSubsystem. */
+    /** Creates a new SwerveSubsystem. */
 
-  // Motors
-  private static CANSparkMax LEFT_FRONT_DRIVE_SPEED_MOTOR;
-  private static CANSparkMax LEFT_BACK_DRIVE_SPEED_MOTOR;
-  private static CANSparkMax RIGHT_FRONT_DRIVE_SPEED_MOTOR;
-  private static CANSparkMax RIGHT_BACK_DRIVE_SPEED_MOTOR;
+    // Motors
+    private static CANSparkMax LEFT_FRONT_DRIVE_SPEED_MOTOR;
+    private static CANSparkMax LEFT_BACK_DRIVE_SPEED_MOTOR;
+    private static CANSparkMax RIGHT_FRONT_DRIVE_SPEED_MOTOR;
+    private static CANSparkMax RIGHT_BACK_DRIVE_SPEED_MOTOR;
 
-  public SwerveDirectionPIDSubsystem m_leftFrontDirection;
+    public SwerveDirectionPIDSubsystem m_leftFrontDirection;
     public SwerveDirectionPIDSubsystem m_rightFrontDirection;
-      public SwerveDirectionPIDSubsystem m_leftBackDirection;
-        public SwerveDirectionPIDSubsystem m_rightBackDirection;
+    public SwerveDirectionPIDSubsystem m_leftBackDirection;
+    public SwerveDirectionPIDSubsystem m_rightBackDirection;
 
+    // private static CANSparkMax LEFT_FRONT_DRIVE_DIRECTION_MOTOR;
+    // private static CANSparkMax LEFT_BACK_DRIVE_DIRECTION_MOTOR;
+    // private static CANSparkMax RIGHT_FRONT_DRIVE_DIRECTION_MOTOR;
+    // private static CANSparkMax RIGHT_BACK_DRIVE_DIRECTION_MOTOR;
 
+    // Encoders
+    // public static CANcoder LEFT_FRONT_DRIVE_DISTANCE_ENCODER;
+    // public static CANcoder LEFT_BACK_DRIVE_DISTANCE_ENCODER;
+    // public static CANcoder RIGHT_FRONT_DRIVE_DISTANCE_ENCODER;
+    // public static CANcoder RIGHT_BACK_DRIVE_DISTANCE_ENCODER;
+    // public static MedianPIDSource DRIVE_DISTANCE_ENCODERS;
 
-//   private static CANSparkMax LEFT_FRONT_DRIVE_DIRECTION_MOTOR;
-//   private static CANSparkMax LEFT_BACK_DRIVE_DIRECTION_MOTOR;
-//   private static CANSparkMax RIGHT_FRONT_DRIVE_DIRECTION_MOTOR;
-//   private static CANSparkMax RIGHT_BACK_DRIVE_DIRECTION_MOTOR;
+    // public static CANcoder LEFT_FRONT_DRIVE_DIRECTION_ENCODER;
+    // public static CANcoder LEFT_BACK_DRIVE_DIRECTION_ENCODER;
+    // public static CANcoder RIGHT_FRONT_DRIVE_DIRECTION_ENCODER;
+    // public static CANcoder RIGHT_BACK_DRIVE_DIRECTION_ENCODER;
 
-  // Encoders
- // public static CANcoder LEFT_FRONT_DRIVE_DISTANCE_ENCODER;
-//   public static CANcoder LEFT_BACK_DRIVE_DISTANCE_ENCODER;
-//   public static CANcoder RIGHT_FRONT_DRIVE_DISTANCE_ENCODER;
-//   public static CANcoder RIGHT_BACK_DRIVE_DISTANCE_ENCODER;
- // public static MedianPIDSource DRIVE_DISTANCE_ENCODERS;
+    // Direction encoder wrapper that scales to degrees
+    // public static DoubleSupplier LEFT_FRONT_DRIVE_DIRECTION_SCALED;
+    // public static DoubleSupplier LEFT_BACK_DRIVE_DIRECTION_SCALED;
+    // public static DoubleSupplier RIGHT_FRONT_DRIVE_DIRECTION_SCALED;
+    // public static DoubleSupplier RIGHT_BACK_DRIVE_DIRECTION_SCALED;
 
-//   public static CANcoder LEFT_FRONT_DRIVE_DIRECTION_ENCODER;
-//   public static CANcoder LEFT_BACK_DRIVE_DIRECTION_ENCODER;
-//   public static CANcoder RIGHT_FRONT_DRIVE_DIRECTION_ENCODER;
-//   public static CANcoder RIGHT_BACK_DRIVE_DIRECTION_ENCODER;
+    SwerveDriveWheel LEFT_FRONT_DRIVE_WHEEL;
+    SwerveDriveWheel LEFT_BACK_DRIVE_WHEEL;
+    SwerveDriveWheel RIGHT_FRONT_DRIVE_WHEEL;
+    SwerveDriveWheel RIGHT_BACK_DRIVE_WHEEL;
 
-  // Direction encoder wrapper that scales to degrees
-//   public static DoubleSupplier LEFT_FRONT_DRIVE_DIRECTION_SCALED;
-//   public static DoubleSupplier LEFT_BACK_DRIVE_DIRECTION_SCALED;
-//   public static DoubleSupplier RIGHT_FRONT_DRIVE_DIRECTION_SCALED;
-//   public static DoubleSupplier RIGHT_BACK_DRIVE_DIRECTION_SCALED;
+    // Gyro
+    public static Pigeon2 DRIVE_GYRO;
+    public SwerveDriveCoordinator SWERVE_DRIVE_COORDINATOR;
 
-SwerveDriveWheel LEFT_FRONT_DRIVE_WHEEL;
-SwerveDriveWheel LEFT_BACK_DRIVE_WHEEL;
-SwerveDriveWheel RIGHT_FRONT_DRIVE_WHEEL;
-SwerveDriveWheel RIGHT_BACK_DRIVE_WHEEL;
+    public SwerveSubsystem(SwerveDirectionPIDSubsystem m_leftFrontDirection,
+            SwerveDirectionPIDSubsystem m_leftBackDirection, SwerveDirectionPIDSubsystem m_rightFrontDirection,
+            SwerveDirectionPIDSubsystem m_rightBackDirection) {
+        // Motors
+        LEFT_FRONT_DRIVE_SPEED_MOTOR = new CANSparkMax(Constants.LEFT_FRONT_DRIVE_SPEED_MOTOR_PIN,
+                MotorType.kBrushless);
+        LEFT_BACK_DRIVE_SPEED_MOTOR = new CANSparkMax(Constants.LEFT_BACK_DRIVE_SPEED_MOTOR_PIN, MotorType.kBrushless);
+        RIGHT_FRONT_DRIVE_SPEED_MOTOR = new CANSparkMax(Constants.RIGHT_FRONT_DRIVE_SPEED_MOTOR_PIN,
+                MotorType.kBrushless);
+        RIGHT_BACK_DRIVE_SPEED_MOTOR = new CANSparkMax(Constants.RIGHT_BACK_DRIVE_SPEED_MOTOR_PIN,
+                MotorType.kBrushless);
 
-  // Gyro
-  public static Pigeon2 DRIVE_GYRO;
-  public SwerveDriveCoordinator SWERVE_DRIVE_COORDINATOR;
+        this.m_leftFrontDirection = m_leftFrontDirection;
+        this.m_rightFrontDirection = m_rightFrontDirection;
+        this.m_leftBackDirection = m_leftBackDirection;
+        this.m_rightBackDirection = m_rightBackDirection;
+        // LEFT_FRONT_DRIVE_DIRECTION_MOTOR = new
+        // CANSparkMax(Constants.LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN,
+        // MotorType.kBrushless);
+        // LEFT_BACK_DRIVE_DIRECTION_MOTOR = new
+        // CANSparkMax(Constants.LEFT_BACK_DRIVE_DIRECTION_MOTOR_PIN,
+        // MotorType.kBrushless);
+        // RIGHT_FRONT_DRIVE_DIRECTION_MOTOR = new
+        // CANSparkMax(Constants.RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN,
+        // MotorType.kBrushless);
+        // RIGHT_BACK_DRIVE_DIRECTION_MOTOR = new
+        // CANSparkMax(Constants.RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN,
+        // MotorType.kBrushless);
 
-  public SwerveSubsystem(SwerveDirectionPIDSubsystem  m_leftFrontDirection, SwerveDirectionPIDSubsystem m_leftBackDirection, SwerveDirectionPIDSubsystem  m_rightFrontDirection, SwerveDirectionPIDSubsystem m_rightBackDirection){
-     // Motors
-     LEFT_FRONT_DRIVE_SPEED_MOTOR = new CANSparkMax(Constants.LEFT_FRONT_DRIVE_SPEED_MOTOR_PIN, MotorType.kBrushless);
-     LEFT_BACK_DRIVE_SPEED_MOTOR = new CANSparkMax(Constants.LEFT_BACK_DRIVE_SPEED_MOTOR_PIN, MotorType.kBrushless);
-     RIGHT_FRONT_DRIVE_SPEED_MOTOR = new CANSparkMax(Constants.RIGHT_FRONT_DRIVE_SPEED_MOTOR_PIN, MotorType.kBrushless);
-     RIGHT_BACK_DRIVE_SPEED_MOTOR = new CANSparkMax(Constants.RIGHT_BACK_DRIVE_SPEED_MOTOR_PIN, MotorType.kBrushless);
+        // Encoders
+        // LEFT_FRONT_DRIVE_DISTANCE_ENCODER = new
+        // CANcoder(Constants.LEFT_FRONT_DRIVE_DISTANCE_ENCODER_PIN);
+        // LEFT_BACK_DRIVE_DISTANCE_ENCODER = new
+        // CANcoder(Constants.LEFT_BACK_DRIVE_DISTANCE_ENCODER_PIN);
+        // RIGHT_FRONT_DRIVE_DISTANCE_ENCODER = new
+        // CANcoder(Constants.RIGHT_FRONT_DRIVE_DISTANCE_ENCODER_PIN);
+        // RIGHT_BACK_DRIVE_DISTANCE_ENCODER = new
+        // CANcoder(Constants.RIGHT_BACK_DRIVE_DISTANCE_ENCODER_PIN);
 
+        // DRIVE_ENCODERS = new MedianPIDSource(LEFT_FRONT_DRIVE_DISTANCE_ENCODER,
+        // LEFT_BACK_DRIVE_DISTANCE_ENCODER, RIGHT_FRONT_DRIVE_DISTANCE_ENCODER,
+        // RIGHT_BACK_DRIVE_DISTANCE_ENCODER);
+        // LEFT_FRONT_DRIVE_DIRECTION_ENCODER = new
+        // CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN);
+        // LEFT_BACK_DRIVE_DIRECTION_ENCODER = new
+        // CANcoder(Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN);
+        // RIGHT_FRONT_DRIVE_DIRECTION_ENCODER = new
+        // CANcoder(Constants.RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN);
+        // RIGHT_BACK_DRIVE_DIRECTION_ENCODER = new
+        // CANcoder(Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN);
 
- this.m_leftFrontDirection=m_leftFrontDirection;
- this.m_rightFrontDirection=m_rightFrontDirection;
- this.m_leftBackDirection=m_leftBackDirection;
-this.m_rightBackDirection=m_rightBackDirection;
-    //  LEFT_FRONT_DRIVE_DIRECTION_MOTOR = new CANSparkMax(Constants.LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN, MotorType.kBrushless);
-    //  LEFT_BACK_DRIVE_DIRECTION_MOTOR = new CANSparkMax(Constants.LEFT_BACK_DRIVE_DIRECTION_MOTOR_PIN, MotorType.kBrushless);
-    //  RIGHT_FRONT_DRIVE_DIRECTION_MOTOR = new CANSparkMax(Constants.RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN, MotorType.kBrushless);
-    //  RIGHT_BACK_DRIVE_DIRECTION_MOTOR = new CANSparkMax(Constants.RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN, MotorType.kBrushless);
+        // Direction encoder wrapper that scales to degrees
+        // DoubleSupplier LEFT_FRONT_DRIVE_DIRECTION_SCALED = () ->
+        // LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble() * 360;
+        // DoubleSupplier LEFT_BACK_DRIVE_DIRECTION_SCALED = () ->
+        // LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
+        // DoubleSupplier RIGHT_FRONT_DRIVE_DIRECTION_SCALED =() ->
+        // LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
+        // DoubleSupplier RIGHT_BACK_DRIVE_DIRECTION_SCALED = () ->
+        // LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
 
-     // Encoders
-    //  LEFT_FRONT_DRIVE_DISTANCE_ENCODER = new CANcoder(Constants.LEFT_FRONT_DRIVE_DISTANCE_ENCODER_PIN);
-    //  LEFT_BACK_DRIVE_DISTANCE_ENCODER = new CANcoder(Constants.LEFT_BACK_DRIVE_DISTANCE_ENCODER_PIN);
-    //  RIGHT_FRONT_DRIVE_DISTANCE_ENCODER = new CANcoder(Constants.RIGHT_FRONT_DRIVE_DISTANCE_ENCODER_PIN);
-    //  RIGHT_BACK_DRIVE_DISTANCE_ENCODER = new CANcoder(Constants.RIGHT_BACK_DRIVE_DISTANCE_ENCODER_PIN);
+        // Gyro
+        // DRIVE_GYRO = new Pigeon2(Constants.MXP_PORT);
 
-   //  DRIVE_ENCODERS = new MedianPIDSource(LEFT_FRONT_DRIVE_DISTANCE_ENCODER, LEFT_BACK_DRIVE_DISTANCE_ENCODER, RIGHT_FRONT_DRIVE_DISTANCE_ENCODER, RIGHT_BACK_DRIVE_DISTANCE_ENCODER);
-    //  LEFT_FRONT_DRIVE_DIRECTION_ENCODER = new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN);
-    //  LEFT_BACK_DRIVE_DIRECTION_ENCODER = new CANcoder(Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN);
-    //  RIGHT_FRONT_DRIVE_DIRECTION_ENCODER = new CANcoder(Constants.RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN);
-    //  RIGHT_BACK_DRIVE_DIRECTION_ENCODER = new CANcoder(Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN);
+        // SwerveDriveWheels
+        LEFT_FRONT_DRIVE_WHEEL = new SwerveDriveWheel(LEFT_FRONT_DRIVE_SPEED_MOTOR, m_leftFrontDirection);
+        LEFT_BACK_DRIVE_WHEEL = new SwerveDriveWheel(LEFT_BACK_DRIVE_SPEED_MOTOR, m_leftBackDirection);
+        RIGHT_FRONT_DRIVE_WHEEL = new SwerveDriveWheel(RIGHT_FRONT_DRIVE_SPEED_MOTOR, m_rightFrontDirection);
+        RIGHT_BACK_DRIVE_WHEEL = new SwerveDriveWheel(RIGHT_BACK_DRIVE_SPEED_MOTOR, m_rightBackDirection);
 
-     // Direction encoder wrapper that scales to degrees
-    //  DoubleSupplier LEFT_FRONT_DRIVE_DIRECTION_SCALED = () -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble() * 360;
-    //  DoubleSupplier LEFT_BACK_DRIVE_DIRECTION_SCALED = () -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
-    //  DoubleSupplier RIGHT_FRONT_DRIVE_DIRECTION_SCALED =() -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
-    //  DoubleSupplier RIGHT_BACK_DRIVE_DIRECTION_SCALED = () -> LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
-     
-     // Gyro
-    // DRIVE_GYRO = new Pigeon2(Constants.MXP_PORT);
+        // SwerveDriveCoordinator
+        SWERVE_DRIVE_COORDINATOR = new SwerveDriveCoordinator(LEFT_FRONT_DRIVE_WHEEL, LEFT_BACK_DRIVE_WHEEL,
+                RIGHT_FRONT_DRIVE_WHEEL, RIGHT_BACK_DRIVE_WHEEL);
 
-     // SwerveDriveWheels
-    LEFT_FRONT_DRIVE_WHEEL = new SwerveDriveWheel( LEFT_FRONT_DRIVE_SPEED_MOTOR, m_leftFrontDirection);
-    LEFT_BACK_DRIVE_WHEEL = new SwerveDriveWheel( LEFT_BACK_DRIVE_SPEED_MOTOR, m_leftBackDirection);
-    RIGHT_FRONT_DRIVE_WHEEL = new SwerveDriveWheel( RIGHT_FRONT_DRIVE_SPEED_MOTOR, m_rightFrontDirection);
-    RIGHT_BACK_DRIVE_WHEEL = new SwerveDriveWheel( RIGHT_BACK_DRIVE_SPEED_MOTOR, m_rightBackDirection);
-    
-    // SwerveDriveCoordinator
-     SWERVE_DRIVE_COORDINATOR = new SwerveDriveCoordinator(LEFT_FRONT_DRIVE_WHEEL, LEFT_BACK_DRIVE_WHEEL, RIGHT_FRONT_DRIVE_WHEEL, RIGHT_BACK_DRIVE_WHEEL);
-    
-}
-public class degreeSupplier{
-public CANcoder encoder;
-public degreeSupplier(CANcoder encoder){
-this.encoder=encoder;
+    }
 
+    public class degreeSupplier {
+        public CANcoder encoder;
 
-} 
-public double getDegrees(){
-return (this.encoder.getPosition().getValueAsDouble() % 1)*360;
+        public degreeSupplier(CANcoder encoder) {
+            this.encoder = encoder;
 
-}
-public double getAsDouble(){
-return (this.encoder.getPosition().getValueAsDouble() % 1)*360;
+        }
 
-}
+        public double getDegrees() {
+            return (this.encoder.getPosition().getValueAsDouble() % 1) * 360;
 
+        }
 
-}
+        public double getAsDouble() {
+            return (this.encoder.getPosition().getValueAsDouble() % 1) * 360;
 
+        }
 
+    }
 
-public class SwerveDriveCoordinator
-    {
+    public class SwerveDriveCoordinator {
         SwerveDriveWheel leftFrontWheel;
         SwerveDriveWheel leftBackWheel;
         SwerveDriveWheel rightFrontWheel;
         SwerveDriveWheel rightBackWheel;
 
-
-    
-        public SwerveDriveCoordinator(SwerveDriveWheel leftFrontWheel, SwerveDriveWheel leftBackWheel, SwerveDriveWheel rightFrontWheel, SwerveDriveWheel rightBackWheel)
-        {
-        this.leftFrontWheel = leftFrontWheel;
-        this.leftBackWheel = leftBackWheel;
-        this.rightFrontWheel = rightFrontWheel;
-        this.rightBackWheel = rightBackWheel;
-
+        public SwerveDriveCoordinator(SwerveDriveWheel leftFrontWheel, SwerveDriveWheel leftBackWheel,
+                SwerveDriveWheel rightFrontWheel, SwerveDriveWheel rightBackWheel) {
+            this.leftFrontWheel = leftFrontWheel;
+            this.leftBackWheel = leftBackWheel;
+            this.rightFrontWheel = rightFrontWheel;
+            this.rightBackWheel = rightBackWheel;
 
         }
-        public void setSwerveDrive(double direction, double translatePower, double turnPower)
-{
-    if ((translatePower == 0.0) && (turnPower != 0.0))
-    {
-        inplaceTurn(turnPower);
-    }
-    else
-    {
-        translateTurn(direction, translatePower, turnPower);
-    }
-}
-        public void translate(double direction, double power)
-        {
+
+        public void setSwerveDrive(double direction, double translatePower, double turnPower) {
+            if ((translatePower > -0.5) && (translatePower < 0.5) && (turnPower > 0.5)) {
+                inplaceTurn(turnPower);
+            } else {
+                translateTurn(direction, translatePower, turnPower);
+
+            }
+        }
+
+        public void translate(double direction, double power) {
 
             leftFrontWheel.setDirection(direction);
             leftBackWheel.setDirection(direction);
             rightFrontWheel.setDirection(direction);
             rightBackWheel.setDirection(direction);
 
-        
             leftFrontWheel.speedMotors(power);
             leftBackWheel.speedMotors(power);
             rightFrontWheel.speedMotors(power);
             rightBackWheel.speedMotors(power);
         }
-        public void inplaceTurn(double power)
-{
-    leftFrontWheel.setDirection(45.0);
-    leftBackWheel.setDirection(135.0);
-    rightFrontWheel.setDirection(315.0);
-    rightBackWheel.setDirection(225.0);
- 
-    leftFrontWheel.speedMotors(power);
-    leftBackWheel.speedMotors(power);
-    rightFrontWheel.speedMotors(power);
-    rightBackWheel.speedMotors(power);
-}
-public void translateTurn(double direction, double translatePower, double turnPower)
-{
-    double turnAngle = turnPower * 45.0;
 
-    // if the left front wheel is in the front
-    if (closestAngle(direction, 135.0) >= 90.0)
-    {
-        leftFrontWheel.setDirection(direction + turnAngle);
-    }
-    // if it's in the back
-    else
-    {
-        leftFrontWheel.setDirection(direction - turnAngle);
-    }
-    // if the left back wheel is in the front
-    if (closestAngle(direction, 225.0) > 90.0)
-    {
-        leftBackWheel.setDirection(direction + turnAngle);
-    }
-    // if it's in the back
-    else
-    {
-        leftBackWheel.setDirection(direction - turnAngle);
-    }
-    // if the right front wheel is in the front
-    if (closestAngle(direction, 45.0) > 90.0)
-    {
-        rightFrontWheel.setDirection(direction + turnAngle);
-    }
-    // if it's in the back
-    else
-    {
-        rightFrontWheel.setDirection(direction - turnAngle);
-    }
-    // if the right back wheel is in the front
-    if (closestAngle(direction, 315.0) >= 90.0)
-    {
-        rightBackWheel.setDirection(direction + turnAngle);
-    }
-    // if it's in the back
-    else
-    {
-        rightBackWheel.setDirection(direction - turnAngle);
+        public void inplaceTurn(double power) {
+            leftFrontWheel.setDirection(225.0);
+            leftBackWheel.setDirection(135.0);
+            rightFrontWheel.setDirection(315.0);
+            rightBackWheel.setDirection(45.0);
+        
+            leftFrontWheel.speedMotors(power/5);
+            leftBackWheel.speedMotors(power/5);
+            rightFrontWheel.speedMotors(power/5);
+            rightBackWheel.speedMotors(power/5);
+        }
+
+        public void translateTurn(double direction, double translatePower, double turnPower) {
+            double turnAngle = turnPower * 45.0;
+
+            // if the left front wheel is in the front
+            if (closestAngle(direction, 135.0) >= 90.0) {
+                leftFrontWheel.setDirection(direction + turnAngle);
+            }
+            // if it's in the back
+            else {
+                leftFrontWheel.setDirection(direction - turnAngle);
+            }
+            // if the left back wheel is in the front
+            if (closestAngle(direction, 225.0) > 90.0) {
+                leftBackWheel.setDirection(direction + turnAngle);
+            }
+            // if it's in the back
+            else {
+                leftBackWheel.setDirection(direction - turnAngle);
+            }
+            // if the right front wheel is in the front
+            if (closestAngle(direction, 45.0) > 90.0) {
+                rightFrontWheel.setDirection(direction + turnAngle);
+            }
+            // if it's in the back
+            else {
+                rightFrontWheel.setDirection(direction - turnAngle);
+            }
+            // if the right back wheel is in the front
+            if (closestAngle(direction, 315.0) >= 90.0) {
+                rightBackWheel.setDirection(direction + turnAngle);
+            }
+            // if it's in the back
+            else {
+                rightBackWheel.setDirection(direction - turnAngle);
+            }
+
+            leftFrontWheel.speedMotors(translatePower);
+            leftBackWheel.speedMotors(translatePower);
+            rightFrontWheel.speedMotors(translatePower);
+            rightBackWheel.speedMotors(translatePower);
+        }
+
     }
 
-    leftFrontWheel.speedMotors(translatePower);
-    leftBackWheel.speedMotors(translatePower);
-    rightFrontWheel.speedMotors(translatePower);
-    rightBackWheel.speedMotors(translatePower);
-}
-
-    
-
-
-   
-}
-/**
- * Get the closest angle between the given angles.
- */
-public static double closestAngle(double a, double b)
-{
+    /**
+     * Get the closest angle between the given angles.
+     */
+    public static double closestAngle(double a, double b) {
         // get direction
         double dir = modulo(b, 360.0) - modulo(a, 360.0);
 
         // convert from -360 to 360 to -180 to 180
-        if (Math.abs(dir) > 180.0)
-        {
-                dir = -(Math.signum(dir) * 360.0) + dir;
+        if (Math.abs(dir) > 180.0) {
+            dir = -(Math.signum(dir) * 360.0) + dir;
         }
         return dir;
+    }
+
+    private static double modulo(double b, double d) {
+
+        return b % d;
+    }
+
+    @Override
+    public void periodic() {
+
+        // This method will be called once per scheduler run
+    }
+
 }
-private static double modulo(double b, double d) {
-    
-    return b % d;
-}
-
-
-  @Override
-  public void periodic() {
-
-    // This method will be called once per scheduler run
-  }
-
-}
-

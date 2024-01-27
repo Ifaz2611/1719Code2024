@@ -6,9 +6,13 @@ package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
 
+import com.ctre.phoenix6.hardware.CANcoder;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 //find correct one later
 import frc.robot.subsystems.SwerveSubsystem;
 
@@ -53,9 +57,16 @@ public class SwerveTeleopCommand extends Command {
     double translatePower = Math
         .sqrt((Math.pow(this.m_getY.getAsDouble(), 2) + Math.pow(this.m_getX.getAsDouble(), 2)) / 2);
     double direction = angleFromXY(this.m_getX.getAsDouble(), this.m_getY.getAsDouble());
-    this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(direction, translatePower/5,
+    this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(direction, translatePower/2,
         this.m_getTwist.getAsDouble());
+    System.out.println((new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
+    SmartDashboard.putNumber("leftf",(new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
+    SmartDashboard.putNumber("leftb",(new CANcoder(Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
+    SmartDashboard.putNumber("rightf",(new CANcoder(Constants.RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
+    SmartDashboard.putNumber("rightb",(new CANcoder(Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
   }
+
+
 
   // Called once the command ends or is interrupted.
   @Override

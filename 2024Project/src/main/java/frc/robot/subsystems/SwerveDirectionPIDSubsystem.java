@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import java.util.function.DoubleSupplier;
 import frc.robot.subsystems.SwerveDriveWheel;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 
@@ -49,7 +50,7 @@ this.directionSensor = new CANcoder(directionSensorPin);
 
   @Override
   public void useOutput(double output, double setpoint) {
-        System.out.println("PID actuseoutput");
+
 
     directionMotor.set(output*directionInvert);
   }
@@ -57,9 +58,10 @@ this.directionSensor = new CANcoder(directionSensorPin);
   @Override
   public double getMeasurement() {
     // Return the process variable measurement here
-        System.out.println("PID actmeasure");
+
 
     return directionSensor.getAbsolutePosition().getValueAsDouble() * 360;
+    
   }
   public void setDirection(double setpoint)
     {
