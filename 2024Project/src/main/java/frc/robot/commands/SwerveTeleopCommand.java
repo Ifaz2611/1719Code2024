@@ -36,7 +36,7 @@ public class SwerveTeleopCommand extends Command {
 
     this.table.getEntry("init").setString("done");
     this.m_swerveSubsystem = swerveSubsystem;
-    this.m_getX = getX;
+    this.m_getX = getX ;
     this.m_getY = getY;
     this.m_getTwist = getTwist;
   }
@@ -55,8 +55,8 @@ public class SwerveTeleopCommand extends Command {
     double test1 = this.m_getY.getAsDouble();
     this.table.getEntry("m_getLeftY").setNumber(test1);
     double translatePower = Math
-        .sqrt((Math.pow(this.m_getY.getAsDouble(), 2) + Math.pow(this.m_getX.getAsDouble(), 2)) / 2);
-    double direction = angleFromXY(this.m_getX.getAsDouble(), this.m_getY.getAsDouble());
+        .sqrt((Math.pow(this.m_getY.getAsDouble(), 2) + Math.pow(-this.m_getX.getAsDouble(), 2)) / 2);
+    double direction = angleFromXY(-this.m_getX.getAsDouble(), this.m_getY.getAsDouble());
     this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(direction, translatePower/2,
         this.m_getTwist.getAsDouble());
     System.out.println((new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);

@@ -142,7 +142,7 @@ public class SwerveSubsystem extends SubsystemBase {
         // LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
 
         // Gyro
-        // DRIVE_GYRO = new Pigeon2(Constants.MXP_PORT);
+        DRIVE_GYRO = new Pigeon2(Constants.MXP_PORT);
 
         // SwerveDriveWheels
         LEFT_FRONT_DRIVE_WHEEL = new SwerveDriveWheel(LEFT_FRONT_DRIVE_SPEED_MOTOR, m_leftFrontDirection);
@@ -195,7 +195,7 @@ public class SwerveSubsystem extends SubsystemBase {
             if ((translatePower > -0.5) && (translatePower < 0.7) && (Math.abs (turnPower) > 0.9)) {
                 inplaceTurn(turnPower);
             } else {
-                translateTurn(direction, translatePower, turnPower);
+                translateTurn(direction - DRIVE_GYRO.getAngle(), translatePower, turnPower);
 
             }
         }
