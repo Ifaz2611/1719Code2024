@@ -192,7 +192,7 @@ public class SwerveSubsystem extends SubsystemBase {
         }
 
         public void setSwerveDrive(double direction, double translatePower, double turnPower) {
-            if ((translatePower > -0.5) && (translatePower < 0.5) && (turnPower > 0.5)) {
+            if ((translatePower > -0.5) && (translatePower < 0.7) && (Math.abs (turnPower) > 0.9)) {
                 inplaceTurn(turnPower);
             } else {
                 translateTurn(direction, translatePower, turnPower);
@@ -219,10 +219,10 @@ public class SwerveSubsystem extends SubsystemBase {
             rightFrontWheel.setDirection(315.0);
             rightBackWheel.setDirection(45.0);
         
-            leftFrontWheel.speedMotors(power/5);
-            leftBackWheel.speedMotors(power/5);
-            rightFrontWheel.speedMotors(power/5);
-            rightBackWheel.speedMotors(power/5);
+            leftFrontWheel.speedMotors(power/4);
+            leftBackWheel.speedMotors(power/4);
+            rightFrontWheel.speedMotors(power/4);
+            rightBackWheel.speedMotors(power/4);
         }
 
         public void translateTurn(double direction, double translatePower, double turnPower) {
