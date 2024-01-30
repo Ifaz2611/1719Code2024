@@ -11,8 +11,13 @@ import frc.robot.Constants;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+
 import frc.robot.subsystems.SwerveDriveWheel;
 
 import java.util.function.DoubleConsumer;
@@ -47,6 +52,13 @@ public class SwerveSubsystem extends SubsystemBase {
     public SwerveDirectionPIDSubsystem m_rightFrontDirection;
     public SwerveDirectionPIDSubsystem m_leftBackDirection;
     public SwerveDirectionPIDSubsystem m_rightBackDirection;
+
+    Translation2d m_frontLeftLocation = new Translation2d(0.3,0.3);
+    Translation2d m_frontRightLocation = new Translation2d(0.3,-0.3);
+    Translation2d m_backLeftLocation = new Translation2d(-0.3,0.3);
+    Translation2d m_backRightLocation = new Translation2d(-0.3 ,-0.3);;
+
+    SwerveDriveKinematics m_Kinematics= new SwerveDriveKinematics(m_frontLeftLocation,  m_backLeftLocation, m_frontRightLocation, m_backRightLocation);
 
     // private static CANSparkMax LEFT_FRONT_DRIVE_DIRECTION_MOTOR;
     // private static CANSparkMax LEFT_BACK_DRIVE_DIRECTION_MOTOR;
@@ -190,9 +202,35 @@ public class SwerveSubsystem extends SubsystemBase {
             this.rightBackWheel = rightBackWheel;
 
         }
+        public void CartesianChassisSpeeds(double x, double y, double twist){
+           ChassisSpeeds basicspeeds =  new ChassisSpeeds(x,y,twist);
+           ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(
+  x, y, twist, DRIVE_GYRO.getRotation2d());
 
+            SwerveModuleState[] moduleStates = m_Kinematics.toSwerveModuleStates(speeds);
+            SwerveModuleState frontLeft =moduleStates[0];
+            SwerveModuleState backLeft =moduleStates[1];
+            SwerveModuleState frontRight =moduleStates[2];
+            SwerveModuleState backRight =moduleStates[3];
+            leftFrontWheel.SwerveSetWithState(frontLeft);
+            leftBackWheel.SwerveSetWithState(backLeft);
+            rightFrontWheel.SwerveSetWithState(frontRight);
+            rightBackWheel.SwerveSetWithState(backRight);
+
+            var frontLeftOptimized = SwerveModuleState.optimize(frontLeft,
+   new Rotation2d(leftFrontWheel.directionController.getMeasurement()));
+            var frontRightOptimized = SwerveModuleState.optimize(frontRight,
+   new Rotation2d(rightFrontWheel.directionController.getMeasurement()));
+            var backLeftOptimized = SwerveModuleState.optimize(backLeft,
+   new Rotation2d(leftBackWheel.directionController.getMeasurement()));
+            var backRightOptimized = SwerveModuleState.optimize(backRight,
+   new Rotation2d(rightBackWheel.directionController.getMeasurement()));
+   
+
+        }
+        
         public void setSwerveDrive(double direction, double translatePower, double turnPower) {
-            if ((translatePower > -0.5) && (translatePower < 0.7) && (Math.abs (turnPower) > 0.9)) {
+            if ((translatePower > -0.10) && (translatePower < 0.10) && (Math.abs (turnPower) > 0.10)) {
                 inplaceTurn(turnPower);
             } else {
                 translateTurn(direction - DRIVE_GYRO.getAngle(), translatePower, turnPower);
@@ -228,7 +266,9 @@ public class SwerveSubsystem extends SubsystemBase {
         public void translateTurn(double direction, double translatePower, double turnPower) {
             double turnAngle = turnPower * 45.0;
 
-            // if the left front wheel is in the front
+            
+
+             // if the left front wheel is in the front
             if (closestAngle(direction, 135.0) >= 90.0) {
                 leftFrontWheel.setDirection(direction + turnAngle);
             }
@@ -266,7 +306,13 @@ public class SwerveSubsystem extends SubsystemBase {
             rightFrontWheel.speedMotors(translatePower);
             rightBackWheel.speedMotors(translatePower);
         }
-
+        public void drifTranslate(double direction, double translatePower, double turnPower){
+                      direction = - DRIVE_GYRO.getAngle();
+            leftFrontWheel.setDirection(direction + 2*turnPower*(direction-135));
+            leftBackWheel.setDirection(direction + 2*turnPower*(direction-225));
+            rightFrontWheel.setDirection(direction + 2*turnPower*(direction-45));
+            rightBackWheel.setDirection(direction + 2*turnPower*(direction-315));
+    }
     }
 
     /**

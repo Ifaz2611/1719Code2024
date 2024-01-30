@@ -7,8 +7,11 @@ package frc.robot.subsystems;
 import java.util.function.DoubleSupplier;
 import frc.robot.subsystems.SwerveSubsystem;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModule;
 import com.revrobotics.CANSparkMax;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SwerveDriveWheel extends SubsystemBase
@@ -17,7 +20,7 @@ public class SwerveDriveWheel extends SubsystemBase
     public int directionMotorpin;
     public boolean directionInvert;
     public CANSparkMax speedMotor;
-
+    public SwerveModuleState m_SwerveModuleState;
     public DoubleSupplier directionSetpoint;
     public double setpoint;
     public CANSparkMax directionMotor;
@@ -33,7 +36,7 @@ public class SwerveDriveWheel extends SubsystemBase
         this.speedMotor = speedMotor;
 this.directionController = directionController;
 directionController.enable();
-        
+
    
     }
 
@@ -52,6 +55,15 @@ public void speedMotors(double output) {
 public void setDirection(double angle){
 directionController.setDirection(angle);
 
+}
+public void SwerveStateSet(double power, double angle){
+speedMotor.set(power);
+directionController.setDirection(angle);
+this.m_SwerveModuleState = new SwerveModuleState(power,Rotation2d.fromDegrees(angle));
+}
+public void SwerveSetWithState(SwerveModuleState moduleState){
+speedMotor.set(moduleState.speedMetersPerSecond);
+directionController.setDirection(moduleState.angle.getDegrees());
 }
 // public void directionMotors(double output) {
 //     directionMotor.set(output);
