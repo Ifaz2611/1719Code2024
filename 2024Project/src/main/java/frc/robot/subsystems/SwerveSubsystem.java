@@ -203,15 +203,15 @@ public class SwerveSubsystem extends SubsystemBase {
 
         }
         public void CartesianChassisSpeeds(double x, double y, double twist){
-           ChassisSpeeds basicspeeds =  new ChassisSpeeds(x,y,twist);
+        //   ChassisSpeeds basicspeeds =  new ChassisSpeeds(x,y,twist);
            ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(
   x, y, twist, DRIVE_GYRO.getRotation2d());
 
             SwerveModuleState[] moduleStates = m_Kinematics.toSwerveModuleStates(speeds);
-            SwerveModuleState frontLeft =moduleStates[0];
-            SwerveModuleState backLeft =moduleStates[1];
-            SwerveModuleState frontRight =moduleStates[2];
-            SwerveModuleState backRight =moduleStates[3];
+            SwerveModuleState frontLeft =moduleStates[1];
+            SwerveModuleState backLeft =moduleStates[0];
+            SwerveModuleState frontRight =moduleStates[3];
+            SwerveModuleState backRight =moduleStates[2];
             leftFrontWheel.SwerveSetWithState(frontLeft);
             leftBackWheel.SwerveSetWithState(backLeft);
             rightFrontWheel.SwerveSetWithState(frontRight);
@@ -307,11 +307,26 @@ public class SwerveSubsystem extends SubsystemBase {
             rightBackWheel.speedMotors(translatePower);
         }
         public void drifTranslate(double direction, double translatePower, double turnPower){
-                      direction = - DRIVE_GYRO.getAngle();
-            leftFrontWheel.setDirection(direction + 2*turnPower*(direction-135));
-            leftBackWheel.setDirection(direction + 2*turnPower*(direction-225));
-            rightFrontWheel.setDirection(direction + 2*turnPower*(direction-45));
-            rightBackWheel.setDirection(direction + 2*turnPower*(direction-315));
+                      direction = direction- DRIVE_GYRO.getAngle();
+                      SwerveModuleState leftFrontPosition = convertToPower(translatePower, 225, turnPower, direction);
+                      SwerveModuleState leftBackPosition = convertToPower(translatePower, 135, turnPower, direction);
+                      SwerveModuleState rightFrontPosition = convertToPower(translatePower, 315, turnPower, direction);
+                      SwerveModuleState rightBackPosition = convertToPower(translatePower, 45, turnPower, direction);
+          leftFrontWheel.SwerveSetWithState(leftFrontPosition);
+          leftBackWheel.SwerveSetWithState(leftBackPosition);
+          rightFrontWheel.SwerveSetWithState(rightFrontPosition);
+          rightBackWheel.SwerveSetWithState(rightBackPosition);
+    }
+    public SwerveModuleState convertToPower(double translatepower, double rotateDirection, double turnpower, double direction ){
+        double turnangle = rotateDirection-direction;
+        double forwardCoeficient = Math.cos(Math.toRadians(turnangle))*turnpower;
+        double leftCoeficient = Math.sin(Math.toRadians(turnangle))*turnpower;
+        forwardCoeficient+=translatepower;
+        translatepower = Math.sqrt(forwardCoeficient*forwardCoeficient+leftCoeficient*leftCoeficient);
+        Rotation2d turnangleRot = new Rotation2d(Math.atan2(leftCoeficient, forwardCoeficient)+ Math.toRadians(direction));
+SwerveModuleState Moduleset = new SwerveModuleState( translatepower, turnangleRot);
+
+return Moduleset;
     }
     }
 

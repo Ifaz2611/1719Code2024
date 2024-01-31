@@ -46,4 +46,11 @@ public class LimelightSubsystem extends SubsystemBase {
     double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches) / Math.tan(angleToGoalRadians);
     return distanceFromLimelightToGoalInches;
   }
+
+  public double getAngleToTag() {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tx = table.getEntry("tx");
+    double targetOffsetAngle_Horizontal = tx.getDouble(0.0);
+    return targetOffsetAngle_Horizontal;
+  }
 }

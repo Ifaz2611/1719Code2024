@@ -57,9 +57,11 @@ public class SwerveTeleopCommand extends Command {
     double translatePower = Math
         .sqrt((Math.pow(this.m_getY.getAsDouble(), 2) + Math.pow(-this.m_getX.getAsDouble(), 2)) / 2);
     double direction = angleFromXY(-this.m_getX.getAsDouble(), this.m_getY.getAsDouble());
-   // this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(direction, translatePower/2,
-     //   this.m_getTwist.getAsDouble());
-     this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.CartesianChassisSpeeds(-this.m_getX.getAsDouble(), this.m_getY.getAsDouble(), this.m_getTwist.getAsDouble());
+    // this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(direction, translatePower/2,
+    //     this.m_getTwist.getAsDouble());
+    this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(direction, translatePower/2,
+         this.m_getTwist.getAsDouble());
+   //  this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.CartesianChassisSpeeds(-this.m_getX.getAsDouble(), this.m_getY.getAsDouble(), this.m_getTwist.getAsDouble());
     System.out.println((new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
     SmartDashboard.putNumber("leftf",(new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
     SmartDashboard.putNumber("leftb",(new CANcoder(Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
