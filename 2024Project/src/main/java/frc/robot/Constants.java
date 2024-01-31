@@ -61,4 +61,7 @@ public final class Constants {
   public static final double DirectionI = 0.00;
   public static final double DirectionD = 0.0;
 
+  public static final double SPEAKER_HEIGHT = 5; // NOT REAL VALUE - Must be meters
+  public static final double DISTANCE_LIMELIGHT_TO_SHOOTER = 0; // NOT REAL VALUE - Must be meters
+
 }

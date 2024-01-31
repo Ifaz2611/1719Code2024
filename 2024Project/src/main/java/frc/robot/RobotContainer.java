@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import com.pathplanner.lib.auto.NamedCommands;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -44,6 +45,9 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
+    NamedCommands.registerCommand("Shoot", new InstantCommand(() -> {
+      System.out.println(m_limelight.getAngleToSpeaker());
+    }));
     configureBindings();
   }
 
