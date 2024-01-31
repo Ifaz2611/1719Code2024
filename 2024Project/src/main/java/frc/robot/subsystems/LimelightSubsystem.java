@@ -27,6 +27,8 @@ public class LimelightSubsystem extends SubsystemBase {
 
   public double getDistance() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tid = table.getEntry("tid");
+    double aprilTagId = tid.getInteger(0);
     NetworkTableEntry ty = table.getEntry("ty");
     double targetOffsetAngle_Vertical = ty.getDouble(0.0);
 
@@ -38,19 +40,53 @@ public class LimelightSubsystem extends SubsystemBase {
 
     // distance from the target to the floor
     double goalHeightInches = 60.0; 
+    if (aprilTagId == 4 || aprilTagId == 7) {
+      double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
+      double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
 
-    double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
-    double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
-
-    //calculate distance
-    double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches) / Math.tan(angleToGoalRadians);
-    return distanceFromLimelightToGoalInches;
+      //calculate distance
+      double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches) / Math.tan(angleToGoalRadians);
+      return distanceFromLimelightToGoalInches;
+    }
+    return 0.0;
   }
-
+  
+  // Returns angle to any april tag
   public double getAngleToTag() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tx = table.getEntry("tx");
     double targetOffsetAngle_Horizontal = tx.getDouble(0.0);
     return targetOffsetAngle_Horizontal;
+  }
+  // Returns angle to traps
+  public double getAngleToTrap() {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tid = table.getEntry("tid");
+    double aprilTagId = tid.getInteger(0);
+     if (aprilTagId == 15 || aprilTagId == 14 || aprilTagId == 16 || 
+      aprilTagId == 11 || aprilTagId == 12 || aprilTagId == 13) {
+      return getAngleToTag();
+    }
+    return 0.0;
+  }
+  // Returns angle to speakers
+  public double getAngleToSpeaker() {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tid = table.getEntry("tid");
+    double aprilTagId = tid.getInteger(0);
+     if (aprilTagId == 7 || aprilTagId == 4) {
+      return getAngleToTag();
+    }
+    return 0.0;
+  }
+  // Returns angle to amps
+  public double getAngleToAmp() {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tid = table.getEntry("tid");
+    double aprilTagId = tid.getInteger(0);
+     if (aprilTagId == 6 || aprilTagId == 5) {
+      return getAngleToTag();
+    }
+    return 0.0;
   }
 }
