@@ -326,8 +326,12 @@ public class SwerveSubsystem extends SubsystemBase {
         Rotation2d turnangleRot = new Rotation2d(Math.atan2(leftCoeficient, forwardCoeficient)+ Math.toRadians(direction));
 SwerveModuleState Moduleset = new SwerveModuleState( translatepower, turnangleRot);
 
+   
+
 return Moduleset;
     }
+
+    
     }
 
     /**

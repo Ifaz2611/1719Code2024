@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Constants;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -25,6 +26,12 @@ public class LimelightSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  // Get angle for shooter head (returns double angle from 0 to 360)
+  public double getShootingAngle() {
+    return Math.atan2(Constants.SPEAKER_HEIGHT, getDistance() - Constants.DISTANCE_LIMELIGHT_TO_SHOOTER);
+  }
+
+  // Get distance to april tag (returns double)
   public double getDistance() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tid = table.getEntry("tid");
