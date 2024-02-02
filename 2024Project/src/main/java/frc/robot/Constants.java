@@ -63,6 +63,26 @@ public final class Constants {
   public static final double DirectionI = 0.00;
   public static final double DirectionD = 0.0;
 
+  public static final double SPEAKER_HEIGHT = 5; // NOT REAL VALUE - Must be meters
+  public static final double DISTANCE_LIMELIGHT_TO_SHOOTER = 0; // NOT REAL VALUE - Must be meters
+
+
+
+
+
+  //testing required to get these ratios correct. use system.out.prinln or something
+
+  public static final double ShooterDegreesPerEncoderRotation= 0;
+  public static final double ShootAngleP = 0;
+public static final double ShootAngleI = 0;
+  public static final double ShootAngleD = 0;
+
+
+  // temp pin
+  public static final int ShootAngleEncoder_PIN = 40;
+public static final int ShootAngleMotorPin = 41;
+
+
   public static final double LimeLightPositionTolerance = 2;
   public static final double LimeLightVelocityTolerance = 0.5;
   public static final double DistFromAprilTag = 10;
