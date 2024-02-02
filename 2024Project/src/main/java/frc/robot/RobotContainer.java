@@ -7,10 +7,12 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.ShootAngleControlCommand;
 // import frc.robot.commands.SwerveDirectionPIDCommand;
 import frc.robot.commands.SwerveTeleopCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 import frc.robot.subsystems.SwerveDirectionPIDSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
@@ -37,10 +39,13 @@ public class RobotContainer {
   private final SwerveDirectionPIDSubsystem m_rightBackDirection = new SwerveDirectionPIDSubsystem(Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN, Constants.RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN);
   private final SwerveSubsystem m_swerveDrive = new SwerveSubsystem(m_leftFrontDirection,m_leftBackDirection, m_rightFrontDirection, m_rightBackDirection );
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
+  private final ShooterAnglePIDSubsystem m_AnglePIDSubsystem = new ShooterAnglePIDSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final Joystick m_driverController =
       new Joystick(OperatorConstants.kDriverControllerPort);
+        private final Joystick m_helperController =
+      new Joystick(OperatorConstants.kHelperControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -72,7 +77,9 @@ public class RobotContainer {
         this.m_swerveDrive, m_driverController::getY, m_driverController::getX,
         m_driverController::getTwist);
     this.m_swerveDrive.setDefaultCommand(DriveMode);
-    
+     ShootAngleControlCommand AngleControl = new ShootAngleControlCommand(
+         m_helperController::getY,this.m_AnglePIDSubsystem);
+    this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
     // Trigger prints limelight
     new JoystickButton(m_driverController, 1)
     .onTrue(new InstantCommand(() -> {

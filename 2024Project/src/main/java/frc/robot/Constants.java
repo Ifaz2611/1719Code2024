@@ -19,6 +19,7 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int kHelperControllerPort = 1;
   }
 
   public static final int LEFT_FRONT_DRIVE_SPEED_MOTOR_PIN = 1;
@@ -63,5 +64,22 @@ public final class Constants {
 
   public static final double SPEAKER_HEIGHT = 5; // NOT REAL VALUE - Must be meters
   public static final double DISTANCE_LIMELIGHT_TO_SHOOTER = 0; // NOT REAL VALUE - Must be meters
+
+
+
+
+
+  //testing required to get these ratios correct. use system.out.prinln or something
+
+  public static final double ShooterDegreesPerEncoderRotation= 0;
+  public static final double ShootAngleP = 0;
+public static final double ShootAngleI = 0;
+  public static final double ShootAngleD = 0;
+
+
+  // temp pin
+  public static final int ShootAngleEncoder_PIN = 40;
+public static final int ShootAngleMotorPin = 41;
+
 
 }
