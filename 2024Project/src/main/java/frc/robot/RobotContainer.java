@@ -10,6 +10,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ShootAngleControlCommand;
 // import frc.robot.commands.SwerveDirectionPIDCommand;
 import frc.robot.commands.SwerveTeleopCommand;
+import frc.robot.subsystems.DeviceSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
@@ -40,6 +41,7 @@ public class RobotContainer {
   private final SwerveSubsystem m_swerveDrive = new SwerveSubsystem(m_leftFrontDirection,m_leftBackDirection, m_rightFrontDirection, m_rightBackDirection );
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterAnglePIDSubsystem m_AnglePIDSubsystem = new ShooterAnglePIDSubsystem();
+  private final DeviceSubsystem m_DeviceSubsystem = new DeviceSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final Joystick m_driverController =
@@ -94,6 +96,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_swerveDrive);
+    return Autos.exampleAuto(m_swerveDrive, m_DeviceSubsystem);
   }
 }
