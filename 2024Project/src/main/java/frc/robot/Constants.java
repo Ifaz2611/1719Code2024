@@ -38,9 +38,11 @@ public final class Constants {
   public static final int RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN = 6;
   public static final int RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN = 12;
 
-
+  // ids of robot arms aka as the rotation motors
   public static final int ARM_MOTOR_LEFT = 21;
   public static final int ARM_MOTOR_RIGHT = 22;
+
+  // intake / outtake motors, allowing robot to shoot ids.
   public static final int INTAKE_LEFT = 23;
   public static final int INTAKE_RIGHT = 24;
 
@@ -61,4 +63,14 @@ public final class Constants {
   public static final double DirectionI = 0.00;
   public static final double DirectionD = 0.0;
 
+  public static final double LimeLightPositionTolerance = 2;
+  public static final double LimeLightVelocityTolerance = 0.5;
+  public static final double DistFromAprilTag = 10;
+
+  // Pid for PIDCommandTurnToAngle (positioning robot direction)
+  public static final double PTurnToAngle = 0.05;
+  public static final double ITurnToAngle = 0.00;
+  public static final double DTurnToAngle = 0;
+
+  public static final double LimeLightDegreesTolerance = 2;
 }
