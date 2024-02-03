@@ -154,7 +154,7 @@ public class SwerveSubsystem extends SubsystemBase {
         // LEFT_FRONT_DRIVE_DIRECTION_ENCODER.getPosition().getValueAsDouble()* 360;
 
         // Gyro
-        DRIVE_GYRO = new Pigeon2(Constants.MXP_PORT);
+        DRIVE_GYRO = new Pigeon2(Constants.CAN_GYRO_PORT);
 
         // SwerveDriveWheels
         LEFT_FRONT_DRIVE_WHEEL = new SwerveDriveWheel(LEFT_FRONT_DRIVE_SPEED_MOTOR, m_leftFrontDirection);

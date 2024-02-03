@@ -17,21 +17,26 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+  // Human controller pin ids
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
     public static final int kHelperControllerPort = 1;
   }
 
+  // These pins controll speed motors
   public static final int LEFT_FRONT_DRIVE_SPEED_MOTOR_PIN = 1;
   public static final int LEFT_BACK_DRIVE_SPEED_MOTOR_PIN = 7;
   public static final int RIGHT_FRONT_DRIVE_SPEED_MOTOR_PIN = 4;
   public static final int RIGHT_BACK_DRIVE_SPEED_MOTOR_PIN = 10;
 
+  // These are the pins for controlling the wheels direction
   public static final int LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN = 2;
   public static final int LEFT_BACK_DRIVE_DIRECTION_MOTOR_PIN = 8;
   public static final int RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN = 5;
   public static final int RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN = 11;
 
+  // these pins hold the ids for the wheel's direction encoders
   public static final int LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN = 3;
   public static final int LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN = 9;
   public static final int RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN = 6;
@@ -45,45 +50,56 @@ public final class Constants {
   public static final int INTAKE_LEFT = 23;
   public static final int INTAKE_RIGHT = 24;
 
-  // changes the speed of the intake / shoot motors. 
+  // changes the speed of the intake / shoot motors.
   // NEEDS TO BE CHANGED!!!
   public static final double INTAKESPEED = 0.0;
   public static final double SHOOTSPEED = 0.0;
 
-  // angles of shooter 
+  // angles of shooter
   // PLACE HOLDERS!!!!!!!!!!!!
-  public static final double shootAngleA = 110.0; 
+  //only 1 shoot angle needed
+  public static final double shootAngleA = 110.0;
   public static final double shootAngleB = 110.0;
   public static final double shootAngleC = 30.0;
 
-  public static final int MXP_PORT = 0;
+  // Gyro pin
+  public static final int CAN_GYRO_PORT = 0;
 
+  // these are the pid values for syncronizing direction motors 
   public static final double DirectionP = 0.005;
   public static final double DirectionI = 0.00;
   public static final double DirectionD = 0.0;
 
+  // height of the shooter in meters
   public static final double SPEAKER_HEIGHT = 5; // NOT REAL VALUE - Must be meters
+
+  // distance from the lime light stand to the shooter base
   public static final double DISTANCE_LIMELIGHT_TO_SHOOTER = 0; // NOT REAL VALUE - Must be meters
 
+  // controlls the motor led pin. and yes it is a motor 
   public static final int LED_PWM_PIN = 9;
 
 
+  // testing required to get these ratios correct. use system.out.prinln or
+  // something
 
-  //testing required to get these ratios correct. use system.out.prinln or something
+  // // 
+  // public static final double ShooterDegreesPerEncoderRotation = 0;
 
-  public static final double ShooterDegreesPerEncoderRotation= 0;
+  // stablizes the angle of the shooter
   public static final double ShootAngleP = 0;
-public static final double ShootAngleI = 0;
+  public static final double ShootAngleI = 0;
   public static final double ShootAngleD = 0;
 
+  // these pins controls the angle of the shooter
+  public static final int ShootAngleEncoder_PIN = 40; // encoder
+  public static final int ShootAngleMotorPin = 41; // motor
 
-  // temp pin
-  public static final int ShootAngleEncoder_PIN = 40;
-public static final int ShootAngleMotorPin = 41;
-
-
+  // these are used in lime light robot driving pid.
   public static final double LimeLightPositionTolerance = 2;
   public static final double LimeLightVelocityTolerance = 0.5;
+
+  // distance from the place you will score in from the april tag in meters
   public static final double DistFromAprilTag = 10;
 
   // Pid for PIDCommandTurnToAngle (positioning robot direction)
@@ -91,5 +107,6 @@ public static final int ShootAngleMotorPin = 41;
   public static final double ITurnToAngle = 0.00;
   public static final double DTurnToAngle = 0;
 
+  // controls tolerence of limelight shooter angle i think
   public static final double LimeLightDegreesTolerance = 2;
 }
