@@ -88,7 +88,10 @@ public class RobotContainer {
     // Trigger prints limelight
     new JoystickButton(m_driverController, 1)
     .onTrue(new InstantCommand(() -> {
-      System.out.println(m_limelight.getDistance());
+      //System.out.println(m_limelight.getDistance());
+      double color = Math.random();
+      m_LedSubsystem.set_led_color(color);
+      System.out.println(color);
     }));
   }
 

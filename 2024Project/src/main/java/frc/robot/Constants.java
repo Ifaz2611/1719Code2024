@@ -109,4 +109,21 @@ public final class Constants {
 
   // controls tolerence of limelight shooter angle i think
   public static final double LimeLightDegreesTolerance = 2;
+
+  /*
+   * LED CONSTANTS FOR COLOR
+   * DO NOT EDIT
+   */
+  // Static colors during match
+  public static final double NO_NOTE_BASELINE_GOLD = 0.67;
+  public static final double HAS_NOTE_NO_TAG_PURPLE = 0.91;
+  public static final double HAS_NOTE_SPEAKER_GREEN = 0.77;
+  public static final double HAS_NOTE_AMP_BLUE = 0.83;
+  public static final double AUTON_YELLOW = 0.25;
+  // Extra colors
+  public static final double WHITE = 0.93;
+  public static final double RED = 0.61;
+  // Patterns
+  public static final double LARSON_SCANNER = 0.19;
+  public static final double RAINBOW_GLITTER = -0.89;
 }
