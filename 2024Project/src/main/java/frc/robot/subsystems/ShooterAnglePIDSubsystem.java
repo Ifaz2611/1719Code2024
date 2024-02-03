@@ -33,7 +33,12 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
         
           ShootAngleEncoder = new DutyCycleEncoder(Constants.ShootAngleEncoder_PIN);
            ShootAngleMotor = new CANSparkMax(Constants.ShootAngleMotorPin,MotorType.kBrushless);
+          
   }
+
+  public double shootAngle() {
+      return getMeasurement();   
+          }
 
   @Override
   public void useOutput(double output, double setpoint) {
@@ -48,3 +53,5 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
     return ShootAngleEncoder.getAbsolutePosition();
   }
 }
+
+

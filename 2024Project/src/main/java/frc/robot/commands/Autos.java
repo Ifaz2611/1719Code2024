@@ -15,7 +15,7 @@ public final class Autos {
   /** Example static factory for an autonomous command. */
   public static Command exampleAuto(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem ) {
    // return new InstantCommand(() -> {subsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(90,0,0 );});
-    return Commands.sequence( new InstantCommand(()-> {deviceSubsystem.intake();} ) );
+    return Commands.sequence( new InstantCommand(()-> {deviceSubsystem.turnIntakeMotors(0);} ) );
   }
 
   private Autos() {

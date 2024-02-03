@@ -31,8 +31,6 @@ public class DeviceSubsystem extends SubsystemBase {
     private static CANSparkMax INTAKE_LEFT;
     private static CANSparkMax INTAKE_RIGHT;
 
-    double armAngle = 30;
-
     public DeviceSubsystem() {
 
         ARM_MOTOR_LEFT = new CANSparkMax(Constants.ARM_MOTOR_LEFT, MotorType.kBrushless);
@@ -42,19 +40,15 @@ public class DeviceSubsystem extends SubsystemBase {
 
     }
 
-    /*
-     * INTAKE CODE AND SHOOT CODE
-     */
-
     // turns the motors a specific direction.
-    // -1 is intake, 1 is shoot!
-    public void turnIntakeMotors(int bof) {
-        if (bof == -1) {
+    // -1 is intake, 1 is shoot
+    public void turnIntakeMotors(int ShootBOF) {
+        if (ShootBOF == -1) {
             // make motors turn inwards
             INTAKE_LEFT.set(Constants.INTAKESPEED);
             INTAKE_RIGHT.set(Constants.INTAKESPEED);
 
-        } else if (bof == 1) {
+        } else if (ShootBOF == 1) {
             // make motors shoot ring out + speed
             INTAKE_LEFT.set(Constants.SHOOTSPEED);
             INTAKE_RIGHT.set(Constants.SHOOTSPEED);
@@ -67,27 +61,5 @@ public class DeviceSubsystem extends SubsystemBase {
     public void turnOffIntakeMotors() {
         INTAKE_LEFT.set(0);
         INTAKE_RIGHT.set(0);
-    }
-
-    public void shoot() {
-        if (armAngle == Constants.shootAngleA || armAngle == Constants.shootAngleB) {
-            turnIntakeMotors(1); 
-        }
-    }
-
-    // turns on the intake motors if in position
-    public void intake() {
-        if (armAngle == Constants.shootAngleC) {
-            turnIntakeMotors(-1);
-        }
-    }
-
-    /*
-     * ARM CODE HERE
-     */
-
-    public void changeAngle(double angle) {
-        armAngle = angle;
-        // sets angles of arm here
     }
 }

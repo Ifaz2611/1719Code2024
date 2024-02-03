@@ -32,8 +32,6 @@ public final class Constants {
   public static final int RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN = 5;
   public static final int RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN = 11;
 
-
-
   public static final int LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN = 3;
   public static final int LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN = 9;
   public static final int RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN = 6;
@@ -67,7 +65,7 @@ public final class Constants {
   public static final double SPEAKER_HEIGHT = 5; // NOT REAL VALUE - Must be meters
   public static final double DISTANCE_LIMELIGHT_TO_SHOOTER = 0; // NOT REAL VALUE - Must be meters
 
-
+  public static final int LED_PWM_PIN = 9;
 
 
 
