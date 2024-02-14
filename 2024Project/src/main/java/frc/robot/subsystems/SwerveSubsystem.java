@@ -230,6 +230,8 @@ public class SwerveSubsystem extends SubsystemBase {
         }
         
         public void setSwerveDrive(double direction, double translatePower, double turnPower) {
+             direction = direction- (DRIVE_GYRO.getAngle()%360);
+             System.out.println(DRIVE_GYRO.getAngle());
             if ((translatePower > -0.10) && (translatePower < 0.10) && (Math.abs (turnPower) > 0.10)) {
                 inplaceTurn(turnPower);
             } else {
@@ -308,6 +310,7 @@ public class SwerveSubsystem extends SubsystemBase {
         }
         public void drifTranslate(double direction, double translatePower, double turnPower){
                       direction = direction- DRIVE_GYRO.getAngle();
+
                       SwerveModuleState leftFrontPosition = convertToPower(translatePower, 225, turnPower, direction);
                       SwerveModuleState leftBackPosition = convertToPower(translatePower, 135, turnPower, direction);
                       SwerveModuleState rightFrontPosition = convertToPower(translatePower, 315, turnPower, direction);

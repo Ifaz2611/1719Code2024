@@ -13,9 +13,17 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public final class Autos {
   /** Example static factory for an autonomous command. */
+  SwerveSubsystem driveSubsystem;
   public static Command exampleAuto(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem ) {
+
    // return new InstantCommand(() -> {subsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(90,0,0 );});
-    return Commands.sequence( new InstantCommand(()-> {deviceSubsystem.turnIntakeMotors(0);} ) );
+    return Commands.sequence( Intake(deviceSubsystem) );
+  }
+  //instantCommands
+
+  public static Command Intake(DeviceSubsystem device){
+
+    return new InstantCommand(()-> {device.turnIntakeMotors(0);});
   }
 
   private Autos() {

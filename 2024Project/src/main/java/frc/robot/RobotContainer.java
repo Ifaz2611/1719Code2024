@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.PIDCommandTurnToAngle;
 import frc.robot.commands.ShootAngleControlCommand;
 // import frc.robot.commands.SwerveDirectionPIDCommand;
 import frc.robot.commands.SwerveTeleopCommand;
@@ -87,12 +88,17 @@ public class RobotContainer {
     this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);*/
     // Trigger prints limelight
     new JoystickButton(m_driverController, 1)
-    .onTrue(new InstantCommand(() -> {
-      //System.out.println(m_limelight.getDistance());
-      double color = Math.random();
-      m_LedSubsystem.set_led_color(color);
-      System.out.println(color);
-    }));
+    .onTrue(
+      new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
+    
+    //new InstantCommand(() -> {
+      //System.out.println("DISTANCE: " + m_limelight.getDistance());
+      //System.out.println("ANGLE: " + m_limelight.getAngleToSpeaker());
+      // double color = Math.random();
+      // m_LedSubsystem.set_led_color(color);
+      // System.out.println(color);
+    //})
+    );
   }
 
   /**

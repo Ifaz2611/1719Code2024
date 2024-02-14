@@ -25,13 +25,13 @@ public final class Constants {
   }
 
   // These pins controll speed motors
-  public static final int LEFT_FRONT_DRIVE_SPEED_MOTOR_PIN = 1;
+  public static final int LEFT_FRONT_DRIVE_SPEED_MOTOR_PIN = 1;// all 4 wheels are rotated 180
   public static final int LEFT_BACK_DRIVE_SPEED_MOTOR_PIN = 7;
   public static final int RIGHT_FRONT_DRIVE_SPEED_MOTOR_PIN = 4;
   public static final int RIGHT_BACK_DRIVE_SPEED_MOTOR_PIN = 10;
 
   // These are the pins for controlling the wheels direction
-  public static final int LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN = 2;
+  public static final int LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN =2;// all 4 wheels are rotated 180
   public static final int LEFT_BACK_DRIVE_DIRECTION_MOTOR_PIN = 8;
   public static final int RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN = 5;
   public static final int RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN = 11;
@@ -63,7 +63,7 @@ public final class Constants {
   public static final double shootAngleC = 30.0;
 
   // Gyro pin
-  public static final int CAN_GYRO_PORT = 0;
+  public static final int CAN_GYRO_PORT = 13;
 
   // these are the pid values for syncronizing direction motors 
   public static final double DirectionP = 0.005;
@@ -72,6 +72,13 @@ public final class Constants {
 
   // height of the shooter in meters
   public static final double SPEAKER_HEIGHT = 5; // NOT REAL VALUE - Must be meters
+
+  // Angle of limelight from the horizontal
+  public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 45.0;
+  // Offset of limelight center in inches from floor
+  public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 9.0; 
+  // Offset of goal center in inches from floor
+  public static final double GOAL_HEIGHT_INCHES = 60;
 
   // distance from the lime light stand to the shooter base
   public static final double DISTANCE_LIMELIGHT_TO_SHOOTER = 0; // NOT REAL VALUE - Must be meters
@@ -103,7 +110,7 @@ public final class Constants {
   public static final double DistFromAprilTag = 10;
 
   // Pid for PIDCommandTurnToAngle (positioning robot direction)
-  public static final double PTurnToAngle = 0.05;
+  public static final double PTurnToAngle = -0.005;
   public static final double ITurnToAngle = 0.00;
   public static final double DTurnToAngle = 0;
 
