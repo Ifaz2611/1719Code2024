@@ -27,7 +27,7 @@ public class PIDCommandTurnToAngle extends PIDCommand {
         // This uses the output
         output -> {
           // Use the output here
-          mSwerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0, 0, output);
+          mSwerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0, 0, -output);
           
         });
 

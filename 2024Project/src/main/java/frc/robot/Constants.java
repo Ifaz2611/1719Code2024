@@ -104,18 +104,19 @@ public final class Constants {
 
   // these are used in lime light robot driving pid.
   public static final double LimeLightPositionTolerance = 2;
-  public static final double LimeLightVelocityTolerance = 0.5;
+  public static final double LimeLightDegreesTolerance = 2;
+  public static final double LimeLightVelocityTolerance = 0.02;
 
   // distance from the place you will score in from the april tag in meters
   public static final double DistFromAprilTag = 10;
 
   // Pid for PIDCommandTurnToAngle (positioning robot direction)
-  public static final double PTurnToAngle = -0.005;
+  public static final double PTurnToAngle = 0.005;
   public static final double ITurnToAngle = 0.00;
   public static final double DTurnToAngle = 0;
 
   // controls tolerence of limelight shooter angle i think
-  public static final double LimeLightDegreesTolerance = 2;
+//see LimelightDegreesTolerance
 
   /*
    * LED CONSTANTS FOR COLOR
