@@ -15,19 +15,19 @@ import frc.robot.subsystems.SwerveSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class LimeLightMovePIDCommand extends PIDCommand {
   /** Creates a new LimeLightMovePIDCommand. */
-  public LimeLightMovePIDCommand(LimelightSubsystem mLimelightSubsystem, SwerveSubsystem mSwerveSubsystem) {
+  public LimeLightMovePIDCommand(LimelightSubsystem mLimelightSubsystem, SwerveSubsystem mSwerveSubsystem, LimelightSwerveManager mLimelightSwerveManager) {
     super(
         // The controller that the command will use
-        new PIDController(0, 0, 0),
+        new PIDController(0.005, 0, 0),
         // This should return the measurement
-        () -> mLimelightSubsystem.getAngleToTag(),
+        () -> mLimelightSubsystem.getDistance(),
         // This should return the setpoint (can also be a constant)
         () -> Constants.DistFromAprilTag, // temp
         // This uses the output
         output -> {
           // Use the output here
-          mSwerveSubsystem.SWERVE_DRIVE_COORDINATOR.CartesianChassisSpeeds(0, output, 0);
-          
+        //  mSwerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(output, output, 0);
+         mLimelightSwerveManager.setMovePID(output);
         });
       
       addRequirements(mSwerveSubsystem, mLimelightSubsystem);

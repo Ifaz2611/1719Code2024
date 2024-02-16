@@ -108,7 +108,7 @@ public final class Constants {
   public static final double LimeLightVelocityTolerance = 0.02;
 
   // distance from the place you will score in from the april tag in meters
-  public static final double DistFromAprilTag = 10;
+  public static final double DistFromAprilTag = 24;
 
   // Pid for PIDCommandTurnToAngle (positioning robot direction)
   public static final double PTurnToAngle = 0.005;

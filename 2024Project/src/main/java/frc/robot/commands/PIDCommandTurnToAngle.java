@@ -16,7 +16,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PIDCommandTurnToAngle extends PIDCommand {
   /** Creates a new PIDCommandTurnToAngle. */
-  public PIDCommandTurnToAngle(LimelightSubsystem mLimelightSubsystem, SwerveSubsystem mSwerveSubsystem) {
+  public PIDCommandTurnToAngle(LimelightSubsystem mLimelightSubsystem, SwerveSubsystem mSwerveSubsystem, LimelightSwerveManager mLimelightSwerveManager) {
     super(
         // The controller that the command will use
         new PIDController(Constants.PTurnToAngle, Constants.ITurnToAngle, Constants.DTurnToAngle),
@@ -27,8 +27,8 @@ public class PIDCommandTurnToAngle extends PIDCommand {
         // This uses the output
         output -> {
           // Use the output here
-          mSwerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0, 0, -output);
-          
+         // mSwerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0, 0, -output);
+         mLimelightSwerveManager.setAnglePID(output, mLimelightSubsystem.getAngleToSpeaker());
         });
 
         getController().setTolerance(Constants.LimeLightDegreesTolerance, Constants.LimeLightVelocityTolerance);

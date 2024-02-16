@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.LimelightSwerveManager;
 import frc.robot.commands.PIDCommandTurnToAngle;
 import frc.robot.commands.ShootAngleControlCommand;
 // import frc.robot.commands.SwerveDirectionPIDCommand;
@@ -43,10 +44,10 @@ public class RobotContainer {
   private final SwerveDirectionPIDSubsystem m_rightBackDirection = new SwerveDirectionPIDSubsystem(Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN, Constants.RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN);
   private final SwerveSubsystem m_swerveDrive = new SwerveSubsystem(m_leftFrontDirection,m_leftBackDirection, m_rightFrontDirection, m_rightBackDirection );
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
-  //private final ShooterAnglePIDSubsystem m_AnglePIDSubsystem = new ShooterAnglePIDSubsystem();
+  private final ShooterAnglePIDSubsystem m_AnglePIDSubsystem = new ShooterAnglePIDSubsystem();
   private final DeviceSubsystem m_DeviceSubsystem = new DeviceSubsystem();
   private final LedSubsystem m_LedSubsystem = new LedSubsystem();
-
+  
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final Joystick m_driverController =
       new Joystick(OperatorConstants.kDriverControllerPort);
@@ -79,17 +80,21 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
   //  m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-    SwerveTeleopCommand DriveMode = new SwerveTeleopCommand(
+  // Swerve Drive  
+  SwerveTeleopCommand DriveMode = new SwerveTeleopCommand(
         this.m_swerveDrive, m_driverController::getY, m_driverController::getX,
         m_driverController::getTwist);
     this.m_swerveDrive.setDefaultCommand(DriveMode);
-     /*ShootAngleControlCommand AngleControl = new ShootAngleControlCommand(
+  // Manually Controlled Shoot Angle
+     ShootAngleControlCommand AngleControl = new ShootAngleControlCommand(
          m_helperController::getY,this.m_AnglePIDSubsystem);
-    this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);*/
+    this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
+    // Limelight Swerve Manager 
+    LimelightSwerveManager LimelightSwerveManager = new LimelightSwerveManager(m_limelight, m_swerveDrive);
     // Trigger prints limelight
     new JoystickButton(m_driverController, 1)
     .onTrue(
-      new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
+      new PIDCommandTurnToAngle(m_limelight, m_swerveDrive, LimelightSwerveManager)
     
     //new InstantCommand(() -> {
       //System.out.println("DISTANCE: " + m_limelight.getDistance());

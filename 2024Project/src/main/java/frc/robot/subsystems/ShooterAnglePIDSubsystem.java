@@ -43,7 +43,7 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
   @Override
   public void useOutput(double output, double setpoint) {
     // Use the output here
-
+System.out.println(ShootAngleEncoder.getAbsolutePosition());
     ShootAngleMotor.set(output);
   }
 
