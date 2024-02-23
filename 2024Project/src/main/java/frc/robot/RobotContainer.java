@@ -20,6 +20,7 @@ import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 import frc.robot.subsystems.SwerveDirectionPIDSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -36,8 +37,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  
+  // The robot's subsystems and commands are defined here...  
   private final SwerveDirectionPIDSubsystem m_leftFrontDirection = new SwerveDirectionPIDSubsystem(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN, Constants.LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN);
   private final SwerveDirectionPIDSubsystem m_leftBackDirection = new SwerveDirectionPIDSubsystem(Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN, Constants.LEFT_BACK_DRIVE_DIRECTION_MOTOR_PIN);
   private final SwerveDirectionPIDSubsystem m_rightFrontDirection = new SwerveDirectionPIDSubsystem(Constants.RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN, Constants.RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN);
@@ -57,9 +57,10 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    NamedCommands.registerCommand("Shoot", new InstantCommand(() -> {
-      System.out.println(m_limelight.getAngleToSpeaker());
-    }));
+    // NamedCommands.registerCommand("Shoot", new InstantCommand(() -> {
+    //   System.out.println(m_limelight.getAngleToSpeaker());
+    // }));
+
     configureBindings();
   }
 
@@ -111,8 +112,16 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  public Command getAutonomousCommand(String m_autoSelected) {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_swerveDrive, m_DeviceSubsystem);
+    if (m_autoSelected.equals("Auto 1")) {
+      return Autos.Auto1(m_swerveDrive, m_DeviceSubsystem);
+    } else if (m_autoSelected.equals("Auto 2")) {
+      return Autos.Auto2(m_swerveDrive, m_DeviceSubsystem);
+    } else if (m_autoSelected.equals("Auto 3")) {
+      return Autos.Auto3(m_swerveDrive, m_DeviceSubsystem);
+    } else {
+      return Autos.defaultAuto(m_swerveDrive, m_DeviceSubsystem);
+    }
   }
 }

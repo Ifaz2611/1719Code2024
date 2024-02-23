@@ -14,10 +14,32 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 public final class Autos {
   /** Example static factory for an autonomous command. */
   SwerveSubsystem driveSubsystem;
-  public static Command exampleAuto(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem ) {
+  // DEFAULT AUTO
+  public static Command defaultAuto(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem ) {
+    // return new InstantCommand(() -> {subsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(90,0,0 );});
+    System.out.println("Default Auto");
+    return Commands.sequence( Autos.Intake(deviceSubsystem) );
+  }
 
-   // return new InstantCommand(() -> {subsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(90,0,0 );});
-    return Commands.sequence( Intake(deviceSubsystem) );
+  // AUTO 1
+  public static Command Auto1(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem ) {
+    // return new InstantCommand(() -> {subsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(90,0,0 );});
+    System.out.println("Auto 1");
+    return Commands.sequence( Autos.Intake(deviceSubsystem) );
+  }
+
+  // AUTO 2
+  public static Command Auto2(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem ) {
+    // return new InstantCommand(() -> {subsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(90,0,0 );});
+    System.out.println("Auto 2");
+    return Commands.sequence( Autos.Intake(deviceSubsystem) );
+  }
+
+  // AUTO 3
+  public static Command Auto3(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem ) {
+    // return new InstantCommand(() -> {subsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(90,0,0 );});
+    System.out.println("Auto 3");
+    return Commands.sequence( Autos.Intake(deviceSubsystem) );
   }
   //instantCommands
 

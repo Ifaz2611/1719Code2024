@@ -5,9 +5,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.LedSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -17,8 +18,15 @@ import frc.robot.subsystems.LedSubsystem;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
   private RobotContainer m_robotContainer;
+  
+  // Robot auton choices
+  private final String kAuto0 = "Auto 0 (Default)";
+  private final String kAuto1 = "Auto 1";
+  private final String kAuto2 = "Auto 2";
+  private final String kAuto3 = "Auto 3";
+  private String m_autoSelected;
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -29,6 +37,13 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    // Setup smart dashboard to choose auton
+    m_chooser.setDefaultOption("Auto 0 (Default)", kAuto0);
+    m_chooser.addOption("Auto 1", kAuto1);
+    m_chooser.addOption("Auto 2", kAuto2);
+    m_chooser.addOption("Auto 3", kAuto3);
+    SmartDashboard.putData("Auto choices", m_chooser);
   }
 
   /**
@@ -57,17 +72,25 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
+    // Get auton from smart dashboard
+    m_autoSelected = m_chooser.getSelected();
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.schedule();
+    // }
   }
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_autoSelected);
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
+    }
+  }
 
   @Override
   public void teleopInit() {

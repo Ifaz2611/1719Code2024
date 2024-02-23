@@ -99,8 +99,8 @@ public final class Constants {
   public static final double ShootAngleD = 0;
 
   // these pins controls the angle of the shooter
-  public static final int ShootAngleEncoder_PIN = 40; // encoder
-  public static final int ShootAngleMotorPin = 41; // motor
+  public static final int ShootAngleEncoder_PIN = 30; // encoder
+  public static final int ShootAngleMotorPin = 31; // motor
 
   // these are used in lime light robot driving pid.
   public static final double LimeLightPositionTolerance = 2;
