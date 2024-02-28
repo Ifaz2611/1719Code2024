@@ -134,4 +134,6 @@ public final class Constants {
   // Patterns
   public static final double LARSON_SCANNER = 0.19;
   public static final double RAINBOW_GLITTER = -0.89;
+public static int m_rightPiston;
+public static int m_leftPiston;
 }
