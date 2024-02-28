@@ -22,7 +22,7 @@ public class LimeLightMovePIDCommand extends PIDCommand {
         // This should return the measurement
         () -> mLimelightSubsystem.getDistance(),
         // This should return the setpoint (can also be a constant)
-        () -> Constants.DistFromAprilTag, // temp
+        () -> 0, // temp
         // This uses the output
         output -> {
           // Use the output here
@@ -31,7 +31,7 @@ public class LimeLightMovePIDCommand extends PIDCommand {
         });
       
       addRequirements(mSwerveSubsystem, mLimelightSubsystem);
-      getController().setTolerance(Constants.LimeLightPositionTolerance, Constants.LimeLightVelocityTolerance);
+      getController().setTolerance(Constants.LimeLightPositionTolerance+Constants.DistFromAprilTag, Constants.LimeLightVelocityTolerance);
 
 }
       
@@ -43,6 +43,7 @@ public class LimeLightMovePIDCommand extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+
     return this.m_controller.atSetpoint();
   }
 }
