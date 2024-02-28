@@ -33,8 +33,8 @@ public class DeviceSubsystem extends SubsystemBase {
 
     public DeviceSubsystem() {
 
-        ARM_MOTOR_LEFT = new CANSparkMax(Constants.ARM_MOTOR_LEFT, MotorType.kBrushless);
-        ARM_MOTOR_RIGHT = new CANSparkMax(Constants.ARM_MOTOR_RIGHT, MotorType.kBrushless); // temporary
+      //  ARM_MOTOR_LEFT = new CANSparkMax(Constants.ARM_MOTOR_LEFT, MotorType.kBrushless);
+     //   ARM_MOTOR_RIGHT = new CANSparkMax(Constants.ARM_MOTOR_RIGHT, MotorType.kBrushless); // temporary
         INTAKE_LEFT = new CANSparkMax(Constants.INTAKE_LEFT, MotorType.kBrushless);
         INTAKE_RIGHT = new CANSparkMax(Constants.INTAKE_RIGHT, MotorType.kBrushless);
 
@@ -50,8 +50,8 @@ public class DeviceSubsystem extends SubsystemBase {
 
         } else if (ShootBOF == 1) {
             // make motors shoot ring out + speed
-            INTAKE_LEFT.set(Constants.SHOOTSPEED);
-            INTAKE_RIGHT.set(Constants.SHOOTSPEED);
+            INTAKE_LEFT.set(0);//-Constants.SHOOTSPEED);
+            INTAKE_RIGHT.set(0);//Constants.SHOOTSPEED);
 
         } else {
             turnOffIntakeMotors();
