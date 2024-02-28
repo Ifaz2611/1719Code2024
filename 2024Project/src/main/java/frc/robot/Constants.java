@@ -42,13 +42,15 @@ public final class Constants {
   public static final int RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN = 6;
   public static final int RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN = 12;
 
-  // ids of robot arms aka as the rotation motors
-  public static final int ARM_MOTOR_LEFT = 21;
-  public static final int ARM_MOTOR_RIGHT = 22;
+  // // ids of robot arms aka as the rotation motors
+  // public static final int ARM_MOTOR_LEFT = 21;
+  // public static final int ARM_MOTOR_RIGHT = 22;
 
+  public static final int ARM_MOTOR = 21; // NO IDEA IF THIS IS CORRECT BEWARE
+  
   // intake / outtake motors, allowing robot to shoot ids.
-  public static final int INTAKE_LEFT = 14;
-  public static final int INTAKE_RIGHT = 15;
+  public static final int SHOOTER = 14;
+  public static final int INTAKE= 15;
 
   // changes the speed of the intake / shoot motors.
   // NEEDS TO BE CHANGED!!!
@@ -134,6 +136,8 @@ public final class Constants {
   // Patterns
   public static final double LARSON_SCANNER = 0.19;
   public static final double RAINBOW_GLITTER = -0.89;
+
+  //TODO: FILL IN IDS AND THEN MAKE BOTH FINAL
 public static int m_rightPiston;
 public static int m_leftPiston;
 }
