@@ -27,7 +27,6 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
@@ -57,10 +56,6 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    // NamedCommands.registerCommand("Shoot", new InstantCommand(() -> {
-    //   System.out.println(m_limelight.getAngleToSpeaker());
-    // }));
-
     configureBindings();
   }
 
@@ -87,23 +82,16 @@ public class RobotContainer {
         m_driverController::getTwist);
     this.m_swerveDrive.setDefaultCommand(DriveMode);
   // Manually Controlled Shoot Angle
-     ShootAngleControlCommand AngleControl = new ShootAngleControlCommand(
-         m_helperController::getY,this.m_AnglePIDSubsystem);
-    this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
-    // // Limelight Swerve Manager 
-    // LimelightSwerveManager LimelightSwerveManager = new LimelightSwerveManager(m_limelight, m_swerveDrive);
+    //  ShootAngleControlCommand AngleControl = new ShootAngleControlCommand(
+    //      m_helperController::getY,this.m_AnglePIDSubsystem);
+    // this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
     // Trigger prints limelight
-    new JoystickButton(m_driverController, 1)
+    new JoystickButton(m_driverController, 1).onTrue(
+      new InstantCommand(()->{m_DeviceSubsystem.turnIntakeMotors(1);})
+    );
+    new Trigger(()->((m_helperController.getY() == 1)))
     .onTrue(
       new LimelightSwerveManager(m_limelight, m_swerveDrive)
-    
-    //new InstantCommand(() -> {
-      //System.out.println("DISTANCE: " + m_limelight.getDistance());
-      //System.out.println("ANGLE: " + m_limelight.getAngleToSpeaker());
-      // double color = Math.random();
-      // m_LedSubsystem.set_led_color(color);
-      // System.out.println(color);
-    //})
     );
   }
 

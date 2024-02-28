@@ -28,6 +28,7 @@ public class PIDCommandTurnToAngle extends PIDCommand {
         output -> {
           // Use the output here
          // mSwerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0, 0, -output);
+         System.out.println("turning");
          mLimelightSwerveManager.setAnglePID(output, mLimelightSubsystem.getAngleToSpeaker());
         });
 
@@ -37,6 +38,7 @@ public class PIDCommandTurnToAngle extends PIDCommand {
 
     // Configure additional PID options by calling `getController` here.
     System.out.println("TurnInit");
+    
   }
 
   // Returns true when the command should end.
