@@ -86,9 +86,17 @@ public class RobotContainer {
     //      m_helperController::getY,this.m_AnglePIDSubsystem);
     // this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
     // Trigger prints limelight
+
+    // this should activate the intake motors
     new JoystickButton(m_driverController, 1).onTrue(
       new InstantCommand(()->{m_DeviceSubsystem.turnIntakeMotors(1);})
     );
+
+    // this should activate the shooter motors
+    new JoystickButton(m_driverController, 2).onTrue(
+      new InstantCommand(()->{m_DeviceSubsystem.turnShooterMotors(1);})
+    );
+
     new Trigger(()->((m_helperController.getY() == 1)))
     .onTrue(
       new LimelightSwerveManager(m_limelight, m_swerveDrive)

@@ -13,6 +13,7 @@ import frc.robot.Constants;
 
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.Pigeon2;
+import com.fasterxml.jackson.databind.introspect.AnnotationCollector.OneAnnotation;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkPIDController;
 //import com.revrobotics.CANSparkMax.ControlType;
@@ -23,20 +24,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 // Motors
 public class DeviceSubsystem extends SubsystemBase {
 
-    // these 2 motors controll the arm / angle of the shooter
-    private static CANSparkMax ARM_MOTOR_LEFT;
-    private static CANSparkMax ARM_MOTOR_RIGHT;
+    // control the arm 
+    private static CANSparkMax ARM_MOTOR;
 
     // these 2 controll the the motors of the shooter more specifically intake
-    private static CANSparkMax INTAKE_LEFT;
-    private static CANSparkMax INTAKE_RIGHT;
+    private static CANSparkMax SHOOTER;
+    private static CANSparkMax INTAKE;
 
     public DeviceSubsystem() {
 
-      //  ARM_MOTOR_LEFT = new CANSparkMax(Constants.ARM_MOTOR_LEFT, MotorType.kBrushless);
-     //   ARM_MOTOR_RIGHT = new CANSparkMax(Constants.ARM_MOTOR_RIGHT, MotorType.kBrushless); // temporary
-        INTAKE_LEFT = new CANSparkMax(Constants.INTAKE_LEFT, MotorType.kBrushless);
-        INTAKE_RIGHT = new CANSparkMax(Constants.INTAKE_RIGHT, MotorType.kBrushless);
+    //    ARM_MOTOR_LEFT = new CANSparkMax(Constants.ARM_MOTOR_LEFT, MotorType.kBrushless);
+    //    ARM_MOTOR = new CANSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless); // TEMP ID. VERIFY BEFORE RUNNING PLEASEE
+
+        SHOOTER = new CANSparkMax(Constants.SHOOTER, MotorType.kBrushless);
+        INTAKE = new CANSparkMax(Constants.INTAKE, MotorType.kBrushless);
 
     }
 
@@ -45,21 +46,34 @@ public class DeviceSubsystem extends SubsystemBase {
     public void turnIntakeMotors(int ShootBOF) {
         if (ShootBOF == -1) {
             // make motors turn inwards
-            INTAKE_LEFT.set(Constants.INTAKESPEED);
-            INTAKE_RIGHT.set(Constants.INTAKESPEED);
+            INTAKE.set(Constants.INTAKESPEED);
 
         } else if (ShootBOF == 1) {
             // make motors shoot ring out + speed
-            INTAKE_LEFT.set(0);//-Constants.SHOOTSPEED);
-            INTAKE_RIGHT.set(0);//Constants.SHOOTSPEED);
+            // SHOOTER.set(0);//-Constants.SHOOTSPEED);
+            INTAKE.set(0);//Constants.SHOOTSPEED);
 
         } else {
             turnOffIntakeMotors();
         }
     }
 
+    // turns the shoot motor on
+    public void turnShooterMotors(int onOrOff) {
+        if (onOrOff == 1) {
+            INTAKE.set(Constants.INTAKESPEED);
+        } else {
+            turnOffShooter();
+        }
+    }
+    // turns off the shooter
+    public void turnOffShooter(){
+        SHOOTER.set(0);
+    }
+
+    // turns off the intake motors
     public void turnOffIntakeMotors() {
-        INTAKE_LEFT.set(0);
-        INTAKE_RIGHT.set(0);
+        // SHOOTER.set(0);
+        INTAKE.set(0);
     }
 }
