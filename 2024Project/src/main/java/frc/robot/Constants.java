@@ -47,13 +47,13 @@ public final class Constants {
   public static final int ARM_MOTOR_RIGHT = 22;
 
   // intake / outtake motors, allowing robot to shoot ids.
-  public static final int INTAKE_LEFT = 23;
-  public static final int INTAKE_RIGHT = 24;
+  public static final int INTAKE_LEFT = 14;
+  public static final int INTAKE_RIGHT = 15;
 
   // changes the speed of the intake / shoot motors.
   // NEEDS TO BE CHANGED!!!
-  public static final double INTAKESPEED = 0.0;
-  public static final double SHOOTSPEED = 0.0;
+  public static final double INTAKESPEED = 1;
+  public static final double SHOOTSPEED = 1;
 
   // angles of shooter
   // PLACE HOLDERS!!!!!!!!!!!!
@@ -94,7 +94,7 @@ public final class Constants {
   // public static final double ShooterDegreesPerEncoderRotation = 0;
 
   // stablizes the angle of the shooter
-  public static final double ShootAngleP = 0;
+  public static final double ShootAngleP = 0.005;
   public static final double ShootAngleI = 0;
   public static final double ShootAngleD = 0;
 
@@ -107,7 +107,7 @@ public final class Constants {
   public static final double LimeLightDegreesTolerance = 2;
   public static final double LimeLightVelocityTolerance = 0.02;
 
-  // distance from the place you will score in from the april tag in meters
+  // distance from the place you will score in from the april tag in inches
   public static final double DistFromAprilTag = 24;
 
   // Pid for PIDCommandTurnToAngle (positioning robot direction)
