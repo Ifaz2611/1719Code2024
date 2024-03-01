@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean
@@ -136,6 +138,9 @@ public final class Constants {
   // Patterns
   public static final double LARSON_SCANNER = 0.19;
   public static final double RAINBOW_GLITTER = -0.89;
+
+  //TODO: ADD ANALOG PIN HERE PLEASE
+public static final AnalogInput ULTRASONIC_SENSOR_PIN = new AnalogInput(0);
 
   //TODO: FILL IN IDS AND THEN MAKE BOTH FINAL
 public static int m_rightPiston;
