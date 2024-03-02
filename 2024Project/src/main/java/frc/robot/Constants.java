@@ -72,13 +72,18 @@ public final class Constants {
   public static final double DirectionI = 0.00;
   public static final double DirectionD = 0.0;
 
-  // height of the shooter in meters
-  public static final double SPEAKER_HEIGHT = 5; // NOT REAL VALUE - Must be meters
+  public static final double SPEAKER_HEIGHT = 60; // NOT REAL VALUE - Must be inches
+
+  public static final double HOLE_TO_APRILTAG_HEIGHT = 24; // (2 feet) - Must be inches
+  public static final double CENTER_HEIGHT_TO_GROUND = 25.5; //Must be inches
+  public static final double CENTER_DISTANCE = 12; // (2 feet) - Must be inches
+
+
 
   // Angle of limelight from the horizontal
-  public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 30.0;
+  public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 20.0; //TODO check angle
   // Offset of limelight center in inches from floor
-  public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 9.0; 
+  public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 7.5; 
   // Offset of goal center in inches from floor
   public static final double GOAL_HEIGHT_INCHES = 60;
 
@@ -144,7 +149,7 @@ public final class Constants {
   public static final double LIGHT_MOVE_D = 0;
  
   //Vertical Offset for Throughbor Encoder.
-  public static final double UPOFFSET = 0.2;
+  public static final double UPOFFSET = 0.27;
 
   //TODO: FILL IN IDS AND THEN MAKE BOTH FINAL
 public static int m_rightPiston;

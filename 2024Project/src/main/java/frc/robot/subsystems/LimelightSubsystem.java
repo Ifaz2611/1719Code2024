@@ -21,7 +21,11 @@ public class LimelightSubsystem extends SubsystemBase {
 
   // Get angle for shooter head (returns double angle from 0 to 360)
   public double getShootingAngle() {
-    return Math.atan2(Constants.SPEAKER_HEIGHT, getDistance() - Constants.DISTANCE_LIMELIGHT_TO_SHOOTER);
+
+    double Y = Constants.GOAL_HEIGHT_INCHES+Constants.HOLE_TO_APRILTAG_HEIGHT-Constants.CENTER_HEIGHT_TO_GROUND;
+    double X = Constants.CENTER_DISTANCE+getDistance();
+    System.out.println(Math.toDegrees(Math.atan2(Y,X)));
+    return Math.toDegrees(Math.atan2(Y,X));
   }
 
   // Get distance to april tag (returns double)
