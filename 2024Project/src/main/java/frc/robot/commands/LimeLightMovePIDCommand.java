@@ -18,7 +18,7 @@ public class LimeLightMovePIDCommand extends PIDCommand {
   public LimeLightMovePIDCommand(LimelightSubsystem mLimelightSubsystem, SwerveSubsystem mSwerveSubsystem, LimelightSwerveManager mLimelightSwerveManager) {
     super(
         // The controller that the command will use
-        new PIDController(0.005, 0, 0),
+        new PIDController(Constants.LIGHT_MOVE_P, Constants.LIGHT_MOVE_I, Constants.LIGHT_MOVE_D),
         // This should return the measurement
         () -> mLimelightSubsystem.getDistance(),
         // This should return the setpoint (can also be a constant)

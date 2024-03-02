@@ -49,12 +49,12 @@ public final class Constants {
   public static final int ARM_MOTOR = 21; // NO IDEA IF THIS IS CORRECT BEWARE
   
   // intake / outtake motors, allowing robot to shoot ids.
-  public static final int SHOOTER = 14;
-  public static final int INTAKE= 15;
+  public static final int SHOOTER = 15;
+  public static final int INTAKE= 14;
 
   // changes the speed of the intake / shoot motors.
   // NEEDS TO BE CHANGED!!!
-  public static final double INTAKESPEED = 1;
+  public static final double INTAKESPEED = -1;
   public static final double SHOOTSPEED = 1;
 
   // angles of shooter
@@ -76,7 +76,7 @@ public final class Constants {
   public static final double SPEAKER_HEIGHT = 5; // NOT REAL VALUE - Must be meters
 
   // Angle of limelight from the horizontal
-  public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 45.0;
+  public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 30.0;
   // Offset of limelight center in inches from floor
   public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 9.0; 
   // Offset of goal center in inches from floor
@@ -101,8 +101,8 @@ public final class Constants {
   public static final double ShootAngleD = 0;
 
   // these pins controls the angle of the shooter
-  public static final int ShootAngleEncoder_PIN = 30; // encoder
-  public static final int ShootAngleMotorPin = 31; // motor
+  public static final int ShootAngleEncoder_PIN = 0; // encoder
+  public static final int ShootAngleMotorPin = 16; // motor
 
   // these are used in lime light robot driving pid.
   public static final double LimeLightPositionTolerance = 2;
@@ -136,6 +136,15 @@ public final class Constants {
   // Patterns
   public static final double LARSON_SCANNER = 0.19;
   public static final double RAINBOW_GLITTER = -0.89;
+
+
+  //Limelight Move Command PID's
+  public static final double LIGHT_MOVE_P = 0.005;
+  public static final double LIGHT_MOVE_I = 0;
+  public static final double LIGHT_MOVE_D = 0;
+ 
+  //Vertical Offset for Throughbor Encoder.
+  public static final double UPOFFSET = 0.2;
 
   //TODO: FILL IN IDS AND THEN MAKE BOTH FINAL
 public static int m_rightPiston;
