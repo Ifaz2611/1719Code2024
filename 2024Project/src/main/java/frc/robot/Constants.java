@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean
@@ -150,6 +152,8 @@ public final class Constants {
  
   //Vertical Offset for Throughbor Encoder.
   public static final double UPOFFSET = 0.27;
+  //TODO: ADD ANALOG PIN HERE PLEASE
+public static final AnalogInput ULTRASONIC_SENSOR_PIN = new AnalogInput(0);
 
   //TODO: FILL IN IDS AND THEN MAKE BOTH FINAL
 public static int m_rightPiston;

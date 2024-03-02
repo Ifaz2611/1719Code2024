@@ -4,20 +4,24 @@
 
 package frc.robot.subsystems;
 
-import java.util.ArrayDeque;
+// import java.util.ArrayDeque;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+// import edu.wpi.first.math.proto.System; // WHO THE FUCK WOULD MAKE A CLASS CALLED SYSTEM 
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
+// import frc.robot.RobotContainer;
 
 public class LedSubsystem extends SubsystemBase {
   private static Spark m_blinkin = null;
-  
+  private AnalogPotentiometer noteSensor;
+
   /** Creates a new LedSubsystem. */
   public LedSubsystem() {
     m_blinkin = new Spark(Constants.LED_PWM_PIN);
+    noteSensor = new AnalogPotentiometer(Constants.ULTRASONIC_SENSOR_PIN,0,10);
     set_led_color(Constants.NO_NOTE_BASELINE_GOLD);
   }
 
@@ -42,4 +46,9 @@ public class LedSubsystem extends SubsystemBase {
     }
   }
 
+  // checks if the ring is there yessir TODO: GET CORRECT MEASUREMENTS SO TEST ! ! ! ! ! 
+  public boolean checkRing(){
+    System.out.println("Note sensor get function:" + noteSensor.get());
+    return noteSensor.get() > 5;
+  }
 }
