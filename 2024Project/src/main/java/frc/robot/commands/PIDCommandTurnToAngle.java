@@ -29,9 +29,11 @@ public class PIDCommandTurnToAngle extends PIDCommand {
           // Use the output here
          // mSwerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0, 0, -output);
          System.out.println("turning");
-         mLimelightSwerveManager.setAnglePID(output, mLimelightSubsystem.getAngleToSpeaker());
+        //  if (mLimelightSubsystem.getAngleToSpeaker()){
+                   mLimelightSwerveManager.setAnglePID(output, mLimelightSubsystem.getAngleToSpeaker());
+        //  }
         });
-
+        
         getController().setTolerance(Constants.LimeLightDegreesTolerance, Constants.LimeLightVelocityTolerance);
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(mSwerveSubsystem, mLimelightSubsystem);

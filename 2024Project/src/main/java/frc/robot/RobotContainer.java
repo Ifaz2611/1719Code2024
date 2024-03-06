@@ -5,6 +5,7 @@
 package frc.robot;
 import frc.robot.commands.LimeLightMovePIDCommand;
 import frc.robot.commands.ShootAngleControlCommand;
+import frc.robot.commands.ShootSequence;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.LimelightSwerveManager;
@@ -26,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -80,6 +82,13 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+
+          //             System.out.println("sent inside");
+
+          // double x = 
+
+          // System.out.println(x + " sensor");
+
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     // new Trigger(m_exampleSubsystem::exampleCondition)
     // .onTrue(new ExampleCommand(m_exampleSubsystem));
@@ -94,9 +103,17 @@ public class RobotContainer {
         m_driverController::getTwist);
     this.m_swerveDrive.setDefaultCommand(DriveMode);
     // Manually Controlled Shoot Angle
+
     ShootAngleControlCommand AngleControl = new ShootAngleControlCommand(
     this.m_AnglePIDSubsystem, m_limelight);
+
+
     this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
+
+      // new InstantCommand(() -> {
+  
+
+      //   });
     // Trigger prints limelight
 
     // this should activate the intake motors
@@ -112,6 +129,8 @@ public class RobotContainer {
     // this should activate the shooter motors
     new JoystickButton(m_helperController, 2).onTrue(
         new InstantCommand(() -> {
+          // System.out.println("outside");
+          m_DeviceSubsystem.checkRing();
           m_DeviceSubsystem.turnShooterMotors(1);
         }));
     new JoystickButton(m_helperController, 2).onFalse(
@@ -119,13 +138,20 @@ public class RobotContainer {
           m_DeviceSubsystem.turnShooterMotors(0);
         }));
 
+        // new JoystickButton(m_helperController, 4).onTrue(
+        // new InstantCommand(() -> {
+        //   System.out.println(m_DeviceSubsystem.checkRing());
+        // }));
+
     new JoystickButton(m_helperController, 3).onTrue(
-       new InstantCommand(() -> {
-             new LimelightSwerveManager(m_limelight, m_swerveDrive);
+       
+            new LimelightSwerveManager(m_limelight, m_swerveDrive)
              
 
-            })) ;
-
+            ) ;
+    new JoystickButton(m_helperController, 4).onTrue(
+            new ShootSequence(m_DeviceSubsystem)
+    );
 
 
 
@@ -145,7 +171,7 @@ public class RobotContainer {
   public Command getAutonomousCommand(String m_autoSelected) {
     // An example command will be run in autonomous
     if (m_autoSelected.equals("Auto 1")) {
-      return Autos.Auto1(m_swerveDrive, m_DeviceSubsystem);
+      return Autos.Auto1(m_swerveDrive, m_DeviceSubsystem, m_limelight);
     } else if (m_autoSelected.equals("Auto 2")) {
       return Autos.Auto2(m_swerveDrive, m_DeviceSubsystem);
     } else if (m_autoSelected.equals("Auto 3")) {

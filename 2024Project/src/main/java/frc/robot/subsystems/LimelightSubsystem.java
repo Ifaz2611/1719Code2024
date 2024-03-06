@@ -24,7 +24,7 @@ public class LimelightSubsystem extends SubsystemBase {
 
     double Y = Constants.GOAL_HEIGHT_INCHES+Constants.HOLE_TO_APRILTAG_HEIGHT-Constants.CENTER_HEIGHT_TO_GROUND;
     double X = Constants.CENTER_DISTANCE+getDistance();
-    System.out.println(Math.toDegrees(Math.atan2(Y,X)));
+    // System.out.println(Math.toDegrees(Math.atan2(Y,X)));
     return Math.toDegrees(Math.atan2(Y,X));
   }
 

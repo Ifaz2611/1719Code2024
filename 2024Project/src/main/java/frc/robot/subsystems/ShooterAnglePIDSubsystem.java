@@ -33,7 +33,7 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
         
            this.ShootAngleEncoder = new DutyCycleEncoder(Constants.ShootAngleEncoder_PIN);
            this.ShootAngleMotor = new CANSparkMax(Constants.ShootAngleMotorPin,MotorType.kBrushless);
-           System.out.println("initshootangle");  
+          //  System.out.println("initshootangle");  
   }
 
   public double shootAngle() {
@@ -51,7 +51,7 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
   public double getMeasurement() {
     double AngleDegrees = (ShootAngleEncoder.getAbsolutePosition()-Constants.UPOFFSET)*360;
     // // Return the process variable measurement here
-    System.out.println(AngleDegrees/360);
+    // System.out.println(AngleDegrees/360);
     return AngleDegrees;
   }
 }

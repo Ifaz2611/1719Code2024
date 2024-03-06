@@ -87,7 +87,7 @@ public final class Constants {
   // Offset of limelight center in inches from floor
   public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 7.5; 
   // Offset of goal center in inches from floor
-  public static final double GOAL_HEIGHT_INCHES = 60;
+  public static final double GOAL_HEIGHT_INCHES = 61; //60-offset height
 
   // distance from the lime light stand to the shooter base
   public static final double DISTANCE_LIMELIGHT_TO_SHOOTER = 0; // NOT REAL VALUE - Must be meters

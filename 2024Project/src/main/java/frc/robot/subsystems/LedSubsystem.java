@@ -16,12 +16,10 @@ import frc.robot.Constants;
 
 public class LedSubsystem extends SubsystemBase {
   private static Spark m_blinkin = null;
-  private AnalogPotentiometer noteSensor;
 
   /** Creates a new LedSubsystem. */
   public LedSubsystem() {
     m_blinkin = new Spark(Constants.LED_PWM_PIN);
-    noteSensor = new AnalogPotentiometer(Constants.ULTRASONIC_SENSOR_PIN,0,10);
     set_led_color(Constants.NO_NOTE_BASELINE_GOLD);
   }
 
@@ -46,9 +44,9 @@ public class LedSubsystem extends SubsystemBase {
     }
   }
 
-  // checks if the ring is there yessir TODO: GET CORRECT MEASUREMENTS SO TEST ! ! ! ! ! 
-  public boolean checkRing(){
-    System.out.println("Note sensor get function:" + noteSensor.get());
-    return noteSensor.get() > 5;
-  }
+  // // checks if the ring is there yessir TODO: GET CORRECT MEASUREMENTS SO TEST ! ! ! ! ! 
+  // public boolean checkRing(){
+  //   System.out.println("Note sensor get function:" + noteSensor.get());
+  //   return noteSensor.get() > 5;
+  // }
 }

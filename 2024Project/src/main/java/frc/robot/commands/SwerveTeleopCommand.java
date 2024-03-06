@@ -66,10 +66,10 @@ public class SwerveTeleopCommand extends Command {
 
    //  this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.CartesianChassisSpeeds(-this.m_getX.getAsDouble(), this.m_getY.getAsDouble(), this.m_getTwist.getAsDouble());
     //System.out.println((new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
-    //  SmartDashboard.putNumber("leftf",(new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
-    //  SmartDashboard.putNumber("leftb",(new CANcoder(Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
-    //  SmartDashboard.putNumber("rightf",(new CANcoder(Constants.RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
-    //  SmartDashboard.putNumber("rightb",(new CANcoder(Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
+     SmartDashboard.putNumber("leftf",(new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
+     SmartDashboard.putNumber("leftb",(new CANcoder(Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
+     SmartDashboard.putNumber("rightf",(new CANcoder(Constants.RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
+     SmartDashboard.putNumber("rightb",(new CANcoder(Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
   }
 
 
@@ -77,7 +77,7 @@ public class SwerveTeleopCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0.0, 0.0, 0.0); // change to setSwerveDrive(
+    this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0.0, 0.0, 0.0); // change to setSwerveDrive(
 
   }
 
