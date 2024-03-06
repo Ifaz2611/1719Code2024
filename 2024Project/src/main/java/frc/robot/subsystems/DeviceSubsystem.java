@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.math.proto.System;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -31,6 +31,8 @@ public class DeviceSubsystem extends SubsystemBase {
     private static CANSparkMax SHOOTER;
     private static CANSparkMax INTAKE;
 
+    private AnalogPotentiometer noteSensor;
+
     public DeviceSubsystem() {
 
     //    ARM_MOTOR_LEFT = new CANSparkMax(Constants.ARM_MOTOR_LEFT, MotorType.kBrushless);
@@ -38,6 +40,8 @@ public class DeviceSubsystem extends SubsystemBase {
 
         SHOOTER = new CANSparkMax(Constants.SHOOTER, MotorType.kBrushless);
         INTAKE = new CANSparkMax(Constants.INTAKE, MotorType.kBrushless);
+        System.out.println("Defined potentiometer");
+    noteSensor = new AnalogPotentiometer(Constants.ULTRASONIC_SENSOR_PIN,100,100);
 
     }
 
@@ -62,6 +66,8 @@ public class DeviceSubsystem extends SubsystemBase {
     public void turnIntakeMotors(int onOrOff) {
         if (onOrOff == 1) {
             INTAKE.set(Constants.INTAKESPEED);
+        } else if (onOrOff == -1){
+            INTAKE.set(-Constants.INTAKESPEED);
         } else {
             INTAKE.set(0);
         }
@@ -76,4 +82,10 @@ public class DeviceSubsystem extends SubsystemBase {
         // SHOOTER.set(0);
         INTAKE.set(0);
     }
+
+      // checks if the ring is there yessir TODO: GET CORRECT MEASUREMENTS SO TEST ! ! ! ! ! 
+  public double checkRing(){
+    System.out.println("Note sensor get function:" + noteSensor.get());
+    return noteSensor.get();
+  }
 }
