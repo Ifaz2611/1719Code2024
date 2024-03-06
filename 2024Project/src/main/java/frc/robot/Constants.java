@@ -156,6 +156,6 @@ public final class Constants {
 public static final AnalogInput ULTRASONIC_SENSOR_PIN = new AnalogInput(0);
 
   //TODO: FILL IN IDS AND THEN MAKE BOTH FINAL
-public static int m_rightPiston;
-public static int m_leftPiston;
+public static int BACKWARDS_SOLENOID_PIN = 9;
+public static int FORWARDS_SOLENOID_PIN = 8;
 }

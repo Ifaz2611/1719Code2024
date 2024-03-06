@@ -21,7 +21,7 @@ public class AutoMovePIDCommand extends PIDCommand {
         // This should return the measurement
         () -> 0,
         // This should return the setpoint (can also be a constant)
-        direction,
+        distance,
         // This uses the output
         output -> {
           // Use the output here

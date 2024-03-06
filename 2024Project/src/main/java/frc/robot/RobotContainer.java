@@ -11,6 +11,7 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.LimelightSwerveManager;
 import frc.robot.commands.PIDCommandTurnToAngle;
 import frc.robot.commands.SwerveTeleopCommand;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DeviceSubsystem;
 import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
@@ -54,11 +55,11 @@ public class RobotContainer {
   private final ShooterAnglePIDSubsystem m_AnglePIDSubsystem = new ShooterAnglePIDSubsystem();
   private final DeviceSubsystem m_DeviceSubsystem = new DeviceSubsystem();
   private final LedSubsystem m_LedSubsystem = new LedSubsystem();
+   private final ClimbSubsystem m_ClimbSubsystem = new ClimbSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final Joystick m_driverController = new Joystick(OperatorConstants.kDriverControllerPort);
   private final Joystick m_helperController = new Joystick(OperatorConstants.kHelperControllerPort);
-
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -130,7 +131,7 @@ public class RobotContainer {
     new JoystickButton(m_helperController, 2).onTrue(
         new InstantCommand(() -> {
           // System.out.println("outside");
-          m_DeviceSubsystem.checkRing();
+
           m_DeviceSubsystem.turnShooterMotors(1);
         }));
     new JoystickButton(m_helperController, 2).onFalse(
@@ -138,10 +139,10 @@ public class RobotContainer {
           m_DeviceSubsystem.turnShooterMotors(0);
         }));
 
-        // new JoystickButton(m_helperController, 4).onTrue(
-        // new InstantCommand(() -> {
-        //   System.out.println(m_DeviceSubsystem.checkRing());
-        // }));
+        new JoystickButton(m_helperController, 8).onTrue(
+        new InstantCommand(() -> {
+          System.out.println(m_DeviceSubsystem.checkRing());
+        }));
 
     new JoystickButton(m_helperController, 3).onTrue(
        
@@ -153,6 +154,15 @@ public class RobotContainer {
             new ShootSequence(m_DeviceSubsystem)
     );
 
+        new JoystickButton(m_helperController, 5).onTrue(
+        new InstantCommand(() -> {
+          m_ClimbSubsystem.raise();
+        }));
+
+        new JoystickButton(m_helperController, 6).onTrue(
+        new InstantCommand(() -> {
+          m_ClimbSubsystem.lower();
+        }));
 
 
       
