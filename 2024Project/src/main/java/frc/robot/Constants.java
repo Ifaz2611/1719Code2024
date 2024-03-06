@@ -87,7 +87,7 @@ public final class Constants {
   // Offset of limelight center in inches from floor
   public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 7.5; 
   // Offset of goal center in inches from floor
-  public static final double GOAL_HEIGHT_INCHES = 61; //60-offset height
+  public static final double GOAL_HEIGHT_INCHES = 60; //60-offset height //TODO test
 
   // distance from the lime light stand to the shooter base
   public static final double DISTANCE_LIMELIGHT_TO_SHOOTER = 0; // NOT REAL VALUE - Must be meters
@@ -156,10 +156,10 @@ public final class Constants {
 public static final AnalogInput ULTRASONIC_SENSOR_PIN = new AnalogInput(0);
 
 // TODO: set these PLEASE
-public static final double AUTO_MOVE_P = 0;
+public static final double AUTO_MOVE_P = 0.0005;
 public static final double AUTO_MOVE_I = 0;
 public static final double AUTO_MOVE_D = 0;
-public static final double DISTANCEPOSITIONTOLERENCE = 0;
+public static final double DISTANCEPOSITIONTOLERENCE = 2;
 
   //TODO: FILL IN IDS AND THEN MAKE BOTH FINAL
 public static int BACKWARDS_SOLENOID_PIN = 9;

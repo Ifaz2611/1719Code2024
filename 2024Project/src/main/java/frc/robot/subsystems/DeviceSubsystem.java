@@ -41,7 +41,7 @@ public class DeviceSubsystem extends SubsystemBase {
         SHOOTER = new CANSparkMax(Constants.SHOOTER, MotorType.kBrushless);
         INTAKE = new CANSparkMax(Constants.INTAKE, MotorType.kBrushless);
         System.out.println("Defined potentiometer");
-    noteSensor = new AnalogPotentiometer(Constants.ULTRASONIC_SENSOR_PIN,20,0);
+    noteSensor = new AnalogPotentiometer(Constants.ULTRASONIC_SENSOR_PIN,180,0);
 
     }
 

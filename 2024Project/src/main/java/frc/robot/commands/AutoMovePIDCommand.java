@@ -31,6 +31,7 @@ public class AutoMovePIDCommand extends PIDCommand {
         });
         addRequirements(m_swerve);
         getController().setTolerance(Constants.DISTANCEPOSITIONTOLERENCE, Constants.LimeLightVelocityTolerance);
+
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
   }
@@ -38,6 +39,5 @@ public class AutoMovePIDCommand extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
-  }
-}
+    return getController().atSetpoint();
+}}

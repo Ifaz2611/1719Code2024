@@ -7,6 +7,7 @@ import frc.robot.commands.LimeLightMovePIDCommand;
 import frc.robot.commands.ShootAngleControlCommand;
 import frc.robot.commands.ShootSequence;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.AutoMovePIDCommand;
 import frc.robot.commands.Autos;
 import frc.robot.commands.LimelightSwerveManager;
 import frc.robot.commands.PIDCommandTurnToAngle;
@@ -163,7 +164,10 @@ public class RobotContainer {
         new InstantCommand(() -> {
           m_ClimbSubsystem.lower();
         }));
+new JoystickButton(m_driverController, 1).onTrue(
 
+new AutoMovePIDCommand(0,  30,  m_swerveDrive)
+);
 
       
 
