@@ -66,11 +66,10 @@ public class SwerveSubsystem extends SubsystemBase {
     // private static CANSparkMax RIGHT_BACK_DRIVE_DIRECTION_MOTOR;
 
     // Encoders
-    // public static CANcoder LEFT_FRONT_DRIVE_DISTANCE_ENCODER;
-    // public static CANcoder LEFT_BACK_DRIVE_DISTANCE_ENCODER;
-    // public static CANcoder RIGHT_FRONT_DRIVE_DISTANCE_ENCODER;
-    // public static CANcoder RIGHT_BACK_DRIVE_DISTANCE_ENCODER;
-    // public static MedianPIDSource DRIVE_DISTANCE_ENCODERS;
+    public static RelativeEncoder LEFT_FRONT_DRIVE_DISTANCE_ENCODER;
+    public static RelativeEncoder LEFT_BACK_DRIVE_DISTANCE_ENCODER;
+    public static RelativeEncoder RIGHT_FRONT_DRIVE_DISTANCE_ENCODER;
+    public static RelativeEncoder RIGHT_BACK_DRIVE_DISTANCE_ENCODER;
 
     // public static CANcoder LEFT_FRONT_DRIVE_DIRECTION_ENCODER;
     // public static CANcoder LEFT_BACK_DRIVE_DIRECTION_ENCODER;
@@ -121,15 +120,7 @@ public class SwerveSubsystem extends SubsystemBase {
         // CANSparkMax(Constants.RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN,
         // MotorType.kBrushless);
 
-        // Encoders
-        // LEFT_FRONT_DRIVE_DISTANCE_ENCODER = new
-        // CANcoder(Constants.LEFT_FRONT_DRIVE_DISTANCE_ENCODER_PIN);
-        // LEFT_BACK_DRIVE_DISTANCE_ENCODER = new
-        // CANcoder(Constants.LEFT_BACK_DRIVE_DISTANCE_ENCODER_PIN);
-        // RIGHT_FRONT_DRIVE_DISTANCE_ENCODER = new
-        // CANcoder(Constants.RIGHT_FRONT_DRIVE_DISTANCE_ENCODER_PIN);
-        // RIGHT_BACK_DRIVE_DISTANCE_ENCODER = new
-        // CANcoder(Constants.RIGHT_BACK_DRIVE_DISTANCE_ENCODER_PIN);
+
 
         // DRIVE_ENCODERS = new MedianPIDSource(LEFT_FRONT_DRIVE_DISTANCE_ENCODER,
         // LEFT_BACK_DRIVE_DISTANCE_ENCODER, RIGHT_FRONT_DRIVE_DISTANCE_ENCODER,
@@ -166,6 +157,19 @@ public class SwerveSubsystem extends SubsystemBase {
         SWERVE_DRIVE_COORDINATOR = new SwerveDriveCoordinator(LEFT_FRONT_DRIVE_WHEEL, LEFT_BACK_DRIVE_WHEEL,
                 RIGHT_FRONT_DRIVE_WHEEL, RIGHT_BACK_DRIVE_WHEEL);
 
+
+        // Encoders
+        LEFT_FRONT_DRIVE_DISTANCE_ENCODER = LEFT_FRONT_DRIVE_SPEED_MOTOR.getEncoder();
+        LEFT_BACK_DRIVE_DISTANCE_ENCODER = LEFT_BACK_DRIVE_SPEED_MOTOR.getEncoder();
+        RIGHT_FRONT_DRIVE_DISTANCE_ENCODER = RIGHT_FRONT_DRIVE_SPEED_MOTOR.getEncoder();
+        RIGHT_BACK_DRIVE_DISTANCE_ENCODER = RIGHT_BACK_DRIVE_SPEED_MOTOR.getEncoder();
+
+        // LEFT_BACK_DRIVE_DISTANCE_ENCODER = new
+        // CANcoder(Constants.LEFT_BACK_DRIVE_DISTANCE_ENCODER_PIN);
+        // RIGHT_FRONT_DRIVE_DISTANCE_ENCODER = new
+        // CANcoder(Constants.RIGHT_FRONT_DRIVE_DISTANCE_ENCODER_PIN);
+        // RIGHT_BACK_DRIVE_DISTANCE_ENCODER = new
+        // CANcoder(Constants.RIGHT_BACK_DRIVE_DISTANCE_ENCODER_PIN);
     }
 
     public class degreeSupplier {
@@ -329,8 +333,6 @@ public class SwerveSubsystem extends SubsystemBase {
         Rotation2d turnangleRot = new Rotation2d(Math.atan2(leftCoeficient, forwardCoeficient)+ Math.toRadians(direction));
 SwerveModuleState Moduleset = new SwerveModuleState( translatepower, turnangleRot);
 
-   
-
 return Moduleset;
     }
 
@@ -355,6 +357,23 @@ return Moduleset;
 
         return b % d;
     }
+
+    // reset the distance motors back to 0
+    public void resetDistanceMotors() {
+        LEFT_FRONT_DRIVE_DISTANCE_ENCODER.setPosition(0);
+        LEFT_BACK_DRIVE_DISTANCE_ENCODER.setPosition(0);
+        RIGHT_FRONT_DRIVE_DISTANCE_ENCODER.setPosition(0);
+        RIGHT_BACK_DRIVE_DISTANCE_ENCODER.setPosition(0);
+    }
+
+    public double returnAverageDistance() {
+        return (LEFT_FRONT_DRIVE_DISTANCE_ENCODER.getPosition() +
+         LEFT_BACK_DRIVE_DISTANCE_ENCODER.getPosition() + 
+         RIGHT_FRONT_DRIVE_DISTANCE_ENCODER.getPosition() + 
+         RIGHT_BACK_DRIVE_DISTANCE_ENCODER.getPosition())/4;
+    } 
+
+    
 
     @Override
     public void periodic() {
