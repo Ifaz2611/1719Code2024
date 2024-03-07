@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 // import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -18,7 +17,7 @@ public class ClimbSubsystem extends SubsystemBase {
     // private final Compressor m_Compressor;
   /** Creates a new climbSubsystem. */
   public ClimbSubsystem() {
-    // TODO: add constants to constant.java (i did this, but I dont want merge problems). SET THE PISTON IDS AND WELL!!!!!!!!!!
+
     m_pistons = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.FORWARDS_SOLENOID_PIN, Constants.BACKWARDS_SOLENOID_PIN);
     m_pistons.set(DoubleSolenoid.Value.kReverse);
     // m_Compressor = new Compressor(PneumaticsModuleType.CTREPCM)
