@@ -64,7 +64,7 @@ public class DeviceSubsystem extends SubsystemBase {
     }
 
     // turns the shoot motor on
-    public void turnIntakeMotors(double speed) {
+    public void turnIntakeMotors(double speed) { 
         INTAKE.set(speed);
         // if (onOrOff == 1) {
         //     INTAKE.set(Constants.INTAKESPEED);
@@ -89,5 +89,6 @@ public class DeviceSubsystem extends SubsystemBase {
   public double checkRing(){
     System.out.println("Note sensor get function:" + noteSensor.get());
     return noteSensor.get();
+    
   }
 }
