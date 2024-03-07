@@ -47,30 +47,32 @@ public class DeviceSubsystem extends SubsystemBase {
 
     // turns the motors a specific direction.
     // -1 is intake, 1 is shoot
-    public void turnShooterMotors(int ShootBOF) {
-        if (ShootBOF == 1) {
-            // make motors turn inwards
-            SHOOTER.set(Constants.SHOOTSPEED);
+    public void turnShooterMotors(double speed) {
+        SHOOTER.set(speed);
+        // if (ShootBOF == 1) {
+        //     // make motors turn inwards
+        //     SHOOTER.set(Constants.SHOOTSPEED);
 
-        } else if (ShootBOF == 0) {
-            // make motors shoot ring out + speed
-            // SHOOTER.set(0);//-Constants.SHOOTSPEED);
-            SHOOTER.set(0);//Constants.SHOOTSPEED);
+        // } else if (ShootBOF == 0) {
+        //     // make motors shoot ring out + speed
+        //     // SHOOTER.set(0);//-Constants.SHOOTSPEED);
+        //     SHOOTER.set(0);//Constants.SHOOTSPEED);
 
-        } else {
-            turnOffIntakeMotors();
-        }
+        // } else {
+        //     turnOffIntakeMotors();
+        // }
     }
 
     // turns the shoot motor on
-    public void turnIntakeMotors(int onOrOff) {
-        if (onOrOff == 1) {
-            INTAKE.set(Constants.INTAKESPEED);
-        } else if (onOrOff == -1){
-            INTAKE.set(-Constants.INTAKESPEED);
-        } else {
-            INTAKE.set(0);
-        }
+    public void turnIntakeMotors(double speed) {
+        INTAKE.set(speed);
+        // if (onOrOff == 1) {
+        //     INTAKE.set(Constants.INTAKESPEED);
+        // } else if (onOrOff == -1){
+        //     INTAKE.set(-Constants.INTAKESPEED);
+        // } else {
+        //     INTAKE.set(0);
+        // }
     }
     // turns off the shooter
     public void turnOffShooter(){

@@ -57,6 +57,7 @@ public final class Constants {
   // changes the speed of the intake / shoot motors.
   // NEEDS TO BE CHANGED!!!
   public static final double INTAKESPEED = -1;
+  public static final double OUTAKESPEED = 1;
   public static final double SHOOTSPEED = 1;
 
   // angles of shooter

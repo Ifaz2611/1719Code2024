@@ -83,6 +83,10 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
    */
+
+   JoystickButton intake = new JoystickButton(m_helperController, 1);
+      JoystickButton outake = new JoystickButton(m_helperController, 7);
+
   private void configureBindings() {
 
           //             System.out.println("sent inside");
@@ -119,14 +123,21 @@ public class RobotContainer {
     // Trigger prints limelight
 
     // this should activate the intake motors
-    new JoystickButton(m_helperController, 1).onTrue(
+    intake.onTrue(
         new InstantCommand(() -> {
-          m_DeviceSubsystem.turnIntakeMotors(1);
+          m_DeviceSubsystem.turnIntakeMotors(Constants.INTAKESPEED);
         }));
-    new JoystickButton(m_helperController, 1).onFalse(
+
+        outake.onTrue(
         new InstantCommand(() -> {
-          m_DeviceSubsystem.turnIntakeMotors(0);
+          m_DeviceSubsystem.turnIntakeMotors(Constants.OUTAKESPEED);
         }));
+
+        if (!intake.getAsBoolean() && !outake.getAsBoolean()){
+          new InstantCommand(() -> {
+          m_DeviceSubsystem.turnOffIntakeMotors();
+        });
+        }
 
     // this should activate the shooter motors
     new JoystickButton(m_helperController, 2).onTrue(
