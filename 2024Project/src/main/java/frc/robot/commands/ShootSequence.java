@@ -23,7 +23,7 @@ public class ShootSequence extends SequentialCommandGroup {
     return new WaitCommand(time);
   }
   public InstantCommand IntakeMotors (int direction) {
-    return new InstantCommand(()->mDeviceSubsystem.turnIntakeMotors(direction));
+    return new InstantCommand(()->mDeviceSubsystem.turnIntakeMotors(-direction));
   }
 
   public ShootSequence(DeviceSubsystem mDeviceSubsystem) {

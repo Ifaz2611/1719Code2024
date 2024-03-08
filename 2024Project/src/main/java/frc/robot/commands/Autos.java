@@ -15,12 +15,12 @@ public final class Autos {
   /** Example static factory for an autonomous command. */
   SwerveSubsystem driveSubsystem;
   // DEFAULT AUTO
-  public static Command defaultAuto(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem ) {
+  public static Command defaultAuto(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem ,LimelightSubsystem mLimelightSubsystem) {
     // return new InstantCommand(() -> {subsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(90,0,0 );});
     System.out.println("Default Auto");
 
 
-    return Commands.sequence( Autos.Intake(deviceSubsystem) );
+    return Commands.sequence(new PIDCommandTurnToAngle(mLimelightSubsystem, driveSubsystem), new ShootSequence(deviceSubsystem));
   }
 
   // AUTO 1

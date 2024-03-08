@@ -44,9 +44,7 @@ public final class Constants {
   public static final int RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN = 6;
   public static final int RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN = 12;
 
-  // // ids of robot arms aka as the rotation motors
-  // public static final int ARM_MOTOR_LEFT = 21;
-  // public static final int ARM_MOTOR_RIGHT = 22;
+ 
 
   public static final int ARM_MOTOR = 21; // NO IDEA IF THIS IS CORRECT BEWARE
   
@@ -168,9 +166,13 @@ public static final double DISTANCEPOSITIONTOLERENCE = 2;
 
 
   //TODO: FILL IN IDS AND THEN MAKE BOTH FINAL
-public static int BACKWARDS_SOLENOID_PIN = 9;
+public static int BACKWARDS_SOLENOID_PIN = 9; 
 public static int FORWARDS_SOLENOID_PIN = 8;
 
-public static final double TELEOPSPEEDMODIFIER = 0;
-public static final double TELEOPTWISTMODIFIER = 0;
+//for learing how to drive 0 to 1
+public static final double TELEOPSPEEDMODIFIER = .2;
+public static final double TELEOPTWISTMODIFIER = .2;
+
+//boolean for aming
+//public boolean SelfAim = true;
 }

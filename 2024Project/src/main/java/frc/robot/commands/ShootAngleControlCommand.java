@@ -34,9 +34,11 @@ public class ShootAngleControlCommand extends Command {
   @Override
   public void execute() {
     // returns angle as double
-    mAnglePIDSubsystem.setSetpoint(
-     0// limeLight.getShootingAngle()
-      );
+    if (this.limeLight.getDistance() == 0.0) {
+      mAnglePIDSubsystem.setSetpoint(45);
+    } else {
+      mAnglePIDSubsystem.setSetpoint(this.limeLight.getShootingAngle());
+    }
   }
 
   // Called once the command ends or is interrupted.

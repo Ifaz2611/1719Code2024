@@ -40,6 +40,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * the robot (including
  * subsystems, commands, and trigger mappings) should be declared here.
  */
+
+
+
+
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final SwerveDirectionPIDSubsystem m_leftFrontDirection = new SwerveDirectionPIDSubsystem(
@@ -83,11 +87,8 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
    */
-
-   JoystickButton intake = new JoystickButton(m_helperController, 1);
-      JoystickButton outake = new JoystickButton(m_helperController, 7);
-
   private void configureBindings() {
+
 
           //             System.out.println("sent inside");
 
@@ -113,6 +114,7 @@ public class RobotContainer {
     ShootAngleControlCommand AngleControl = new ShootAngleControlCommand(
     this.m_AnglePIDSubsystem, m_limelight);
 
+
     this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
 
       // new InstantCommand(() -> {
@@ -121,46 +123,49 @@ public class RobotContainer {
       //   });
     // Trigger prints limelight
 
-    // this should activate the intake motors
-    intake.onTrue(
-        new InstantCommand(() -> {
-          m_DeviceSubsystem.turnIntakeMotors(Constants.INTAKESPEED);
-        }));
+  //        JoystickButton intake = new JoystickButton(m_helperController, 1);
+  // JoystickButton outake = new JoystickButton(m_helperController, 7);
 
-        outake.onTrue(
-        new InstantCommand(() -> {
-          m_DeviceSubsystem.turnIntakeMotors(Constants.OUTAKESPEED);
-        }));
+  //   // this should activate the intake motors
+  //   intake.onTrue(
+  //       new InstantCommand(() -> {
+  //         m_DeviceSubsystem.turnIntakeMotors(Constants.INTAKESPEED);
+  //       }));
 
-        if (!intake.getAsBoolean() && !outake.getAsBoolean()){
-          new InstantCommand(() -> {
-          m_DeviceSubsystem.turnOffIntakeMotors();
-        });
-        }
+  //       outake.onTrue(
+  //       new InstantCommand(() -> {
+  //         m_DeviceSubsystem.turnIntakeMotors(Constants.OUTAKESPEED);
+  //       }));
+
+  //       if (!intake.getAsBoolean() && !outake.getAsBoolean()){
+  //         new InstantCommand(() -> {
+  //         m_DeviceSubsystem.turnOffIntakeMotors();
+  //       });
+  //       }
 
     // this should activate the shooter motors
     new JoystickButton(m_helperController, 2).onTrue(
         new InstantCommand(() -> {
           // System.out.println("outside");
 
-          m_DeviceSubsystem.turnShooterMotors(1);
+          m_DeviceSubsystem.turnShooterMotors(1.0);
         }));
     new JoystickButton(m_helperController, 2).onFalse(
         new InstantCommand(() -> {
-          m_DeviceSubsystem.turnShooterMotors(0);
+          m_DeviceSubsystem.turnShooterMotors(0.0);
         }));
 
-        new JoystickButton(m_helperController, 8).onTrue(
-        new InstantCommand(() -> {
-          System.out.println(m_DeviceSubsystem.checkRing());
-        }));
+        // new JoystickButton(m_helperController, 8).onTrue(
+        // new InstantCommand(() -> {
+        //   System.out.println(m_DeviceSubsystem.checkRing());
+        // }));
 
-    new JoystickButton(m_helperController, 3).onTrue(
+    // new JoystickButton(m_helperController, 3).onTrue(
        
-            new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
+    //         new LimelightSwerveManager(m_limelight, m_swerveDrive)
              
 
-            ) ;
+           // ) ;
     new JoystickButton(m_helperController, 4).onTrue(
             new ShootSequence(m_DeviceSubsystem)
     );
@@ -170,14 +175,14 @@ public class RobotContainer {
           m_ClimbSubsystem.raise();
         }));
 
-        new JoystickButton(m_helperController, 6).onTrue(
-        new InstantCommand(() -> {
-          m_ClimbSubsystem.lower();
-        }));
-new JoystickButton(m_driverController, 1).onTrue(
+//         new JoystickButton(m_helperController, 6).onTrue(
+//         new InstantCommand(() -> {
+//           m_ClimbSubsystem.lower();
+//         }));
+// new JoystickButton(m_driverController, 1).onTrue(
 
-new AutoMovePIDCommand(0,  30,  m_swerveDrive)
-);
+// new AutoMovePIDCommand(0,  30,  m_swerveDrive)
+// );
 
       
 
@@ -201,7 +206,7 @@ new AutoMovePIDCommand(0,  30,  m_swerveDrive)
     } else if (m_autoSelected.equals("Auto 3")) {
       return Autos.Auto3(m_swerveDrive, m_DeviceSubsystem);
     } else {
-      return Autos.defaultAuto(m_swerveDrive, m_DeviceSubsystem);
+      return Autos.defaultAuto(m_swerveDrive, m_DeviceSubsystem,m_limelight);
     }
   }
 }

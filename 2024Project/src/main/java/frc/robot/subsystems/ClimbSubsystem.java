@@ -21,13 +21,13 @@ public class ClimbSubsystem extends SubsystemBase {
 
     m_pistons = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.FORWARDS_SOLENOID_PIN, Constants.BACKWARDS_SOLENOID_PIN);
     m_pistons.set(DoubleSolenoid.Value.kReverse);
-        System.out.println("pistons set");
-    // m_Compressor = new Compressor(PneumaticsModuleType.CTREPCM)
+      //ystem.out.println("pistons set");
+    //m_Compressor = new Compressor(PneumaticsModuleType.CTREPCM);
   }
 
   // this function should make both the left piston and the right piston raise
   public void raise() {
-        m_pistons.set(DoubleSolenoid.Value.kForward);
+        m_pistons.toggle();
 
   }
 
