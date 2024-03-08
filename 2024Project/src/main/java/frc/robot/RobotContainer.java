@@ -6,6 +6,7 @@ package frc.robot;
 import frc.robot.commands.LimeLightMovePIDCommand;
 import frc.robot.commands.ShootAngleControlCommand;
 import frc.robot.commands.ShootSequence;
+import frc.robot.commands.IntakeSequence;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AutoMovePIDCommand;
 import frc.robot.commands.Autos;
@@ -144,6 +145,13 @@ public class RobotContainer {
   //       }
 
     // this should activate the shooter motors
+    new JoystickButton(m_helperController, 1).onTrue(
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0)      
+    );
+    new JoystickButton(m_helperController, 1).onFalse(
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1)      
+    );
+
     new JoystickButton(m_helperController, 2).onTrue(
         new InstantCommand(() -> {
           // System.out.println("outside");
