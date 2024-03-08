@@ -14,12 +14,14 @@ import frc.robot.Constants;
 
 public class ClimbSubsystem extends SubsystemBase {
     private static DoubleSolenoid m_pistons;
+
     // private final Compressor m_Compressor;
   /** Creates a new climbSubsystem. */
   public ClimbSubsystem() {
 
     m_pistons = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.FORWARDS_SOLENOID_PIN, Constants.BACKWARDS_SOLENOID_PIN);
     m_pistons.set(DoubleSolenoid.Value.kReverse);
+        System.out.println("pistons set");
     // m_Compressor = new Compressor(PneumaticsModuleType.CTREPCM)
   }
 

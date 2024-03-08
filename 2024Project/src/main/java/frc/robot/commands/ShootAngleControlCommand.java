@@ -35,7 +35,7 @@ public class ShootAngleControlCommand extends Command {
   public void execute() {
     // returns angle as double
     mAnglePIDSubsystem.setSetpoint(
-      limeLight.getShootingAngle()
+     0// limeLight.getShootingAngle()
       );
   }
 

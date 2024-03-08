@@ -59,17 +59,17 @@ public class SwerveTeleopCommand extends Command {
     double direction = angleFromXY(-this.m_getX.getAsDouble(), this.m_getY.getAsDouble());
     // this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(direction, translatePower/2,
     //     this.m_getTwist.getAsDouble());
-    this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(direction, translatePower/2,
-         this.m_getTwist.getAsDouble()/8);
+    this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(direction, translatePower*Constants.TELEOPSPEEDMODIFIER,
+         this.m_getTwist.getAsDouble()*Constants.TELEOPTWISTMODIFIER);
 
     //This has a resource leak!!!
 
    //  this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.CartesianChassisSpeeds(-this.m_getX.getAsDouble(), this.m_getY.getAsDouble(), this.m_getTwist.getAsDouble());
     //System.out.println((new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
-     SmartDashboard.putNumber("leftf",(new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
-     SmartDashboard.putNumber("leftb",(new CANcoder(Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
-     SmartDashboard.putNumber("rightf",(new CANcoder(Constants.RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
-     SmartDashboard.putNumber("rightb",(new CANcoder(Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
+    //  SmartDashboard.putNumber("leftf",(new CANcoder(Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
+    //  SmartDashboard.putNumber("leftb",(new CANcoder(Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
+    //  SmartDashboard.putNumber("rightf",(new CANcoder(Constants.RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
+    //  SmartDashboard.putNumber("rightb",(new CANcoder(Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN).getPosition().getValueAsDouble() % 1) * 360);
   }
 
 

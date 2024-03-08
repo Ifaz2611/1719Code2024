@@ -27,7 +27,7 @@ public final class Autos {
   public static Command Auto1(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem, LimelightSubsystem mLimelightSubsystem) {
     // return new InstantCommand(() -> {subsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(90,0,0 );});
     System.out.println("Auto 1");
-    return Commands.sequence(new LimelightSwerveManager(mLimelightSubsystem, driveSubsystem), new ShootSequence(deviceSubsystem));
+    return Commands.sequence(new PIDCommandTurnToAngle(mLimelightSubsystem, driveSubsystem), new ShootSequence(deviceSubsystem));
   }
 
   // AUTO 2
@@ -54,3 +54,4 @@ public final class Autos {
     throw new UnsupportedOperationException("This is a utility class!");
   }
 }
+// 
