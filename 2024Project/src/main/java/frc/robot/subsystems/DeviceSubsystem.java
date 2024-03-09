@@ -76,7 +76,7 @@ public class DeviceSubsystem extends SubsystemBase {
     }
     // turns off the shooter
     public void turnOffShooter(){
-        INTAKE.set(0);
+        SHOOTER.set(0);
     }
 
     // turns off the intake motors

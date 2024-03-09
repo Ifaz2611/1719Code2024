@@ -235,7 +235,7 @@ public class SwerveSubsystem extends SubsystemBase {
         
         public void setSwerveDrive(double direction, double translatePower, double turnPower) {
              direction = direction- (DRIVE_GYRO.getAngle()%360) + 90;// gryo on side hence +90
-             System.out.println(DRIVE_GYRO.getAngle());
+            //  System.out.println(DRIVE_GYRO.getAngle());
             if ((translatePower > -0.10) && (translatePower < 0.10) && (Math.abs (turnPower) > 0.10)) {
                 inplaceTurn(turnPower);
             } else {

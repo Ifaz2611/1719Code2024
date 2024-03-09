@@ -37,7 +37,7 @@ public class IntakeSequence extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
      //addCommands(new FooCommand(), new BarCommand());
      if (stateNum == 0) {
-       addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), waitwait(2), IntakeMotors(1));
+       addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(1));
     } else {
        addCommands(IntakeMotors(0), setIntakeState(m_angler, false));
     }

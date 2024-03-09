@@ -26,9 +26,9 @@ public class PIDCommandTurnToAngle extends PIDCommand {
         ()-> 0,
         // This uses the output
         output -> {
-          // Use the output here
-          mSwerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0, 0, -output);
-         System.out.println("turning");
+          System.out.println("Speaker angle horz: " + mLimelightSubsystem.getAngleToSpeaker());
+         mSwerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0, 0, -output);
+         
         //  if (mLimelightSubsystem.getAngleToSpeaker()){
             //mLimelightSwerveManager.setAnglePID(output, mLimelightSubsystem.getAngleToSpeaker());
 
@@ -39,9 +39,7 @@ public class PIDCommandTurnToAngle extends PIDCommand {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(mSwerveSubsystem, mLimelightSubsystem);
 
-    // Configure additional PID options by calling `getController` here.
-    System.out.println("TurnInit");
-    
+    // Configure additional PID options by calling `getController` here.    
   }
 
   // Returns true when the command should end.

@@ -38,6 +38,7 @@ public class ShootAngleControlCommand extends Command {
       mAnglePIDSubsystem.setSetpoint(47);
     } else if (!mAnglePIDSubsystem.getIntakeState()) {
       mAnglePIDSubsystem.setSetpoint(this.limeLight.getShootingAngle());
+      
     }
   }
 

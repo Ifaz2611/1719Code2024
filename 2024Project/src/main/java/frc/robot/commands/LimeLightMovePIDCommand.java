@@ -20,7 +20,7 @@ public class LimeLightMovePIDCommand extends PIDCommand {
         // The controller that the command will use
         new PIDController(Constants.LIGHT_MOVE_P, Constants.LIGHT_MOVE_I, Constants.LIGHT_MOVE_D),
         // This should return the measurement
-        () -> mLimelightSubsystem.getDistance(),
+        () -> mLimelightSubsystem.getAngleToTag(),
         // This should return the setpoint (can also be a constant)
         () -> 0, // temp
         // This uses the output

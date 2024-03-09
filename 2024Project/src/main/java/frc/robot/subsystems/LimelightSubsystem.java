@@ -21,8 +21,9 @@ public class LimelightSubsystem extends SubsystemBase {
 
   // Get angle for shooter head (returns double angle from 0 to 360)
   public double getShootingAngle() {
-
+    // Y is verified correct
     double Y = Constants.GOAL_HEIGHT_INCHES+Constants.HOLE_TO_APRILTAG_HEIGHT-Constants.CENTER_HEIGHT_TO_GROUND;
+    // X is verified correct
     double X = Constants.CENTER_DISTANCE+getDistance();
     // System.out.println(Math.toDegrees(Math.atan2(Y,X)));
     return Math.toDegrees(Math.atan2(Y,X));

@@ -72,11 +72,16 @@ public final class Constants {
   public static final double DirectionP = 0.005;
   public static final double DirectionI = 0.00;
   public static final double DirectionD = 0.0;
-
+  // actually the vertical height of top of speaker's apriltag above ground
   public static final double SPEAKER_HEIGHT = 60; // NOT REAL VALUE - Must be inches
 
+  // vertical distance from top of apriltag to center of speaker
   public static final double HOLE_TO_APRILTAG_HEIGHT = 24; // (2 feet) - Must be inches
+  // vertical distance to (assumed) shooter height CENTER above ground
+  // yes, we are ignoring the fact that it changes as we change
+  // the shooter angle
   public static final double CENTER_HEIGHT_TO_GROUND = 25.5; //Must be inches
+  // Horizontal distane from limelight to shooter CENTER
   public static final double CENTER_DISTANCE = 12; // (2 feet) - Must be inches
 
 
@@ -85,7 +90,7 @@ public final class Constants {
   public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 20.0; //TODO check angle
   // Offset of limelight center in inches from floor
   public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 7.5; 
-  // Offset of goal center in inches from floor
+  // Vertical distance of speaker's apriltag above ground
   public static final double GOAL_HEIGHT_INCHES = 60; //60-offset height //TODO test
 
   // distance from the lime light stand to the shooter base
@@ -103,7 +108,7 @@ public final class Constants {
 
   // stablizes the angle of the shooter
   public static final double ShootAngleP = 0.005;
-  public static final double ShootAngleI = 0;
+  public static final double ShootAngleI = 0.000;
   public static final double ShootAngleD = 0;
 
   // these pins controls the angle of the shooter
@@ -120,7 +125,7 @@ public final class Constants {
 
   // Pid for PIDCommandTurnToAngle (positioning robot direction)
   public static final double PTurnToAngle = 0.005;
-  public static final double ITurnToAngle = 0.00;
+  public static final double ITurnToAngle = 0.001;
   public static final double DTurnToAngle = 0;
 
   // controls tolerence of limelight shooter angle i think
@@ -149,7 +154,7 @@ public final class Constants {
   public static final double LIGHT_MOVE_I = 0;
   public static final double LIGHT_MOVE_D = 0;
  
-  //Vertical Offset for Throughbor Encoder.
+  //Vertical Offset for Throughbore Encoder. Currently 95 deg in 0-1 units
   public static final double UPOFFSET = 0.2643;
 
   //degree angle to intake
