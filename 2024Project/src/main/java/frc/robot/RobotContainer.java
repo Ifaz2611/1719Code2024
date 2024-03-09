@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -179,6 +180,7 @@ public class RobotContainer {
            // ) ;
     new JoystickButton(m_helperController, 4).onTrue(
             new ShootSequence(m_DeviceSubsystem)   
+
             );
 
 
@@ -188,9 +190,29 @@ public class RobotContainer {
             new InstantCommand(()->{
               // BE SURE TO SCHEDULE A COMMAND WITH .schedule()
               //m_swerveDrive.resetDistanceMotors();
+
+              //Target Distance IN INCHES
+              double targetDistance = 50; //40 is distance to note, 4 is length of shooter overhang
+
+              //Factor of distance
               final double distanceConversionFactor = 1.5;
-              Commands.sequence(new AutoMovePIDCommand(180, 30 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive)).schedule();
-              // Commands.sequence(new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), new ShootSequence(m_DeviceSubsystem)).schedule();
+              Commands.sequence(
+              
+              
+              new ShootSequence(m_DeviceSubsystem),
+              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0),
+              new AutoMovePIDCommand(180, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+              new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), 
+              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1),
+              new WaitCommand(2),
+              //new AutoMovePIDCommand(180, 10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+              new ShootSequence(m_DeviceSubsystem)
+              
+              
+              ).schedule();
+
+
+             // Commands.sequence(new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), new ShootSequence(m_DeviceSubsystem)).schedule();
             })
               //new ShootSequence(m_DeviceSubsystem)
 
