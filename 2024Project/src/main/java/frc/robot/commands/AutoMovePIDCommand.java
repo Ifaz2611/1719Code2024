@@ -16,7 +16,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 public class AutoMovePIDCommand extends PIDCommand {
   /** Creates a new AutoMovePIDCommand. */
 
-  public AutoMovePIDCommand(double direction, double distance, final double initialDist, SwerveSubsystem m_swerve) {
+  public AutoMovePIDCommand(double direction, double distance, double initialDist, SwerveSubsystem m_swerve) {
     super(
         // The controller that the command will use
         new PIDController(Constants.AUTO_MOVE_P, Constants.AUTO_MOVE_I, Constants.AUTO_MOVE_D),

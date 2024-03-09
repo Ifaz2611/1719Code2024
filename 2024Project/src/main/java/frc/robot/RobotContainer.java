@@ -187,7 +187,9 @@ public class RobotContainer {
             //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
             new InstantCommand(()->{
               // BE SURE TO SCHEDULE A COMMAND WITH .schedule()
-              Commands.sequence(new AutoMovePIDCommand(180, 20, m_swerveDrive.returnAverageDistance(), m_swerveDrive)).schedule();
+              //m_swerveDrive.resetDistanceMotors();
+              final double distanceConversionFactor = 1.5;
+              Commands.sequence(new AutoMovePIDCommand(180, 30 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive)).schedule();
               // Commands.sequence(new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), new ShootSequence(m_DeviceSubsystem)).schedule();
             })
               //new ShootSequence(m_DeviceSubsystem)

@@ -313,7 +313,7 @@ public class SwerveSubsystem extends SubsystemBase {
             rightBackWheel.speedMotors(translatePower);
         }
         public void drifTranslate(double direction, double translatePower, double turnPower){
-                      direction = direction- DRIVE_GYRO.getAngle() + 90; //gyro on side hence +90
+                      direction = direction- DRIVE_GYRO.getAngle() + 120; //gyro on side hence +90
 
                       SwerveModuleState leftFrontPosition = convertToPower(translatePower, 225, turnPower, direction);
                       SwerveModuleState leftBackPosition = convertToPower(translatePower, 135, turnPower, direction);
