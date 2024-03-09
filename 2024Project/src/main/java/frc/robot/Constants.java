@@ -164,8 +164,8 @@ public final class Constants {
 public static final AnalogInput ULTRASONIC_SENSOR_PIN = new AnalogInput(0);
 
 // TODO: set these PLEASE
-public static final double AUTO_MOVE_P = 0.0005;
-public static final double AUTO_MOVE_I = 0;
+public static final double AUTO_MOVE_P = 0.0008;
+public static final double AUTO_MOVE_I = 0.0001;
 public static final double AUTO_MOVE_D = 0;
 public static final double DISTANCEPOSITIONTOLERENCE = 2;
 

@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -183,8 +184,13 @@ public class RobotContainer {
 
 
         new JoystickButton(m_helperController, 5).onTrue(
-            new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
-          //new ShootSequence(m_DeviceSubsystem)
+            //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
+            new InstantCommand(()->{
+              // BE SURE TO SCHEDULE A COMMAND WITH .schedule()
+              Commands.sequence(new AutoMovePIDCommand(180, 20, m_swerveDrive.returnAverageDistance(), m_swerveDrive)).schedule();
+              // Commands.sequence(new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), new ShootSequence(m_DeviceSubsystem)).schedule();
+            })
+              //new ShootSequence(m_DeviceSubsystem)
 
           // System.out.println(m_AnglePIDSubsystem.getMeasurement() + " PID");
           //   System.out.println(m_limelight.getShootingAngle() + " LIMELIGHT");

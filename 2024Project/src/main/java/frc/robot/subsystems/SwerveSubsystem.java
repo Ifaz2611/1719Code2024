@@ -336,7 +336,6 @@ SwerveModuleState Moduleset = new SwerveModuleState( translatepower, turnangleRo
 return Moduleset;
     }
 
-    
     }
 
     /**
