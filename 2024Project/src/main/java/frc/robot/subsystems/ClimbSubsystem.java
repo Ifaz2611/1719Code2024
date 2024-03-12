@@ -20,8 +20,8 @@ public class ClimbSubsystem extends SubsystemBase {
   public ClimbSubsystem() {
 
     //PNEUMATICS
-    //m_pistons = new DoubleSolenoid(Constants.COMPRESSOR_MODULE_NUMBER, PneumaticsModuleType.REVPH, Constants.FORWARDS_SOLENOID_PIN, Constants.BACKWARDS_SOLENOID_PIN);
-    //m_pistons.set(DoubleSolenoid.Value.kReverse);
+    m_pistons = new DoubleSolenoid(Constants.COMPRESSOR_MODULE_NUMBER, PneumaticsModuleType.REVPH, Constants.FORWARDS_SOLENOID_PIN, Constants.BACKWARDS_SOLENOID_PIN);
+    m_pistons.set(DoubleSolenoid.Value.kReverse);
 
 
       //ystem.out.println("pistons set");

@@ -22,8 +22,8 @@ import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 public class IntakeSequence extends SequentialCommandGroup {
   /** Creates a new ShootSequence. */
   DeviceSubsystem mDeviceSubsystem;
-
   
+  public double ANGLEAIM = 47;
 
   public WaitCommand waitwait (double time) {
     return new WaitCommand(time);

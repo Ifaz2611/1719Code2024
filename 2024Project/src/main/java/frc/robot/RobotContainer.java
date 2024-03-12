@@ -66,7 +66,7 @@ public class RobotContainer {
   private final ShooterAnglePIDSubsystem m_AnglePIDSubsystem = new ShooterAnglePIDSubsystem();
   private final DeviceSubsystem m_DeviceSubsystem = new DeviceSubsystem();
   private final LedSubsystem m_LedSubsystem = new LedSubsystem();
-   private final ClimbSubsystem m_ClimbSubsystem = new ClimbSubsystem();
+  private final ClimbSubsystem m_ClimbSubsystem = new ClimbSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final Joystick m_driverController = new Joystick(OperatorConstants.kDriverControllerPort);
@@ -167,12 +167,18 @@ public class RobotContainer {
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0)      
     );
     new JoystickButton(m_helperController, 2).onFalse(
+      
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1)      
     );
 
     //Manual aim
     new JoystickButton(m_helperController, 3).onTrue(
-      IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2)
+      
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2)
+        );
+
+    new JoystickButton(m_helperController, 3).onFalse(
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1)
         );
 
         // new JoystickButton(m_helperController, 8).onTrue(
@@ -209,7 +215,7 @@ public class RobotContainer {
               
               new ShootSequence(m_DeviceSubsystem),
               new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0),
-              new AutoMovePIDCommand(180, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+              new AutoMovePIDCommand(160, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
               new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), 
               new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1),
               new WaitCommand(2),
@@ -218,7 +224,8 @@ public class RobotContainer {
               
               
               ).schedule();
-
+            })
+            );
 
         new JoystickButton(m_helperController, 8).onTrue(
             //  
@@ -236,12 +243,12 @@ public class RobotContainer {
 
 
              // Commands.sequence(new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), new ShootSequence(m_DeviceSubsystem)).schedule();
-            })
+            
               //new ShootSequence(m_DeviceSubsystem)
 
           // System.out.println(m_AnglePIDSubsystem.getMeasurement() + " PID");
           //   System.out.println(m_limelight.getShootingAngle() + " LIMELIGHT");
-        );
+      
 
 //         new JoystickButton (m_helperController, 6).onTrue(
 //         new InstantCommand(() -> {
