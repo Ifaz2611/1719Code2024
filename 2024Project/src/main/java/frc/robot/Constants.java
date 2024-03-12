@@ -158,7 +158,7 @@ public final class Constants {
   public static final double UPOFFSET = 0.2643;
 
   //degree angle to intake
-  public static final double INTAKE_DEGREE_VALUE = 57;
+  public static final double INTAKE_DEGREE_VALUE = 47;
 
   //TODO: ADD ANALOG PIN HERE PLEASE
 public static final AnalogInput ULTRASONIC_SENSOR_PIN = new AnalogInput(0);
@@ -171,8 +171,10 @@ public static final double DISTANCEPOSITIONTOLERENCE = 2;
 
 
   //TODO: FILL IN IDS AND THEN MAKE BOTH FINAL
-public static int BACKWARDS_SOLENOID_PIN = 9; 
-public static int FORWARDS_SOLENOID_PIN = 8;
+public static int BACKWARDS_SOLENOID_PIN = 0; 
+public static int FORWARDS_SOLENOID_PIN = 1;
+public static int COMPRESSOR_MODULE_NUMBER = 25;
+
 
 //for learing how to drive 0 to 1
 public static final double TELEOPSPEEDMODIFIER = .2;

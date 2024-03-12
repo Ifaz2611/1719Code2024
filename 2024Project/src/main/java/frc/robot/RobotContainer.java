@@ -20,6 +20,9 @@ import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 import frc.robot.subsystems.SwerveDirectionPIDSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
+
+import java.time.Instant;
+
 import edu.wpi.first.wpilibj.DutyCycle;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Joystick;
@@ -148,21 +151,26 @@ public class RobotContainer {
   //       });
   //       }
 
-    // this should activate the shooter motors
+
+  //Run shoot sequence
     new JoystickButton(m_helperController, 1).onTrue(
+      new InstantCommand(()-> {
+      Commands.sequence(
+          new ShootSequence(m_DeviceSubsystem)   
+      ).schedule();
+    })  
+            );
+
+    // Turn on and off intake motors
+    new JoystickButton(m_helperController, 2).onTrue(
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0)      
     );
-    new JoystickButton(m_helperController, 1).onFalse(
+    new JoystickButton(m_helperController, 2).onFalse(
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1)      
     );
 
-    new JoystickButton(m_helperController, 2).onTrue(
-        new InstantCommand(() -> {
-          // System.out.println("outside");
-
-          m_DeviceSubsystem.turnShooterMotors(1.0);
-        }));
-    new JoystickButton(m_helperController, 2).onFalse(
+    //Manual aim
+    new JoystickButton(m_helperController, 3).onFalse(
         new InstantCommand(() -> {
           m_DeviceSubsystem.turnShooterMotors(0.0);
         }));
@@ -178,14 +186,11 @@ public class RobotContainer {
              
 
            // ) ;
-    new JoystickButton(m_helperController, 4).onTrue(
-            new ShootSequence(m_DeviceSubsystem)   
+    
 
-            );
+     
 
-
-
-        new JoystickButton(m_helperController, 5).onTrue(
+        new JoystickButton(m_helperController, 7).onTrue(
             //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
             new InstantCommand(()->{
               // BE SURE TO SCHEDULE A COMMAND WITH .schedule()
@@ -197,7 +202,10 @@ public class RobotContainer {
               //Factor of distance
               final double distanceConversionFactor = 1.5;
               Commands.sequence(
-              
+                new InstantCommand(()->{m_AnglePIDSubsystem.shootAngle();}),
+                new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1),
+         
+              //Lower arm to 47.
               
               new ShootSequence(m_DeviceSubsystem),
               new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0),
@@ -210,6 +218,21 @@ public class RobotContainer {
               
               
               ).schedule();
+
+
+        new JoystickButton(m_helperController, 8).onTrue(
+            //  
+          new InstantCommand(()->{
+            m_ClimbSubsystem.raise();
+          })
+            );
+
+        new JoystickButton(m_helperController, 11).onTrue(
+            //  
+          new InstantCommand(()->{
+            m_ClimbSubsystem.lower();
+          })
+            );
 
 
              // Commands.sequence(new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), new ShootSequence(m_DeviceSubsystem)).schedule();

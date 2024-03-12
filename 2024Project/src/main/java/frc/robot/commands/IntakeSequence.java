@@ -9,6 +9,7 @@ import java.time.Instant;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants;
 import frc.robot.subsystems.DeviceSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 
@@ -29,7 +30,7 @@ public class IntakeSequence extends SequentialCommandGroup {
     return new InstantCommand(()-> m_angler.setIntakeState(state));
   }
   public InstantCommand setIntakeSetpoint(ShooterAnglePIDSubsystem m_angler) {
-    return new InstantCommand(()->m_angler.setSetpoint(47));
+    return new InstantCommand(()->m_angler.setSetpoint(Constants.INTAKE_DEGREE_VALUE));
   }
 
   public IntakeSequence(DeviceSubsystem mDeviceSubsystem, ShooterAnglePIDSubsystem m_angler, int stateNum) {
