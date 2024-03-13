@@ -56,7 +56,7 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
 
   @Override
   public double getMeasurement() {
-    double AngleDegrees = (ShootAngleEncoder.getAbsolutePosition()-Constants.VERTICASHOOTERANGLEOFFSET)*360;
+    double AngleDegrees = ShootAngleEncoder.getAbsolutePosition()*360.0 - Constants.SHOOTER_ANGLE_ZEROPOINT_OFFSET - Constants.SHOOTER_ANGLE_CORRECTION;
     // // Return the process variable measurement here
      //System.out.println(AngleDegrees/360);
     return AngleDegrees;
