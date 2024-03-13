@@ -152,9 +152,12 @@ public final class Constants {
   public static final double LIGHT_MOVE_P = 0.005;
   public static final double LIGHT_MOVE_I = 0;
   public static final double LIGHT_MOVE_D = 0;
- 
-  //Vertical Offset for Throughbore Encoder. Currently 95 deg in 0-1 units
-  public static final double VERTICASHOOTERANGLEOFFSET = 100.0/360.0;
+
+  // Zero-point offset for shooter-arm (throughbore) encoder. 
+  // This makes the returned angle be 0.0 when the shooting plane is horizontal
+  public state final double SHOOTER_ANGLE_ZEROPOINT_OFFSET = 90.0; // degrees
+  // Aiming offset in degrees to correct shooting. Currently 10 deg. 
+  public static final double SHOOTER_ANGLE_CORRECTION = 10.0;
 
   //degree angle to intake
   public static final double INTAKE_DEGREE_VALUE = 47;
