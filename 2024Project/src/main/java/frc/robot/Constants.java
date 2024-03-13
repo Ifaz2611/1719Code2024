@@ -72,29 +72,28 @@ public final class Constants {
   public static final double DirectionP = 0.005;
   public static final double DirectionI = 0.00;
   public static final double DirectionD = 0.0;
-  // actually the vertical height of top of speaker's apriltag above ground
-  public static final double SPEAKER_HEIGHT = 60; // NOT REAL VALUE - Must be inches
 
+  // ****** Physical measurements of the system ******
+  // the vertical height of top of speaker's apriltag above ground
+  public static final double SPEAKER_APRILTAG_HEIGHT = 60; // inches
   // vertical distance from top of apriltag to center of speaker
-  public static final double HOLE_TO_APRILTAG_HEIGHT = 24; // (2 feet) - Must be inches
-  // vertical distance to (assumed) shooter height CENTER above ground
-  // yes, we are ignoring the fact that it changes as we change
-  // the shooter angle
-  public static final double CENTER_HEIGHT_TO_GROUND = 24; //Must be inches
-  // Horizontal distane from limelight to shooter CENTER
-  public static final double CENTER_DISTANCE = 12; // (2 feet) - Must be inches
-
-
-
+  public static final double HOLE_TO_APRILTAG_HEIGHT = 24; // inches
+  //
   // Angle of limelight from the horizontal
-  public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 20.0; //TODO check angle
+  public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 20.0; 
   // Offset of limelight center in inches from floor
   public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 7.5; 
-  // Vertical distance of speaker's apriltag above ground
-  public static final double GOAL_HEIGHT_INCHES = 60; //60-offset height //TODO test
+  //
+  // distance from the shooter arm's pivot to the shooting mechanism plane
+  public static final double SHOOTER_ARM_LENGTH = 24 ; // !!CHECK THIS!!
+  // horizontal distance from limelight lens to shooter arm pivot point
+  public static final LIMELIGHT_TO_SHOOTER_PIVOT double = 20; !!CHECK THIS!!
+  // vertical height of shooter arm pivot above floor
+  public static final double SHOOTER_PIVOT_TO_FLOOR double = 12; !!CHECK THIS!!
+  //
 
-  // distance from the lime light stand to the shooter base
-  public static final double DISTANCE_LIMELIGHT_TO_SHOOTER = 0; // NOT REAL VALUE - Must be meters
+
+
 
   // controlls the motor led pin. and yes it is a motor 
   public static final int LED_PWM_PIN = 9;
