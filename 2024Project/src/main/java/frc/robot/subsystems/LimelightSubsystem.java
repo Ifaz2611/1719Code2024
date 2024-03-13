@@ -22,7 +22,7 @@ public class LimelightSubsystem extends SubsystemBase {
   // Get angle for shooter head (returns double angle from 0 to 360)
   public double getShootingAngle() {
     // Y is verified correct
-    double Y = Constants.GOAL_HEIGHT_INCHES+Constants.HOLE_TO_APRILTAG_HEIGHT-Constants.CENTER_HEIGHT_TO_GROUND;
+    double Y = Constants.SPEAKER_APRILTAG_HEIGHT+Constants.HOLE_TO_APRILTAG_HEIGHT-Constants.CENTER_HEIGHT_TO_GROUND;
     // X is verified correct
     double X = Constants.CENTER_DISTANCE+getDistance();
     // System.out.println(Math.toDegrees(Math.atan2(Y,X)));
@@ -30,6 +30,8 @@ public class LimelightSubsystem extends SubsystemBase {
   }
 
   // Get distance to april tag (returns double)
+  // This version is hard-coded for the speakers. Pass in a variable that the height   
+  // of the apriltag in question to make this more general
   public double getDistance() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tid = table.getEntry("tid");
@@ -41,7 +43,7 @@ public class LimelightSubsystem extends SubsystemBase {
       double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
 
       //calculate distance
-      double distanceFromLimelightToGoalInches = (Constants.GOAL_HEIGHT_INCHES - Constants.LIMELIGHT_LENS_HEIGHT_INCHES) / Math.tan(angleToGoalRadians);
+      double distanceFromLimelightToGoalInches = (Constants.SPEAKER_APRILTAG_HEIGHT - Constants.LIMELIGHT_LENS_HEIGHT_INCHES) / Math.tan(angleToGoalRadians);
       return distanceFromLimelightToGoalInches;
     }
     return 0.0;
