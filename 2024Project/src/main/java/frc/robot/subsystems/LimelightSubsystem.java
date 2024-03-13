@@ -5,12 +5,17 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.subsystems.ShooterAnglePIDSubsystem;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LimelightSubsystem extends SubsystemBase {
+  // !! is this the correct way to put in the angle subsystem??
+  private ShooterAnglePIDSubsystem m_angler;
+  
   /** Creates a new LimelightSubsystem. */
   public LimelightSubsystem() {}
 
@@ -23,7 +28,7 @@ public class LimelightSubsystem extends SubsystemBase {
   public double getShootingAngle() {
     // First get the current angle of the shooter
     // !! Someone will have to edit this code so we can use the AnglePIDSubsystem to getMeasurement()
-    double phi = Math.toRadians(m_AnglePIDSubsystem.getMeasurement()); 
+    double phi = Math.toRadians(m_angler.getMeasurement()); 
     // vertical height from the shooter to the target
     double Y = Constants.SPEAKER_APRILTAG_HEIGHT+Constants.HOLE_TO_APRILTAG_HEIGHT
              - Constants.SHOOTER_PIVOT_TO_FLOOR - Constants.SHOOTER_ARM_LENGTH*Math.cos(phi);
