@@ -21,10 +21,15 @@ public class LimelightSubsystem extends SubsystemBase {
 
   // Get angle for shooter head (returns double angle from 0 to 360)
   public double getShootingAngle() {
-    // Y is verified correct
-    double Y = Constants.SPEAKER_APRILTAG_HEIGHT+Constants.HOLE_TO_APRILTAG_HEIGHT-Constants.CENTER_HEIGHT_TO_GROUND;
-    // X is verified correct
-    double X = Constants.CENTER_DISTANCE+getDistance();
+    // First get the current angle of the shooter
+    // !! Someone will have to edit this code so we can use the AnglePIDSubsystem to getMeasurement()
+    double phi = Math.toRadians(m_AnglePIDSubsystem.getMeasurement()); 
+    // vertical height from the shooter to the target
+    double Y = Constants.SPEAKER_APRILTAG_HEIGHT+Constants.HOLE_TO_APRILTAG_HEIGHT
+             - Constants.SHOOTER_PIVOT_TO_FLOOR - Constants.SHOOTER_ARM_LENGTH*Math.cos(phi);
+    // horizontal distance from shooter to target
+    double X = getDistance() + Constants.LIMELIGHT_TO_SHOOTER_PIVOT 
+             + Constants.SHOOTER_ARM_LENGTH*Math.sin(phi) ;
     // System.out.println(Math.toDegrees(Math.atan2(Y,X)));
     return Math.toDegrees(Math.atan2(Y,X));
   }
