@@ -13,8 +13,6 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LimelightSubsystem extends SubsystemBase {
-  // !! is this the correct way to put in the angle subsystem??
-  private ShooterAnglePIDSubsystem m_angler;
   
   /** Creates a new LimelightSubsystem. */
   public LimelightSubsystem() {}
@@ -24,19 +22,22 @@ public class LimelightSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  public static double ShootingAngleCorrection(double distance) {
+    // Sugerman figured this out empirically. Good to 0.1 deg to a distance of 10 ft.
+    return 1.6*np.tanh((distance - Constants.DISTANCE_FROM_SPEAKER_FOR_DEFAULT_SHOOTING)/47.);
+  }
+  
   // Get angle for shooter head (returns double angle from 0 to 360)
   public double getShootingAngle() {
-    // First get the current angle of the shooter
-    // !! Someone will have to edit this code so we can use the AnglePIDSubsystem to getMeasurement()
-    double phi = Math.toRadians(m_angler.getMeasurement()); 
     // vertical height from the shooter to the target
-    double Y = Constants.SPEAKER_APRILTAG_HEIGHT+Constants.HOLE_TO_APRILTAG_HEIGHT
-             - Constants.SHOOTER_PIVOT_TO_FLOOR - Constants.SHOOTER_ARM_LENGTH*Math.cos(phi);
+    double Y = Constants.SPEAKER_SHOOTING_dY;
     // horizontal distance from shooter to target
-    double X = getDistance() + Constants.LIMELIGHT_TO_SHOOTER_PIVOT 
-             + Constants.SHOOTER_ARM_LENGTH*Math.sin(phi) ;
+    double distance_to_target = getDistance();
+    double X = distance_to_target + Constants.SPEAKER_SHOOTING_dX;
     // System.out.println(Math.toDegrees(Math.atan2(Y,X)));
-    return Math.toDegrees(Math.atan2(Y,X));
+    double phi = Math.toDegrees(Math.atan2(Y,X)) + ShootingAngleCorrection();
+    // 
+    return phi + ShootingAngleCorrection(distance_to_target);
   }
 
   // Get distance to april tag (returns double)
