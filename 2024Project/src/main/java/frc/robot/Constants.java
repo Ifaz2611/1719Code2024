@@ -85,13 +85,21 @@ public final class Constants {
   public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 7.5; 
   //
   // distance from the shooter arm's pivot to the shooting mechanism plane
-  public static final double SHOOTER_ARM_LENGTH = 24 ; // !!CHECK THIS!!
+  public static final double SHOOTER_ARM_LENGTH = 24. ; // !!CHECK THIS!!
   // horizontal distance from limelight lens to shooter arm pivot point
-  public static final LIMELIGHT_TO_SHOOTER_PIVOT double = 20; !!CHECK THIS!!
+  public static final LIMELIGHT_TO_SHOOTER_PIVOT double = 20.; !!CHECK THIS!!
   // vertical height of shooter arm pivot above floor
-  public static final double SHOOTER_PIVOT_TO_FLOOR double = 12; !!CHECK THIS!!
-  //
+  public static final double SHOOTER_PIVOT_TO_FLOOR double = 12.; !!CHECK THIS!!
+  // default shooter angle if it can't see limelight
+  public static final double DEFAULT_SHOOTER_ANGLE double = Math.radians(48.);
+  // default distance of robot to speaker at which DEFAULT_SHOOTER_ANGLE will work
+  public static final double DISTANCE_FROM_SPEAKER_FOR_DEFAULT_SHOOTING double = 41.;
 
+  // Now do math to combine constants for the shooting equations
+  public static final double SPEAKER_SHOOTING_dY = SPEAKER_APRILTAG_HEIGHT + HOLE_TO_APRILTAG_HEIGHT
+             - SHOOTER_PIVOT_TO_FLOOR - SHOOTER_ARM_LENGTH*Math.cos(DEFAULT_SHOOTER_ANGLE);
+  public static final double SPEAKER_SHOOTING_dX = LIMELIGHT_TO_SHOOTER_PIVOT 
+             + SHOOTER_ARM_LENGTH*Math.sin(phi);
 
 
 
