@@ -60,7 +60,6 @@ public class SwerveTeleopCommand extends Command {
    
     this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(direction, translatePower*Constants.TELEOPSPEEDMODIFIER,
          this.m_getTwist.getAsDouble()*Constants.TELEOPTWISTMODIFIER);
-
     //This has a resource leak!!!
 
    //  this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.CartesianChassisSpeeds(-this.m_getX.getAsDouble(), this.m_getY.getAsDouble(), this.m_getTwist.getAsDouble());
@@ -77,7 +76,7 @@ public class SwerveTeleopCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0.0, 0.0, 0.0); // change to setSwerveDrive(
-
+    
   }
 
   // Returns true when the command should end.

@@ -15,6 +15,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PIDCommandTurnToAngle extends PIDCommand {
+  public double ANGLEAIM;
   /** Creates a new PIDCommandTurnToAngle. */
   public PIDCommandTurnToAngle(LimelightSubsystem mLimelightSubsystem , SwerveSubsystem mSwerveSubsystem/*, LimelightSwerveManager mLimelightSwerveManager */) {
     super(
@@ -26,7 +27,7 @@ public class PIDCommandTurnToAngle extends PIDCommand {
         ()-> 0,
         // This uses the output
         output -> {
-          System.out.println("Speaker angle horz: " + mLimelightSubsystem.getAngleToSpeaker());
+          //System.out.println("Speaker angle horz: " + mLimelightSubsystem.getAngleToSpeaker());
          mSwerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0, 0, -output);
          
         //  if (mLimelightSubsystem.getAngleToSpeaker()){

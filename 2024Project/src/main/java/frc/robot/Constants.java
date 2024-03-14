@@ -80,7 +80,7 @@ public final class Constants {
   // vertical distance to (assumed) shooter height CENTER above ground
   // yes, we are ignoring the fact that it changes as we change
   // the shooter angle
-  public static final double CENTER_HEIGHT_TO_GROUND = 25.5; //Must be inches
+  public static final double CENTER_HEIGHT_TO_GROUND = 24; //Must be inches
   // Horizontal distane from limelight to shooter CENTER
   public static final double CENTER_DISTANCE = 12; // (2 feet) - Must be inches
 
@@ -107,8 +107,8 @@ public final class Constants {
   // public static final double ShooterDegreesPerEncoderRotation = 0;
 
   // stablizes the angle of the shooter
-  public static final double ShootAngleP = 0.005;
-  public static final double ShootAngleI = 0.000;
+  public static final double ShootAngleP = 0.02;
+  public static final double ShootAngleI = 0.0;
   public static final double ShootAngleD = 0;
 
   // these pins controls the angle of the shooter
@@ -124,7 +124,7 @@ public final class Constants {
   public static final double DistFromAprilTag = 24;
 
   // Pid for PIDCommandTurnToAngle (positioning robot direction)
-  public static final double PTurnToAngle = 0.005;
+  public static final double PTurnToAngle = 0.02;
   public static final double ITurnToAngle = 0.001;
   public static final double DTurnToAngle = 0;
 
@@ -155,7 +155,7 @@ public final class Constants {
   public static final double LIGHT_MOVE_D = 0;
  
   //Vertical Offset for Throughbore Encoder. Currently 95 deg in 0-1 units
-  public static final double UPOFFSET = 0.2643;
+  public static final double VERTICASHOOTERANGLEOFFSET = 100.0/360.0;
 
   //degree angle to intake
   public static final double INTAKE_DEGREE_VALUE = 47;
@@ -177,8 +177,8 @@ public static int COMPRESSOR_MODULE_NUMBER = 25;
 
 
 //for learing how to drive 0 to 1
-public static final double TELEOPSPEEDMODIFIER = .2;
-public static final double TELEOPTWISTMODIFIER = .2;
+public static final double TELEOPSPEEDMODIFIER = .75;
+public static final double TELEOPTWISTMODIFIER = .5;
 
 //boolean for aming
 //public boolean SelfAim = true;

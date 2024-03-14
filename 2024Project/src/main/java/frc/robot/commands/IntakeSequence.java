@@ -16,9 +16,14 @@ import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+
+
+
 public class IntakeSequence extends SequentialCommandGroup {
   /** Creates a new ShootSequence. */
   DeviceSubsystem mDeviceSubsystem;
+  
+  public double ANGLEAIM = 47;
 
   public WaitCommand waitwait (double time) {
     return new WaitCommand(time);
@@ -30,7 +35,7 @@ public class IntakeSequence extends SequentialCommandGroup {
     return new InstantCommand(()-> m_angler.setIntakeState(state));
   }
   public InstantCommand setIntakeSetpoint(ShooterAnglePIDSubsystem m_angler) {
-    return new InstantCommand(()->m_angler.setSetpoint(Constants.INTAKE_DEGREE_VALUE));
+    return new InstantCommand(()->m_angler.setSetpoint(ANGLEAIM));
   }
 
   public IntakeSequence(DeviceSubsystem mDeviceSubsystem, ShooterAnglePIDSubsystem m_angler, int stateNum) {
@@ -42,8 +47,11 @@ public class IntakeSequence extends SequentialCommandGroup {
     //} else if (stateNum == 2) {
       //addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(1), waitwait(2), IntakeMotors(0), setIntakeState(m_angler, false));
     } 
-    else {
+    else if (stateNum == 1) {
        addCommands(IntakeMotors(0), setIntakeState(m_angler, false));
+    }
+    else if (stateNum == 2) {
+      addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler));
     }
   }
 }
