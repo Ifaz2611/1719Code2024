@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 
 public class ArmIntakeCommand extends Command {
@@ -24,7 +25,7 @@ public class ArmIntakeCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_angler.setSetpoint(47);
+    m_angler.setSetpoint(Constants.DEFAULT_SHOOTER_ANGLE);
   }
 
   // Called once the command ends or is interrupted.

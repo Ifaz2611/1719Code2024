@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import java.time.Instant;
+import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -24,7 +25,7 @@ public class IntakeSequence extends SequentialCommandGroup {
   /** Creates a new ShootSequence. */
   DeviceSubsystem mDeviceSubsystem;
 
-  public double ANGLEAIM = Constants.DEFAULT_SHOOTER_ANGLE;
+  private double ANGLEAIM;
 
   public WaitCommand waitwait (double time) {
     return new WaitCommand(time);
@@ -39,8 +40,9 @@ public class IntakeSequence extends SequentialCommandGroup {
     return new InstantCommand(()->m_angler.setSetpoint(ANGLEAIM));
   }
 
-  public IntakeSequence(DeviceSubsystem mDeviceSubsystem, ShooterAnglePIDSubsystem m_angler, int stateNum) {
+  public IntakeSequence(DeviceSubsystem mDeviceSubsystem, ShooterAnglePIDSubsystem m_angler, int stateNum, double ANGLEAIM) {
     this.mDeviceSubsystem = mDeviceSubsystem;
+    this.ANGLEAIM = ANGLEAIM;
     // Add your commands in the addCommands() call, e.g.
      //addCommands(new FooCommand(), new BarCommand());
      if (stateNum == 0) {
@@ -55,7 +57,7 @@ public class IntakeSequence extends SequentialCommandGroup {
       addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler));
     }
     if (stateNum == -1) {
-       addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(-1));
+       addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(-1), waitwait(.05), IntakeMotors(0), setIntakeState(m_angler, false));
     } 
   }
 }

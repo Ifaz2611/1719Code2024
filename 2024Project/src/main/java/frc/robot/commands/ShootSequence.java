@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants;
 import frc.robot.subsystems.DeviceSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -30,6 +31,6 @@ public class ShootSequence extends SequentialCommandGroup {
     this.mDeviceSubsystem = mDeviceSubsystem;
     // Add your commands in the addCommands() call, e.g.
      //addCommands(new FooCommand(), new BarCommand());
-    addCommands(/*IntakeMotors(-1), waitwait(0.01),*/ShooterMotors(1),waitwait(2), IntakeMotors(1), waitwait(1.5), IntakeMotors(0), ShooterMotors(0));
+    addCommands(ShooterMotors(1),waitwait(2), IntakeMotors(1), waitwait(1.5), IntakeMotors(0), ShooterMotors(0));
   }
 }
