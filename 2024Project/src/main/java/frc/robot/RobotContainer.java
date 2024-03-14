@@ -196,7 +196,7 @@ public class RobotContainer {
              
 
            // ) ;
-        new JoystickButton(m_helperController, 4).onTrue(
+        /*new JoystickButton(m_helperController, 4).onTrue(
           
           new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 10)
         );
@@ -211,7 +211,16 @@ public class RobotContainer {
             System.out.println(HelperControllerY());
           })
         );
-     
+        */
+        new JoystickButton(m_helperController, 6).onTrue(
+            new InstantCommand(()-> {
+      Commands.sequence(
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MIN_SHOOTER_ANGLE),
+            new WaitCommand(1),
+            new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -2, Constants.MIN_SHOOTER_ANGLE)
+      ).schedule();
+            })
+        );
 
         new JoystickButton(m_helperController, 7).onTrue(
             //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
@@ -225,14 +234,14 @@ public class RobotContainer {
               //Factor of distance
               final double distanceConversionFactor = 1.5;
               Commands.sequence(
-                new InstantCommand(()->{m_AnglePIDSubsystem.shootAngle();}),
+                new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MAX_SHOOTER_ANGLE),
+                //new InstantCommand(()->{m_AnglePIDSubsystem.shootAngle();}),
                 new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE),
-         
-              //Lower arm to 47.
+                new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
               
               new ShootSequence(m_DeviceSubsystem),
               new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE),
-              new AutoMovePIDCommand(160, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+              new AutoMovePIDCommand(180, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
               new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), 
               new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE),
               new WaitCommand(2),
