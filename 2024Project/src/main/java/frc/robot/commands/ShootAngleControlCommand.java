@@ -7,6 +7,7 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 
@@ -35,7 +36,7 @@ public class ShootAngleControlCommand extends Command {
   public void execute() {
     // returns angle as double
     if (this.limeLight.getDistance() == 0.0 ) {
-      mAnglePIDSubsystem.setSetpoint(47);
+      mAnglePIDSubsystem.setSetpoint(Constants.DEFAULT_SHOOTER_ANGLE);
     } else if (!mAnglePIDSubsystem.getIntakeState()) {
       mAnglePIDSubsystem.setSetpoint(this.limeLight.getShootingAngle());
       

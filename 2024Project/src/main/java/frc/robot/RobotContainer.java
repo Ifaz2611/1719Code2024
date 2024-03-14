@@ -119,10 +119,10 @@ public class RobotContainer {
 
     ShootAngleControlCommand AngleControl = new ShootAngleControlCommand(
     this.m_AnglePIDSubsystem, m_limelight);
-    System.out.println(m_AnglePIDSubsystem.getMeasurement() + " PID");
-    System.out.println(m_limelight.getShootingAngle() + " LIMELIGHT");
-
-
+    //System.out.println(m_AnglePIDSubsystem.getMeasurement() + " PID");
+    //System.out.println(m_limelight.getShootingAngle() + " LIMELIGHT");
+    
+    System.out.println(m_driverController.getY());
     this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
 
       // new InstantCommand(() -> {
@@ -151,11 +151,11 @@ public class RobotContainer {
   //       });
   //       }
 
-
   //Run shoot sequence
     new JoystickButton(m_helperController, 1).onTrue(
       new InstantCommand(()-> {
       Commands.sequence(
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
           new ShootSequence(m_DeviceSubsystem)   
       ).schedule();
     })  
@@ -163,22 +163,21 @@ public class RobotContainer {
 
     // Turn on and off intake motors
     new JoystickButton(m_helperController, 2).onTrue(
-      
-      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0)      
+
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE)      
     );
     new JoystickButton(m_helperController, 2).onFalse(
       
-      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1)      
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE)      
     );
 
     //Manual aim
-    new JoystickButton(m_helperController, 3).onTrue(
-      
-      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2)
+    
+      new JoystickButton(m_helperController, 3).onTrue(
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE)
         );
-
-    new JoystickButton(m_helperController, 3).onFalse(
-      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1)
+      new JoystickButton(m_helperController, 3).onFalse(
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE )
         );
 
         // new JoystickButton(m_helperController, 8).onTrue(
@@ -193,7 +192,15 @@ public class RobotContainer {
 
            // ) ;
     
+        new JoystickButton(m_helperController, 4).onTrue(
+          
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 0)
+        );
 
+        new JoystickButton(m_helperController, 4).onFalse(
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE)
+
+        );
      
 
         new JoystickButton(m_helperController, 7).onTrue(
@@ -209,15 +216,15 @@ public class RobotContainer {
               final double distanceConversionFactor = 1.5;
               Commands.sequence(
                 new InstantCommand(()->{m_AnglePIDSubsystem.shootAngle();}),
-                new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1),
+                new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE),
          
               //Lower arm to 47.
               
               new ShootSequence(m_DeviceSubsystem),
-              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0),
+              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE),
               new AutoMovePIDCommand(160, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
               new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), 
-              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1),
+              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE),
               new WaitCommand(2),
               //new AutoMovePIDCommand(180, 10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
               new ShootSequence(m_DeviceSubsystem)

@@ -5,12 +5,15 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.subsystems.ShooterAnglePIDSubsystem;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LimelightSubsystem extends SubsystemBase {
+  
   /** Creates a new LimelightSubsystem. */
   public LimelightSubsystem() {}
 
@@ -19,17 +22,27 @@ public class LimelightSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  public static double ShootingAngleCorrection(double distance) {
+    // Sugerman figured this out empirically. Good to 0.1 deg to a distance of 10 ft.
+    return 1.6*Math.tanh((distance - Constants.DISTANCE_FROM_SPEAKER_FOR_DEFAULT_SHOOTING)/47.);
+  }
+  
   // Get angle for shooter head (returns double angle from 0 to 360)
   public double getShootingAngle() {
-    // Y is verified correct
-    double Y = Constants.GOAL_HEIGHT_INCHES+Constants.HOLE_TO_APRILTAG_HEIGHT-Constants.CENTER_HEIGHT_TO_GROUND;
-    // X is verified correct
-    double X = Constants.CENTER_DISTANCE+getDistance();
+    // vertical height from the shooter to the target
+    double Y = Constants.SPEAKER_SHOOTING_dY;
+    // horizontal distance from shooter to target
+    double distance_to_target = getDistance();
+    double X = distance_to_target + Constants.SPEAKER_SHOOTING_dX;
     // System.out.println(Math.toDegrees(Math.atan2(Y,X)));
-    return Math.toDegrees(Math.atan2(Y,X));
+    double phi = Math.toDegrees(Math.atan2(Y,X));
+    // 
+    return phi + ShootingAngleCorrection(distance_to_target);
   }
 
   // Get distance to april tag (returns double)
+  // This version is hard-coded for the speakers. Pass in a variable that the height   
+  // of the apriltag in question to make this more general
   public double getDistance() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tid = table.getEntry("tid");
@@ -41,7 +54,7 @@ public class LimelightSubsystem extends SubsystemBase {
       double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
 
       //calculate distance
-      double distanceFromLimelightToGoalInches = (Constants.GOAL_HEIGHT_INCHES - Constants.LIMELIGHT_LENS_HEIGHT_INCHES) / Math.tan(angleToGoalRadians);
+      double distanceFromLimelightToGoalInches = (Constants.SPEAKER_APRILTAG_HEIGHT - Constants.LIMELIGHT_LENS_HEIGHT_INCHES) / Math.tan(angleToGoalRadians);
       return distanceFromLimelightToGoalInches;
     }
     return 0.0;

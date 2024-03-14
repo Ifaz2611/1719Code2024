@@ -72,29 +72,43 @@ public final class Constants {
   public static final double DirectionP = 0.005;
   public static final double DirectionI = 0.00;
   public static final double DirectionD = 0.0;
-  // actually the vertical height of top of speaker's apriltag above ground
-  public static final double SPEAKER_HEIGHT = 60; // NOT REAL VALUE - Must be inches
 
+  // ****** Physical measurements of the system ******
+  // the vertical height of top of speaker's apriltag above ground
+  public static final double SPEAKER_APRILTAG_HEIGHT = 60; // inches
   // vertical distance from top of apriltag to center of speaker
-  public static final double HOLE_TO_APRILTAG_HEIGHT = 24; // (2 feet) - Must be inches
-  // vertical distance to (assumed) shooter height CENTER above ground
-  // yes, we are ignoring the fact that it changes as we change
-  // the shooter angle
-  public static final double CENTER_HEIGHT_TO_GROUND = 24; //Must be inches
-  // Horizontal distane from limelight to shooter CENTER
-  public static final double CENTER_DISTANCE = 12; // (2 feet) - Must be inches
-
-
-
+  public static final double HOLE_TO_APRILTAG_HEIGHT = 24; // inches
+  //
   // Angle of limelight from the horizontal
-  public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 20.0; //TODO check angle
+  public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 20.0; 
   // Offset of limelight center in inches from floor
   public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 7.5; 
-  // Vertical distance of speaker's apriltag above ground
-  public static final double GOAL_HEIGHT_INCHES = 60; //60-offset height //TODO test
+  //
+  // maximum arm angle allowed (deg)
+  public static final double MAX_SHOOTER_ANGLE = 48; // might set 1-2 lower
+  // minimum arm angle allowed (deg)
+  public static final double MIN_SHOOTER_ANGLE = 0; // horizontal shooter
+  // arm angle when shooting platform (lexan) is horizontal
+  public static final double SHOOTER_ARM_ANGLE = 27.5; // degreees
+  //
+  // distance from the shooter arm's pivot to the shooting mechanism plane
+  public static final double SHOOTER_ARM_LENGTH = 16.; // inches 
+  // horizontal distance from limelight lens to shooter arm pivot point
+  public static final double LIMELIGHT_TO_SHOOTER_PIVOT = 6.25; // inches 
+  // vertical height of shooter arm pivot above floor
+  public static final double SHOOTER_PIVOT_TO_FLOOR = 7.5;
+  // default shooter angle if it can't see limelight
+  public static final double DEFAULT_SHOOTER_ANGLE = 48.;
+  // default distance of robot to speaker at which DEFAULT_SHOOTER_ANGLE will work
+  public static final double DISTANCE_FROM_SPEAKER_FOR_DEFAULT_SHOOTING = 41.0;
 
-  // distance from the lime light stand to the shooter base
-  public static final double DISTANCE_LIMELIGHT_TO_SHOOTER = 0; // NOT REAL VALUE - Must be meters
+  // Now do math to combine constants for the shooting equations
+  public static final double SPEAKER_SHOOTING_dY = SPEAKER_APRILTAG_HEIGHT + HOLE_TO_APRILTAG_HEIGHT
+             - SHOOTER_PIVOT_TO_FLOOR - SHOOTER_ARM_LENGTH*Math.cos(Math.toRadians(DEFAULT_SHOOTER_ANGLE + SHOOTER_ARM_ANGLE));
+  public static final double SPEAKER_SHOOTING_dX = LIMELIGHT_TO_SHOOTER_PIVOT
+             + SHOOTER_ARM_LENGTH*Math.sin(Math.toRadians(DEFAULT_SHOOTER_ANGLE+SHOOTER_ARM_ANGLE));
+
+
 
   // controlls the motor led pin. and yes it is a motor 
   public static final int LED_PWM_PIN = 9;
@@ -153,12 +167,15 @@ public final class Constants {
   public static final double LIGHT_MOVE_P = 0.005;
   public static final double LIGHT_MOVE_I = 0;
   public static final double LIGHT_MOVE_D = 0;
- 
-  //Vertical Offset for Throughbore Encoder. Currently 95 deg in 0-1 units
-  public static final double VERTICASHOOTERANGLEOFFSET = 100.0/360.0;
+
+  // Zero-point offset for shooter-arm (throughbore) encoder. 
+  // This makes the returned angle be 0.0 when the shooting plane is horizontal
+  public static final double SHOOTER_ANGLE_ZEROPOINT_OFFSET = 95.0; // degrees
+  // Aiming offset in degrees to correct shooting. Currently 10 deg. 
+  public static final double SHOOTER_ANGLE_CORRECTION = 0.0;
 
   //degree angle to intake
-  public static final double INTAKE_DEGREE_VALUE = 47;
+ // public static final double INTAKE_DEGREE_VALUE = 47;
 
   //TODO: ADD ANALOG PIN HERE PLEASE
 public static final AnalogInput ULTRASONIC_SENSOR_PIN = new AnalogInput(0);
