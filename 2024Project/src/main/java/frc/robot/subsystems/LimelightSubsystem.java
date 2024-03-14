@@ -37,7 +37,9 @@ public class LimelightSubsystem extends SubsystemBase {
     // System.out.println(Math.toDegrees(Math.atan2(Y,X)));
     double phi = Math.toDegrees(Math.atan2(Y,X));
     // 
+    //System.out.println(getDistance());
     return phi + ShootingAngleCorrection(distance_to_target);
+    
   }
 
   // Get distance to april tag (returns double)
@@ -51,12 +53,13 @@ public class LimelightSubsystem extends SubsystemBase {
     double targetOffsetAngle_Vertical = ty.getDouble(0.0);
     if (aprilTagId.intValue() == 4 || aprilTagId.intValue() == 7) {
       double angleToGoalDegrees = Constants.LIMELIGHT_MOUNT_ANGLE_DEGREES + targetOffsetAngle_Vertical;
-      double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
+      double angleToGoalRadians = Math.toRadians(angleToGoalDegrees);
 
       //calculate distance
       double distanceFromLimelightToGoalInches = (Constants.SPEAKER_APRILTAG_HEIGHT - Constants.LIMELIGHT_LENS_HEIGHT_INCHES) / Math.tan(angleToGoalRadians);
       return distanceFromLimelightToGoalInches;
     }
+    
     return 0.0;
   }
   

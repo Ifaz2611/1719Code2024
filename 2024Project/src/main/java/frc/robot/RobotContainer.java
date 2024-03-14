@@ -23,6 +23,8 @@ import frc.robot.subsystems.SwerveSubsystem;
 
 import java.time.Instant;
 
+import com.playingwithfusion.jni.CANVenomJNI.Helper;
+
 import edu.wpi.first.wpilibj.DutyCycle;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Joystick;
@@ -71,6 +73,7 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final Joystick m_driverController = new Joystick(OperatorConstants.kDriverControllerPort);
   private final Joystick m_helperController = new Joystick(OperatorConstants.kHelperControllerPort);
+  
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -79,6 +82,9 @@ public class RobotContainer {
     configureBindings();
   }
 
+    public double HelperControllerY() {
+      return (m_helperController.getY()*24);
+    }
   /**
    * Use this method to define your trigger->command mappings. Triggers can be
    * created via the
@@ -94,7 +100,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-
+      
 
           //             System.out.println("sent inside");
 
@@ -121,8 +127,6 @@ public class RobotContainer {
     this.m_AnglePIDSubsystem, m_limelight);
     //System.out.println(m_AnglePIDSubsystem.getMeasurement() + " PID");
     //System.out.println(m_limelight.getShootingAngle() + " LIMELIGHT");
-    
-    System.out.println(m_driverController.getY());
     this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
 
       // new InstantCommand(() -> {
@@ -162,10 +166,11 @@ public class RobotContainer {
             );
 
     // Turn on and off intake motors
-    new JoystickButton(m_helperController, 2).onTrue(
-
+    new JoystickButton(m_helperController, 2).onTrue(  
+      
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE)      
-    );
+      );
+
     new JoystickButton(m_helperController, 2).onFalse(
       
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE)      
@@ -191,15 +196,20 @@ public class RobotContainer {
              
 
            // ) ;
-    
         new JoystickButton(m_helperController, 4).onTrue(
           
-          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 0)
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 10)
         );
 
         new JoystickButton(m_helperController, 4).onFalse(
           new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE)
 
+        );
+
+        new JoystickButton(m_helperController, 5).onTrue(
+          new InstantCommand(()->{
+            System.out.println(HelperControllerY());
+          })
         );
      
 
@@ -235,14 +245,14 @@ public class RobotContainer {
             );
 
         new JoystickButton(m_helperController, 8).onTrue(
-            //  
+
           new InstantCommand(()->{
             m_ClimbSubsystem.raise();
           })
             );
 
         new JoystickButton(m_helperController, 11).onTrue(
-            //  
+          
           new InstantCommand(()->{
             m_ClimbSubsystem.lower();
           })

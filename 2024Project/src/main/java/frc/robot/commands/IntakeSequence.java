@@ -19,8 +19,6 @@ import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 
-
-
 public class IntakeSequence extends SequentialCommandGroup {
   /** Creates a new ShootSequence. */
   DeviceSubsystem mDeviceSubsystem;
@@ -38,11 +36,19 @@ public class IntakeSequence extends SequentialCommandGroup {
   }
   public InstantCommand setIntakeSetpoint(ShooterAnglePIDSubsystem m_angler) {
     return new InstantCommand(()->m_angler.setSetpoint(ANGLEAIM));
+    
   }
 
   public IntakeSequence(DeviceSubsystem mDeviceSubsystem, ShooterAnglePIDSubsystem m_angler, int stateNum, double ANGLEAIM) {
     this.mDeviceSubsystem = mDeviceSubsystem;
     this.ANGLEAIM = ANGLEAIM;
+    
+    if (ANGLEAIM > Constants.MAX_SHOOTER_ANGLE) {
+    ANGLEAIM = Constants.MAX_SHOOTER_ANGLE;
+    }
+    if (ANGLEAIM < Constants.MIN_SHOOTER_ANGLE) {
+    ANGLEAIM = Constants.MIN_SHOOTER_ANGLE;
+    }
     // Add your commands in the addCommands() call, e.g.
      //addCommands(new FooCommand(), new BarCommand());
      if (stateNum == 0) {
