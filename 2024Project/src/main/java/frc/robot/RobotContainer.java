@@ -151,7 +151,6 @@ public class RobotContainer {
   //       });
   //       }
 
-
   //Run shoot sequence
     new JoystickButton(m_helperController, 1).onTrue(
       new InstantCommand(()-> {
@@ -163,7 +162,7 @@ public class RobotContainer {
 
     // Turn on and off intake motors
     new JoystickButton(m_helperController, 2).onTrue(
-      
+
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0)      
     );
     new JoystickButton(m_helperController, 2).onFalse(
@@ -172,13 +171,12 @@ public class RobotContainer {
     );
 
     //Manual aim
-    new JoystickButton(m_helperController, 3).onTrue(
-      
-      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2)
+    
+      new JoystickButton(m_helperController, 3).onTrue(
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1)
         );
-
-    new JoystickButton(m_helperController, 3).onFalse(
-      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1)
+      new JoystickButton(m_helperController, 3).onFalse(
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1)
         );
 
         // new JoystickButton(m_helperController, 8).onTrue(
@@ -193,7 +191,14 @@ public class RobotContainer {
 
            // ) ;
     
+        new JoystickButton(m_helperController, 4).onTrue(
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2)
+        );
 
+        new JoystickButton(m_helperController, 4).onFalse(
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1)
+
+        );
      
 
         new JoystickButton(m_helperController, 7).onTrue(

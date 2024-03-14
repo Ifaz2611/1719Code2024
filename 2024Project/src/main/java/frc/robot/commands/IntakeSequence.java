@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.subsystems.DeviceSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 
@@ -22,8 +23,8 @@ import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 public class IntakeSequence extends SequentialCommandGroup {
   /** Creates a new ShootSequence. */
   DeviceSubsystem mDeviceSubsystem;
-  
-  public double ANGLEAIM = 47;
+
+  public double ANGLEAIM = Constants.DEFAULT_SHOOTER_ANGLE;
 
   public WaitCommand waitwait (double time) {
     return new WaitCommand(time);
@@ -53,5 +54,8 @@ public class IntakeSequence extends SequentialCommandGroup {
     else if (stateNum == 2) {
       addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler));
     }
+    if (stateNum == -1) {
+       addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(-1));
+    } 
   }
 }

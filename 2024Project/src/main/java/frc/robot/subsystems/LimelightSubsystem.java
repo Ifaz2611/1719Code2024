@@ -24,7 +24,7 @@ public class LimelightSubsystem extends SubsystemBase {
 
   public static double ShootingAngleCorrection(double distance) {
     // Sugerman figured this out empirically. Good to 0.1 deg to a distance of 10 ft.
-    return 1.6*np.tanh((distance - Constants.DISTANCE_FROM_SPEAKER_FOR_DEFAULT_SHOOTING)/47.);
+    return 1.6*Math.tanh((distance - Constants.DISTANCE_FROM_SPEAKER_FOR_DEFAULT_SHOOTING)/47.);
   }
   
   // Get angle for shooter head (returns double angle from 0 to 360)
@@ -35,7 +35,7 @@ public class LimelightSubsystem extends SubsystemBase {
     double distance_to_target = getDistance();
     double X = distance_to_target + Constants.SPEAKER_SHOOTING_dX;
     // System.out.println(Math.toDegrees(Math.atan2(Y,X)));
-    double phi = Math.toDegrees(Math.atan2(Y,X)) + ShootingAngleCorrection();
+    double phi = Math.toDegrees(Math.atan2(Y,X));
     // 
     return phi + ShootingAngleCorrection(distance_to_target);
   }

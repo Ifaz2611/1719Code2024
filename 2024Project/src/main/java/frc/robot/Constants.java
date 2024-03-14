@@ -87,19 +87,19 @@ public final class Constants {
   // distance from the shooter arm's pivot to the shooting mechanism plane
   public static final double SHOOTER_ARM_LENGTH = 24. ; // !!CHECK THIS!!
   // horizontal distance from limelight lens to shooter arm pivot point
-  public static final LIMELIGHT_TO_SHOOTER_PIVOT double = 20.; !!CHECK THIS!!
+  public static final double LIMELIGHT_TO_SHOOTER_PIVOT = 20.0; 
   // vertical height of shooter arm pivot above floor
-  public static final double SHOOTER_PIVOT_TO_FLOOR double = 12.; !!CHECK THIS!!
+  public static final double SHOOTER_PIVOT_TO_FLOOR = 12.0;
   // default shooter angle if it can't see limelight
-  public static final double DEFAULT_SHOOTER_ANGLE double = Math.radians(48.);
+  public static final double DEFAULT_SHOOTER_ANGLE = 48.;
   // default distance of robot to speaker at which DEFAULT_SHOOTER_ANGLE will work
-  public static final double DISTANCE_FROM_SPEAKER_FOR_DEFAULT_SHOOTING double = 41.;
+  public static final double DISTANCE_FROM_SPEAKER_FOR_DEFAULT_SHOOTING = 41.0;
 
   // Now do math to combine constants for the shooting equations
   public static final double SPEAKER_SHOOTING_dY = SPEAKER_APRILTAG_HEIGHT + HOLE_TO_APRILTAG_HEIGHT
-             - SHOOTER_PIVOT_TO_FLOOR - SHOOTER_ARM_LENGTH*Math.cos(DEFAULT_SHOOTER_ANGLE);
-  public static final double SPEAKER_SHOOTING_dX = LIMELIGHT_TO_SHOOTER_PIVOT 
-             + SHOOTER_ARM_LENGTH*Math.sin(phi);
+             - SHOOTER_PIVOT_TO_FLOOR - SHOOTER_ARM_LENGTH*Math.cos(Math.toRadians(DEFAULT_SHOOTER_ANGLE));
+  public static final double SPEAKER_SHOOTING_dX = LIMELIGHT_TO_SHOOTER_PIVOT
+             + SHOOTER_ARM_LENGTH*Math.sin(Math.toRadians(DEFAULT_SHOOTER_ANGLE));
 
 
 
@@ -163,12 +163,12 @@ public final class Constants {
 
   // Zero-point offset for shooter-arm (throughbore) encoder. 
   // This makes the returned angle be 0.0 when the shooting plane is horizontal
-  public state final double SHOOTER_ANGLE_ZEROPOINT_OFFSET = 90.0; // degrees
+  public static final double SHOOTER_ANGLE_ZEROPOINT_OFFSET = 95.0; // degrees
   // Aiming offset in degrees to correct shooting. Currently 10 deg. 
-  public static final double SHOOTER_ANGLE_CORRECTION = 10.0;
+  public static final double SHOOTER_ANGLE_CORRECTION = 0.0;
 
   //degree angle to intake
-  public static final double INTAKE_DEGREE_VALUE = 47;
+ // public static final double INTAKE_DEGREE_VALUE = 47;
 
   //TODO: ADD ANALOG PIN HERE PLEASE
 public static final AnalogInput ULTRASONIC_SENSOR_PIN = new AnalogInput(0);
