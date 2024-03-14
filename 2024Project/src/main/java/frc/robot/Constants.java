@@ -84,12 +84,19 @@ public final class Constants {
   // Offset of limelight center in inches from floor
   public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 7.5; 
   //
+  // maximum arm angle allowed (deg)
+  public static final double MAX_SHOOTER_ANGLE = 48; // might set 1-2 lower
+  // minimum arm angle allowed (deg)
+  public static final double MIN_SHOOTER_ANGLE = 0; // horizontal shooter
+  // arm angle when shooting platform (lexan) is horizontal
+  public static final double SHOOTER_ARM_ANGLE = 27.5; // degreees
+  //
   // distance from the shooter arm's pivot to the shooting mechanism plane
-  public static final double SHOOTER_ARM_LENGTH = 24. ; // !!CHECK THIS!!
+  public static final double SHOOTER_ARM_LENGTH = 16.; // inches 
   // horizontal distance from limelight lens to shooter arm pivot point
-  public static final double LIMELIGHT_TO_SHOOTER_PIVOT = 20.0; 
+  public static final double LIMELIGHT_TO_SHOOTER_PIVOT = 6.25; // inches 
   // vertical height of shooter arm pivot above floor
-  public static final double SHOOTER_PIVOT_TO_FLOOR = 12.0;
+  public static final double SHOOTER_PIVOT_TO_FLOOR = 7.5;
   // default shooter angle if it can't see limelight
   public static final double DEFAULT_SHOOTER_ANGLE = 48.;
   // default distance of robot to speaker at which DEFAULT_SHOOTER_ANGLE will work
@@ -97,9 +104,9 @@ public final class Constants {
 
   // Now do math to combine constants for the shooting equations
   public static final double SPEAKER_SHOOTING_dY = SPEAKER_APRILTAG_HEIGHT + HOLE_TO_APRILTAG_HEIGHT
-             - SHOOTER_PIVOT_TO_FLOOR - SHOOTER_ARM_LENGTH*Math.cos(Math.toRadians(DEFAULT_SHOOTER_ANGLE));
+             - SHOOTER_PIVOT_TO_FLOOR - SHOOTER_ARM_LENGTH*Math.cos(Math.toRadians(DEFAULT_SHOOTER_ANGLE + SHOOTER_ARM_ANGLE));
   public static final double SPEAKER_SHOOTING_dX = LIMELIGHT_TO_SHOOTER_PIVOT
-             + SHOOTER_ARM_LENGTH*Math.sin(Math.toRadians(DEFAULT_SHOOTER_ANGLE));
+             + SHOOTER_ARM_LENGTH*Math.sin(Math.toRadians(DEFAULT_SHOOTER_ANGLE+SHOOTER_ARM_ANGLE));
 
 
 
