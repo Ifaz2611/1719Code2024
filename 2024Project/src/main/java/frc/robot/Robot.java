@@ -24,7 +24,7 @@ import frc.robot.subsystems.LimelightSubsystem;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-  
+
   // Robot auton choices
   // private final String kAuto0 = "Auto 0 (Default)";
   // private final String kAuto1 = "Auto 1";
@@ -77,9 +77,9 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-   
-    Autos.defaultAuto(new DeviceSubsystem(), new ShooterAnglePIDSubsystem(), new LimelightSubsystem(), new SwerveSubsystem(Constants.m_leftFrontDirection, Constants.m_leftBackDirection,
-    Constants.m_rightFrontDirection, Constants.m_rightBackDirection));
+   m_autonomousCommand=  m_robotContainer.getAutonomousCommand("default");
+    // Autos.defaultAuto(new DeviceSubsystem(), new ShooterAnglePIDSubsystem(), new LimelightSubsystem(), new SwerveSubsystem(Constants.m_leftFrontDirection, Constants.m_leftBackDirection,
+    // Constants.m_rightFrontDirection, Constants.m_rightBackDirection));
 
   }
   /** This function is called periodically during autonomous. */

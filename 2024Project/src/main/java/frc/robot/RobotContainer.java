@@ -369,8 +369,9 @@ public class RobotContainer {
    *
    * @ the command to run in autonomous
    */
- public void getAutonomousCommand(String m_autoSelected) {
-      Autos.defaultAuto(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+ public Command getAutonomousCommand(String m_autoSelected) {
+      return Autos.defaultAuto(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     }
+
   }
 
