@@ -1,57 +1,63 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
+// In Robot.java (Java) or Robot.h (C++)
 package frc.robot.commands;
 
 import frc.robot.subsystems.DeviceSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-
-public final class Autos {
-  /** Example static factory for an autonomous command. */
-  SwerveSubsystem driveSubsystem;
-  // DEFAULT AUTO
-  public static Command defaultAuto(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem ,LimelightSubsystem mLimelightSubsystem) {
-    // return new InstantCommand(() -> {subsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(90,0,0 );});
-    System.out.println("Default Auto");
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants;
 
 
-    return Commands.sequence(new PIDCommandTurnToAngle(mLimelightSubsystem, driveSubsystem), new ShootSequence(deviceSubsystem));
-  }
+public class Autos {
+  LimelightSubsystem mLimelightSubsystem;
+  ShooterAnglePIDSubsystem m_AnglePIDSubsystem;
+  DeviceSubsystem m_DeviceSubsystem;
+SwerveSubsystem m_swerveDrive;
 
-  // AUTO 1
-  public static Command Auto1(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem, LimelightSubsystem mLimelightSubsystem) {
-    // return new InstantCommand(() -> {subsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(90,0,0 );});
-    System.out.println("Auto 1");
-    return Commands.sequence(new PIDCommandTurnToAngle(mLimelightSubsystem, driveSubsystem), new ShootSequence(deviceSubsystem));
-  }
-
-  // AUTO 2
-  public static Command Auto2(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem ) {
-    // return new InstantCommand(() -> {subsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(90,0,0 );});
-    System.out.println("Auto 2");
-    return Commands.sequence( Autos.Intake(deviceSubsystem) );
-  }
-
-  // AUTO 3
-  public static Command Auto3(SwerveSubsystem driveSubsystem, DeviceSubsystem deviceSubsystem ) {
-    // return new InstantCommand(() -> {subsystem.SWERVE_DRIVE_COORDINATOR.setSwerveDrive(90,0,0 );});
-    System.out.println("Auto 3");
-    return Commands.sequence( Autos.Intake(deviceSubsystem) );
-  }
-  //instantCommands
-
-  public static Command Intake(DeviceSubsystem device){
-
-    return new InstantCommand(()-> {device.turnIntakeMotors(0);});
-  }
-
-  private Autos() {
-    throw new UnsupportedOperationException("This is a utility class!");
-  }
+  public void robotInit() {
+    
 }
-// 
+
+    
+ public static Command defaultAuto(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,  LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive) {
+
+     return new InstantCommand(()->{
+      // BE SURE TO SCHEDULE A COMMAND WITH .schedule()
+      //m_swerveDrive.resetDistanceMotors();
+
+      //Target Distance IN INCHES
+      double targetDistance = 60;
+
+      //Factor of distance
+      final double distanceConversionFactor = 1.5;
+      Commands.sequence(
+      new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), 
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MAX_SHOOTER_ANGLE),
+        //new InstantCommand(()->{m_AnglePIDSubsystem.shootAngle();}),
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE),
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
+      new ShootSequence(m_DeviceSubsystem),
+      new ResetAngleCommand(m_limelight, m_swerveDrive), 
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE),
+      new AutoMovePIDCommand(0, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+      new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),   
+      new AutoMovePIDCommand(0, 9 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE),
+      new WaitCommand(2),
+      new AutoMovePIDCommand(0, 10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
+      //new AutoMovePIDCommand(180, 10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+      new ShootSequence(m_DeviceSubsystem),
+      new AutoMovePIDCommand(180, targetDistance-10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive)
+      
+      ).schedule();
+    });
+  
+  
+          
+    }
+}

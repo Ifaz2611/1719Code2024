@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import frc.robot.subsystems.SwerveDirectionPIDSubsystem;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -25,6 +26,16 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
     public static final int kHelperControllerPort = 1;
   }
+
+  
+  public static final SwerveDirectionPIDSubsystem m_leftFrontDirection = new SwerveDirectionPIDSubsystem(
+      Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN, Constants.LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN);
+  public static final SwerveDirectionPIDSubsystem m_leftBackDirection = new SwerveDirectionPIDSubsystem(
+      Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN, Constants.LEFT_BACK_DRIVE_DIRECTION_MOTOR_PIN);
+  public static final  SwerveDirectionPIDSubsystem m_rightFrontDirection = new SwerveDirectionPIDSubsystem(
+      Constants.RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN, Constants.RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN);
+  public static final SwerveDirectionPIDSubsystem m_rightBackDirection = new SwerveDirectionPIDSubsystem(
+      Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN, Constants.RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN);
 
   // These pins controll speed motors
   public static final int LEFT_FRONT_DRIVE_SPEED_MOTOR_PIN = 1;// all 4 wheels are rotated 180

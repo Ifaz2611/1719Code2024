@@ -57,16 +57,16 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final SwerveDirectionPIDSubsystem m_leftFrontDirection = new SwerveDirectionPIDSubsystem(
-      Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN, Constants.LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN);
-  private final SwerveDirectionPIDSubsystem m_leftBackDirection = new SwerveDirectionPIDSubsystem(
-      Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN, Constants.LEFT_BACK_DRIVE_DIRECTION_MOTOR_PIN);
-  private final SwerveDirectionPIDSubsystem m_rightFrontDirection = new SwerveDirectionPIDSubsystem(
-      Constants.RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN, Constants.RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN);
-  private final SwerveDirectionPIDSubsystem m_rightBackDirection = new SwerveDirectionPIDSubsystem(
-      Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN, Constants.RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN);
-  private final SwerveSubsystem m_swerveDrive = new SwerveSubsystem(m_leftFrontDirection, m_leftBackDirection,
-      m_rightFrontDirection, m_rightBackDirection);
+  // private final SwerveDirectionPIDSubsystem m_leftFrontDirection = new SwerveDirectionPIDSubsystem(
+  //     Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN, Constants.LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN);
+  // private final SwerveDirectionPIDSubsystem m_leftBackDirection = new SwerveDirectionPIDSubsystem(
+  //     Constants.LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN, Constants.LEFT_BACK_DRIVE_DIRECTION_MOTOR_PIN);
+  // private final SwerveDirectionPIDSubsystem m_rightFrontDirection = new SwerveDirectionPIDSubsystem(
+  //     Constants.RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN, Constants.RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN);
+  // private final SwerveDirectionPIDSubsystem m_rightBackDirection = new SwerveDirectionPIDSubsystem(
+  //     Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN, Constants.RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN);
+  private final SwerveSubsystem m_swerveDrive = new SwerveSubsystem(Constants.m_leftFrontDirection, Constants.m_leftBackDirection,
+      Constants.m_rightFrontDirection, Constants.m_rightBackDirection);
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterAnglePIDSubsystem m_AnglePIDSubsystem = new ShooterAnglePIDSubsystem();
   private final DeviceSubsystem m_DeviceSubsystem = new DeviceSubsystem();
@@ -242,7 +242,9 @@ public class RobotContainer {
 
         //Auto sequences *MOVE*
 
-        /*new JoystickButton(m_helperController, 8).onTrue(
+        /*
+         this is a test for are auto 
+        new JoystickButton(m_helperController, 8).onTrue(
             //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
             new InstantCommand(()->{
               // BE SURE TO SCHEDULE A COMMAND WITH .schedule()
@@ -275,7 +277,7 @@ public class RobotContainer {
             })
             );
             */
-
+/* 
             new JoystickButton(m_helperController, 10).onTrue(
             //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
             new InstantCommand(()->{
@@ -311,7 +313,7 @@ public class RobotContainer {
               ).schedule();
             })
             );
-
+*/
           /* 
                       new JoystickButton(m_helperController, 12).onTrue(
             //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
@@ -346,7 +348,7 @@ public class RobotContainer {
             */
 
             //Raise pistons
-        /*new JoystickButton(m_helperController, 11).onTrue(
+        new JoystickButton(m_helperController, 11).onTrue(
 
           new InstantCommand(()->{
             m_ClimbSubsystem.raise();
@@ -357,49 +359,18 @@ public class RobotContainer {
           new InstantCommand(()->{
             m_ClimbSubsystem.lower();
           })
-            );
-*/
-
-             // Commands.sequence(new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), new ShootSequence(m_DeviceSubsystem)).schedule();
-            
-              //new ShootSequence(m_DeviceSubsystem)
-
-          // System.out.println(m_AnglePIDSubsystem.getMeasurement() + " PID");
-          //   System.out.println(m_limelight.getShootingAngle() + " LIMELIGHT");
-      
-
-//         new JoystickButton (m_helperController, 6).onTrue(
-//         new InstantCommand(() -> {
-//           m_ClimbSubsystem.lower();
-//         }));
-// new JoystickButton(m_driverController, 1).onTrue(
-
-// new AutoMovePIDCommand(0,  30,  m_swerveDrive)
-// );
-
-      
-
+         );
         
-    // new Trigger(() -> ((m_helperController.getY() == 1)))
-    //     .onTrue(
-    //         new LimelightSwerveManager(m_limelight, m_swerveDrive));
+      
   }
 
-  /**
+  /* 
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
-   * @return the command to run in autonomous
+   * @ the command to run in autonomous
    */
-  public Command getAutonomousCommand(String m_autoSelected) {
-    // An example command will be run in autonomous
-    if (m_autoSelected.equals("Auto 1")) {
-      return Autos.Auto1(m_swerveDrive, m_DeviceSubsystem, m_limelight);
-    } else if (m_autoSelected.equals("Auto 2")) {
-      return Autos.Auto2(m_swerveDrive, m_DeviceSubsystem);
-    } else if (m_autoSelected.equals("Auto 3")) {
-      return Autos.Auto3(m_swerveDrive, m_DeviceSubsystem);
-    } else {
-      return Autos.defaultAuto(m_swerveDrive, m_DeviceSubsystem,m_limelight);
+ public void getAutonomousCommand(String m_autoSelected) {
+      Autos.defaultAuto(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     }
   }
-}
+

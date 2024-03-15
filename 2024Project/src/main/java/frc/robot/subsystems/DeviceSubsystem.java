@@ -38,10 +38,10 @@ public class DeviceSubsystem extends SubsystemBase {
     //    ARM_MOTOR_LEFT = new CANSparkMax(Constants.ARM_MOTOR_LEFT, MotorType.kBrushless);
     //    ARM_MOTOR = new CANSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless); // TEMP ID. VERIFY BEFORE RUNNING PLEASEE
 
-        SHOOTER = new CANSparkMax(Constants.SHOOTER, MotorType.kBrushless);
-        INTAKE = new CANSparkMax(Constants.INTAKE, MotorType.kBrushless);
+     //   SHOOTER = new CANSparkMax(Constants.SHOOTER, MotorType.kBrushless);
+      //  INTAKE = new CANSparkMax(Constants.INTAKE, MotorType.kBrushless);
         System.out.println("Defined potentiometer");
-    noteSensor = new AnalogPotentiometer(Constants.ULTRASONIC_SENSOR_PIN,180,0);
+    //noteSensor = new AnalogPotentiometer(Constants.ULTRASONIC_SENSOR_PIN,180,0);
 
     }
 
