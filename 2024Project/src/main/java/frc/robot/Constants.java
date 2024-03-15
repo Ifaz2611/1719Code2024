@@ -100,7 +100,12 @@ public final class Constants {
   // default shooter angle if it can't see limelight
   public static final double DEFAULT_SHOOTER_ANGLE = 48.;
   // default distance of robot to speaker at which DEFAULT_SHOOTER_ANGLE will work
-  public static final double DISTANCE_FROM_SPEAKER_FOR_DEFAULT_SHOOTING = 41.0;
+  public static final double DISTANCE_FROM_SPEAKER_FOR_DEFAULT_SHOOTING = 42.0;
+  // Empirical gyro correction factor to align with field orientation
+  // needed in part since the gryo has been turned on its side
+  public static final double GYRO_CORRECTION_FACTOR = 120.; 
+  // Empirical correction factor to Limelight distance based on azimuth offset
+  public static final double AZIMUTH_CORRECTION_FACTOR = 20.0;
 
   // Now do math to combine constants for the shooting equations
   public static final double SPEAKER_SHOOTING_dY = SPEAKER_APRILTAG_HEIGHT + HOLE_TO_APRILTAG_HEIGHT
@@ -138,8 +143,8 @@ public final class Constants {
   public static final double DistFromAprilTag = 24;
 
   // Pid for PIDCommandTurnToAngle (positioning robot direction)
-  public static final double PTurnToAngle = 0.02;
-  public static final double ITurnToAngle = 0.001;
+  public static final double PTurnToAngle = 0.005;
+  public static final double ITurnToAngle = 0.000;
   public static final double DTurnToAngle = 0;
 
   // controls tolerence of limelight shooter angle i think

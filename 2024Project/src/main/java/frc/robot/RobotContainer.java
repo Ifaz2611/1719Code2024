@@ -8,10 +8,12 @@ import frc.robot.commands.ShootAngleControlCommand;
 import frc.robot.commands.ShootSequence;
 import frc.robot.commands.IntakeSequence;
 import frc.robot.Constants.OperatorConstants;
-// import frc.robot.commands.AutoMovePIDCommand;
+import frc.robot.commands.AutoMovePIDCommand;
+import frc.robot.commands.AutoMovePIDCommand;
 import frc.robot.commands.Autos;
 //import frc.robot.commands.LimelightSwerveManager;
-// import frc.robot.commands.PIDCommandTurnToAngle;
+import frc.robot.commands.PIDCommandTurnToAngle;
+import frc.robot.commands.ResetAngleCommand;
 import frc.robot.commands.SwerveTeleopCommand;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DeviceSubsystem;
@@ -33,6 +35,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 // import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 // import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -100,7 +103,6 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-      
 
           //             System.out.println("sent inside");
 
@@ -159,6 +161,7 @@ public class RobotContainer {
   //Run shoot sequence
     new JoystickButton(m_helperController, 1).onTrue(
       new InstantCommand(()-> {
+      System.out.println("working");
       Commands.sequence(
           new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
           new ShootSequence(m_DeviceSubsystem)   
@@ -168,12 +171,10 @@ public class RobotContainer {
 
     // Turn on and off intake motors
     new JoystickButton(m_helperController, 2).onTrue(  
-      
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE)      
       );
 
     new JoystickButton(m_helperController, 2).onFalse(
-      
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE)      
     );
 
@@ -200,8 +201,9 @@ public class RobotContainer {
 
         //Turn on manual aim  
 
-        new JoystickButton(m_helperController, 4 & 7).onTrue(
-          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, m_AnglePIDSubsystem.shootAngle()+2.0)
+       /* new JoystickButton(m_helperController, 4 & 7).onTrue(
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, m_AnglePIDSubsystem.shootAngle()+2.0
+        )
         );
 
         new JoystickButton(m_helperController, 4 & 8).onTrue(
@@ -209,28 +211,37 @@ public class RobotContainer {
         );
 
         new JoystickButton(m_helperController, 4 & 7).onFalse(
-          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, m_AnglePIDSubsystem.shootAngle())
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, m_AnglePIDSubsystem.shootAngle())
         );
 
         new JoystickButton(m_helperController, 4 & 8).onFalse(
-          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, m_AnglePIDSubsystem.shootAngle())
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, m_AnglePIDSubsystem.shootAngle())
         );
-
-
+ */
+        new JoystickButton(m_helperController, 5).onTrue(
+        new InstantCommand(()-> {
+      Commands.sequence(
+          new ResetAngleCommand(m_limelight, m_swerveDrive)
+      ).schedule();
+      })
+      );
+          
 
         //Amp outtake button
         new JoystickButton(m_helperController, 6).onTrue(
-           // new InstantCommand(()-> {
-      //Commands.sequence(
-          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 0)
-           // new WaitCommand(3)
-            //new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -2, Constants.MIN_SHOOTER_ANGLE)
-      //).schedule();
-          //  })
-        );
+        new InstantCommand(()-> {
+      Commands.sequence(
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 0),
+          new WaitCommand(3),
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -2, Constants.MIN_SHOOTER_ANGLE)
+      ).schedule();
+      })
+      );
+      
 
 
         //Auto sequences *MOVE*
+
         /*new JoystickButton(m_helperController, 8).onTrue(
             //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
             new InstantCommand(()->{
@@ -263,6 +274,7 @@ public class RobotContainer {
               ).schedule();
             })
             );
+            */
 
             new JoystickButton(m_helperController, 10).onTrue(
             //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
@@ -271,31 +283,37 @@ public class RobotContainer {
               //m_swerveDrive.resetDistanceMotors();
 
               //Target Distance IN INCHES
-              double targetDistance = 50;
+              double targetDistance = 60;
 
               //Factor of distance
               final double distanceConversionFactor = 1.5;
               Commands.sequence(
-                new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MAX_SHOOTER_ANGLE),
-                //new InstantCommand(()->{m_AnglePIDSubsystem.shootAngle();}),
-                new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE),
-                new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
-              
-              new ShootSequence(m_DeviceSubsystem),
-              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE),
-              new AutoMovePIDCommand(180, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
               new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), 
+              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MAX_SHOOTER_ANGLE),
+                //new InstantCommand(()->{m_AnglePIDSubsystem.shootAngle();}),
+              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE),
+              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
+
+              new ShootSequence(m_DeviceSubsystem),
+              new ResetAngleCommand(m_limelight, m_swerveDrive), 
+              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE),
+              new AutoMovePIDCommand(0, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+              new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),   
+              new AutoMovePIDCommand(0, 9 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
               new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE),
               new WaitCommand(2),
+              new AutoMovePIDCommand(0, 10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
               //new AutoMovePIDCommand(180, 10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
-              new ShootSequence(m_DeviceSubsystem)
-              
+              new ShootSequence(m_DeviceSubsystem),
+              new AutoMovePIDCommand(180, targetDistance-10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive)
               
               ).schedule();
             })
             );
 
-            new JoystickButton(m_helperController, 12).onTrue(
+          /* 
+                      new JoystickButton(m_helperController, 12).onTrue(
             //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
             new InstantCommand(()->{
               // BE SURE TO SCHEDULE A COMMAND WITH .schedule()
@@ -328,7 +346,7 @@ public class RobotContainer {
             */
 
             //Raise pistons
-        new JoystickButton(m_helperController, 11).onTrue(
+        /*new JoystickButton(m_helperController, 11).onTrue(
 
           new InstantCommand(()->{
             m_ClimbSubsystem.raise();
@@ -340,7 +358,7 @@ public class RobotContainer {
             m_ClimbSubsystem.lower();
           })
             );
-
+*/
 
              // Commands.sequence(new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), new ShootSequence(m_DeviceSubsystem)).schedule();
             
