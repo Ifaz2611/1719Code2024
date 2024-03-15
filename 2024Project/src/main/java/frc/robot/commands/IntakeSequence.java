@@ -4,14 +4,14 @@
 
 package frc.robot.commands;
 
-import java.time.Instant;
-import java.util.function.DoubleSupplier;
+// import java.time.Instant;
+// import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
-import frc.robot.Robot;
+// import frc.robot.Robot;
 import frc.robot.subsystems.DeviceSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 
@@ -49,22 +49,24 @@ public class IntakeSequence extends SequentialCommandGroup {
     if (ANGLEAIM < Constants.MIN_SHOOTER_ANGLE) {
     ANGLEAIM = Constants.MIN_SHOOTER_ANGLE;
     }
-    // Add your commands in the addCommands() call, e.g.
-     //addCommands(new FooCommand(), new BarCommand());
-     if (stateNum == 0) {
+
+    //Turn on intake
+    if (stateNum == 0) {
        addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(1));
-    //} else if (stateNum == 2) {
-      //addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(1), waitwait(2), IntakeMotors(0), setIntakeState(m_angler, false));
     } 
+    //Turn off intake
     else if (stateNum == 1) {
        addCommands(IntakeMotors(0), setIntakeState(m_angler, false));
     }
+    //Move shooter to an angle
     else if (stateNum == 2) {
       addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler));
     }
+    //Turn on outtake
     else if (stateNum == -1) {
        addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(-1), waitwait(.05), IntakeMotors(0), setIntakeState(m_angler, false));
     } 
+    //Special outtake for amp shooting
     else if (stateNum == -2) {
        addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(-1), waitwait(.5), IntakeMotors(0), setIntakeState(m_angler, false));
     } 

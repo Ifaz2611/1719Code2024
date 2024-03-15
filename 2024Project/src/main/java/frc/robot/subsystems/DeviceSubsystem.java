@@ -11,21 +11,21 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-import com.ctre.phoenix6.hardware.CANcoder;
-import com.ctre.phoenix6.hardware.Pigeon2;
-import com.fasterxml.jackson.databind.introspect.AnnotationCollector.OneAnnotation;
+// import com.ctre.phoenix6.hardware.CANcoder;
+// import com.ctre.phoenix6.hardware.Pigeon2;
+// import com.fasterxml.jackson.databind.introspect.AnnotationCollector.OneAnnotation;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.SparkPIDController;
+// import com.revrobotics.SparkPIDController;
 //import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+// import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 // Motors
 public class DeviceSubsystem extends SubsystemBase {
 
     // control the arm 
-    private static CANSparkMax ARM_MOTOR;
+    // private static CANSparkMax ARM_MOTOR;
 
     // these 2 controll the the motors of the shooter more specifically intake
     private static CANSparkMax SHOOTER;

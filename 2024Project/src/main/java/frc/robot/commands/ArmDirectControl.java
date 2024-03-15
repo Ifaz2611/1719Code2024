@@ -6,6 +6,7 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 
 public class ArmDirectControl extends Command {
@@ -38,7 +39,7 @@ public class ArmDirectControl extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-        this.mAnglePIDSubsystem.setSetpoint(47); // make this a constant pls
+        this.mAnglePIDSubsystem.setSetpoint(Constants.DEFAULT_SHOOTER_ANGLE); // make this a constant pls
 
   }
 

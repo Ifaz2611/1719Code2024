@@ -8,21 +8,21 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 // import frc.robot.commands.SwerveDirectionPIDCommand;
 // import frc.robot.subsystems.SwerveSubsystem.SwerveDriveWheel.SwerveDriveCoordinator;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+//import edu.wpi.first.math.controller.PIDController;
+//import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveModulePosition;
+//import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 
-import frc.robot.subsystems.SwerveDriveWheel;
+/*import frc.robot.subsystems.SwerveDriveWheel;
 
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
-
+*/
 // import frc.lib.util.SwerveModuleConstants;
 
 // import frc.lib.util.CANSparkMaxUtil.Usage;
@@ -221,20 +221,22 @@ public class SwerveSubsystem extends SubsystemBase {
             rightFrontWheel.SwerveSetWithState(frontRight);
             rightBackWheel.SwerveSetWithState(backRight);
 
-            var frontLeftOptimized = SwerveModuleState.optimize(frontLeft,
-   new Rotation2d(leftFrontWheel.directionController.getMeasurement()));
-            var frontRightOptimized = SwerveModuleState.optimize(frontRight,
-   new Rotation2d(rightFrontWheel.directionController.getMeasurement()));
-            var backLeftOptimized = SwerveModuleState.optimize(backLeft,
-   new Rotation2d(leftBackWheel.directionController.getMeasurement()));
-            var backRightOptimized = SwerveModuleState.optimize(backRight,
-   new Rotation2d(rightBackWheel.directionController.getMeasurement()));
-   
+            //***
+//             var frontLeftOptimized = SwerveModuleState.optimize(frontLeft,
+//    new Rotation2d(leftFrontWheel.directionController.getMeasurement()));
+//             var frontRightOptimized = SwerveModuleState.optimize(frontRight,
+//    new Rotation2d(rightFrontWheel.directionController.getMeasurement()));
+//             var backLeftOptimized = SwerveModuleState.optimize(backLeft,
+//    new Rotation2d(leftBackWheel.directionController.getMeasurement()));
+//             var backRightOptimized = SwerveModuleState.optimize(backRight,
+//    new Rotation2d(rightBackWheel.directionController.getMeasurement()));
+            //*** 
 
         }
         
         public void setSwerveDrive(double direction, double translatePower, double turnPower) {
-             direction = direction- (DRIVE_GYRO.getAngle()%360) + 90;// gryo on side hence +90
+            // !! this was just 90 
+             direction = direction- (DRIVE_GYRO.getAngle()%360) + 90 + 30;// gryo on side hence +90
             //  System.out.println(DRIVE_GYRO.getAngle());
             if ((translatePower > -0.10) && (translatePower < 0.10) && (Math.abs (turnPower) > 0.10)) {
                 inplaceTurn(turnPower);
@@ -313,7 +315,7 @@ public class SwerveSubsystem extends SubsystemBase {
             rightBackWheel.speedMotors(translatePower);
         }
         public void drifTranslate(double direction, double translatePower, double turnPower){
-                      direction = direction- DRIVE_GYRO.getAngle() +120; //gyro on hootide hence +90
+                      direction = direction- DRIVE_GYRO.getAngle() + 120 + 180; //gyro on hootide hence +90
 
                       SwerveModuleState leftFrontPosition = convertToPower(translatePower, 225, turnPower, direction);
                       SwerveModuleState leftBackPosition = convertToPower(translatePower, 135, turnPower, direction);
