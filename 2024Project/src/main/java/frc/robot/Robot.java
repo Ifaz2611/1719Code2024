@@ -46,10 +46,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
 
-    //zeros gyro
-    GYRO.reset();
-    //initiates robot container
     m_robotContainer = new RobotContainer();
+    GYRO.reset();
  
    // autonomousCommand = new ;
 
