@@ -167,9 +167,9 @@ public final class Constants {
    */
   // Static colors during match
   public static final double NO_NOTE_BASELINE_GOLD = 0.67;
-  public static final double HAS_NOTE_NO_TAG_PURPLE = 0.91;
-  public static final double HAS_NOTE_SPEAKER_GREEN = 0.77;
-  public static final double HAS_NOTE_AMP_BLUE = 0.83;
+  public static final double NO_TAG_PURPLE = 0.91;
+  public static final double SPEAKER_GREEN = 0.77;
+  public static final double AMP_BLUE = 0.83;
   public static final double AUTON_YELLOW = 0.25;
   // Extra colors
   public static final double WHITE = 0.93;

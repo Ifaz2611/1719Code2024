@@ -23,6 +23,8 @@ import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 import frc.robot.subsystems.SwerveDirectionPIDSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
+import java.util.function.DoubleSupplier;
+
 // import java.time.Instant;
 
 // import com.playingwithfusion.jni.CANVenomJNI.Helper;
@@ -70,7 +72,7 @@ public class RobotContainer {
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterAnglePIDSubsystem m_AnglePIDSubsystem = new ShooterAnglePIDSubsystem();
   private final DeviceSubsystem m_DeviceSubsystem = new DeviceSubsystem();
-  private final LedSubsystem m_LedSubsystem = new LedSubsystem();
+  private final LedSubsystem m_LedSubsystem = new LedSubsystem(m_limelight);
   private final ClimbSubsystem m_ClimbSubsystem = new ClimbSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -218,15 +220,25 @@ public class RobotContainer {
           new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, m_AnglePIDSubsystem.shootAngle())
         );
  */
-      //   new JoystickButton(m_helperController, 5).onTrue(
-      //   new InstantCommand(()-> {
-      // Commands.sequence(
-      // //     new ResetAngleCommand(m_limelight, m_swerveDrive)
-      // // ).schedule();
-      // // })
-      // // );
-          
+        new JoystickButton(m_helperController, 4).onTrue(
+        new InstantCommand(()-> {
+          m_AnglePIDSubsystem.setSetpoint(33);
+        })
+        );
 
+        new JoystickButton(m_helperController, 5).onTrue(
+        new InstantCommand(()-> {
+          m_AnglePIDSubsystem.setSetpoint(0);
+        })
+        );
+
+        new JoystickButton(m_helperController, 5).onTrue(
+        new InstantCommand(()-> {
+          m_AnglePIDSubsystem.setSetpoint(0);
+        })
+        );
+                  
+        
         //Amp outtake button
         new JoystickButton(m_helperController, 6).onTrue(
         new InstantCommand(()-> {
@@ -237,6 +249,12 @@ public class RobotContainer {
       ).schedule();
       })
       );
+
+      new JoystickButton(m_helperController, 7).onTrue(
+        new InstantCommand(()-> {
+          Robot.zeroGYRO();
+        })
+        );
       
 
 
@@ -358,6 +376,7 @@ public class RobotContainer {
         new JoystickButton(m_helperController, 12).onTrue(
           new InstantCommand(()->{
             m_ClimbSubsystem.lower();
+            
           })
          );
         
@@ -370,7 +389,7 @@ public class RobotContainer {
    * @ the command to run in autonomous
    */
  public Command getAutonomousCommand(String m_autoSelected) {
-      return Autos.defaultAuto(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+      return Autos.defaultAuto(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
     }
 
   }

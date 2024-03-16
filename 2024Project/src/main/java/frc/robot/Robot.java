@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.configs.MountPoseConfigs;
+import com.ctre.phoenix6.configs.Pigeon2Configuration;
+import com.ctre.phoenix6.hardware.Pigeon2;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -24,6 +28,7 @@ import frc.robot.subsystems.LimelightSubsystem;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
+  public static Pigeon2 GYRO = new Pigeon2(Constants.CAN_GYRO_PORT);
 
   // Robot auton choices
   // private final String kAuto0 = "Auto 0 (Default)";
@@ -41,6 +46,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    GYRO.reset();
    // autonomousCommand = new ;
 
     // Setup smart dashboard to choose auton
@@ -77,11 +83,19 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-   m_autonomousCommand=  m_robotContainer.getAutonomousCommand("default");
+   m_autonomousCommand = m_robotContainer.getAutonomousCommand("default");
     // Autos.defaultAuto(new DeviceSubsystem(), new ShooterAnglePIDSubsystem(), new LimelightSubsystem(), new SwerveSubsystem(Constants.m_leftFrontDirection, Constants.m_leftBackDirection,
     // Constants.m_rightFrontDirection, Constants.m_rightBackDirection));
 
   }
+
+  public static Pigeon2 getGYRO() {
+    return GYRO;
+  }
+  public static void zeroGYRO() {
+    GYRO.reset();
+  }
+
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {

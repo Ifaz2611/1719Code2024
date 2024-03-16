@@ -2,6 +2,7 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DeviceSubsystem;
+import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -10,6 +11,11 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+
+import com.ctre.phoenix6.configs.MountPoseConfigs;
+import com.ctre.phoenix6.configs.Pigeon2Configuration;
+import com.ctre.phoenix6.hardware.Pigeon2;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
@@ -20,15 +26,19 @@ public class Autos {
   SwerveSubsystem m_swerveDrive;
 
   public void robotInit() {
-
+    
   }
 
   public static Command defaultAuto(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
-      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive) {
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
 
     // return new InstantCommand(()->{
     // BE SURE TO SCHEDULE A COMMAND WITH .schedule()
     // m_swerveDrive.resetDistanceMotors();
+
+    // Change LEDs to rainbow
+    // System.out.println("auton");
+    // m_ledSubsystem.update_led_color(Constants.RAINBOW_GLITTER);
 
     // Target Distance IN INCHES
     double targetDistance = 60;
@@ -38,29 +48,29 @@ public class Autos {
     SmartDashboard.putNumber("Before Command Sequence", 1);
 
     return new SequentialCommandGroup(
-
+        new WaitCommand(0.5),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(0.5),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MAX_SHOOTER_ANGLE).withTimeout(0.5),
         // new InstantCommand(()->{m_AnglePIDSubsystem.shootAngle();}),
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE),
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
         new ShootSequence(m_DeviceSubsystem),
         // new ResetAngleCommand(m_limelight, m_swerveDrive),
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
         new AutoMovePIDCommand(0, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(),
-            m_swerveDrive),
-        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),
-        new AutoMovePIDCommand(0, 9 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE),
+            m_swerveDrive).withTimeout(2),
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(0.5),
+       // new AutoMovePIDCommand(0, 9 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(0.5),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
         new WaitCommand(2),
-        new AutoMovePIDCommand(0, 10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
+
+       // new AutoMovePIDCommand(0, 10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(2),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(3),
         // new AutoMovePIDCommand(180, 10 / distanceConversionFactor,
         // m_swerveDrive.returnAverageDistance(), m_swerveDrive),
-        new ShootSequence(m_DeviceSubsystem)
+        new ShootSequence(m_DeviceSubsystem).withTimeout(5)
         // new AutoMovePIDCommand(180, targetDistance - 10 / distanceConversionFactor,
         //     m_swerveDrive.returnAverageDistance(), m_swerveDrive)
-
     );
   };
 

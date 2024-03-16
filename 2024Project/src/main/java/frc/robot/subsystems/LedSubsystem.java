@@ -16,16 +16,28 @@ import frc.robot.Constants;
 
 public class LedSubsystem extends SubsystemBase {
   private static Spark m_blinkin = null;
+  private LimelightSubsystem m_limelight;
+  private double currentValue = Constants.NO_NOTE_BASELINE_GOLD;
 
   /** Creates a new LedSubsystem. */
-  public LedSubsystem() {
+  public LedSubsystem(LimelightSubsystem m_lime) {
     m_blinkin = new Spark(Constants.LED_PWM_PIN);
-    set_led_color(Constants.NO_NOTE_BASELINE_GOLD);
+    m_limelight = m_lime;
+    // set_led_color(Constants.NO_NOTE_BASELINE_GOLD);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    double tag = m_limelight.getTag();
+    if (tag == 7 || tag == 4) {
+      update_led_color(Constants.SPEAKER_GREEN);
+    } else if (tag == 6 || tag == 5) {
+      update_led_color(Constants.AMP_BLUE);
+    } else {
+      update_led_color(Constants.NO_NOTE_BASELINE_GOLD);
+    }
+    set_led_color(currentValue);
   }
   // Set all led's to given color
   public void set_led_color(double val) {
@@ -33,16 +45,19 @@ public class LedSubsystem extends SubsystemBase {
       m_blinkin.set(val);
     }
   }
+  public void update_led_color(double val) {
+    currentValue = val;
+  }
 
   // Set to alliance color
-  public void allianceColor() {
-    boolean isRed = NetworkTableInstance.getDefault().getTable("FMSInfo").getEntry("IsRedAlliance").getBoolean(true);
-    if (isRed == true){
-      set_led_color(-0.01); // RED ALLIANCE
-    } else {
-      set_led_color(0.19); // BLUE ALLIANCE
-    }
-  }
+  // public void allianceColor() {
+  //   boolean isRed = NetworkTableInstance.getDefault().getTable("FMSInfo").getEntry("IsRedAlliance").getBoolean(true);
+  //   if (isRed == true){
+  //     set_led_color(-0.01); // RED ALLIANCE
+  //   } else {
+  //     set_led_color(0.19); // BLUE ALLIANCE
+  //   }
+  // }
 
   // // checks if the ring is there yessir TODO: GET CORRECT MEASUREMENTS SO TEST ! ! ! ! ! 
   // public boolean checkRing(){

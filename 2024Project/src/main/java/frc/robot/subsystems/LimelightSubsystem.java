@@ -38,7 +38,7 @@ public class LimelightSubsystem extends SubsystemBase {
     double phi = Math.toDegrees(Math.atan2(Y,X));
     // 
     //System.out.println(getDistance());
-    return phi + ShootingAngleCorrection(distance_to_target);
+    return phi; //+// ShootingAngleCorrection(distance_to_target);
     
   }
 
@@ -91,6 +91,16 @@ public class LimelightSubsystem extends SubsystemBase {
     }
     return 0.0;
   }
+ 
+  // Boolean value if limelight can see speaker
+  public double getTag() {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tid = table.getEntry("tid");
+    double aprilTagId = tid.getInteger(0);
+    return aprilTagId;
+  }
+
+
   // Returns angle to amps
   public double getAngleToAmp() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
