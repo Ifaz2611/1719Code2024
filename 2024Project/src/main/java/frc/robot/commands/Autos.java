@@ -57,9 +57,9 @@ public class Autos {
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
         // new AutoMovePIDCommand(180, 10 / distanceConversionFactor,
         // m_swerveDrive.returnAverageDistance(), m_swerveDrive),
-        new ShootSequence(m_DeviceSubsystem),
-        new AutoMovePIDCommand(180, targetDistance - 10 / distanceConversionFactor,
-            m_swerveDrive.returnAverageDistance(), m_swerveDrive)
+        new ShootSequence(m_DeviceSubsystem)
+        // new AutoMovePIDCommand(180, targetDistance - 10 / distanceConversionFactor,
+        //     m_swerveDrive.returnAverageDistance(), m_swerveDrive)
 
     );
   };
