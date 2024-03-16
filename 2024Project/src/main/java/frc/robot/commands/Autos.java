@@ -66,7 +66,6 @@ public class Autos {
 
        // new AutoMovePIDCommand(0, 10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(2),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(3),
-        // new AutoMovePIDCommand(180, 10 / distanceConversionFactor,
         // m_swerveDrive.returnAverageDistance(), m_swerveDrive),
         new ShootSequence(m_DeviceSubsystem).withTimeout(5)
         // new AutoMovePIDCommand(180, targetDistance - 10 / distanceConversionFactor,
