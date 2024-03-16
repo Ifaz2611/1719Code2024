@@ -50,7 +50,14 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
   @Override
   public void useOutput(double output, double setpoint) {
     // Use the output here
-
+    if (output < 0) { 
+      output = 0;
+    }
+      
+    else if (output > 48) {
+      output = 48;
+    }
+    
     ShootAngleMotor.set(output);
   }
 
