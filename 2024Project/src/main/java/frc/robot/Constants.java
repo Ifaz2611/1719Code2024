@@ -210,7 +210,7 @@ public static int COMPRESSOR_MODULE_NUMBER = 25;
 
 
 //for learing how to drive 0 to 1
-public static final double TELEOPSPEEDMODIFIER = .75;
+public static double TELEOPSPEEDMODIFIER = .75;
 public static final double TELEOPTWISTMODIFIER = .5;
 
 //boolean for aming

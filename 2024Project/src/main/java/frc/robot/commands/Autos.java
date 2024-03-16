@@ -31,7 +31,6 @@ public class Autos {
 
   public static Command defaultAuto(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
       LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
-
     // return new InstantCommand(()->{
     // BE SURE TO SCHEDULE A COMMAND WITH .schedule()
     // m_swerveDrive.resetDistanceMotors();
@@ -74,10 +73,10 @@ public class Autos {
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(3),
         // new AutoMovePIDCommand(180, 10 / distanceConversionFactor,
         // m_swerveDrive.returnAverageDistance(), m_swerveDrive),
-        new ShootSequence(m_DeviceSubsystem).withTimeout(5)
+        new ShootSequence(m_DeviceSubsystem).withTimeout(5),
         // new AutoMovePIDCommand(180, targetDistance - 10 / distanceConversionFactor,
         //     m_swerveDrive.returnAverageDistance(), m_swerveDrive)
+        new WaitCommand(5)
     );
   };
-
 }

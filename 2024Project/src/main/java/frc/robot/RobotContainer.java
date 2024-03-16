@@ -180,6 +180,20 @@ public class RobotContainer {
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE)      
     );
 
+    new JoystickButton(m_driverController, 2).onTrue(
+      new InstantCommand(()-> {
+        Constants.TELEOPSPEEDMODIFIER = 0.95;
+      })
+    );
+
+    new JoystickButton(m_driverController, 2).onFalse(
+      new InstantCommand(()-> {
+        Constants.TELEOPSPEEDMODIFIER = 0.75;
+      })
+    );
+
+
+
     //Turn on and off outtake motors
     
       new JoystickButton(m_helperController, 3).onTrue(
@@ -226,12 +240,6 @@ public class RobotContainer {
 
         new JoystickButton(m_helperController, 5).onTrue(
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 0)
-        );
-
-        new JoystickButton(m_helperController, 5).onTrue(
-        new InstantCommand(()-> {
-          m_AnglePIDSubsystem.setSetpoint(0);
-        })
         );
                   
         
