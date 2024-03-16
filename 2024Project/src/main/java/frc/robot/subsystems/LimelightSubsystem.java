@@ -38,7 +38,7 @@ public class LimelightSubsystem extends SubsystemBase {
     double phi = Math.toDegrees(Math.atan2(Y,X));
     // 
     //System.out.println(getDistance());
-    return phi; //+// ShootingAngleCorrection(distance_to_target);
+    return phi + ShootingAngleCorrection(distance_to_target);
     
   }
 

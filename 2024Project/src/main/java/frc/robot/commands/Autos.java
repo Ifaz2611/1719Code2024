@@ -50,21 +50,27 @@ public class Autos {
     return new SequentialCommandGroup(
         new WaitCommand(0.5),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(0.5),
+        // move shooter to max shooting angle (48 deg)
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MAX_SHOOTER_ANGLE).withTimeout(0.5),
         // new InstantCommand(()->{m_AnglePIDSubsystem.shootAngle();}),
+        // turn intake off
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
+        // quick outtake to unjam note
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
         new ShootSequence(m_DeviceSubsystem),
         // new ResetAngleCommand(m_limelight, m_swerveDrive),
+        // turn intake on
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
         new AutoMovePIDCommand(0, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(),
             m_swerveDrive).withTimeout(2),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(0.5),
        // new AutoMovePIDCommand(0, 9 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(0.5),
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
+       // turn intake off 
+       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
         new WaitCommand(2),
 
        // new AutoMovePIDCommand(0, 10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(2),
+        // quick outtake to unlodge stuck note 
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(3),
         // new AutoMovePIDCommand(180, 10 / distanceConversionFactor,
         // m_swerveDrive.returnAverageDistance(), m_swerveDrive),

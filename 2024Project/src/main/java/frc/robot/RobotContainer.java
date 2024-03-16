@@ -221,15 +221,11 @@ public class RobotContainer {
         );
  */
         new JoystickButton(m_helperController, 4).onTrue(
-        new InstantCommand(()-> {
-          m_AnglePIDSubsystem.setSetpoint(33);
-        })
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 33)
         );
 
         new JoystickButton(m_helperController, 5).onTrue(
-        new InstantCommand(()-> {
-          m_AnglePIDSubsystem.setSetpoint(0);
-        })
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 0)
         );
 
         new JoystickButton(m_helperController, 5).onTrue(
