@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.LimelightSubsystem;
@@ -49,6 +50,7 @@ public class PIDCommandTurnToAngle extends PIDCommand {
   @Override
   public boolean isFinished() {
 
+          SmartDashboard.putNumber("Before Command Sequence in pid aim y", 2);
     return this.m_controller.atSetpoint();
   }
 }
