@@ -182,13 +182,13 @@ public class RobotContainer {
 
     new JoystickButton(m_driverController, 2).onTrue(
       new InstantCommand(()-> {
-        Constants.TELEOPSPEEDMODIFIER = 0.95;
+        Constants.TELEOPSPEEDMODIFIER = 1;
       })
     );
 
     new JoystickButton(m_driverController, 2).onFalse(
       new InstantCommand(()-> {
-        Constants.TELEOPSPEEDMODIFIER = 0.75;
+        Constants.TELEOPSPEEDMODIFIER = .78;
       })
     );
 
@@ -202,6 +202,13 @@ public class RobotContainer {
       new JoystickButton(m_helperController, 3).onFalse(
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE )
         );
+
+      // new JoystickButton(m_helperController, 5).onTrue(
+      //   new InstantCommand(() -> {
+      //     m_DeviceSubsystem.turnShooterMotors(1)
+      //   });
+      // );
+      
 
         // new JoystickButton(m_helperController, 8).onTrue(
         // new InstantCommand(() -> {
@@ -238,9 +245,9 @@ public class RobotContainer {
           new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 33)
         );
 
-        new JoystickButton(m_helperController, 5).onTrue(
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 0)
-        );
+        //new JoystickButton(m_helperController, 5).onTrue(
+        //new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 0)
+        //);
                   
         
         //Amp outtake button
@@ -259,46 +266,23 @@ public class RobotContainer {
           Robot.zeroGYRO();
         })
         );
-      
-
-
-        //Auto sequences *MOVE*
-
-        /*
-         this is a test for are auto 
+   
+         
         new JoystickButton(m_helperController, 8).onTrue(
-            //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
-            new InstantCommand(()->{
-              // BE SURE TO SCHEDULE A COMMAND WITH .schedule()
-              //m_swerveDrive.resetDistanceMotors();
-
-              //Target Distance IN INCHES
-              double targetDistance = 76; //
-
-              //Factor of distance
-              final double distanceConversionFactor = 1.5;
-              Commands.sequence(
-                new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MAX_SHOOTER_ANGLE),
-                //new InstantCommand(()->{m_AnglePIDSubsystem.shootAngle();}),
-                new WaitCommand(2),
-                new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE),
-                new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
-              
-              new ShootSequence(m_DeviceSubsystem),
-              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE),
-              // The angle to the note is around 6-8 degrees
-              new AutoMovePIDCommand(192, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
-              new PIDCommandTurnToAngle(m_limelight, m_swerveDrive), 
-              new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE),
-              new WaitCommand(2),
-              //new AutoMovePIDCommand(180, 10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
-              new ShootSequence(m_DeviceSubsystem)
-              
-              
-              ).schedule();
-            })
-            );
-            */
+            new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
+             //new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MIN_SHOOTER_ANGLE)
+             
+            //  new InstantCommand(()-> {
+            //     Commands.sequence(
+            //       new InstantCommand(()->)
+            //       new InstantCommand(()->m_AnglePIDSubsystem.setSetpoint(Constants.MIN_SHOOTER_ANGLE))
+            //     ).schedule();
+            //  })
+        );
+        
+        
+        
+  
 /* 
             new JoystickButton(m_helperController, 10).onTrue(
             //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)

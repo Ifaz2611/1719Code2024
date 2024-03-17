@@ -40,7 +40,7 @@ public class Autos {
     // m_ledSubsystem.update_led_color(Constants.RAINBOW_GLITTER);
 
     // Target Distance IN INCHES
-    double targetDistance = 60;
+    double targetDistance = 67;
     SmartDashboard.putNumber("Before Command Sequence", 0);
     // Factor of distance
     final double distanceConversionFactor = 1.5;
