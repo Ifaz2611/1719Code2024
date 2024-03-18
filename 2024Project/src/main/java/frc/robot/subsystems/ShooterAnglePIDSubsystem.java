@@ -57,8 +57,12 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
     else if (output > Constants.MAX_SHOOTER_ANGLE) {
       output = Constants.MAX_SHOOTER_ANGLE;
     }
-    
-    ShootAngleMotor.set(output);
+
+    if (!isIntaking) {
+          ShootAngleMotor.set(output);
+    } else {
+      // I dont know what to put here exactly so it will remain like this for now :)
+    }
   }
 
   @Override
