@@ -129,6 +129,6 @@ public class SwerveTeleopCommand extends Command {
   }
   
   public double scaleJoystickInput(double input) {
-    return (Math.sign(input) * Math.pow(input, Constants.JOYSTICK_SCALE_FACTOR));
+    return (Math.signum(input) * Math.pow(Math.abs(input), Constants.JOYSTICK_SCALE_FACTOR));
   }
 }
