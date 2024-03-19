@@ -9,6 +9,7 @@ import java.util.function.BooleanSupplier;
 
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
@@ -19,17 +20,20 @@ public class ShootAngleControlCommand extends Command {
   private LimelightSubsystem limeLight;
 
   private DoubleSupplier Yposition;
-  private BooleanSupplier buttonVal;
+  private JoystickButton buttonVal;
   /** Creates a new ShootAngleControlCommand. */
-  public ShootAngleControlCommand(ShooterAnglePIDSubsystem mAnglePIDSubsystem, LimelightSubsystem limeLight, DoubleSupplier Yposition, BooleanSupplier buttonVal) {
+  public ShootAngleControlCommand(ShooterAnglePIDSubsystem mAnglePIDSubsystem, LimelightSubsystem limeLight, DoubleSupplier Yposition, JoystickButton buttonval) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(mAnglePIDSubsystem);
 
-    this.mAnglePIDSubsystem = mAnglePIDSubsystem;
+  this.mAnglePIDSubsystem = mAnglePIDSubsystem;
     this.limeLight = limeLight;
 
     this.Yposition = Yposition;
+
+    // ignore this error :) i have no clue what it wants but it work
     this.buttonVal = buttonVal;
+
   }
 
   // Called when the command is initially scheduled.
