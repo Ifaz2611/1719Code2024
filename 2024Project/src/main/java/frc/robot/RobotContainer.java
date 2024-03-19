@@ -296,7 +296,18 @@ public class RobotContainer {
             System.out.println(m_limelight.getTag());
           })
         );
-      
+
+          // sets manual control based on if button 10 is pressed. im sorry i did it this way..
+    new JoystickButton(m_helperController, 10).onTrue(
+        new InstantCommand(() -> {
+          m_AnglePIDSubsystem.setManualControl(true);
+        }));
+
+        new JoystickButton(m_helperController, 10).onFalse(
+        new InstantCommand(() -> {
+          m_AnglePIDSubsystem.setManualControl(false);
+        }));
+        
     // new JoystickButton(m_helperController, 9).onTrue(
     //   new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 20 )
     // );
