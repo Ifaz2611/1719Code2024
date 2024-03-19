@@ -24,7 +24,8 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
   public DutyCycleEncoder ShootAngleEncoder;
   public CANSparkMax ShootAngleMotor;
   public boolean isIntaking = false;
-
+  public boolean manualControl = false;
+  
   //change to actual encoder
   public ShooterAnglePIDSubsystem() {
     super(
@@ -37,7 +38,6 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
            this.ShootAngleMotor = new CANSparkMax(Constants.ShootAngleMotorPin,MotorType.kBrushless);
           //  System.out.println("initshootangle");  
   }
-
   public void setIntakeState(boolean state) {
     this.isIntaking = state;
   }
@@ -45,6 +45,11 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
   public boolean getIntakeState() {
     return this.isIntaking;
   }
+
+    // sets manual control
+    public void setManualControl(boolean state) {
+      manualControl = state;
+    }
 
   public double shootAngle() {
       return getMeasurement();   

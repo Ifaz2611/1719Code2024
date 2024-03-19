@@ -15,6 +15,8 @@ import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 
 public class ShootAngleControlCommand extends Command {
+
+  public boolean manualControl = false;
   private ShooterAnglePIDSubsystem mAnglePIDSubsystem;
   // private DoubleSupplier getShootAngle;
   private LimelightSubsystem limeLight;
@@ -22,7 +24,7 @@ public class ShootAngleControlCommand extends Command {
   private DoubleSupplier Yposition;
   private JoystickButton buttonVal;
   /** Creates a new ShootAngleControlCommand. */
-  public ShootAngleControlCommand(ShooterAnglePIDSubsystem mAnglePIDSubsystem, LimelightSubsystem limeLight, DoubleSupplier Yposition, JoystickButton buttonval) {
+  public ShootAngleControlCommand(ShooterAnglePIDSubsystem mAnglePIDSubsystem, LimelightSubsystem limeLight, DoubleSupplier Yposition) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(mAnglePIDSubsystem);
 
@@ -46,11 +48,11 @@ public class ShootAngleControlCommand extends Command {
   @Override
   public void execute() {
    
-    // if (!buttonVal.getAsBoolean()) {
-    //   double y = Yposition.getAsDouble() * 24;
-    //   System.out.println("going");
-    //   mAnglePIDSubsystem.setSetpoint((y > Constants.MAX_SHOOTER_ANGLE) ? Constants.MAX_SHOOTER_ANGLE : y);
-    // }
+    if (mAnglePIDSubsystem.manualControl) {
+      double y = Yposition.getAsDouble() * 24;
+      System.out.println("going");
+      mAnglePIDSubsystem.setSetpoint((y > Constants.MAX_SHOOTER_ANGLE) ? Constants.MAX_SHOOTER_ANGLE : y);
+    }
 
     // returns angle as double
  //   else 
