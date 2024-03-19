@@ -37,6 +37,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 // import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 // import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -160,55 +161,71 @@ public class RobotContainer {
   //       }
 
   
-  //Run shoot sequence
-    new JoystickButton(m_helperController, 1).onTrue(
-      new InstantCommand(()-> {
-      System.out.println("working");
-      Commands.sequence(
+  //Run shoot sequence BUTTON 1 (HELPER)
+    new JoystickButton(m_helperController, 1).onTrue(      
+     new SequentialCommandGroup(
           new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
-          new ShootSequence(m_DeviceSubsystem)   
-      ).schedule();
-    })  
-            );
+          new InstantCommand(()-> {
+            System.out.println("working");
+          }),
+          new InstantCommand(()-> {
+            m_DeviceSubsystem.turnShooterMotors(1);
+          })
+     ))  
+    ;
 
-    // Turn on and off intake motors
+   new JoystickButton(m_helperController, 1).onFalse(
+      new InstantCommand(()-> {
+        m_DeviceSubsystem.turnShooterMotors(0);
+      })
+    );
+
+    // Turn on and off intake motors BUTTON 2 (HELPER)
     new JoystickButton(m_helperController, 2).onTrue(  
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE)      
       );
-
     new JoystickButton(m_helperController, 2).onFalse(
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE)      
     );
 
-    new JoystickButton(m_driverController, 2).onTrue(
+    // Make driving speed faster or slower BUTTON 2 (DRIVER)
+    new JoystickButton(m_driverController, 1).onTrue(
       new InstantCommand(()-> {
         Constants.TELEOPSPEEDMODIFIER = 1;
       })
     );
+    new JoystickButton(m_driverController, 1).onFalse(
+      new InstantCommand(()-> {
+        Constants.TELEOPSPEEDMODIFIER = .78;
+      })
+    );
 
+    new JoystickButton(m_driverController, 2).onTrue(
+      new InstantCommand(()-> {
+        Constants.TELEOPSPEEDMODIFIER = .5;
+      })
+    );
     new JoystickButton(m_driverController, 2).onFalse(
       new InstantCommand(()-> {
         Constants.TELEOPSPEEDMODIFIER = .78;
       })
     );
 
-
-
-    //Turn on and off outtake motors
+    // Turn on and off outtake motors BUTTON 3 (HELPER)    
+    new JoystickButton(m_helperController, 3).onTrue(
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE)
+    );
+    new JoystickButton(m_helperController, 3).onFalse(
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE )
+    );
     
-      new JoystickButton(m_helperController, 3).onTrue(
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE)
-        );
-      new JoystickButton(m_helperController, 3).onFalse(
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE )
-        );
-
-      // new JoystickButton(m_helperController, 5).onTrue(
-      //   new InstantCommand(() -> {
-      //     m_DeviceSubsystem.turnShooterMotors(1)
-      //   });
-      // );
-      
+    // Toggle Shooter Motors BUTTON 5 (HELPER)
+    // new JoystickButton(m_helperController, 1).onTrue(
+    //   new InstantCommand(()-> {
+    //     m_DeviceSubsystem.turnShooterMotors(1);
+    //   })
+    // );
+    
 
         // new JoystickButton(m_helperController, 8).onTrue(
         // new InstantCommand(() -> {
@@ -241,35 +258,39 @@ public class RobotContainer {
           new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, m_AnglePIDSubsystem.shootAngle())
         );
  */
-        new JoystickButton(m_helperController, 4).onTrue(
-          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 33)
-        );
+      
+      // new JoystickButton(m_helperController, 4).onTrue(
+      //   new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 33)
+      // );
 
         //new JoystickButton(m_helperController, 5).onTrue(
         //new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 0)
         //);
                   
         
-        //Amp outtake button
-        new JoystickButton(m_helperController, 6).onTrue(
-        new InstantCommand(()-> {
-      Commands.sequence(
-          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 0),
-          new WaitCommand(3),
-          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -2, Constants.MIN_SHOOTER_ANGLE)
-      ).schedule();
-      })
+      //Amp outtake button BUTTON 6 (HELPER)
+      new JoystickButton(m_helperController, 6).onTrue(
+        new SequentialCommandGroup(
+            new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MIN_SHOOTER_ANGLE),
+            new WaitCommand(1.5),
+            new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -2, Constants.MIN_SHOOTER_ANGLE)
+          )
       );
 
+      // new JoystickButton(m_helperController, 6).onFalse(
+      //   new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE)
+      // );
+
+      // Reset Gyro BUTTON 7 (HELPER)
       new JoystickButton(m_helperController, 7).onTrue(
         new InstantCommand(()-> {
           Robot.zeroGYRO();
         })
-        );
+      );
    
-         
-        new JoystickButton(m_helperController, 8).onTrue(
-            new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
+      // Align with limelight BUTTON 8 (HELPER) 
+      new JoystickButton(m_helperController, 8).onTrue(
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
              //new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MIN_SHOOTER_ANGLE)
              
             //  new InstantCommand(()-> {
@@ -279,7 +300,20 @@ public class RobotContainer {
             //     ).schedule();
             //  })
         );
-        
+
+        new JoystickButton(m_helperController, 9).onTrue(
+          new InstantCommand(()-> {
+            System.out.println(m_limelight.getTag());
+          })
+        );
+      
+    // new JoystickButton(m_helperController, 9).onTrue(
+    //   new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 20 )
+    // );
+
+    // new JoystickButton(m_helperController, 10).onTrue(
+    //   new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 30)
+    // );
         
         
   
@@ -353,22 +387,18 @@ public class RobotContainer {
             );
             */
 
-            //Raise pistons
+        // Raise pistons BUTTON 11 (HELPER)
         new JoystickButton(m_helperController, 11).onTrue(
-
           new InstantCommand(()->{
             m_ClimbSubsystem.raise();
           })
-            );
-          //Lower Pistons
+        );
+        // Lower pistons BUTTON 12 (HELPER)
         new JoystickButton(m_helperController, 12).onTrue(
           new InstantCommand(()->{
             m_ClimbSubsystem.lower();
-            
           })
-         );
-        
-      
+        );
   }
 
   /* 

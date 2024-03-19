@@ -33,11 +33,21 @@ public class ShootAngleControlCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
     // returns angle as double
     if (this.limeLight.getDistance() == 0.0) {
       mAnglePIDSubsystem.setSetpoint(Constants.DEFAULT_SHOOTER_ANGLE);
     } else if (!mAnglePIDSubsystem.getIntakeState()) {
-      mAnglePIDSubsystem.setSetpoint(this.limeLight.getShootingAngle());
+      System.out.println("Moving with april tag: " + this.limeLight.getShootingAngle() + " degrees");
+      // Limits in place to prevent over turning motors
+      double correctedAngle = this.limeLight.getShootingAngle();
+      if (correctedAngle <= Constants.MIN_SHOOTER_ANGLE) { 
+        correctedAngle = Constants.MIN_SHOOTER_ANGLE;
+      }      
+      else if (correctedAngle >= Constants.MAX_SHOOTER_ANGLE) {
+        correctedAngle = Constants.MAX_SHOOTER_ANGLE;
+      } 
+      mAnglePIDSubsystem.setSetpoint(correctedAngle);
     }
   }
 

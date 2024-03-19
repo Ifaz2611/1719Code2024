@@ -50,13 +50,9 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
   @Override
   public void useOutput(double output, double setpoint) {
     // Use the output here
-    if (output < Constants.MIN_SHOOTER_ANGLE) { 
-      output = Constants.MIN_SHOOTER_ANGLE;
-    }
-      
-    else if (output > Constants.MAX_SHOOTER_ANGLE) {
-      output = Constants.MAX_SHOOTER_ANGLE;
-    } 
+
+    // STILL NEEDS TO HAVE A CORRECTION 
+       
     ShootAngleMotor.set(output);
   }
 
