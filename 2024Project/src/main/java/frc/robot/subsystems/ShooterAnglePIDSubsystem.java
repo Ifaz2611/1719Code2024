@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 //import com.revrobotics.;
@@ -19,9 +20,11 @@ import frc.robot.Constants;
 public class ShooterAnglePIDSubsystem extends PIDSubsystem {
   /** Creates a new ShooterAnglePIDSubsystem. */
 
+  public DigitalInput armLowerLimit = new DigitalInput(Constants.BOTTOM_LIMIT_SWITCH_PIN);
   public DutyCycleEncoder ShootAngleEncoder;
   public CANSparkMax ShootAngleMotor;
   public boolean isIntaking = false;
+
   //change to actual encoder
   public ShooterAnglePIDSubsystem() {
     super(
@@ -49,20 +52,19 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
 
   @Override
   public void useOutput(double output, double setpoint) {
-    // Use the output here
-    if (output < Constants.MIN_SHOOTER_ANGLE) { 
-      output = Constants.MIN_SHOOTER_ANGLE;
-    }
-      
-    else if (output > Constants.MAX_SHOOTER_ANGLE) {
-      output = Constants.MAX_SHOOTER_ANGLE;
-    }
 
-    if (!isIntaking) {
-          ShootAngleMotor.set(output);
-    } else {
-      // I dont know what to put here exactly so it will remain like this for now :)
-    }
+    if (armLowerLimit.get() && output > 0){
+      output = 0;
+    } 
+    // // Use the output here
+    // if (output < Constants.MIN_SHOOTER_ANGLE) { 
+    //   output = Constants.MIN_SHOOTER_ANGLE;
+    // }
+      
+    // else if (output > Constants.MAX_SHOOTER_ANGLE) {
+    //   output = Constants.MAX_SHOOTER_ANGLE;
+    // } 
+ShootAngleMotor.set(output);
   }
 
   @Override
