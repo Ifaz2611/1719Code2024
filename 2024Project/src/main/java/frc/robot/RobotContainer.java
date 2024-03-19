@@ -88,6 +88,7 @@ public class RobotContainer {
     configureBindings();
   }
 
+    // THIS FUNCTION IS WRITTEN AND NEVER USED !!!!
     public double HelperControllerY() {
       return (m_helperController.getY()*24);
     }
@@ -188,28 +189,17 @@ public class RobotContainer {
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE)      
     );
 
-    // Make driving speed faster or slower BUTTON 2 (DRIVER)
-    new JoystickButton(m_driverController, 1).onTrue(
-      new InstantCommand(()-> {
-        Constants.TELEOPSPEEDMODIFIER = 1;
-      })
-    );
-    new JoystickButton(m_driverController, 1).onFalse(
-      new InstantCommand(()-> {
-        Constants.TELEOPSPEEDMODIFIER = .78;
-      })
-    );
+    // new JoystickButton(m_driverController, 2).onTrue(
+    //   new InstantCommand(()-> {
+    //     Constants.TELEOPSPEEDMODIFIER = 0.95;
+    //   })
+    // );
 
-    new JoystickButton(m_driverController, 2).onTrue(
-      new InstantCommand(()-> {
-        Constants.TELEOPSPEEDMODIFIER = .5;
-      })
-    );
-    new JoystickButton(m_driverController, 2).onFalse(
-      new InstantCommand(()-> {
-        Constants.TELEOPSPEEDMODIFIER = .78;
-      })
-    );
+    // new JoystickButton(m_driverController, 2).onFalse(
+    //   new InstantCommand(()-> {
+    //     Constants.TELEOPSPEEDMODIFIER = 0.75;
+    //   })
+    // );
 
     // Turn on and off outtake motors BUTTON 3 (HELPER)    
     new JoystickButton(m_helperController, 3).onTrue(
@@ -406,9 +396,8 @@ public class RobotContainer {
    *
    * @ the command to run in autonomous
    */
- public Command getAutonomousCommand(String m_autoSelected) {
+    public Command getAutonomousCommand(String m_autoSelected) {
       return Autos.defaultAuto(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
     }
-
   }
 

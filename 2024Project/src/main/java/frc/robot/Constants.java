@@ -210,8 +210,10 @@ public static int COMPRESSOR_MODULE_NUMBER = 25;
 
 
 //for learing how to drive 0 to 1
-public static double TELEOPSPEEDMODIFIER = .75;
+public static double TELEOPSPEEDMODIFIER = 1;
 public static final double TELEOPTWISTMODIFIER = .5;
+
+public static final double JOYSTICK_SCALE_FACTOR = 2.0;
 
 //boolean for aming
 //public boolean SelfAim = true;
