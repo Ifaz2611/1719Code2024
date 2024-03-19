@@ -4,7 +4,9 @@
 
 package frc.robot.commands;
 
-// import java.util.function.DoubleSupplier;
+import java.util.function.DoubleSupplier;
+import java.util.function.BooleanSupplier;
+
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
@@ -15,13 +17,19 @@ public class ShootAngleControlCommand extends Command {
   private ShooterAnglePIDSubsystem mAnglePIDSubsystem;
   // private DoubleSupplier getShootAngle;
   private LimelightSubsystem limeLight;
+
+  private DoubleSupplier Yposition;
+  private BooleanSupplier buttonVal;
   /** Creates a new ShootAngleControlCommand. */
-  public ShootAngleControlCommand(ShooterAnglePIDSubsystem mAnglePIDSubsystem, LimelightSubsystem limeLight) {
+  public ShootAngleControlCommand(ShooterAnglePIDSubsystem mAnglePIDSubsystem, LimelightSubsystem limeLight, DoubleSupplier Yposition, BooleanSupplier buttonVal) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(mAnglePIDSubsystem);
 
     this.mAnglePIDSubsystem = mAnglePIDSubsystem;
     this.limeLight = limeLight;
+
+    this.Yposition = Yposition;
+    this.buttonVal = buttonVal;
   }
 
   // Called when the command is initially scheduled.
@@ -33,10 +41,17 @@ public class ShootAngleControlCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    if (buttonVal.getAsBoolean()) {
+      double y = Yposition.getAsDouble() * 24;
+      mAnglePIDSubsystem.setSetpoint((y > Constants.MAX_SHOOTER_ANGLE) ? Constants.MAX_SHOOTER_ANGLE : y);
+    }
+
     // returns angle as double
-    if (this.limeLight.getDistance() == 0.0 ) {
+    else if (this.limeLight.getDistance() == 0.0 ) {
       mAnglePIDSubsystem.setSetpoint(Constants.DEFAULT_SHOOTER_ANGLE);
     } else if (!mAnglePIDSubsystem.getIntakeState()) {
+      System.out.println("theres the limelight!");
       mAnglePIDSubsystem.setSetpoint(this.limeLight.getShootingAngle());
       
     }
