@@ -30,6 +30,7 @@ public class DeviceSubsystem extends SubsystemBase {
     // these 2 controll the the motors of the shooter more specifically intake
     private static CANSparkMax SHOOTER;
     private static CANSparkMax INTAKE;
+    private int proximity;
 
     private AnalogPotentiometer noteSensor;
 
@@ -77,7 +78,9 @@ public class DeviceSubsystem extends SubsystemBase {
     }
 
       // checks if the ring is there yessir TODO: GET CORRECT MEASUREMENTS SO TEST ! ! ! ! ! 
-    public boolean checkRing(){
+    public boolean checkRing(){ 
+    proximity = m_colorSensor.getProximity();
+    System.out.println("proximity", proximity);
     if (proximity >= Constants.DISTANCE_NOTE_IN) {
         return true;
     } 
