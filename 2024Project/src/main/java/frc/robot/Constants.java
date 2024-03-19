@@ -214,6 +214,8 @@ public static double TELEOPSPEEDMODIFIER = .75;
 public static final double TELEOPTWISTMODIFIER = .5;
 
 public static final double SHOOTERINTAKESUPPORT = -0.1;
+
+public static final int BOTTOM_LIMIT_SWITCH_PIN = 100;
 //boolean for aming
 //public boolean SelfAim = true;
 }
