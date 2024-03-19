@@ -90,10 +90,11 @@ public class Robot extends TimedRobot {
     // Constants.m_rightFrontDirection, Constants.m_rightBackDirection));
 
   }
-
+  // Return the instance of the gyroscope
   public static Pigeon2 getGYRO() {
     return GYRO;
   }
+  // Zero the gyroscope
   public static void zeroGYRO() {
     GYRO.reset();
   }

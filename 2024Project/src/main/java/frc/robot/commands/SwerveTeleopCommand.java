@@ -51,12 +51,20 @@ public class SwerveTeleopCommand extends Command {
   @Override
   public void execute() {
 
+    // X and y positions
+    double x = this.m_getX.getAsDouble();
+    double y = this.m_getY.getAsDouble();
+
+    // Scaled x and y positions
+    double scaledX = scaleJoystickInput(x);
+    double scaledY = scaleJoystickInput(y);
+
     this.table.getEntry("countCall").setNumber(this.countCall++);
-    double test1 = this.m_getY.getAsDouble();
-    this.table.getEntry("m_getLeftY").setNumber(test1);
+    // double test1 = this.m_getY.getAsDouble();
+    this.table.getEntry("m_getLeftY").setNumber(y); // THIS IS UNSCALED
     double translatePower = Math
-        .sqrt((Math.pow(this.m_getY.getAsDouble(), 2) + Math.pow(-this.m_getX.getAsDouble(), 2)) / 2);
-    double direction = angleFromXY(-this.m_getX.getAsDouble(), this.m_getY.getAsDouble());
+        .sqrt((Math.pow(scaledY, 2) + Math.pow(-scaledX, 2)) / 2);
+    double direction = angleFromXY(-scaledX, scaledY);
    
     this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(direction, translatePower*Constants.TELEOPSPEEDMODIFIER,
          this.m_getTwist.getAsDouble()*Constants.TELEOPTWISTMODIFIER);
@@ -118,5 +126,9 @@ public class SwerveTeleopCommand extends Command {
     // }
 
     return a;
+  }
+  
+  public double scaleJoystickInput(double input) {
+    return (Math.sign(input) * Math.pow(input, Constants.JOYSTICK_SCALE_FACTOR));
   }
 }

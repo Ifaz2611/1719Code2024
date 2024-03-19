@@ -87,6 +87,7 @@ public class RobotContainer {
     configureBindings();
   }
 
+    // THIS FUNCTION IS WRITTEN AND NEVER USED !!!!
     public double HelperControllerY() {
       return (m_helperController.getY()*24);
     }
@@ -392,9 +393,8 @@ public class RobotContainer {
    *
    * @ the command to run in autonomous
    */
- public Command getAutonomousCommand(String m_autoSelected) {
+    public Command getAutonomousCommand(String m_autoSelected) {
       return Autos.defaultAuto(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
     }
-
   }
 
