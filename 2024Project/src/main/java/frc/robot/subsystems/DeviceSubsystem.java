@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.ColorSensorV3;
+
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -31,8 +33,8 @@ public class DeviceSubsystem extends SubsystemBase {
     private static CANSparkMax SHOOTER;
     private static CANSparkMax INTAKE;
     private int proximity;
-
-    private AnalogPotentiometer noteSensor;
+    private ColorSensorV3 m_colorSensor = Constants.m_colorSensor;
+    // private AnalogPotentiometer noteSensor;
 
     public DeviceSubsystem() {
 
@@ -80,15 +82,16 @@ public class DeviceSubsystem extends SubsystemBase {
       // checks if the ring is there yessir TODO: GET CORRECT MEASUREMENTS SO TEST ! ! ! ! ! 
     public boolean checkRing(){ 
     proximity = m_colorSensor.getProximity();
-    System.out.println("proximity", proximity);
+    System.out.println("proximity " + proximity);
     if (proximity >= Constants.DISTANCE_NOTE_IN) {
         return true;
     } 
-    else (){
+    else{
         return false;
     }
   }
-  if (checkRing() == True) {
-    turnOffIntakeMotor();
-  }
 }
+//   if (checkRing() == True) {
+//     turnOffIntakeMotor();
+//   }
+// }
