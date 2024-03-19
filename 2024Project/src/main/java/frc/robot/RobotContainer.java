@@ -136,8 +136,7 @@ public class RobotContainer {
     // Manually Controlled Shoot Angle
 
     ShootAngleControlCommand AngleControl = new ShootAngleControlCommand(
-        this.m_AnglePIDSubsystem, m_limelight, m_helperController::getY,
-        returnBoolSupplier(m_helperController.getRawButton(10)));
+        this.m_AnglePIDSubsystem, m_limelight, m_helperController::getY, new JoystickButton(m_helperController, 10));
     // System.out.println(m_AnglePIDSubsystem.getMeasurement() + " PID");
     // System.out.println(m_limelight.getShootingAngle() + " LIMELIGHT");
     this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
@@ -415,11 +414,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand(String m_autoSelected) {
     return Autos.defaultAuto(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
-  }
-
-  public BooleanSupplier returnBoolSupplier(boolean booleanSentToDevil) {
-    BooleanSupplier returnBool = () -> booleanSentToDevil;
-    return returnBool;
   }
 
 }
