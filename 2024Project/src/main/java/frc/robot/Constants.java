@@ -213,6 +213,7 @@ public static int COMPRESSOR_MODULE_NUMBER = 25;
 public static double TELEOPSPEEDMODIFIER = .75;
 public static final double TELEOPTWISTMODIFIER = .5;
 
+public static final double SHOOTERINTAKESUPPORT = -0.1;
 //boolean for aming
 //public boolean SelfAim = true;
 }
