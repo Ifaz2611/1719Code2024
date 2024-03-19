@@ -56,14 +56,7 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
     if (armLowerLimit.get() && output > 0){
       output = 0;
     } 
-    // // Use the output here
-    // if (output < Constants.MIN_SHOOTER_ANGLE) { 
-    //   output = Constants.MIN_SHOOTER_ANGLE;
-    // }
-      
-    // else if (output > Constants.MAX_SHOOTER_ANGLE) {
-    //   output = Constants.MAX_SHOOTER_ANGLE;
-    // } 
+
 ShootAngleMotor.set(output);
   }
 
