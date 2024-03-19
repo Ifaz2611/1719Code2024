@@ -20,7 +20,7 @@ import frc.robot.Constants;
 public class ShooterAnglePIDSubsystem extends PIDSubsystem {
   /** Creates a new ShooterAnglePIDSubsystem. */
 
-  public DigitalInput armLowerLimit = new DigitalInput(Constants.BOTTOM_LIMIT_SWITCH_PIN);
+  // public DigitalInput armLowerLimit = new DigitalInput(Constants.BOTTOM_LIMIT_SWITCH_PIN);
   public DutyCycleEncoder ShootAngleEncoder;
   public CANSparkMax ShootAngleMotor;
   public boolean isIntaking = false;
@@ -53,9 +53,9 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
   @Override
   public void useOutput(double output, double setpoint) {
 
-    if (armLowerLimit.get() && output > 0){
-      output = 0;
-    } 
+    // if (armLowerLimit.get() && output > 0){
+    //   output = 0;
+    // } 
     // // Use the output here
     // if (output < Constants.MIN_SHOOTER_ANGLE) { 
     //   output = Constants.MIN_SHOOTER_ANGLE;

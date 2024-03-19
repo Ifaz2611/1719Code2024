@@ -41,9 +41,10 @@ public class ShootAngleControlCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    if (buttonVal.getAsBoolean()) {
+   
+    if (!buttonVal.getAsBoolean()) {
       double y = Yposition.getAsDouble() * 24;
+      System.out.println("going");
       mAnglePIDSubsystem.setSetpoint((y > Constants.MAX_SHOOTER_ANGLE) ? Constants.MAX_SHOOTER_ANGLE : y);
     }
 
