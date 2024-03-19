@@ -69,6 +69,14 @@ public final class Constants {
   public static final double OUTAKESPEED = 1;
   public static final double SHOOTSPEED = 1;
 
+  //I2C port for color sensor - we may need to "Change the I2C port below to match the connection of your color sensor"
+  public static final I2C.Port i2cPort = I2C.Port.kOnboard;
+  //colorsensor, i2c port is parameter
+  public static final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort); 
+
+  // the value of this is probably wrong
+  public static final int DISTANCE_NOTE_IN = 2000; 
+
   // angles of shooter
   // PLACE HOLDERS!!!!!!!!!!!!
   //only 1 shoot angle needed

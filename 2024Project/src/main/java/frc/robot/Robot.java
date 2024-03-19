@@ -15,6 +15,7 @@ import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 import frc.robot.subsystems.SwerveDirectionPIDSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -24,6 +25,7 @@ import frc.robot.subsystems.LimelightSubsystem;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
+  public int proximity;
   
   // Robot auton choices
   // private final String kAuto0 = "Auto 0 (Default)";
@@ -60,6 +62,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    proximity = m_colorSensor.getProximity();
+    System.out.println("prox", proximity);
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic

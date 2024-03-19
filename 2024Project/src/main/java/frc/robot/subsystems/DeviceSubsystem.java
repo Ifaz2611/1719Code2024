@@ -47,23 +47,14 @@ public class DeviceSubsystem extends SubsystemBase {
 
     // turns the motors a specific direction.
     // -1 is intake, 1 is shoot
+
+    //turns on the shooter motors
     public void turnShooterMotors(double speed) {
         SHOOTER.set(speed);
-        // if (ShootBOF == 1) {
-        //     // make motors turn inwards
-        //     SHOOTER.set(Constants.SHOOTSPEED);
-
-        // } else if (ShootBOF == 0) {
-        //     // make motors shoot ring out + speed
-        //     // SHOOTER.set(0);//-Constants.SHOOTSPEED);
-        //     SHOOTER.set(0);//Constants.SHOOTSPEED);
-
-        // } else {
-        //     turnOffIntakeMotors();
-        // }
+        
     }
 
-    // turns the shoot motor on
+    // turns the intake motor on
     public void turnIntakeMotors(double speed) { 
         INTAKE.set(speed);
         // if (onOrOff == 1) {
@@ -86,9 +77,12 @@ public class DeviceSubsystem extends SubsystemBase {
     }
 
       // checks if the ring is there yessir TODO: GET CORRECT MEASUREMENTS SO TEST ! ! ! ! ! 
-  public double checkRing(){
-    System.out.println("Note sensor get function:" + noteSensor.get());
-    return noteSensor.get();
-    
+    public boolean checkRing(){
+    if (proximity >= Constants.DISTANCE_NOTE_IN) {
+        return true;
+    } 
+    else (){
+        return false;
+    }
   }
 }
