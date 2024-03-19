@@ -22,7 +22,7 @@ public class ShootAngleControlCommand extends Command {
   private LimelightSubsystem limeLight;
 
   private DoubleSupplier Yposition;
-  private JoystickButton buttonVal;
+  // private JoystickButton buttonVal;
   /** Creates a new ShootAngleControlCommand. */
   public ShootAngleControlCommand(ShooterAnglePIDSubsystem mAnglePIDSubsystem, LimelightSubsystem limeLight, DoubleSupplier Yposition) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -34,7 +34,7 @@ public class ShootAngleControlCommand extends Command {
     this.Yposition = Yposition;
 
     // ignore this error :) i have no clue what it wants but it work
-    this.buttonVal = buttonVal;
+    //this.buttonVal = buttonVal;
 
   }
 
@@ -47,19 +47,19 @@ public class ShootAngleControlCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   
+
+    // this should allow manual control
     if (mAnglePIDSubsystem.manualControl) {
-      double y = Yposition.getAsDouble() * 24;
-      System.out.println("going");
+      double y = Yposition.getAsDouble() * 24 + 24;
+      // System.out.println("going");
       mAnglePIDSubsystem.setSetpoint((y > Constants.MAX_SHOOTER_ANGLE) ? Constants.MAX_SHOOTER_ANGLE : y);
     }
 
     // returns angle as double
- //   else 
- if (this.limeLight.getDistance() == 0.0 ) {
+ else if (this.limeLight.getDistance() == 0.0 ) {
       mAnglePIDSubsystem.setSetpoint(Constants.DEFAULT_SHOOTER_ANGLE);
     } else if (!mAnglePIDSubsystem.getIntakeState()) {
-      System.out.println("theres the limelight!");
+      // System.out.println("theres the limelight!");
       mAnglePIDSubsystem.setSetpoint(this.limeLight.getShootingAngle());
       
     }
