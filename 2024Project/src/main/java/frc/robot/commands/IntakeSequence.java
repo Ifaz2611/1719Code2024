@@ -52,16 +52,22 @@ public class IntakeSequence extends SequentialCommandGroup {
 
     //Turn on intake
     if (stateNum == 0) {
-       addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(1));
+       addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), new SetIntakeOutake(mDeviceSubsystem,1,Constants.SHOOTERINTAKESUPPORT)); // i dont know if this really does anything but move the motors, why not just only run the motors here? - hbg
     } 
     //Turn off intake
     else if (stateNum == 1) {
-       addCommands(IntakeMotors(0), setIntakeState(m_angler, false));
+       addCommands(IntakeMotors(0), setIntakeState(m_angler, false)); // same question as above
     }
     //Move shooter to an angle
     else if (stateNum == 2) {
       addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler));
     }
+
+    // this should set the intake to false
+     else if (stateNum == 3) {
+      addCommands(setIntakeState(m_angler, false));
+    }
+
     //Turn on outtake
     else if (stateNum == -1) {
        addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(-1), waitwait(.05), IntakeMotors(0), setIntakeState(m_angler, false));

@@ -214,8 +214,12 @@ public static int COMPRESSOR_MODULE_NUMBER = 25;
 public static double TELEOPSPEEDMODIFIER = 1.5;
 public static final double TELEOPTWISTMODIFIER = .5;
 
+
 public static final double JOYSTICK_SCALE_FACTOR = 2.0;
 
+public static final double SHOOTERINTAKESUPPORT = -0.1;
+
+// public static final int BOTTOM_LIMIT_SWITCH_PIN = 100;
 //boolean for aming
 //public boolean SelfAim = true;
 }

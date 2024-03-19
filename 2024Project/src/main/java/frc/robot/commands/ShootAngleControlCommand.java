@@ -4,24 +4,38 @@
 
 package frc.robot.commands;
 
-// import java.util.function.DoubleSupplier;
+import java.util.function.DoubleSupplier;
+import java.util.function.BooleanSupplier;
+
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 
 public class ShootAngleControlCommand extends Command {
+
+  public boolean manualControl = false;
   private ShooterAnglePIDSubsystem mAnglePIDSubsystem;
   // private DoubleSupplier getShootAngle;
   private LimelightSubsystem limeLight;
+
+  private DoubleSupplier Yposition;
+  // private JoystickButton buttonVal;
   /** Creates a new ShootAngleControlCommand. */
-  public ShootAngleControlCommand(ShooterAnglePIDSubsystem mAnglePIDSubsystem, LimelightSubsystem limeLight) {
+  public ShootAngleControlCommand(ShooterAnglePIDSubsystem mAnglePIDSubsystem, LimelightSubsystem limeLight, DoubleSupplier Yposition) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(mAnglePIDSubsystem);
 
-    this.mAnglePIDSubsystem = mAnglePIDSubsystem;
+  this.mAnglePIDSubsystem = mAnglePIDSubsystem;
     this.limeLight = limeLight;
+
+    this.Yposition = Yposition;
+
+    // ignore this error :) i have no clue what it wants but it work
+    //this.buttonVal = buttonVal;
+
   }
 
   // Called when the command is initially scheduled.
@@ -34,20 +48,20 @@ public class ShootAngleControlCommand extends Command {
   @Override
   public void execute() {
 
+    // this should allow manual control
+    if (mAnglePIDSubsystem.manualControl) {
+      double y = Yposition.getAsDouble() * 24 + 24;
+      // System.out.println("going");
+      mAnglePIDSubsystem.setSetpoint((y > Constants.MAX_SHOOTER_ANGLE) ? Constants.MAX_SHOOTER_ANGLE : y);
+    }
+
     // returns angle as double
-    if (this.limeLight.getDistance() == 0.0) {
+ else if (this.limeLight.getDistance() == 0.0 ) {
       mAnglePIDSubsystem.setSetpoint(Constants.DEFAULT_SHOOTER_ANGLE);
     } else if (!mAnglePIDSubsystem.getIntakeState()) {
-      System.out.println("Moving with april tag: " + this.limeLight.getShootingAngle() + " degrees");
-      // Limits in place to prevent over turning motors
-      double correctedAngle = this.limeLight.getShootingAngle();
-      if (correctedAngle <= Constants.MIN_SHOOTER_ANGLE) { 
-        correctedAngle = Constants.MIN_SHOOTER_ANGLE;
-      }      
-      else if (correctedAngle >= Constants.MAX_SHOOTER_ANGLE) {
-        correctedAngle = Constants.MAX_SHOOTER_ANGLE;
-      } 
-      mAnglePIDSubsystem.setSetpoint(correctedAngle);
+      // System.out.println("theres the limelight!");
+      mAnglePIDSubsystem.setSetpoint(this.limeLight.getShootingAngle());
+      
     }
   }
 

@@ -130,7 +130,7 @@ public class RobotContainer {
     // Manually Controlled Shoot Angle
 
     ShootAngleControlCommand AngleControl = new ShootAngleControlCommand(
-    this.m_AnglePIDSubsystem, m_limelight);
+    this.m_AnglePIDSubsystem, m_limelight, m_helperController::getY);
     //System.out.println(m_AnglePIDSubsystem.getMeasurement() + " PID");
     //System.out.println(m_limelight.getShootingAngle() + " LIMELIGHT");
     this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
