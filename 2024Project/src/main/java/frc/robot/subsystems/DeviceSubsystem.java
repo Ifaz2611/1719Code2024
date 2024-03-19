@@ -88,4 +88,7 @@ public class DeviceSubsystem extends SubsystemBase {
         return false;
     }
   }
+  if (checkRing() == True) {
+    turnOffIntakeMotor();
+  }
 }
