@@ -43,13 +43,13 @@ public class LedCommand extends Command {
         double aprilTagId = mLimelightSubsystem.getTag();
 
         mLedSubsystem.set_led_color(
+            !m_DeviceSubsystem.checkRing() // put not here please when we have the sensor
+                                    ? Constants.NO_NOTE_BASELINE_GOLD :
                 (aprilTagId == 4 || aprilTagId == 7)
                         ? Constants.SPEAKER_GREEN
                         : (aprilTagId == 6 || aprilTagId == 5)
                                 ? Constants.AMP_BLUE 
-                                : (m_DeviceSubsystem.checkRing()) 
-                                    ? Constants.NO_TAG_PURPLE
-                                    : Constants.NO_NOTE_BASELINE_GOLD);
+                : Constants.NO_TAG_PURPLE);
 
         // // speaker
         // if (aprilTagId == 4 || aprilTagId == 7) {
