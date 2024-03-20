@@ -82,15 +82,17 @@ public class DeviceSubsystem extends SubsystemBase {
         INTAKE.set(0);
     }
 
+
+    // REVERSE THIS HERE 
     // TODO: GET CORRECT MEASUREMENTS SO TEST ! ! ! ! ! 
     public boolean checkRing(){ 
     proximity = m_colorSensor.getProximity();
     System.out.println("proximity " + proximity);
     if (proximity >= Constants.DISTANCE_NOTE_IN) {
-        return true;
+        return false;
     } 
     else{
-        return false;
+        return true;
     }
   }
 }

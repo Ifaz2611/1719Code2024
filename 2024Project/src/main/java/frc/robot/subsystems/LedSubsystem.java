@@ -29,15 +29,15 @@ public class LedSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    double tag = m_limelight.getTag();
-    if (tag == 7 || tag == 4) {
-      update_led_color(Constants.SPEAKER_GREEN);
-    } else if (tag == 6 || tag == 5) {
-      update_led_color(Constants.AMP_BLUE);
-    } else {
-      update_led_color(Constants.NO_NOTE_BASELINE_GOLD);
-    }
-    set_led_color(currentValue);
+    // double tag = m_limelight.getTag();
+    // if (tag == 7 || tag == 4) {
+    //   update_led_color(Constants.SPEAKER_GREEN);
+    // } else if (tag == 6 || tag == 5) {
+    //   update_led_color(Constants.AMP_BLUE);
+    // } else {
+    //   update_led_color(Constants.NO_NOTE_BASELINE_GOLD);
+    // }
+    // set_led_color(currentValue);
   }
   // Set all led's to given color
   public void set_led_color(double val) {
@@ -45,9 +45,9 @@ public class LedSubsystem extends SubsystemBase {
       m_blinkin.set(val);
     }
   }
-  public void update_led_color(double val) {
-    currentValue = val;
-  }
+  // public void update_led_color(double val) {
+  //   currentValue = val;
+  // }
 
   // Set to alliance color
   // public void allianceColor() {
