@@ -42,8 +42,6 @@ public class LedCommand extends Command {
         // sets this so that it doesn't try to set the leds all the time
         double aprilTagId = mLimelightSubsystem.getTag();
 
-        System.out.println(aprilTagId); // TODO: COMMENT THIS OUT!!
-
         mLedSubsystem.set_led_color(
                 (aprilTagId == 4 || aprilTagId == 7)
                         ? Constants.SPEAKER_GREEN
@@ -52,15 +50,6 @@ public class LedCommand extends Command {
                                 : (m_DeviceSubsystem.checkRing()) 
                                     ? Constants.NO_TAG_PURPLE
                                     : Constants.NO_NOTE_BASELINE_GOLD);
-
-        mLedSubsystem.set_led_color(
-                (aprilTagId == 4 || aprilTagId == 7)
-                        ? Constants.SPEAKER_GREEN
-                        : (aprilTagId == 6 || aprilTagId == 5)
-                                ? Constants.AMP_BLUE
-                                : (m_DeviceSubsystem.checkRing() != false)
-                                        ? Constants.NO_TAG_PURPLE
-                                        : Constants.NO_NOTE_BASELINE_GOLD);
 
         // // speaker
         // if (aprilTagId == 4 || aprilTagId == 7) {
