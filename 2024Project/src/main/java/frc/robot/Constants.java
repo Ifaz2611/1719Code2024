@@ -107,7 +107,7 @@ public final class Constants {
   public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 7.5; 
   //
   // maximum arm angle allowed (deg)
-  public static final double MAX_SHOOTER_ANGLE = 48; // might set 1-2 lower
+  public static final double MAX_SHOOTER_ANGLE = 49.5; // might set 1-2 lower
   // minimum arm angle allowed (deg)
   public static final double MIN_SHOOTER_ANGLE = 0; // horizontal shooter
   // arm angle when shooting platform (lexan) is horizontal
@@ -120,7 +120,7 @@ public final class Constants {
   // vertical height of shooter arm pivot above floor
   public static final double SHOOTER_PIVOT_TO_FLOOR = 7.5;
   // default shooter angle if it can't see limelight
-  public static final double DEFAULT_SHOOTER_ANGLE = 48.;
+  public static final double DEFAULT_SHOOTER_ANGLE = Constants.MAX_SHOOTER_ANGLE;
   // default distance of robot to speaker at which DEFAULT_SHOOTER_ANGLE will work
   public static final double DISTANCE_FROM_SPEAKER_FOR_DEFAULT_SHOOTING = 42.0;
   // Empirical gyro correction factor to align with field orientation
@@ -228,7 +228,7 @@ public static final double TELEOPTWISTMODIFIER = .5;
 
 public static final double JOYSTICK_SCALE_FACTOR = 2.0;
 
-public static final double SHOOTERINTAKESUPPORT = -0.1;
+public static final double SHOOTERINTAKESUPPORT = -0.01;
 
 // public static final int BOTTOM_LIMIT_SWITCH_PIN = 100;
 //boolean for aming

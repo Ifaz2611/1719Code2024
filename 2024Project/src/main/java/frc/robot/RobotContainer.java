@@ -176,20 +176,21 @@ public class RobotContainer {
   //Run shoot sequence BUTTON 1 (HELPER)
     new JoystickButton(m_helperController, 1).onTrue(      
      new SequentialCommandGroup(
-          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
-          new InstantCommand(()-> {
-            System.out.println("working");
-          }),
+          //new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
           new InstantCommand(()-> {
             m_DeviceSubsystem.turnShooterMotors(1);
           })
      ))  
+    
     ;
 
    new JoystickButton(m_helperController, 1).onFalse(
-      new InstantCommand(()-> {
+      new SequentialCommandGroup(
+   new InstantCommand(()-> {
         m_DeviceSubsystem.turnShooterMotors(0);
-      })
+      }),
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.MAX_SHOOTER_ANGLE)
+      )
     );
 
     // Turn on and off intake motors BUTTON 2 (HELPER)
@@ -197,7 +198,9 @@ public class RobotContainer {
       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE)      
       );
     new JoystickButton(m_helperController, 2).onFalse(
-      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE)      
+     
+      new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE) 
+          
     );
 
     // new JoystickButton(m_driverController, 2).onTrue(

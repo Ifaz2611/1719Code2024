@@ -52,10 +52,11 @@ public class ShootAngleControlCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    System.out.println(mAnglePIDSubsystem.getMeasurement());
 
     // this should allow manual control
     if (mAnglePIDSubsystem.manualControl) {
-      double y = Yposition.getAsDouble() * 24 + 24;
+      double y = Yposition.getAsDouble() * 25 + 25;
       // System.out.println("going");
       mAnglePIDSubsystem.setSetpoint((y > Constants.MAX_SHOOTER_ANGLE) ? Constants.MAX_SHOOTER_ANGLE : y);
     }
@@ -63,7 +64,13 @@ public class ShootAngleControlCommand extends Command {
     // returns angle as double
  else if (this.limeLight.getDistance() == 0.0 ) {
       mAnglePIDSubsystem.setSetpoint(Constants.DEFAULT_SHOOTER_ANGLE);
-    } else if (m_DeviceSubsystem.checkRing()) {
+    // } else if (!m_DeviceSubsystem.checkRing()) {
+    //   // System.out.println("theres the limelight!");
+    //   mAnglePIDSubsystem.setSetpoint(this.limeLight.getShootingAngle());
+      
+    // }
+    // in
+        } else if (!mAnglePIDSubsystem.getIntakeState()) {
       // System.out.println("theres the limelight!");
       mAnglePIDSubsystem.setSetpoint(this.limeLight.getShootingAngle());
       
