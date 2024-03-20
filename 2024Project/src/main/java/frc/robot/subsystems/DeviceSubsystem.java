@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.ColorSensorV3;
+
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -30,8 +32,12 @@ public class DeviceSubsystem extends SubsystemBase {
     // these 2 controll the the motors of the shooter more specifically intake
     private static CANSparkMax SHOOTER;
     private static CANSparkMax INTAKE;
+
     private static CANSparkMax ARM_MOTOR;
-    private AnalogPotentiometer noteSensor;
+
+    private int proximity;
+    private ColorSensorV3 m_colorSensor = Constants.m_colorSensor;
+
 
     public DeviceSubsystem() {
 
@@ -47,23 +53,14 @@ public class DeviceSubsystem extends SubsystemBase {
 
     // turns the motors a specific direction.
     // -1 is intake, 1 is shoot
+
+    //turns on the shooter motors
     public void turnShooterMotors(double speed) {
         SHOOTER.set(speed);
-        // if (ShootBOF == 1) {
-        //     // make motors turn inwards
-        //     SHOOTER.set(Constants.SHOOTSPEED);
-
-        // } else if (ShootBOF == 0) {
-        //     // make motors shoot ring out + speed
-        //     // SHOOTER.set(0);//-Constants.SHOOTSPEED);
-        //     SHOOTER.set(0);//Constants.SHOOTSPEED);
-
-        // } else {
-        //     turnOffIntakeMotors();
-        // }
+        
     }
 
-    // turns the shoot motor on
+    // turns the intake motor on
     public void turnIntakeMotors(double speed) { 
         INTAKE.set(speed);
         // if (onOrOff == 1) {
@@ -85,10 +82,21 @@ public class DeviceSubsystem extends SubsystemBase {
         INTAKE.set(0);
     }
 
-      // checks if the ring is there yessir TODO: GET CORRECT MEASUREMENTS SO TEST ! ! ! ! ! 
-  public double checkRing(){
-    System.out.println("Note sensor get function:" + noteSensor.get());
-    return noteSensor.get();
+    // TODO: GET CORRECT MEASUREMENTS SO TEST ! ! ! ! ! 
+    public boolean checkRing(){ 
+    proximity = m_colorSensor.getProximity();
+    System.out.println("proximity " + proximity);
     
+    if (proximity >= Constants.DISTANCE_NOTE_IN) {
+        return true;
+    } 
+    else{
+        return false;
+    }
   }
 }
+
+//   if (checkRing() == True) {
+//     turnOffIntakeMotor();
+//   }
+// }
