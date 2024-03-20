@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.commands.ShootAngleControlCommand;
 import frc.robot.commands.ShootSequence;
 import frc.robot.commands.IntakeSequence;
+import frc.robot.commands.LedCommand;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AutoMovePIDCommand;
 import frc.robot.commands.AutoMovePIDCommand;
@@ -135,6 +136,9 @@ public class RobotContainer {
     //System.out.println(m_limelight.getShootingAngle() + " LIMELIGHT");
     this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
 
+    LedCommand mLedCommand = new LedCommand(m_LedSubsystem, m_limelight);
+    this.m_LedSubsystem.setDefaultCommand(mLedCommand);
+    
       // new InstantCommand(() -> {
   
 
