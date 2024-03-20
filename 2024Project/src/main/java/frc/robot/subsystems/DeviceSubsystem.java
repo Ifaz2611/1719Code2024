@@ -86,7 +86,6 @@ public class DeviceSubsystem extends SubsystemBase {
     public boolean checkRing(){ 
     proximity = m_colorSensor.getProximity();
     System.out.println("proximity " + proximity);
-    
     if (proximity >= Constants.DISTANCE_NOTE_IN) {
         return true;
     } 

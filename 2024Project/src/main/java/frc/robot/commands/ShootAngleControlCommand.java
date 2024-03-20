@@ -11,6 +11,7 @@ import java.util.function.BooleanSupplier;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
+import frc.robot.subsystems.DeviceSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 
@@ -23,8 +24,11 @@ public class ShootAngleControlCommand extends Command {
 
   private DoubleSupplier Yposition;
   // private JoystickButton buttonVal;
+
+  private DeviceSubsystem m_DeviceSubsystem;
+
   /** Creates a new ShootAngleControlCommand. */
-  public ShootAngleControlCommand(ShooterAnglePIDSubsystem mAnglePIDSubsystem, LimelightSubsystem limeLight, DoubleSupplier Yposition) {
+  public ShootAngleControlCommand(ShooterAnglePIDSubsystem mAnglePIDSubsystem, LimelightSubsystem limeLight, DoubleSupplier Yposition, DeviceSubsystem m_DeviceSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(mAnglePIDSubsystem);
 
@@ -32,6 +36,7 @@ public class ShootAngleControlCommand extends Command {
     this.limeLight = limeLight;
 
     this.Yposition = Yposition;
+    this.m_DeviceSubsystem = m_DeviceSubsystem;
 
     // ignore this error :) i have no clue what it wants but it work
     //this.buttonVal = buttonVal;
@@ -58,7 +63,7 @@ public class ShootAngleControlCommand extends Command {
     // returns angle as double
  else if (this.limeLight.getDistance() == 0.0 ) {
       mAnglePIDSubsystem.setSetpoint(Constants.DEFAULT_SHOOTER_ANGLE);
-    } else if (!mAnglePIDSubsystem.getIntakeState()) {
+    } else if (m_DeviceSubsystem.checkRing()) {
       // System.out.println("theres the limelight!");
       mAnglePIDSubsystem.setSetpoint(this.limeLight.getShootingAngle());
       
