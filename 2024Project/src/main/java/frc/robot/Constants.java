@@ -78,7 +78,7 @@ public final class Constants {
   public static final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort); 
 
   // the value of this is probably wrong
-  public static final int DISTANCE_NOTE_IN = 2000; 
+  public static final int DISTANCE_NOTE_IN = 1500; 
 
   // angles of shooter
   // PLACE HOLDERS!!!!!!!!!!!!
