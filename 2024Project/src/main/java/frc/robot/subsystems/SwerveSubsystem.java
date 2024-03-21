@@ -314,6 +314,9 @@ public class SwerveSubsystem extends SubsystemBase {
             rightFrontWheel.speedMotors(translatePower);
             rightBackWheel.speedMotors(translatePower);
         }
+        public void robotOrientedDrift(double direction, double translatePower, double turnPower){
+            drifTranslate(direction+DRIVE_GYRO.getAngle(), translatePower, turnPower);
+        }
         public void drifTranslate(double direction, double translatePower, double turnPower){
                       direction = direction - DRIVE_GYRO.getAngle(); //gyro on hootide hence +90 took out +90 +30 + 180
 
