@@ -14,7 +14,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PIDGyroCommand extends PIDCommand {
   /** Creates a new PIDGyroCommand. */
-  public PIDGyroCommand(double direction, SwerveSubsystem mSwerveSubsystem ) {
+  public PIDGyroCommand(double direction, SwerveSubsystem mSwerveSubsystem) {
     super(
         // The controller that the command will use
         new PIDController(Constants.PTurnToAngle, Constants.ITurnToAngle, Constants.DTurnToAngle),
@@ -29,7 +29,7 @@ public class PIDGyroCommand extends PIDCommand {
         });
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
-    getController().setTolerance(Constants.LimeLightDegreesTolerance, Constants.LimeLightVelocityTolerance);
+    getController().setTolerance(1.2*Constants.LimeLightDegreesTolerance, 1.2*Constants.LimeLightVelocityTolerance);
     addRequirements(mSwerveSubsystem);
     getController().enableContinuousInput(0, 360);
   }
