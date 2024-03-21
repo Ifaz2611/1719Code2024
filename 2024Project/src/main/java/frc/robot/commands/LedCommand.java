@@ -30,7 +30,7 @@ public class LedCommand extends Command {
         this.m_DeviceSubsystem = m_DeviceSubsystem;
         this.m_AnglePIDSubsystem = m_AnglePIDSubsystem;
 
-        addRequirements(mLedSubsystem, mLimelightSubsystem, m_DeviceSubsystem);
+        addRequirements(mLedSubsystem);
 
     }
 

@@ -48,9 +48,10 @@ public class Autos {
 
     // Default AUTO
     return new SequentialCommandGroup(
-        new WaitCommand(0.25),
+        //new WaitCommand(0.25),
+        
         new InstantCommand(() -> SmartDashboard.putNumber("Before Command Sequence", 5)),
-       // new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(0.5),
+       // new PIDCommandTurnToAngle(gm_limelight, m_swerveDrive).withTimeout(0.5),
         // move shooter to max shooting angle (48 deg)
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MAX_SHOOTER_ANGLE).withTimeout(0.5),
         // new InstantCommand(()->{m_AnglePIDSubsystem.shootAngle();}),
@@ -88,7 +89,7 @@ public class Autos {
       LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
     m_ledSubsystem.set_led_color(-.25);
     // SmartDashboard.putNumber("Before Command Sequence", 0);
-        //return new ShootSequence(m_DeviceSubsystem);
+        //return new ShootSequence(m_DeviceSubsystem);  
     return new SequentialCommandGroup(
         // //AUTO LEFT
         // new WaitCommand(.5),
@@ -149,15 +150,15 @@ public class Autos {
 
         // 3 NOTE
 
-        new PIDGyroCommand(0, m_swerveDrive),
+        //new PIDGyroCommand(0, m_swerveDrive),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.MAX_SHOOTER_ANGLE),
         new AutoMovePIDCommand(190, 100, 0, m_swerveDrive),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.MAX_SHOOTER_ANGLE),
         new AutoMovePIDCommand(10, 100, 0, m_swerveDrive),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),
         // new PIDGyroCommand(22, m_swerveDrive),
-        new ShootSequence(m_DeviceSubsystem),
-        new PIDGyroCommand(0, m_swerveDrive)
+        new ShootSequence(m_DeviceSubsystem)
+        //new PIDGyroCommand(0, m_swerveDrive)
 
     );
   }
