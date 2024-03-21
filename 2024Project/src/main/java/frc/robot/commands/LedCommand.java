@@ -12,6 +12,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.DeviceSubsystem;
 import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 
 public class LedCommand extends Command {
     /** Creates a new LedCommand. */
@@ -19,13 +20,16 @@ public class LedCommand extends Command {
     LimelightSubsystem mLimelightSubsystem;
     LedSubsystem mLedSubsystem;
     DeviceSubsystem m_DeviceSubsystem;
+    ShooterAnglePIDSubsystem m_AnglePIDSubsystem;
 
     public LedCommand(LedSubsystem mLedSubsystem, LimelightSubsystem mLimelightSubsystem,
-            DeviceSubsystem m_DeviceSubsystem) {
+            DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem) {
         // Use addRequirements() here to declare subsystem dependencies.
         this.mLedSubsystem = mLedSubsystem;
         this.mLimelightSubsystem = mLimelightSubsystem;
         this.m_DeviceSubsystem = m_DeviceSubsystem;
+        this.m_AnglePIDSubsystem = m_AnglePIDSubsystem;
+
         addRequirements(mLedSubsystem, mLimelightSubsystem, m_DeviceSubsystem);
 
     }
@@ -43,13 +47,13 @@ public class LedCommand extends Command {
         double aprilTagId = mLimelightSubsystem.getTag();
 
         mLedSubsystem.set_led_color(
-            !m_DeviceSubsystem.checkRing() // put not here please when we have the sensor
-                                    ? Constants.NO_NOTE_BASELINE_GOLD :
-                (aprilTagId == 4 || aprilTagId == 7)
-                        ? Constants.SPEAKER_GREEN
-                        : (aprilTagId == 6 || aprilTagId == 5)
-                                ? Constants.AMP_BLUE 
-                : Constants.NO_TAG_PURPLE);
+                !m_DeviceSubsystem.checkRing() // put not here please when we have the sensor
+                        ? (m_AnglePIDSubsystem.manualControl ? Constants.LARSON_SCANNER : Constants.NO_TAG_PURPLE)
+                        : (aprilTagId == 4 || aprilTagId == 7)
+                                ? Constants.SPEAKER_GREEN
+                                : (aprilTagId == 6 || aprilTagId == 5)
+                                        ? Constants.AMP_BLUE
+                                        : Constants.NO_NOTE_BASELINE_GOLD);
 
         // // speaker
         // if (aprilTagId == 4 || aprilTagId == 7) {
