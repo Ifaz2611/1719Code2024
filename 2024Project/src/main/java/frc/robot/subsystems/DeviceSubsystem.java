@@ -62,7 +62,7 @@ public class DeviceSubsystem extends SubsystemBase {
 
     // turns the intake motor on
     public void turnIntakeMotors(double speed) { 
-        INTAKE.set(speed);
+        INTAKE.set(speed*.4);
         // if (onOrOff == 1) {
         //     INTAKE.set(Constants.INTAKESPEED);
         // } else if (onOrOff == -1){
@@ -89,10 +89,10 @@ public class DeviceSubsystem extends SubsystemBase {
     proximity = m_colorSensor.getProximity();
     System.out.println("proximity " + proximity);
     if (proximity >= Constants.DISTANCE_NOTE_IN) {
-        return false;
+        return true;
     } 
     else{
-        return true;
+        return false;
     }
   }
 }
