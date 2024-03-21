@@ -24,7 +24,7 @@ public class Autos {
   ShooterAnglePIDSubsystem m_AnglePIDSubsystem;
   DeviceSubsystem m_DeviceSubsystem;
   SwerveSubsystem m_swerveDrive;
-
+  LedSubsystem m_LedSubsystem;
   public void robotInit() {
     
   }
@@ -37,7 +37,9 @@ public class Autos {
 
     // Change LEDs to rainbow
     // System.out.println("auton");
-    // m_ledSubsystem.update_led_color(Constants.RAINBOW_GLITTER);
+
+    // updates LEDs
+    m_ledSubsystem.set_led_color(Constants.AUTON_YELLOW);
 
     // Target Distance IN INCHES
     double targetDistance = 67;
