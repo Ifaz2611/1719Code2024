@@ -14,6 +14,7 @@ import frc.robot.commands.AutoMovePIDCommand;
 import frc.robot.commands.Autos;
 //import frc.robot.commands.LimelightSwerveManager;
 import frc.robot.commands.PIDCommandTurnToAngle;
+import frc.robot.commands.PIDGyroCommand;
 //import frc.robot.commands.ResetAngleCommand;
 import frc.robot.commands.SwerveTeleopCommand;
 import frc.robot.subsystems.ClimbSubsystem;
@@ -176,7 +177,7 @@ public class RobotContainer {
   //Run shoot sequence BUTTON 1 (HELPER)
     new JoystickButton(m_helperController, 1).onTrue(      
      new SequentialCommandGroup(
-          //new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
+          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
           new InstantCommand(()-> {
             m_DeviceSubsystem.turnShooterMotors(1);
           })
@@ -214,6 +215,10 @@ public class RobotContainer {
     //     Constants.TELEOPSPEEDMODIFIER = 0.75;
     //   })
     // );
+
+      new JoystickButton(m_driverController, 6).onTrue(
+      new PIDGyroCommand(0,m_swerveDrive)
+    );
 
     // Turn on and off outtake motors BUTTON 3 (HELPER)    
     new JoystickButton(m_helperController, 3).onTrue(

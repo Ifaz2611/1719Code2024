@@ -52,7 +52,7 @@ public class IntakeSequence extends SequentialCommandGroup {
 
     //Turn on intake
     if (stateNum == 0) {
-       addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(1/10)); // i dont know if this really does anything but move the motors, why not just only run the motors here? - hbg
+       addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(1)); // i dont know if this really does anything but move the motors, why not just only run the motors here? - hbg
     } 
     //Turn off intake
     else if (stateNum == 1) {

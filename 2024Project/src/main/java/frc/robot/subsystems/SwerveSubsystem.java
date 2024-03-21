@@ -366,6 +366,7 @@ return Moduleset;
         RIGHT_FRONT_DRIVE_DISTANCE_ENCODER.setPosition(0);
         RIGHT_BACK_DRIVE_DISTANCE_ENCODER.setPosition(0);
     }
+    
 
     public double returnAverageDistance() {
         return (LEFT_FRONT_DRIVE_DISTANCE_ENCODER.getPosition() +
@@ -373,8 +374,10 @@ return Moduleset;
          RIGHT_FRONT_DRIVE_DISTANCE_ENCODER.getPosition() + 
          RIGHT_BACK_DRIVE_DISTANCE_ENCODER.getPosition())/4;
     } 
-
+    public double getGYROAngle(){
+        return DRIVE_GYRO.getAngle();
     
+}
 
     @Override
     public void periodic() {
