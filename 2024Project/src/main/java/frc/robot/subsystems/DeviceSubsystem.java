@@ -62,7 +62,7 @@ public class DeviceSubsystem extends SubsystemBase {
 
     // turns the intake motor on
     public void turnIntakeMotors(double speed) { 
-        INTAKE.set(speed*.4);
+        INTAKE.set(speed/2);
         // if (onOrOff == 1) {
         //     INTAKE.set(Constants.INTAKESPEED);
         // } else if (onOrOff == -1){

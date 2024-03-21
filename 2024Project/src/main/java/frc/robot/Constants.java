@@ -99,7 +99,7 @@ public final class Constants {
   // the vertical height of top of speaker's apriltag above ground
   public static final double SPEAKER_APRILTAG_HEIGHT = 60; // inches
   // vertical distance from top of apriltag to center of speaker
-  public static final double HOLE_TO_APRILTAG_HEIGHT = 24; // inches
+  public static final double HOLE_TO_APRILTAG_HEIGHT = 20; // inches //Jai just changed this from 24 to 20
   //
   // Angle of limelight from the horizontal
   public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 20.0; 
@@ -162,7 +162,7 @@ public final class Constants {
   public static final double LimeLightVelocityTolerance = 0.02;
 
   // distance from the place you will score in from the april tag in inches
-  public static final double DistFromAprilTag = 24;
+  public static final double DistFromAprilTag = 20; //24 was too high
 
   // Pid for PIDCommandTurnToAngle (positioning robot direction)
   public static final double PTurnToAngle = 0.005;
@@ -177,7 +177,7 @@ public final class Constants {
    * DO NOT EDIT
    */
   // Static colors during match
-  public static final double NO_NOTE_BASELINE_GOLD = 0.63;
+  public static final double NO_NOTE_BASELINE_GOLD = -0.85;
   public static final double NO_TAG_PURPLE = 0.91;
   public static final double SPEAKER_GREEN = 0.77;
   public static final double AMP_BLUE = 0.83;

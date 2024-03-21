@@ -311,6 +311,15 @@ public class RobotContainer {
           System.out.println(m_limelight.getTag());
         }));
 
+    new JoystickButton(m_helperController, 5).onTrue(
+       
+          new AutoMovePIDCommand(0, 30, m_swerveDrive.returnAverageDistance(), m_swerveDrive)
+        );
+    //  new JoystickButton(m_driverController, 5).onTrue(
+    //    new PIDCommandTurnToAngle(m_limelight,m_swerveDrive)
+          
+    //     );
+
     // sets manual control based on if button 10 is pressed. im sorry i did it this
     // way..
     new JoystickButton(m_helperController, 10).onTrue(
@@ -439,9 +448,11 @@ public class RobotContainer {
   public Command getAutonomousCommand(String m_autoSelected) {
     // returns the correct auto called from the smart dashboard
     if (m_autoSelected.equals("auto 1")) {
+      System.out.println("AUTO 1");
       return Autos.autoPositionOne(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
 
     } else if (m_autoSelected.equals("auto 2")) {
+      System.out.println("AUTO 2");
       return Autos.autoPositionTwo(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
 
     } else if (m_autoSelected.equals("auto 3")) {

@@ -52,7 +52,7 @@ public class ShootAngleControlCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println(mAnglePIDSubsystem.getMeasurement());
+    //System.out.println(mAnglePIDSubsystem.getMeasurement());
 
     // this should allow manual control
     if (mAnglePIDSubsystem.manualControl) {

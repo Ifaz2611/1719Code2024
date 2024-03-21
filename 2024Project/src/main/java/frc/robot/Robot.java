@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
     CameraServer.startAutomaticCapture();
 
     m_robotContainer = new RobotContainer();
-    GYRO.reset();
+    //GYRO.reset();
  
    // autonomousCommand = new ;
 
@@ -99,6 +99,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    System.out.println("WORKING");
    m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_chooser.getSelected());
       // m_autonomousCommand = m_robotContainer.getAutonomousCommand("default");
 
