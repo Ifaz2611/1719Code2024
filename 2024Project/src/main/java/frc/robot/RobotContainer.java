@@ -216,9 +216,6 @@ public class RobotContainer {
     // })
     // );
 
-    new JoystickButton(m_driverController, 6).onTrue(
-        new PIDGyroCommand(0, m_swerveDrive));
-
     // Turn on and off outtake motors BUTTON 3 (HELPER)
     new JoystickButton(m_helperController, 3).onTrue(
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE));

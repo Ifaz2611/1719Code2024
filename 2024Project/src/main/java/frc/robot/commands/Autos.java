@@ -48,47 +48,45 @@ public class Autos {
 
 
     //FIRST AUTO
-    // return new SequentialCommandGroup(
-    //     new WaitCommand(0.5),
-    //     new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(0.5),
-    //     // move shooter to max shooting angle (48 deg)
-    //     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MAX_SHOOTER_ANGLE).withTimeout(0.5),
-    //     // new InstantCommand(()->{m_AnglePIDSubsystem.shootAngle();}),
-    //     // turn intake off
-    //     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
-    //     // quick outtake to unjam note
-    //     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
-    //     new ShootSequence(m_DeviceSubsystem),
-    //     // new ResetAngleCommand(m_limelight, m_swerveDrive),
-    //     // turn intake on
-    //     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
-    //     new AutoMovePIDCommand(0, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(),
-    //         m_swerveDrive).withTimeout(2),
-    //     new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(0.5),
-    //    // new AutoMovePIDCommand(0, 9 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(0.5),
-    //    // turn intake off 
-    //    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
-    //     new WaitCommand(2),
+    return new SequentialCommandGroup(
+        new WaitCommand(0.5),
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(0.5),
+        // move shooter to max shooting angle (48 deg)
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MAX_SHOOTER_ANGLE).withTimeout(0.5),
+        // new InstantCommand(()->{m_AnglePIDSubsystem.shootAngle();}),
+        // turn intake off
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
+        // quick outtake to unjam note
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
+        new ShootSequence(m_DeviceSubsystem),
+        // new ResetAngleCommand(m_limelight, m_swerveDrive),
+        // turn intake on
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
+        new AutoMovePIDCommand(0, targetDistance / distanceConversionFactor, m_swerveDrive.returnAverageDistance(),
+            m_swerveDrive).withTimeout(2),
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(0.5),
+       // new AutoMovePIDCommand(0, 9 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(0.5),
+       // turn intake off 
+       new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
+        new WaitCommand(2),
 
-    //    // new AutoMovePIDCommand(0, 10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(2),
-    //     // quick outtake to unlodge stuck note 
-    //     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(3),
-    //     // m_swerveDrive.returnAverageDistance(), m_swerveDrive),
-    //     new ShootSequence(m_DeviceSubsystem).withTimeout(5),
-    //     // new AutoMovePIDCommand(180, targetDistance - 10 / distanceConversionFactor,
-    //     //     m_swerveDrive.returnAverageDistance(), m_swerveDrive)
-    //     new WaitCommand(5)
-    // );
-
-      return new SequentialCommandGroup(
-
-      );
+       // new AutoMovePIDCommand(0, 10 / distanceConversionFactor, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(2),
+        // quick outtake to unlodge stuck note 
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(3),
+        // m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+        new ShootSequence(m_DeviceSubsystem).withTimeout(5),
+        // new AutoMovePIDCommand(180, targetDistance - 10 / distanceConversionFactor,
+        //     m_swerveDrive.returnAverageDistance(), m_swerveDrive)
+        new WaitCommand(5)
+    );
 
   };
 
   public static Command autoPositionOne(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
       LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
         m_ledSubsystem.set_led_color(Constants.RAINBOW_GLITTER);
+        SmartDashboard.putNumber("Before Command Sequence", 0);
+        
         return new SequentialCommandGroup(
           // //AUTO LEFT
           // new WaitCommand(.5),
@@ -97,31 +95,32 @@ public class Autos {
           new AutoMovePIDCommand(180, 20, 0, m_swerveDrive),
           new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),
           //new PIDGyroCommand(45, m_swerveDrive),
-          new ShootSequence(m_DeviceSubsystem),
+          new ShootSequence(m_DeviceSubsystem)
 
-          //TWO NOTE
+          // //TWO NOTE
 
-          new PIDGyroCommand(0, m_swerveDrive),
-          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.MAX_SHOOTER_ANGLE),
-          new AutoMovePIDCommand(180, 80, 0, m_swerveDrive),
-          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.  MAX_SHOOTER_ANGLE),
-          new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),
-          //new PIDGyroCommand(22, m_swerveDrive),
-          new ShootSequence(m_DeviceSubsystem),
+          // new PIDGyroCommand(0, m_swerveDrive),
+          // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.MAX_SHOOTER_ANGLE),
+          // new AutoMovePIDCommand(180, 80, 0, m_swerveDrive),
+          // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.  MAX_SHOOTER_ANGLE),
+          // new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),
+          // //new PIDGyroCommand(22, m_swerveDrive),
+          // new ShootSequence(m_DeviceSubsystem),
 
-          //3 NOTE
+          // //3 NOTE
 
-          new PIDGyroCommand(0, m_swerveDrive),
-          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.MAX_SHOOTER_ANGLE),
-          new AutoMovePIDCommand(190, 100, 0, m_swerveDrive),
-          new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.  MAX_SHOOTER_ANGLE),
-          new AutoMovePIDCommand(10, 100, 0, m_swerveDrive),
-          new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),
-          //new PIDGyroCommand(22, m_swerveDrive),
-          new ShootSequence(m_DeviceSubsystem),
-          new PIDGyroCommand(0, m_swerveDrive)
+          // new PIDGyroCommand(0, m_swerveDrive),
+          // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.MAX_SHOOTER_ANGLE),
+          // new AutoMovePIDCommand(190, 100, 0, m_swerveDrive),
+          // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.  MAX_SHOOTER_ANGLE),
+          // new AutoMovePIDCommand(10, 100, 0, m_swerveDrive),
+          // new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),
+          // //new PIDGyroCommand(22, m_swerveDrive),
+          // new ShootSequence(m_DeviceSubsystem),
+          // new PIDGyroCommand(0, m_swerveDrive)
 
         );
+        
       }
 
     public static Command autoPositionTwo(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
