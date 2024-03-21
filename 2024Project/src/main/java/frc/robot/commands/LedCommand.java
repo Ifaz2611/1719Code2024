@@ -48,12 +48,13 @@ public class LedCommand extends Command {
 
         mLedSubsystem.set_led_color(
                 !m_DeviceSubsystem.checkRing() // put not here please when we have the sensor
-                        ? (m_AnglePIDSubsystem.manualControl ? Constants.LARSON_SCANNER : Constants.NO_TAG_PURPLE)
-                        : (aprilTagId == 4 || aprilTagId == 7)
-                                ? Constants.SPEAKER_GREEN
-                                : (aprilTagId == 6 || aprilTagId == 5)
-                                        ? Constants.AMP_BLUE
-                                        : Constants.NO_NOTE_BASELINE_GOLD);
+                        ? Constants.NO_TAG_PURPLE
+                        : m_AnglePIDSubsystem.manualControl ? Constants.LARSON_SCANNER
+                                : (aprilTagId == 4 || aprilTagId == 7)
+                                        ? Constants.SPEAKER_GREEN
+                                        : (aprilTagId == 6 || aprilTagId == 5)
+                                                ? Constants.AMP_BLUE
+                                                : Constants.NO_NOTE_BASELINE_GOLD);
 
         // // speaker
         // if (aprilTagId == 4 || aprilTagId == 7) {
