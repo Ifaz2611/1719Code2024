@@ -12,6 +12,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -37,12 +38,12 @@ public class Robot extends TimedRobot {
   public static Pigeon2 GYRO = new Pigeon2(Constants.CAN_GYRO_PORT);
 
   // Robot auton choices
-  // private final String kAuto0 = "Auto 0 (Default)";
-  // private final String kAuto1 = "Auto 1";
-  // private final String kAuto2 = "Auto 2";
-  // private final String kAuto3 = "Auto 3";
+  private final String kAuto0 = "Auto 0 (Default)";
+  private final String kAuto1 = "Auto 1";
+  private final String kAuto2 = "Auto 2";
+  private final String kAuto3 = "Auto 3";
   // private String m_autoSelected;
-  // private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -65,11 +66,11 @@ public class Robot extends TimedRobot {
    // autonomousCommand = new ;
 
     // Setup smart dashboard to choose auton
-    // m_chooser.setDefaultOption("Auto 0 (Default)", kAuto0);
-    // m_chooser.addOption("Auto 1", kAuto1);
-    // m_chooser.addOption("Auto 2", kAuto2);
-    // m_chooser.addOption("Auto 3", kAuto3);
-    // SmartDashboard.putData("Auto choices", m_chooser);
+    m_chooser.setDefaultOption("Auto 0 (Default)", kAuto0);
+    m_chooser.addOption("Auto 1", kAuto1);
+    m_chooser.addOption("Auto 2", kAuto2);
+    m_chooser.addOption("Auto 3", kAuto3);
+    SmartDashboard.putData("Auto choices", m_chooser);
   }
 
   /**
@@ -98,7 +99,9 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-   m_autonomousCommand = m_robotContainer.getAutonomousCommand("default");
+   m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_chooser.getSelected());
+      // m_autonomousCommand = m_robotContainer.getAutonomousCommand("default");
+
     // Autos.defaultAuto(new DeviceSubsystem(), new ShooterAnglePIDSubsystem(), new LimelightSubsystem(), new SwerveSubsystem(Constants.m_leftFrontDirection, Constants.m_leftBackDirection,
     // Constants.m_rightFrontDirection, Constants.m_rightBackDirection));
 
