@@ -179,21 +179,19 @@ public class RobotContainer {
     // }
 
     // Run shoot sequence BUTTON 1 (HELPER)
-    new JoystickButton(m_helperController, 1).onTrue(
-        new SequentialCommandGroup(
-            new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
+    new JoystickButton(m_helperController, 5).onTrue(
+  
             new InstantCommand(() -> {
-              m_DeviceSubsystem.turnShooterMotors(1);
-            })))
+              m_DeviceSubsystem.turnIntakeMotors(-1);
+            })
+        );
 
     ;
 
-    new JoystickButton(m_helperController, 1).onFalse(
-        new SequentialCommandGroup(
+    new JoystickButton(m_helperController, 5).onFalse(
             new InstantCommand(() -> {
-              m_DeviceSubsystem.turnShooterMotors(0);
-            }),
-            new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.MAX_SHOOTER_ANGLE)));
+              m_DeviceSubsystem.turnIntakeMotors(0);
+            }));
 
     // Turn on and off intake motors BUTTON 2 (HELPER)
     new JoystickButton(m_helperController, 2).onTrue(
@@ -311,9 +309,17 @@ public class RobotContainer {
           System.out.println(m_limelight.getTag());
         }));
 
-    new JoystickButton(m_helperController, 5).onTrue(
-       
-          new AutoMovePIDCommand(0, 30, m_swerveDrive.returnAverageDistance(), m_swerveDrive)
+    new JoystickButton(m_helperController, 1).onTrue(
+      new InstantCommand(() -> {
+        m_DeviceSubsystem.turnShooterMotors(1);
+      })
+        );
+
+
+         new JoystickButton(m_helperController, 1).onFalse(
+      new InstantCommand(() -> {
+        m_DeviceSubsystem.turnShooterMotors(0);
+      })
         );
     //  new JoystickButton(m_driverController, 5).onTrue(
     //    new PIDCommandTurnToAngle(m_limelight,m_swerveDrive)

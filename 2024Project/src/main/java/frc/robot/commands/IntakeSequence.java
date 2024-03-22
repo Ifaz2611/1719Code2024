@@ -76,9 +76,14 @@ public class IntakeSequence extends SequentialCommandGroup {
     else if (stateNum == -2) {
        addCommands(setIntakeState(m_angler, true), setIntakeSetpoint(m_angler), IntakeMotors(-1), waitwait(.5), IntakeMotors(0), setIntakeState(m_angler, false));
     } 
-     // Called once the command ends or is interrupted.
-  
+
+    // copy of state -1, where arm does NOT move down. this fixes aim
+  else if (stateNum == -3) {
+       addCommands(setIntakeSetpoint(m_angler), IntakeMotors(-1), waitwait(.05), IntakeMotors(0), setIntakeState(m_angler, false));
+    } 
   }
+       // Called once the command ends or is interrupted.
+
 //   @Override 
 //   public void end(boolean interrupted ) {
 // mDeviceSubsystem.turnOffIntakeMotors();

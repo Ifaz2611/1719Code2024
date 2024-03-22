@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
     CameraServer.startAutomaticCapture();
 
     m_robotContainer = new RobotContainer();
-    //GYRO.reset();
+    GYRO.reset();
  
    // autonomousCommand = new ;
 
