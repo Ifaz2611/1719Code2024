@@ -107,7 +107,7 @@ public final class Constants {
   public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 7.5; 
   //
   // maximum arm angle allowed (deg)
-  public static final double MAX_SHOOTER_ANGLE = 49.5; // might set 1-2 lower
+  public static final double MAX_SHOOTER_ANGLE = 49.8; // might set 1-2 lower
   // minimum arm angle allowed (deg)
   public static final double MIN_SHOOTER_ANGLE = 0; // horizontal shooter
   // arm angle when shooting platform (lexan) is horizontal

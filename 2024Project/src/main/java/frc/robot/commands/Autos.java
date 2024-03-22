@@ -107,7 +107,7 @@ public class Autos {
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
     Constants.MAX_SHOOTER_ANGLE),
 new WaitCommand(1),
-    new AutoMovePIDCommand(0, 50, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+    new AutoMovePIDCommand(0, 40, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
     MAX_SHOOTER_ANGLE).withTimeout(1),
 
@@ -220,5 +220,249 @@ new WaitCommand(1),
     // new PIDGyroCommand(0, m_swerveDrive)
         new WaitCommand(100)
     );
+    }
+    
+
+    public static Command RedPositionOne(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+    m_ledSubsystem.set_led_color(-.25);
+    // SmartDashboard.putNumber("Before Command Sequence", 0);
+        //return new ShootSequence(m_DeviceSubsystem);  
+    return new SequentialCommandGroup(
+        new WaitCommand(.5),
+        //ONE NOTE
+        new PIDGyroCommand(60, m_swerveDrive).withTimeout(.5),
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
+        new ShootSequence(m_DeviceSubsystem),
+
+        //TWO NOTE
+        new PIDGyroCommand(0, m_swerveDrive).withTimeout(1),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
+        Constants.MAX_SHOOTER_ANGLE),
+        new WaitCommand(1),
+        new AutoMovePIDCommand(0, 50, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
+        MAX_SHOOTER_ANGLE).withTimeout(1),
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
+        new WaitCommand(1),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
+        new ShootSequence(m_DeviceSubsystem)//,
+    // //3 NOTE
+
+    // new PIDGyroCommand(0, m_swerveDrive),
+    // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
+    // Constants.MAX_SHOOTER_ANGLE).withTimeout(1),
+    // new AutoMovePIDCommand(190, 100, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+    // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.
+    // MAX_SHOOTER_ANGLE),
+    // new AutoMovePIDCommand(10, 100, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing),
+    // new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),
+    // //new PIDGyroCommand(22, m_swerveDrive),
+    // new ShootSequence(m_DeviceSubsystem),
+    // new PIDGyroCommand(0, m_swerveDrive),
+    //     new WaitCommand(100)
+    );
+  }
+
+  public static Command PositionTwo(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+    m_ledSubsystem.set_led_color(Constants.RAINBOW_GLITTER);
+
+    return new SequentialCommandGroup(
+        new WaitCommand(.5),
+        //ONE NOTE
+        new ShootSequence(m_DeviceSubsystem),
+
+        //TWO NOTE
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
+        Constants.MAX_SHOOTER_ANGLE),
+        new WaitCommand(1),
+        new AutoMovePIDCommand(0, 40, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
+        MAX_SHOOTER_ANGLE).withTimeout(1),
+        new WaitCommand(1),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
+        new ShootSequence(m_DeviceSubsystem),
+
+    //3 NOTE
+
+    // new PIDGyroCommand(0, m_swerveDrive),
+    // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
+    // Constants.MAX_SHOOTER_ANGLE),
+    // new AutoMovePIDCommand(5, 100, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing),
+    // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.
+    // MAX_SHOOTER_ANGLE),
+    // new AutoMovePIDCommand(185, 100, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+    // new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),
+    // //new PIDGyroCommand(22, m_swerveDrive),
+    // new ShootSequence(m_DeviceSubsystem),
+    // new PIDGyroCommand(0, m_swerveDrive),
+        new WaitCommand(100)
+    );
+  }
+
+  public static Command RedPositionThree(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+  return new SequentialCommandGroup(
+        //AUTO LEFT
+        new WaitCommand(.5),
+        //ONE NOTE
+
+        //new AutoMovePIDCommand(0,20, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(1),
+        new PIDGyroCommand(-60, m_swerveDrive).withTimeout(.5),
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
+        //new PIDGyroCommand(45, m_swerveDrive), keep this commented out
+        new ShootSequence(m_DeviceSubsystem),
+
+    //TWO NOTE
+    
+    new PIDGyroCommand(0, m_swerveDrive).withTimeout(1),
+    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
+    Constants.MAX_SHOOTER_ANGLE),
+new WaitCommand(1),
+    new AutoMovePIDCommand(0, 40, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
+    MAX_SHOOTER_ANGLE).withTimeout(1),
+
+   // new PIDGyroCommand(30, m_swerveDrive).withTimeout(.8),
+    new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
+    new WaitCommand(1),
+    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
+    new ShootSequence(m_DeviceSubsystem),
+
+    // //3 NOTE
+
+    // new PIDGyroCommand(0, m_swerveDrive),
+    // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
+    // Constants.MAX_SHOOTER_ANGLE),
+    // new AutoMovePIDCommand(190, 100, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+    // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.
+    // MAX_SHOOTER_ANGLE),
+    // new AutoMovePIDCommand(10, 100, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+    // new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),
+    // //new PIDGyroCommand(22, m_swerveDrive),
+    // new ShootSequence(m_DeviceSubsystem),
+    // new PIDGyroCommand(0, m_swerveDrive)
+        new WaitCommand(100)
+    );
+    }
+    
+    public static Command BluePositionOne(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+    m_ledSubsystem.set_led_color(-.25);
+    // SmartDashboard.putNumber("Before Command Sequence", 0);
+        //return new ShootSequence(m_DeviceSubsystem);  
+    return new SequentialCommandGroup(
+        new WaitCommand(.5),
+        //ONE NOTE
+        new PIDGyroCommand(60, m_swerveDrive).withTimeout(.5),
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
+        new ShootSequence(m_DeviceSubsystem),
+
+        //TWO NOTE
+        new PIDGyroCommand(0, m_swerveDrive).withTimeout(1),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
+        Constants.MAX_SHOOTER_ANGLE),
+        new WaitCommand(1),
+        new AutoMovePIDCommand(0, 40, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
+        MAX_SHOOTER_ANGLE).withTimeout(1),
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
+        new WaitCommand(1),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
+        new ShootSequence(m_DeviceSubsystem)//,
+    // //3 NOTE
+
+    // new PIDGyroCommand(0, m_swerveDrive),
+    // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
+    // Constants.MAX_SHOOTER_ANGLE).withTimeout(1),
+    // new AutoMovePIDCommand(190, 100, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+    // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.
+    // MAX_SHOOTER_ANGLE),
+    // new AutoMovePIDCommand(10, 100, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing),
+    // new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),
+    // //new PIDGyroCommand(22, m_swerveDrive),
+    // new ShootSequence(m_DeviceSubsystem),
+    // new PIDGyroCommand(0, m_swerveDrive),
+    //     new WaitCommand(100)
+    );
+  }
+
+  public static Command BluePositionThree(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+    m_ledSubsystem.set_led_color(-.25);
+    // SmartDashboard.putNumber("Before Command Sequence", 0);
+        //return new ShootSequence(m_DeviceSubsystem);  
+    return new SequentialCommandGroup(
+        new WaitCommand(.5),
+        //ONE NOTE
+        new PIDGyroCommand(-60, m_swerveDrive).withTimeout(.5),
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
+        new ShootSequence(m_DeviceSubsystem),
+
+        //TWO NOTE
+        new PIDGyroCommand(0, m_swerveDrive).withTimeout(1),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
+        Constants.MAX_SHOOTER_ANGLE),
+        new WaitCommand(1),
+        new AutoMovePIDCommand(0, 50, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
+        MAX_SHOOTER_ANGLE).withTimeout(1),
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
+        new WaitCommand(1),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
+        new ShootSequence(m_DeviceSubsystem)//,
+    // //3 NOTE
+
+    // new PIDGyroCommand(0, m_swerveDrive),
+    // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
+    // Constants.MAX_SHOOTER_ANGLE).withTimeout(1),
+    // new AutoMovePIDCommand(190, 100, m_swerveDrive.returnAverageDistance(), m_swerveDrive),
+    // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.
+    // MAX_SHOOTER_ANGLE),
+    // new AutoMovePIDCommand(10, 100, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing),
+    // new PIDCommandTurnToAngle(m_limelight, m_swerveDrive),
+    // //new PIDGyroCommand(22, m_swerveDrive),
+    // new ShootSequence(m_DeviceSubsystem),
+    // new PIDGyroCommand(0, m_swerveDrive),
+    //     new WaitCommand(100)
+    );
+  }
+
+
+    public static Command Test3note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+          m_ledSubsystem.set_led_color(Constants.RAINBOW_GLITTER);
+
+    return new SequentialCommandGroup(
+        //AUTO LEFT
+        new WaitCommand(.5),
+        //ONE NOTE
+
+        new ShootSequence(m_DeviceSubsystem),
+
+    //TWO NOTE
+    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
+    Constants.MAX_SHOOTER_ANGLE),
+    new WaitCommand(1.5),
+    new AutoMovePIDCommand(0, 40, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
+    MAX_SHOOTER_ANGLE).withTimeout(1),
+
+   // new PIDGyroCommand(30, m_swerveDrive).withTimeout(.8),
+    new WaitCommand(1),
+    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
+    new ShootSequence(m_DeviceSubsystem),
+
+
+    //Test place
+
+    new WaitCommand(1),
+    new PIDGyroCommand(90, m_swerveDrive).withTimeout(1),
+    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.MAX_SHOOTER_ANGLE),
+    new AutoMovePIDCommand(90, 60, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(1.5),
+    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.MAX_SHOOTER_ANGLE)
+    );
+
       }
 }
