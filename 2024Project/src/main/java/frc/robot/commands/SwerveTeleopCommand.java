@@ -36,7 +36,7 @@ public class SwerveTeleopCommand extends Command {
 
     this.table.getEntry("init").setString("done");
     this.m_swerveSubsystem = swerveSubsystem;
-    this.m_getX = getX ;
+    this.m_getX = getX;
     this.m_getY = getY;
     this.m_getTwist = getTwist;
   }
@@ -54,10 +54,12 @@ public class SwerveTeleopCommand extends Command {
     // X and y positions
     double x = this.m_getX.getAsDouble();
     double y = this.m_getY.getAsDouble();
+    double phi = this.m_getTwist.getAsDouble();
 
     // Scaled x and y positions
-    double scaledX = scaleJoystickInput(x);
-    double scaledY = scaleJoystickInput(y);
+    double scaledX = scaleJoystickInput(x,Constants.JOYSTICK_SCALE_FACTOR);
+    double scaledY = scaleJoystickInput(y,Constants.JOYSTICK_SCALE_FACTOR);
+    double scaledPhi = scaleJoystickInput(phi,Constants.TWIST_SCALE_FACTOR);
 
     this.table.getEntry("countCall").setNumber(this.countCall++);
     // double test1 = this.m_getY.getAsDouble();
@@ -67,7 +69,7 @@ public class SwerveTeleopCommand extends Command {
     double direction = angleFromXY(-scaledX, scaledY);
    
     this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(direction, translatePower*Constants.TELEOPSPEEDMODIFIER,
-         this.m_getTwist.getAsDouble()*Constants.TELEOPTWISTMODIFIER);
+         scaledPhi*Constants.TELEOPTWISTMODIFIER);
     //This has a resource leak!!!
 
    //  this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.CartesianChassisSpeeds(-this.m_getX.getAsDouble(), this.m_getY.getAsDouble(), this.m_getTwist.getAsDouble());
@@ -128,7 +130,7 @@ public class SwerveTeleopCommand extends Command {
     return a;
   }
   
-  public double scaleJoystickInput(double input) {
-    return (Math.signum(input) * Math.pow(Math.abs(input), Constants.JOYSTICK_SCALE_FACTOR));
+  public double scaleJoystickInput(double input, double scale_factor) {
+    return (Math.signum(input) * Math.pow(Math.abs(input), scale_factor));
   }
 }
