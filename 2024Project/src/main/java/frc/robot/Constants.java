@@ -233,4 +233,4 @@ public static final double SHOOTERINTAKESUPPORT = -0.01;
 // public static final int BOTTOM_LIMIT_SWITCH_PIN = 100;
 //boolean for aming
 //public boolean SelfAim = true;
-}
+} 
