@@ -29,7 +29,7 @@ public class PIDGyroCommand extends PIDCommand {
         });
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
-    getController().setTolerance(1.2*Constants.LimeLightDegreesTolerance, 1.2*Constants.LimeLightVelocityTolerance);
+    getController().setTolerance(Constants.LimeLightDegreesTolerance, Constants.LimeLightVelocityTolerance);
     addRequirements(mSwerveSubsystem);
     getController().enableContinuousInput(0, 360);
   }
