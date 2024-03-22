@@ -223,7 +223,7 @@ new WaitCommand(1),
     }
     
 
-    public static Command RedPositionOne(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+    public static Command RedAmp2note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
       LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
     m_ledSubsystem.set_led_color(-.25);
     // SmartDashboard.putNumber("Before Command Sequence", 0);
@@ -264,7 +264,7 @@ new WaitCommand(1),
     );
   }
 
-  public static Command PositionTwo(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+  public static Command RedOrBlueCenter2note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
       LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
     m_ledSubsystem.set_led_color(Constants.RAINBOW_GLITTER);
 
@@ -301,7 +301,7 @@ new WaitCommand(1),
     );
   }
 
-  public static Command RedPositionThree(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+  public static Command RedClimber2note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
       LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
   return new SequentialCommandGroup(
         //AUTO LEFT
@@ -347,7 +347,7 @@ new WaitCommand(1),
     );
     }
     
-    public static Command BluePositionOne(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+    public static Command BlueClimber2note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
       LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
     m_ledSubsystem.set_led_color(-.25);
     // SmartDashboard.putNumber("Before Command Sequence", 0);
@@ -388,7 +388,7 @@ new WaitCommand(1),
     );
   }
 
-  public static Command BluePositionThree(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+  public static Command BlueAmp2note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
       LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
     m_ledSubsystem.set_led_color(-.25);
     // SmartDashboard.putNumber("Before Command Sequence", 0);
@@ -461,7 +461,9 @@ new WaitCommand(1),
     new PIDGyroCommand(90, m_swerveDrive).withTimeout(1),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.MAX_SHOOTER_ANGLE),
     new AutoMovePIDCommand(90, 60, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(1.5),
-    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.MAX_SHOOTER_ANGLE)
+    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.MAX_SHOOTER_ANGLE),
+    // Jai added these based on neel's text
+    new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
     );
 
       }
