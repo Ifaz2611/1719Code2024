@@ -226,7 +226,7 @@ public static double TELEOPSPEEDMODIFIER = 1.5;
 public static final double TELEOPTWISTMODIFIER = .5;
 
 
-public static final double JOYSTICK_SCALE_FACTOR = 2.0;
+public static final double JOYSTICK_SCALE_FACTOR = 3.0;
 public static final double TWIST_SCALE_FACTOR = 2.0;
 
 public static final double SHOOTERINTAKESUPPORT = -0.01;
