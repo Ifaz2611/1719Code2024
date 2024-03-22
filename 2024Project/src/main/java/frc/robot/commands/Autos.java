@@ -105,9 +105,9 @@ public class Autos {
     
     new PIDGyroCommand(0, m_swerveDrive).withTimeout(1),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
-    Constants.MAX_SHOOTER_ANGLE).withTimeout(1.5),
-    new WaitCommand(1),
-    new AutoMovePIDCommand(0, 50, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(2),
+    Constants.MAX_SHOOTER_ANGLE),
+new WaitCommand(1),
+    new AutoMovePIDCommand(0, 50, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
     MAX_SHOOTER_ANGLE).withTimeout(1),
 
