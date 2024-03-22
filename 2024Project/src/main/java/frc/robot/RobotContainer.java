@@ -447,7 +447,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand(String m_autoSelected) {
     // returns the correct auto called from the smart dashboard
-    return Autos.autoPositionOne(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+    return Autos.autoPositionThree(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
   //   if (m_autoSelected.equals("Auto 1")) {
   //     System.out.println("AUTO 1");
   //     return Autos.autoPositionOne(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
