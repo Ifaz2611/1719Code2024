@@ -240,7 +240,7 @@ new WaitCommand(1),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
         Constants.MAX_SHOOTER_ANGLE),
         new WaitCommand(1),
-        new AutoMovePIDCommand(0, 50, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+        new AutoMovePIDCommand(0, 50, 0, m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
         MAX_SHOOTER_ANGLE).withTimeout(1),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
@@ -277,7 +277,7 @@ new WaitCommand(1),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
         Constants.MAX_SHOOTER_ANGLE),
         new WaitCommand(1),
-        new AutoMovePIDCommand(0, 40, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+        new AutoMovePIDCommand(0, 40, 0, m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
         MAX_SHOOTER_ANGLE).withTimeout(1),
         new WaitCommand(1),
@@ -320,7 +320,7 @@ new WaitCommand(1),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
     Constants.MAX_SHOOTER_ANGLE),
 new WaitCommand(1),
-    new AutoMovePIDCommand(0, 40, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+    new AutoMovePIDCommand(0, 40, 0, m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
     MAX_SHOOTER_ANGLE).withTimeout(1),
 
@@ -364,7 +364,7 @@ new WaitCommand(1),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
         Constants.MAX_SHOOTER_ANGLE),
         new WaitCommand(1),
-        new AutoMovePIDCommand(0, 40, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+        new AutoMovePIDCommand(0, 40, 0, m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
         MAX_SHOOTER_ANGLE).withTimeout(1),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
@@ -405,7 +405,7 @@ new WaitCommand(1),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
         Constants.MAX_SHOOTER_ANGLE),
         new WaitCommand(1),
-        new AutoMovePIDCommand(0, 50, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+        new AutoMovePIDCommand(0, 50, 0, m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
         MAX_SHOOTER_ANGLE).withTimeout(1),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
@@ -445,25 +445,25 @@ new WaitCommand(1),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
     Constants.MAX_SHOOTER_ANGLE),
     new WaitCommand(1.5),
-    new AutoMovePIDCommand(0, 40, m_swerveDrive.returnAverageDistance(), m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+    new AutoMovePIDCommand(0, 40, 0, m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.
     MAX_SHOOTER_ANGLE).withTimeout(1),
 
    // new PIDGyroCommand(30, m_swerveDrive).withTimeout(.8),
     new WaitCommand(1),
-    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
-    new ShootSequence(m_DeviceSubsystem),
+    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(.5),
+    new ShootSequence(m_DeviceSubsystem).withTimeout(2.6),
 
 
     //Test place
-
-    new WaitCommand(1),
     new PIDGyroCommand(90, m_swerveDrive).withTimeout(1),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.MAX_SHOOTER_ANGLE),
-    new AutoMovePIDCommand(90, 60, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(1.5),
+    new WaitCommand(.4),
+    new AutoMovePIDCommand(-87, 40, 0, m_swerveDrive).withTimeout(1.4).until(m_DeviceSubsystem::checkRing),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.MAX_SHOOTER_ANGLE),
-    // Jai added these based on neel's text
-    new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
+    new PIDGyroCommand(23, m_swerveDrive).withTimeout(.8),
+    new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(.5),
+    new ShootSequence(m_DeviceSubsystem).withTimeout(2.6)
     );
 
       }

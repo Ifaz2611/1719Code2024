@@ -311,10 +311,10 @@ public class RobotContainer {
           System.out.println(m_limelight.getTag());
         }));
 
-    new JoystickButton(m_helperController, 5).onTrue(
+   // new JoystickButton(m_helperController, 5).onTrue(
        
-          new AutoMovePIDCommand(0, 30, m_swerveDrive.returnAverageDistance(), m_swerveDrive)
-        );
+          //new AutoMovePIDCommand(0, 30, m_swerveDrive.returnAverageDistance(), m_swerveDrive)
+        //);
     //  new JoystickButton(m_driverController, 5).onTrue(
     //    new PIDCommandTurnToAngle(m_limelight,m_swerveDrive)
           
@@ -465,20 +465,20 @@ public class RobotContainer {
     // } else {
     //   return Autos.defaultAuto(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
     // }
-    if (m_autoSelected.equals("R1")) {
+    if (m_autoSelected.equals("RedAmp2note")) {
       return Autos.RedAmp2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
-    } else if (m_autoSelected.equals("R3")) {
+    } else if (m_autoSelected.equals("RedClimber2note")) {
       return Autos.RedClimber2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
-    } else if (m_autoSelected.equals("B1")) {
+    } else if (m_autoSelected.equals("BlueClimber2note")) {
       return Autos.BlueClimber2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
-    } else if (m_autoSelected.equals("P2")) {
+    } else if (m_autoSelected.equals("RedOrBlueCenter2note")) {
       return Autos.RedOrBlueCenter2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
-    } else if (m_autoSelected.equals("B3")) {
+    } else if (m_autoSelected.equals("BlueAmp2note")) {
       return Autos.BlueAmp2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
-    } else if (m_autoSelected.equals("Test")) {
+    } else if (m_autoSelected.equals("Center3note(test)")) {
       return Autos.Test3note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
     } else {
-      return Autos.defaultAuto(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+      return Autos.RedOrBlueCenter2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
     }
 
 

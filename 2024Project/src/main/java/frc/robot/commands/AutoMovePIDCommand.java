@@ -31,6 +31,7 @@ public class AutoMovePIDCommand extends PIDCommand {
           m_swerve.SWERVE_DRIVE_COORDINATOR.drifTranslate(direction,output,0.0);
           
         });
+        m_swerve.resetDistanceMotors();
         addRequirements(m_swerve);
         getController().setTolerance(Constants.DISTANCEPOSITIONTOLERENCE, Constants.LimeLightVelocityTolerance);
 

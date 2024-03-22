@@ -43,12 +43,12 @@ public class Robot extends TimedRobot {
   private final String kAuto2 = "Auto 2";
   private final String kAuto3 = "Auto 3";
 
-  private final String RedOnePosition = "R1";
-  private final String RedThreePosition = "R3";
-  private final String BlueOnePosition = "B1";
-  private final String TwoPosition = "P2";
-  private final String BlueThreePosition = "B3";
-  private final String TEST3NOTE = "Test";
+  private final String RedOnePosition = "RedAmp2note";
+  private final String RedThreePosition = "RedClimber2note";
+  private final String BlueOnePosition = "BlueClimber2note";
+  private final String TwoPosition = "RedOrBlueCenter2note";
+  private final String BlueThreePosition = "BlueAmp2note";
+  private final String TEST3NOTE = "Center3note(test)";
   // private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   /**
@@ -78,12 +78,12 @@ public class Robot extends TimedRobot {
     //m_chooser.addOption("Auto 2", kAuto2);
     //m_chooser.addOption("Auto 3", kAuto3);
 
-    m_chooser.addOption("Red Position 1", RedOnePosition);
-    m_chooser.addOption("Red Position 3", RedThreePosition);
-    m_chooser.addOption("Blue Position 1", BlueOnePosition);
-    m_chooser.addOption("Blue Position 3", BlueThreePosition);
-    m_chooser.addOption("Position 2", TwoPosition);
-    m_chooser.addOption("Test", TEST3NOTE);
+    m_chooser.addOption("RedAmp2note", RedOnePosition);
+    m_chooser.addOption("RedClimber2note", RedThreePosition);
+    m_chooser.addOption("BlueClimber2note", BlueOnePosition);
+    m_chooser.addOption("BlueAmp2note", BlueThreePosition);
+    m_chooser.addOption("RedOrBlueCenter2note", TwoPosition);
+    m_chooser.addOption("Center3note(test)", TEST3NOTE);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 
