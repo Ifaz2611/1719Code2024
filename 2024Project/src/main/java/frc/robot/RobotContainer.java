@@ -178,28 +178,23 @@ public class RobotContainer {
     // });
     // }
 
-    // Run shoot sequence BUTTON 1 (HELPER)
-    new JoystickButton(m_helperController, 5).onTrue(
-  
+    // Run shoot sequence part 2 BUTTON 2 (HELPER)
+    new JoystickButton(m_helperController, 2).onTrue(  
             new InstantCommand(() -> {
-              m_DeviceSubsystem.turnIntakeMotors(-1);
+              m_DeviceSubsystem.turnIntakeMotors(-1); // -1 is the correct value for shooting
             })
         );
-
     ;
-
-    new JoystickButton(m_helperController, 5).onFalse(
+    new JoystickButton(m_helperController, 2).onFalse(
             new InstantCommand(() -> {
               m_DeviceSubsystem.turnIntakeMotors(0);
             }));
 
-    // Turn on and off intake motors BUTTON 2 (HELPER)
-    new JoystickButton(m_helperController, 2).onTrue(
+    // Turn on and off intake motors BUTTON 5 (HELPER)
+    new JoystickButton(m_helperController, 5).onTrue(
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE));
-    new JoystickButton(m_helperController, 2).onFalse(
-
+    new JoystickButton(m_helperController, 5).onFalse(
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE)
-
     );
 
     // new JoystickButton(m_driverController, 2).onTrue(
@@ -271,7 +266,7 @@ public class RobotContainer {
     // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, 0)
     // );
 
-    // Amp outtake button BUTTON 6 (HELPER)
+    // Shoot into Amp BUTTON 6 (HELPER)
     new JoystickButton(m_helperController, 6).onTrue(
         new SequentialCommandGroup(
             new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MIN_SHOOTER_ANGLE),
@@ -289,8 +284,8 @@ public class RobotContainer {
           Robot.zeroGYRO();
         }));
 
-    // Align with limelight BUTTON 8 (HELPER)
-    new JoystickButton(m_helperController, 8).onTrue(
+    // Align with limelight BUTTON 5 (DRIVER)
+    new JoystickButton(m_driverController, 5).onTrue(
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
     // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2,
     // Constants.MIN_SHOOTER_ANGLE)
@@ -304,10 +299,10 @@ public class RobotContainer {
     // })
     );
 
-    new JoystickButton(m_helperController, 9).onTrue(
-        new InstantCommand(() -> {
-          System.out.println(m_limelight.getTag());
-        }));
+    // new JoystickButton(m_helperController, 9).onTrue(
+    //     new InstantCommand(() -> {
+    //       System.out.println(m_limelight.getTag());
+    //     }));
 
     new JoystickButton(m_helperController, 1).onTrue(
       new InstantCommand(() -> {
@@ -321,13 +316,8 @@ public class RobotContainer {
         m_DeviceSubsystem.turnShooterMotors(0);
       })
         );
-    //  new JoystickButton(m_driverController, 5).onTrue(
-    //    new PIDCommandTurnToAngle(m_limelight,m_swerveDrive)
-          
-    //     );
 
-    // sets manual control based on if button 10 is pressed. im sorry i did it this
-    // way..
+    // Manual Arm Aim BUTTON 10 (HELPER)
     new JoystickButton(m_helperController, 10).onTrue(
         new InstantCommand(() -> {
           m_AnglePIDSubsystem.setManualControl(true);

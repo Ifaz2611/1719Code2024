@@ -38,12 +38,7 @@ public class Robot extends TimedRobot {
   public static Pigeon2 GYRO = new Pigeon2(Constants.CAN_GYRO_PORT);
 
   // Robot auton choices
-  private final String kAuto0 = "Auto 0 (Default)";
-  private final String kAuto1 = "Auto 1";
-  private final String kAuto2 = "Auto 2";
-  private final String kAuto3 = "Auto 3";
-
-  private final String RedOnePosition = "RedAmp2note";
+    private final String RedOnePosition = "RedAmp2note";
   private final String RedThreePosition = "RedClimber2note";
   private final String BlueOnePosition = "BlueClimber2note";
   private final String TwoPosition = "RedOrBlueCenter2note";
@@ -73,7 +68,7 @@ public class Robot extends TimedRobot {
    // autonomousCommand = new ;
 
     // Setup smart dashboard to choose auton
-    m_chooser.setDefaultOption("Auto 0 (Default)", kAuto0);
+    m_chooser.setDefaultOption("RedOrBlueCenter2note", TwoPosition);
     //m_chooser.addOption("Auto 1", kAuto1);
     //m_chooser.addOption("Auto 2", kAuto2);
     //m_chooser.addOption("Auto 3", kAuto3);
@@ -82,8 +77,8 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("RedClimber2note", RedThreePosition);
     m_chooser.addOption("BlueClimber2note", BlueOnePosition);
     m_chooser.addOption("BlueAmp2note", BlueThreePosition);
-    m_chooser.addOption("RedOrBlueCenter2note", TwoPosition);
-    m_chooser.addOption("Center3note(test)", TEST3NOTE);
+    // m_chooser.addOption("RedOrBlueCenter2note", TwoPosition); THIS IS COMMENTED BECAUSE IT IS DEFAULT OPTION
+    // m_chooser.addOption("Center3note(test)", TEST3NOTE);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 
