@@ -211,7 +211,7 @@ public class RobotContainer {
 
     // Turn on and off outtake motors BUTTON 3 (HELPER)
     new JoystickButton(m_helperController, 3).onTrue(
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE));
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -3, Constants.DEFAULT_SHOOTER_ANGLE));
     new JoystickButton(m_helperController, 3).onFalse(
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE));
 
@@ -286,7 +286,9 @@ public class RobotContainer {
 
     // Align with limelight BUTTON 5 (DRIVER)
     new JoystickButton(m_driverController, 5).onTrue(
-        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(0.50)
+
+        
     // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2,
     // Constants.MIN_SHOOTER_ANGLE)
 
