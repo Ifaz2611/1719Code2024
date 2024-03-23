@@ -172,7 +172,7 @@ new WaitCommand(1),
     // //new PIDGyroCommand(22, m_swerveDrive),
     // new ShootSequence(m_DeviceSubsystem),
     // new PIDGyroCommand(0, m_swerveDrive),
-        new WaitCommand(100)
+        new WaitCommand(100) //DO NOT COMMENT
     );
   }
   
@@ -187,7 +187,7 @@ new WaitCommand(1),
         new PIDGyroCommand(-60, m_swerveDrive).withTimeout(.5),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
         //new PIDGyroCommand(45, m_swerveDrive), keep this commented out
-        new ShootSequence(m_DeviceSubsystem),
+        new ShootSequence(m_DeviceSubsystem), 
 
     //TWO NOTE
     
@@ -218,7 +218,7 @@ new WaitCommand(1),
     // //new PIDGyroCommand(22, m_swerveDrive),
     // new ShootSequence(m_DeviceSubsystem),
     // new PIDGyroCommand(0, m_swerveDrive)
-        new WaitCommand(100)
+        new WaitCommand(100) //DO NOT COMMENT
     );
     }
     
@@ -246,7 +246,8 @@ new WaitCommand(1),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
         new WaitCommand(1),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
-        new ShootSequence(m_DeviceSubsystem)//,
+        new ShootSequence(m_DeviceSubsystem),
+  
     // //3 NOTE
 
     // new PIDGyroCommand(0, m_swerveDrive),
@@ -260,7 +261,7 @@ new WaitCommand(1),
     // //new PIDGyroCommand(22, m_swerveDrive),
     // new ShootSequence(m_DeviceSubsystem),
     // new PIDGyroCommand(0, m_swerveDrive),
-    //     new WaitCommand(100)
+        new WaitCommand(100) //DO NOT COMMENT
     );
   }
 
@@ -283,6 +284,7 @@ new WaitCommand(1),
         new WaitCommand(1),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
         new ShootSequence(m_DeviceSubsystem),
+        
 
     //3 NOTE
 
@@ -297,7 +299,7 @@ new WaitCommand(1),
     // //new PIDGyroCommand(22, m_swerveDrive),
     // new ShootSequence(m_DeviceSubsystem),
     // new PIDGyroCommand(0, m_swerveDrive),
-        new WaitCommand(100)
+        new WaitCommand(100) //DO NOT COMMENT
     );
   }
 
@@ -343,7 +345,7 @@ new WaitCommand(1),
     // //new PIDGyroCommand(22, m_swerveDrive),
     // new ShootSequence(m_DeviceSubsystem),
     // new PIDGyroCommand(0, m_swerveDrive)
-        new WaitCommand(100)
+        new WaitCommand(100) //DO NOT COMMENT
     );
     }
     
@@ -370,7 +372,7 @@ new WaitCommand(1),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
         new WaitCommand(1),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
-        new ShootSequence(m_DeviceSubsystem)//,
+        new ShootSequence(m_DeviceSubsystem),
     // //3 NOTE
 
     // new PIDGyroCommand(0, m_swerveDrive),
@@ -384,7 +386,7 @@ new WaitCommand(1),
     // //new PIDGyroCommand(22, m_swerveDrive),
     // new ShootSequence(m_DeviceSubsystem),
     // new PIDGyroCommand(0, m_swerveDrive),
-    //     new WaitCommand(100)
+         new WaitCommand(100) //DO NOT COMMENT
     );
   }
 
@@ -411,7 +413,7 @@ new WaitCommand(1),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
         new WaitCommand(1),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
-        new ShootSequence(m_DeviceSubsystem)//,
+        new ShootSequence(m_DeviceSubsystem),
     // //3 NOTE
 
     // new PIDGyroCommand(0, m_swerveDrive),
@@ -425,7 +427,7 @@ new WaitCommand(1),
     // //new PIDGyroCommand(22, m_swerveDrive),
     // new ShootSequence(m_DeviceSubsystem),
     // new PIDGyroCommand(0, m_swerveDrive),
-    //     new WaitCommand(100)
+         new WaitCommand(100) //DO NOT COMMENT
     );
   }
 
@@ -459,11 +461,12 @@ new WaitCommand(1),
     new PIDGyroCommand(90, m_swerveDrive).withTimeout(1),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.MAX_SHOOTER_ANGLE),
     new WaitCommand(.4),
-    new AutoMovePIDCommand(-87, 40, 0, m_swerveDrive).withTimeout(1.4).until(m_DeviceSubsystem::checkRing),
+    new AutoMovePIDCommand(-87, 40, 0, m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(1.4),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.MAX_SHOOTER_ANGLE),
     new PIDGyroCommand(23, m_swerveDrive).withTimeout(.8),
     new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(.5),
-    new ShootSequence(m_DeviceSubsystem).withTimeout(2.6)
+    new ShootSequence(m_DeviceSubsystem).withTimeout(2.6),
+    new WaitCommand(100) //DO NOT COMMENT
     );
 
       }
