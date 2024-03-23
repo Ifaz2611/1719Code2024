@@ -60,7 +60,7 @@ public class Autos {
         // quick outtake to unjam note
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE)
             .withTimeout(0.5),
-        new ShootSequence(m_DeviceSubsystem),
+        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
         // new ResetAngleCommand(m_limelight, m_swerveDrive),
         // turn intake on
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE).withTimeout(0.5),
@@ -95,7 +95,7 @@ public class Autos {
         //ONE NOTE
         new PIDGyroCommand(60, m_swerveDrive).withTimeout(.5),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
-        new ShootSequence(m_DeviceSubsystem),
+        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
 
         //TWO NOTE
         new PIDGyroCommand(0, m_swerveDrive).withTimeout(1),
@@ -108,7 +108,7 @@ public class Autos {
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
         new WaitCommand(1),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
-        new ShootSequence(m_DeviceSubsystem),
+        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
   
     // //3 NOTE
 
@@ -134,7 +134,7 @@ public class Autos {
     return new SequentialCommandGroup(
         new WaitCommand(.5),
         //ONE NOTE
-        new ShootSequence(m_DeviceSubsystem),
+        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
 
         //TWO NOTE
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0,
@@ -145,7 +145,7 @@ public class Autos {
         MAX_SHOOTER_ANGLE).withTimeout(1),
         new WaitCommand(1),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
-        new ShootSequence(m_DeviceSubsystem),
+        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
         
 
     //3 NOTE
@@ -176,7 +176,7 @@ public class Autos {
         new PIDGyroCommand(-60, m_swerveDrive).withTimeout(.5),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
         //new PIDGyroCommand(45, m_swerveDrive), keep this commented out
-        new ShootSequence(m_DeviceSubsystem),
+        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
 
     //TWO NOTE
     
@@ -192,7 +192,7 @@ new WaitCommand(1),
     new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
     new WaitCommand(1),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
-    new ShootSequence(m_DeviceSubsystem),
+    new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
 
     // //3 NOTE
 
@@ -221,7 +221,7 @@ new WaitCommand(1),
         //ONE NOTE
         new PIDGyroCommand(60, m_swerveDrive).withTimeout(.5),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
-        new ShootSequence(m_DeviceSubsystem),
+        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
 
         //TWO NOTE
         new PIDGyroCommand(0, m_swerveDrive).withTimeout(1),
@@ -234,7 +234,7 @@ new WaitCommand(1),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
         new WaitCommand(1),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
-        new ShootSequence(m_DeviceSubsystem),
+        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
     // //3 NOTE
 
     // new PIDGyroCommand(0, m_swerveDrive),
@@ -262,7 +262,7 @@ new WaitCommand(1),
         //ONE NOTE
         new PIDGyroCommand(-60, m_swerveDrive).withTimeout(.5),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
-        new ShootSequence(m_DeviceSubsystem),
+        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
 
         //TWO NOTE
         new PIDGyroCommand(0, m_swerveDrive).withTimeout(1),
@@ -275,7 +275,7 @@ new WaitCommand(1),
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
         new WaitCommand(1),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE),
-        new ShootSequence(m_DeviceSubsystem),
+        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
     // //3 NOTE
 
     // new PIDGyroCommand(0, m_swerveDrive),

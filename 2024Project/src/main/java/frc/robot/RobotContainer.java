@@ -305,7 +305,7 @@ public class RobotContainer {
     //     }));
 
     new JoystickButton(m_helperController, 1).onTrue(
-      new InstantCommand(() -> {
+        new InstantCommand(() -> {
         m_DeviceSubsystem.turnShooterMotors(1);
       })
         );
