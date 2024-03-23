@@ -267,11 +267,11 @@ public class RobotContainer {
     // );
 
     // Shoot into Amp BUTTON 6 (HELPER)
-    new JoystickButton(m_helperController, 6).onTrue(
-        new SequentialCommandGroup(
-            new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MIN_SHOOTER_ANGLE),
-            new WaitCommand(1.5),
-            new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -2, Constants.MIN_SHOOTER_ANGLE)));
+    // new JoystickButton(m_helperController, 6).onTrue(
+    //     new SequentialCommandGroup(
+    //         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MIN_SHOOTER_ANGLE),
+    //         new WaitCommand(1.5),
+    //         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -2, Constants.MIN_SHOOTER_ANGLE)));
 
     // new JoystickButton(m_helperController, 6).onFalse(
     // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1,
