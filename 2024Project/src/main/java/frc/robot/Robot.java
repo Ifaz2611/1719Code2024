@@ -69,14 +69,10 @@ public class Robot extends TimedRobot {
 
     // Setup smart dashboard to choose auton
     m_chooser.setDefaultOption("RedOrBlueCenter2note", TwoPosition);
-    //m_chooser.addOption("Auto 1", kAuto1);
-    //m_chooser.addOption("Auto 2", kAuto2);
-    //m_chooser.addOption("Auto 3", kAuto3);
-
     m_chooser.addOption("RedAmp2note", RedOnePosition);
     m_chooser.addOption("RedClimber2note", RedThreePosition);
-    m_chooser.addOption("BlueClimber2note", BlueOnePosition);
     m_chooser.addOption("BlueAmp2note", BlueThreePosition);
+    m_chooser.addOption("BlueClimber2note", BlueOnePosition);
     // m_chooser.addOption("RedOrBlueCenter2note", TwoPosition); THIS IS COMMENTED BECAUSE IT IS DEFAULT OPTION
     // m_chooser.addOption("Center3note(test)", TEST3NOTE);
     SmartDashboard.putData("Auto choices", m_chooser);
