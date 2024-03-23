@@ -69,7 +69,7 @@ ShootAngleMotor.set(output);
   public double getMeasurement() {
     double AngleDegrees = ShootAngleEncoder.getAbsolutePosition()*360.0 - Constants.SHOOTER_ANGLE_ZEROPOINT_OFFSET - Constants.SHOOTER_ANGLE_CORRECTION;
     // // Return the process variable measurement here
-    //System.out.println(AngleDegrees);
+    System.out.println(AngleDegrees);
     return AngleDegrees;
     
   }

@@ -294,7 +294,7 @@ new WaitCommand(1),
   }
 
 
-    public static Command Test3note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+  public static Command Test3note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
       LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
           m_ledSubsystem.set_led_color(Constants.RAINBOW_GLITTER);
 
@@ -323,13 +323,13 @@ new WaitCommand(1),
     new PIDGyroCommand(90, m_swerveDrive).withTimeout(1),
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.MAX_SHOOTER_ANGLE),
     new WaitCommand(.4),
-    new AutoMovePIDCommand(-87, 40, 0, m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(1.4),
+    new AutoMovePIDCommand(-87, 40, 0, m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(1), //Tune
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.MAX_SHOOTER_ANGLE),
     new PIDGyroCommand(23, m_swerveDrive).withTimeout(.8),
     new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(.5),
+    new WaitCommand(1),
     new ShootSequence(m_DeviceSubsystem).withTimeout(2.6),
     new WaitCommand(100) //DO NOT COMMENT
     );
-
-      }
+  }
 }
