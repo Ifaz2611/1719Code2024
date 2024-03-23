@@ -27,7 +27,7 @@ public class AutoMovePIDCommand extends PIDCommand {
         // This uses the output
         output -> {
           // Use the output here
-          System.out.println("Difference in distance: " + Math.abs(initialDist - m_swerve.returnAverageDistance()));
+          //System.out.println("Difference in distance: " + Math.abs(initialDist - m_swerve.returnAverageDistance()));
           m_swerve.SWERVE_DRIVE_COORDINATOR.drifTranslate(direction,output,0.0);
           
         });

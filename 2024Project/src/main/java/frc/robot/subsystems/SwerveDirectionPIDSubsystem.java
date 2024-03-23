@@ -41,7 +41,7 @@ public CANSparkMax directionMotor;
         // The PIDController used by the subsystem
         new PIDController(Constants.DirectionP, Constants.DirectionI, Constants.DirectionD));
 this.directionMotor = new CANSparkMax(directionPin, MotorType.kBrushless);
-    System.out.println("PID actinit");
+    //System.out.println("PID actinit");
     getController().enableContinuousInput(0, 360);
 this.directionSensor = new CANcoder(directionSensorPin);
 
