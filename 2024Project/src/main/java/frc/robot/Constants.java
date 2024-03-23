@@ -99,7 +99,7 @@ public final class Constants {
   // the vertical height of top of speaker's apriltag above ground
   public static final double SPEAKER_APRILTAG_HEIGHT = 60; // inches
   // vertical distance from top of apriltag to center of speaker
-  public static final double HOLE_TO_APRILTAG_HEIGHT = 20; // inches //Jai just changed this from 24 to 20
+  public static final double HOLE_TO_APRILTAG_HEIGHT = 24; // inches //Jai just changed this from 24 to 20
   //
   // Angle of limelight from the horizontal
   public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 20.0; 

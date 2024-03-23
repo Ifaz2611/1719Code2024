@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
   public static Pigeon2 GYRO = new Pigeon2(Constants.CAN_GYRO_PORT);
 
   // Robot auton choices
-    private final String RedOnePosition = "RedAmp2note";
+  private final String RedOnePosition = "RedAmp2note";
   private final String RedThreePosition = "RedClimber2note";
   private final String BlueOnePosition = "BlueClimber2note";
   private final String TwoPosition = "RedOrBlueCenter2note";
