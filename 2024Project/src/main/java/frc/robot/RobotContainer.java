@@ -475,11 +475,14 @@ public class RobotContainer {
       return Autos.BlueAmp2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
     } else if (m_autoSelected.equals("Center3note(test)")) {
       return Autos.Test3note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+    } else if (m_autoSelected.equals("AutoRightGoodTeams")) {
+      return Autos.AutoRightofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+    } else if (m_autoSelected.equals("AutoCenterGoodTeams")) {
+      return Autos.AutoCenterGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+    } else if (m_autoSelected.equals("AutoLeftGoodTeams")) {
+      return Autos.AutoLeftofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
     } else {
       return Autos.RedOrBlueCenter2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
     }
-
-
-
   }
 }
