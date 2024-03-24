@@ -45,9 +45,9 @@ public class Robot extends TimedRobot {
   private final String BlueThreePosition = "BlueAmp2note";
   private final String TEST3NOTE = "Center3note(test)";
 
-  // private final String AutoAmpGoodTeams = "AutoAmpGoodTeams";
-  // private final String AutoCenterGoodTeams = "AutoCenterGoodTeams";
-  // private final String AutoClimberGoodTeams = "AutoClimberGoodTeams";
+  private final String AutoLeftGoodTeams = "AutoLeftGoodTeams";
+  private final String AutoCenterGoodTeams = "AutoCenterGoodTeams";
+  private final String AutoRightGoodTeams = "AutoRightGoodTeams";
 
   // private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
@@ -79,11 +79,11 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("BlueAmp2note", BlueThreePosition);
     m_chooser.addOption("BlueClimber2note", BlueOnePosition);
     // m_chooser.addOption("RedOrBlueCenter2note", TwoPosition); THIS IS COMMENTED BECAUSE IT IS DEFAULT OPTION
-    // m_chooser.addOption("Center3note(test)", TEST3NOTE);
+    m_chooser.addOption("Center3note(test)", TEST3NOTE);
 
-    // m_chooser.addOption("AutoAmpGoodTeams", AutoAmpGoodTeams);
-    // m_chooser.addOption("AutoCenterGoodTeams", AutoCenterGoodTeams);
-    // m_chooser.addOption("AutoClimberGoodTeams", AutoClimberGoodTeams);
+    m_chooser.addOption("AutoRightGoodTeams", AutoLeftGoodTeams);
+    m_chooser.addOption("AutoCenterGoodTeams", AutoCenterGoodTeams);
+    m_chooser.addOption("AutoLeftGoodTeams", AutoRightGoodTeams);
 
     SmartDashboard.putData("Auto choices", m_chooser);
   }
