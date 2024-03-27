@@ -31,7 +31,7 @@ public final class Constants {
     public static final int kHelperControllerPort = 1;
   }
 
-  
+
   public static final SwerveDirectionPIDSubsystem m_leftFrontDirection = new SwerveDirectionPIDSubsystem(
       Constants.LEFT_FRONT_DRIVE_DIRECTION_ENCODER_PIN, Constants.LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN);
   public static final SwerveDirectionPIDSubsystem m_leftBackDirection = new SwerveDirectionPIDSubsystem(
@@ -42,13 +42,15 @@ public final class Constants {
       Constants.RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN, Constants.RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN);
 
   // These pins controll speed motors
-  public static final int LEFT_FRONT_DRIVE_SPEED_MOTOR_PIN = 1;// all 4 wheels are rotated 180
+  // all 4 wheels are rotated 180
+  public static final int LEFT_FRONT_DRIVE_SPEED_MOTOR_PIN = 1;
   public static final int LEFT_BACK_DRIVE_SPEED_MOTOR_PIN = 7;
   public static final int RIGHT_FRONT_DRIVE_SPEED_MOTOR_PIN = 4;
   public static final int RIGHT_BACK_DRIVE_SPEED_MOTOR_PIN = 10;
 
   // These are the pins for controlling the wheels direction
-  public static final int LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN =2;// all 4 wheels are rotated 180
+  // all 4 wheels are rotated 180
+  public static final int LEFT_FRONT_DRIVE_DIRECTION_MOTOR_PIN =2;
   public static final int LEFT_BACK_DRIVE_DIRECTION_MOTOR_PIN = 8;
   public static final int RIGHT_FRONT_DRIVE_DIRECTION_MOTOR_PIN = 5;
   public static final int RIGHT_BACK_DRIVE_DIRECTION_MOTOR_PIN = 11;
@@ -58,10 +60,6 @@ public final class Constants {
   public static final int LEFT_BACK_DRIVE_DIRECTION_ENCODER_PIN = 9;
   public static final int RIGHT_FRONT_DRIVE_DIRECTION_ENCODER_PIN = 6;
   public static final int RIGHT_BACK_DRIVE_DIRECTION_ENCODER_PIN = 12;
-
- 
-
-  public static final int ARM_MOTOR = 21; // NO IDEA IF THIS IS CORRECT BEWARE
   
   // intake / outtake motors, allowing robot to shoot ids.
   public static final int SHOOTER = 15;
@@ -82,7 +80,6 @@ public final class Constants {
   public static final int DISTANCE_NOTE_IN = 1500; 
 
   // angles of shooter
-  // PLACE HOLDERS!!!!!!!!!!!!
   //only 1 shoot angle needed
   public static final double shootAngleA = 110.0;
   public static final double shootAngleB = 110.0;
@@ -96,24 +93,27 @@ public final class Constants {
   public static final double DirectionI = 0.00;
   public static final double DirectionD = 0.0;
 
-  // ****** Physical measurements of the system ******
+  /***************************************
+   * Physical measurements of the system 
+  ****************************************/
+
   // the vertical height of top of speaker's apriltag above ground
   public static final double SPEAKER_APRILTAG_HEIGHT = 60; // inches
   // vertical distance from top of apriltag to center of speaker
   public static final double HOLE_TO_APRILTAG_HEIGHT = 24; // inches //Jai just changed this from 24 to 20
-  //
+
   // Angle of limelight from the horizontal
   public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 20.0; 
   // Offset of limelight center in inches from floor
   public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 7.5; 
-  //
+  
   // maximum arm angle allowed (deg)
   public static final double MAX_SHOOTER_ANGLE = 51.5; // might set 1-2 lower
   // minimum arm angle allowed (deg)
   public static final double MIN_SHOOTER_ANGLE = 0; // horizontal shooter
   // arm angle when shooting platform (lexan) is horizontal
   public static final double SHOOTER_ARM_ANGLE = 27.5; // degreees
-  //
+  
   // distance from the shooter arm's pivot to the shooting mechanism plane
   public static final double SHOOTER_ARM_LENGTH = 16.; // inches 
   // horizontal distance from limelight lens to shooter arm pivot point
@@ -145,7 +145,6 @@ public final class Constants {
   // testing required to get these ratios correct. use system.out.prinln or
   // something
 
-  // // 
   // public static final double ShooterDegreesPerEncoderRotation = 0;
 
   // stablizes the angle of the shooter
@@ -177,6 +176,7 @@ public final class Constants {
    * LED CONSTANTS FOR COLOR
    * DO NOT EDIT
    */
+
   // Static colors during match
   public static final double NO_NOTE_BASELINE_GOLD = -0.85;
   public static final double NO_TAG_PURPLE = 0.91;
@@ -203,9 +203,8 @@ public final class Constants {
   public static final double SHOOTER_ANGLE_CORRECTION = 0.0;
 
   //degree angle to intake
- // public static final double INTAKE_DEGREE_VALUE = 47;
 
-  //TODO: ADD ANALOG PIN HERE PLEASE
+  //TODO: ADD ANALOG PIN HERE 
 public static final AnalogInput ULTRASONIC_SENSOR_PIN = new AnalogInput(0);
 
 // TODO: set these PLEASE
