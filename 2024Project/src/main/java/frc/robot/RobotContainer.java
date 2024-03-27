@@ -125,26 +125,26 @@ public class RobotContainer {
 
     // Turn on and off intake motors BUTTON 5 (HELPER)
     new JoystickButton(m_helperController, 5).onTrue(
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 0, Constants.DEFAULT_SHOOTER_ANGLE));
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOn", Constants.DEFAULT_SHOOTER_ANGLE));
     new JoystickButton(m_helperController, 5).onFalse(
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE)
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOff", Constants.DEFAULT_SHOOTER_ANGLE)
     );
 
 
     // Turn on and off outtake motors BUTTON 3 (HELPER)
     new JoystickButton(m_helperController, 3).onTrue(
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -1, Constants.DEFAULT_SHOOTER_ANGLE));
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "-1", Constants.DEFAULT_SHOOTER_ANGLE));
     new JoystickButton(m_helperController, 3).onFalse(
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 1, Constants.DEFAULT_SHOOTER_ANGLE));
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOff", Constants.DEFAULT_SHOOTER_ANGLE));
 
 
 
     // Shoot into Amp BUTTON 6 (HELPER)
     new JoystickButton(m_helperController, 6).onTrue(
         new SequentialCommandGroup(
-            new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, 2, Constants.MIN_SHOOTER_ANGLE),
+            new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "2", Constants.MIN_SHOOTER_ANGLE),
             new WaitCommand(1.5),
-            new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, -2, Constants.MIN_SHOOTER_ANGLE)));
+            new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "-2", Constants.MIN_SHOOTER_ANGLE)));
 
 
     // Reset Gyro BUTTON 7 (HELPER)
