@@ -1,3 +1,9 @@
+/**
+ * Climb Subsystem: This subsytem is dedicated to the Pneumatic control.
+ * 
+ * Pneumatics work via a double solenoid and here you can just move them up and down.
+ */
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -22,10 +28,8 @@ public class ClimbSubsystem extends SubsystemBase {
     //PNEUMATICS
     m_pistons = new DoubleSolenoid(Constants.COMPRESSOR_MODULE_NUMBER, PneumaticsModuleType.REVPH, Constants.FORWARDS_SOLENOID_PIN, Constants.BACKWARDS_SOLENOID_PIN);
     m_pistons.set(DoubleSolenoid.Value.kReverse);
-
-
-      //ystem.out.println("pistons set");
     //m_Compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+  
   }
 
   // this function should make both the left piston and the right piston raise
