@@ -86,7 +86,7 @@ public class RobotContainer {
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterAnglePIDSubsystem m_AnglePIDSubsystem = new ShooterAnglePIDSubsystem();
   private final DeviceSubsystem m_DeviceSubsystem = new DeviceSubsystem();
-  private final LedSubsystem m_LedSubsystem = new LedSubsystem(m_limelight, m_AnglePIDSubsystem);
+  private final LedSubsystem m_LedSubsystem = new LedSubsystem(m_limelight);
   private final ClimbSubsystem m_ClimbSubsystem = new ClimbSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
