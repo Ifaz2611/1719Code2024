@@ -5,13 +5,11 @@
 package frc.robot;
 
 import frc.robot.commands.ShootAngleControlCommand;
-import frc.robot.commands.ShootSequence;
 import frc.robot.commands.IntakeSequence;
 import frc.robot.commands.LedCommand;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.PIDCommandTurnToAngle;
-import frc.robot.commands.PIDGyroCommand;
 import frc.robot.commands.SwerveTeleopCommand;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DeviceSubsystem;

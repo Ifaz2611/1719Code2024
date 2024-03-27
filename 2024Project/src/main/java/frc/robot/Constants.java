@@ -9,7 +9,7 @@ import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.I2C;
-import frc.robot.subsystems.SwerveDirectionPIDSubsystem;
+
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -119,7 +119,7 @@ public final class Constants {
   public static final double DISTANCE_FROM_SPEAKER_FOR_DEFAULT_SHOOTING = 42.0;
   // Empirical gyro correction factor to align with field orientation
   // needed in part since the gryo has been turned on its side
-  public static final double GYRO_CORRECTION_FACTOR = 120.; 
+  public static final double GYRO_CORRECTION_FACTOR = 120; 
   // Empirical correction factor to Limelight distance based on azimuth offset
   public static final double AZIMUTH_CORRECTION_FACTOR = 20.0;
 
@@ -226,6 +226,5 @@ public static final double TWIST_SCALE_FACTOR = 2.0;
 public static final double SHOOTERINTAKESUPPORT = -0.01;
 
 // public static final int BOTTOM_LIMIT_SWITCH_PIN = 100;
-//boolean for aming
-//public boolean SelfAim = true;
+
 } 
