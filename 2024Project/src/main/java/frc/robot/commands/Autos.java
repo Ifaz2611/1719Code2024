@@ -240,17 +240,57 @@ new WaitCommand(1),
     );
   }
 
+ public static Command AutoRightofDriverGoodTeam(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+        return new SequentialCommandGroup(
+            new WaitCommand(.5),
+            //ONE NOTE
+            new PIDGyroCommand(60, m_swerveDrive).withTimeout(.5),
+            new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
+            new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
+            // Allow other robots to do their autonomous sequence
+            new WaitCommand(10),
+            new AutoMovePIDCommand(0, 40, m_swerveDrive).withTimeout(2),
+            new WaitCommand(100) //DO NOT COMMENT
+        );
+      }
+
+  public static Command AutoCenterGoodTeam(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+        return new SequentialCommandGroup(
+            new WaitCommand(.5),
+            // ONE NOTE
+            new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
+            // Allow other robots to do their autonomous sequence
+            new WaitCommand(11),
+            new AutoMovePIDCommand(0, 40, m_swerveDrive).withTimeout(2),
+            new WaitCommand(100) //DO NOT COMMENT
+        );
+      }
+
+  public static Command AutoLeftofDriverGoodTeam(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+        return new SequentialCommandGroup(
+            new WaitCommand(.5),
+            //ONE NOTE
+            new PIDGyroCommand(-60, m_swerveDrive).withTimeout(.5),
+            new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
+            new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
+            // Allow other robots to do their autonomous sequence
+            new WaitCommand(10),
+            new AutoMovePIDCommand(0, 40, m_swerveDrive).withTimeout(2),
+            new WaitCommand(100) //DO NOT COMMENT
+        );
+      } //CODE FOR AUTOS WITH GOOD TEAMMATES DO NOT UNCODE UNTIL TESTED - neel
 
   public static Command Test3note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
       LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
-          m_ledSubsystem.set_led_color(Constants.RAINBOW_GLITTER);
-
     return new SequentialCommandGroup(
         //AUTO LEFT
         new WaitCommand(.5),
         //ONE NOTE
 
-        new ShootSequence(m_DeviceSubsystem),
+        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
 
     //TWO NOTE
     new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOn", Constants.

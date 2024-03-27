@@ -1,3 +1,9 @@
+/**
+ * Climb Subsystem: This subsytem is dedicated to the Pneumatic control.
+ * 
+ * Pneumatics work via a double solenoid and here you can just move them up and down.
+ */
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.

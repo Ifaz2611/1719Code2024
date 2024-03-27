@@ -1,12 +1,10 @@
 /*
-* THIS IS UNFINISHED AND UNTESTED
-* This code has been written prior to the device being finished, all code isn't final!
-*
-* Essentially just the plan of the code :)
+Device Subsytem: This subsystem controls the device motors and sensors
+
+Specifcally control over the shooter and intake motors and the proximity sensor (for sensing the note!)
 */
 
 package frc.robot.subsystems;
-
 import com.revrobotics.ColorSensorV3;
 
 
@@ -43,19 +41,18 @@ public class DeviceSubsystem extends SubsystemBase {
 
     }
 
-    // turns the motors a specific direction.
-    // -1 is intake, 1 is shoot
 
-    //turns on the shooter motors
+    //turns the shooter motors with a double
     public void turnShooterMotors(double speed) {
         SHOOTER.set(speed);
         
     }
 
-    // turns the intake motor on
+    //turns the intake motors with a double
     public void turnIntakeMotors(double speed) { 
-        INTAKE.set(speed*.75);
+        INTAKE.set(speed*0.5);
     }
+
     // turns off the shooter
     public void turnOffShooter(){
         SHOOTER.set(0);
@@ -67,11 +64,12 @@ public class DeviceSubsystem extends SubsystemBase {
         INTAKE.set(0);
     }
 
-
-    // REVERSE THIS HERE 
+    // returns a boolean based on if the ring is in the system or not
     public boolean checkRing(){ 
+        // gets the proximity
         proximity = m_colorSensor.getProximity();
-        // System.out.println("proximity " + proximity);
+
+        // returns true if the note is sensed.
         if (proximity >= Constants.DISTANCE_NOTE_IN) {
             return true;
         } 
@@ -80,4 +78,3 @@ public class DeviceSubsystem extends SubsystemBase {
         }
     }
 }
-

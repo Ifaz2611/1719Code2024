@@ -6,8 +6,8 @@ package frc.robot;
 
 import frc.robot.commands.ShootAngleControlCommand;
 import frc.robot.commands.IntakeSequence;
-import frc.robot.commands.LedCommand;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.AutoMovePIDCommand;
 import frc.robot.commands.Autos;
 import frc.robot.commands.PIDCommandTurnToAngle;
 import frc.robot.commands.SwerveTeleopCommand;
@@ -17,6 +17,7 @@ import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 import frc.robot.subsystems.SwerveDirectionPIDSubsystem;
+// import frc.robot.subsystems.SwerveDirectionPIDSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
 
@@ -108,7 +109,7 @@ public class RobotContainer {
 
     this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
 
-    LedCommand mLedCommand = new LedCommand(m_LedSubsystem, m_limelight, m_DeviceSubsystem, m_AnglePIDSubsystem);
+    // LedCommand mLedCommand = new LedCommand(m_LedSubsystem, m_limelight, m_DeviceSubsystem, m_AnglePIDSubsystem);
     //this.m_LedSubsystem.setDefaultCommand(mLedCommand);
 
     // Run shoot sequence part 2 BUTTON 2 (HELPER)
@@ -133,18 +134,28 @@ public class RobotContainer {
 
     // Turn on and off outtake motors BUTTON 3 (HELPER)
     new JoystickButton(m_helperController, 3).onTrue(
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "-1", Constants.DEFAULT_SHOOTER_ANGLE));
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "-3", Constants.DEFAULT_SHOOTER_ANGLE));
     new JoystickButton(m_helperController, 3).onFalse(
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOff", Constants.DEFAULT_SHOOTER_ANGLE));
 
 
 
-    // Shoot into Amp BUTTON 6 (HELPER)
+    //Shoot into Amp BUTTON 6 (HELPER)
     new JoystickButton(m_helperController, 6).onTrue(
         new SequentialCommandGroup(
-            new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "2", Constants.MIN_SHOOTER_ANGLE),
-            new WaitCommand(1.5),
-            new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "-2", Constants.MIN_SHOOTER_ANGLE)));
+            // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "2", Constants.MIN_SHOOTER_ANGLE),
+            // new WaitCommand(1.5),
+            // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "-2", Constants.MIN_SHOOTER_ANGLE)));
+
+          new AutoMovePIDCommand(0, 10, m_swerveDrive),
+          new WaitCommand(2),
+          new InstantCommand(()-> {
+            m_swerveDrive.resetDistanceMotors();
+          }),
+          new AutoMovePIDCommand(0, 10, m_swerveDrive)
+        )
+
+    );
 
 
     // Reset Gyro BUTTON 7 (HELPER)
@@ -155,7 +166,7 @@ public class RobotContainer {
 
     // Align with limelight BUTTON 5 (DRIVER)
     new JoystickButton(m_driverController, 5).onTrue(
-        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive)
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(0.5)
 
     );
 
@@ -216,11 +227,14 @@ public class RobotContainer {
       return Autos.BlueAmp2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
     } else if (m_autoSelected.equals("Center3note(test)")) {
       return Autos.Test3note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+    } else if (m_autoSelected.equals("AutoRightGoodTeams")) {
+      return Autos.AutoRightofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+    } else if (m_autoSelected.equals("AutoCenterGoodTeams")) {
+      return Autos.AutoCenterGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+    } else if (m_autoSelected.equals("AutoLeftGoodTeams")) {
+      return Autos.AutoLeftofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
     } else {
       return Autos.RedOrBlueCenter2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
     }
-
-
-
   }
 }
