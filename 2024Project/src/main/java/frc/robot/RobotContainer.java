@@ -6,16 +6,15 @@ package frc.robot;
 
 //import frc.robot.commands.LimeLightMovePIDCommand;
 import frc.robot.commands.ShootAngleControlCommand;
-import frc.robot.commands.ShootSequence;
+// import frc.robot.commands.ShootSequence;
 import frc.robot.commands.IntakeSequence;
-import frc.robot.commands.LedCommand;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AutoMovePIDCommand;
-import frc.robot.commands.AutoMovePIDCommand;
+// import frc.robot.commands.AutoMovePIDCommand;
 import frc.robot.commands.Autos;
 //import frc.robot.commands.LimelightSwerveManager;
 import frc.robot.commands.PIDCommandTurnToAngle;
-import frc.robot.commands.PIDGyroCommand;
+// import frc.robot.commands.PIDGyroCommand;
 //import frc.robot.commands.ResetAngleCommand;
 import frc.robot.commands.SwerveTeleopCommand;
 import frc.robot.subsystems.ClimbSubsystem;
@@ -23,7 +22,7 @@ import frc.robot.subsystems.DeviceSubsystem;
 import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
-import frc.robot.subsystems.SwerveDirectionPIDSubsystem;
+// import frc.robot.subsystems.SwerveDirectionPIDSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
 // import java.util.function.DoubleSupplier;
@@ -44,7 +43,7 @@ import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 // import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.Commands;
+// import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -87,7 +86,7 @@ public class RobotContainer {
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterAnglePIDSubsystem m_AnglePIDSubsystem = new ShooterAnglePIDSubsystem();
   private final DeviceSubsystem m_DeviceSubsystem = new DeviceSubsystem();
-  private final LedSubsystem m_LedSubsystem = new LedSubsystem(m_limelight);
+  private final LedSubsystem m_LedSubsystem = new LedSubsystem(m_limelight, m_AnglePIDSubsystem);
   private final ClimbSubsystem m_ClimbSubsystem = new ClimbSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -150,7 +149,7 @@ public class RobotContainer {
     // System.out.println(m_limelight.getShootingAngle() + " LIMELIGHT");
     this.m_AnglePIDSubsystem.setDefaultCommand(AngleControl);
 
-    LedCommand mLedCommand = new LedCommand(m_LedSubsystem, m_limelight, m_DeviceSubsystem, m_AnglePIDSubsystem);
+    // LedCommand mLedCommand = new LedCommand(m_LedSubsystem, m_limelight, m_DeviceSubsystem, m_AnglePIDSubsystem);
     //this.m_LedSubsystem.setDefaultCommand(mLedCommand);
 
     // new InstantCommand(() -> {
