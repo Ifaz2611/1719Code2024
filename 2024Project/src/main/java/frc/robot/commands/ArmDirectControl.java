@@ -32,14 +32,14 @@ public class ArmDirectControl extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // sets Y as the set point. maybe this will work i hope 
+    // sets Y as the set point.
     this.mAnglePIDSubsystem.setSetpoint(getY);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-        this.mAnglePIDSubsystem.setSetpoint(Constants.DEFAULT_SHOOTER_ANGLE); // make this a constant pls
+        this.mAnglePIDSubsystem.setSetpoint(Constants.DEFAULT_SHOOTER_ANGLE); 
 
   }
 
