@@ -4,7 +4,10 @@
 
 package frc.robot.commands;
 
+// WPILIB
 import edu.wpi.first.wpilibj2.command.Command;
+
+// Robot
 import frc.robot.Constants;
 import frc.robot.subsystems.DeviceSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
@@ -16,9 +19,8 @@ public class ArmIntakeCommand extends Command {
   /** Creates a new ArmIntakeCommand. */
   public ArmIntakeCommand(ShooterAnglePIDSubsystem m_angler, DeviceSubsystem m_device) {
     addRequirements(m_angler);
-    this.m_angler=m_angler;
-    this.m_device=m_device;
-    // Use addRequirements() here to declare subsystem dependencies.
+    this.m_angler = m_angler;
+    this.m_device = m_device;
   }
 
   // Called when the command is initially scheduled.
@@ -28,6 +30,7 @@ public class ArmIntakeCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // Sets arm angle to the intaking angle
     m_angler.setSetpoint(Constants.DEFAULT_SHOOTER_ANGLE);
   }
 
@@ -38,6 +41,7 @@ public class ArmIntakeCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    // Intakes until the device sees a ring
     return m_device.checkRing();
   }
 }

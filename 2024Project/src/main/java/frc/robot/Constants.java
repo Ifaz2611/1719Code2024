@@ -224,6 +224,9 @@ public static final double TWIST_SCALE_FACTOR = 3.0;
 
 public static final double SHOOTERINTAKESUPPORT = -0.01;
 
+// Error Correction Ratio of 41:30 - Robot went 41 inches when we provide 30
+public static final double LINEAR_MOVE_RATIO = (41./30.);
+
 // public static final int BOTTOM_LIMIT_SWITCH_PIN = 100;
 
 } 

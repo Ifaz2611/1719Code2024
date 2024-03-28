@@ -84,7 +84,7 @@ public class SwerveSubsystem extends SubsystemBase {
         this.m_rightBackDirection = m_rightBackDirection;
 
         // Gyro
-        DRIVE_GYRO = Robot.getGYRO();
+        DRIVE_GYRO = Robot.GYRO;
 
         // SwerveDriveWheels
         LEFT_FRONT_DRIVE_WHEEL = new SwerveDriveWheel(LEFT_FRONT_DRIVE_SPEED_MOTOR, m_leftFrontDirection);

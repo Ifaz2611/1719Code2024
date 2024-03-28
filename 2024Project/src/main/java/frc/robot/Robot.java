@@ -41,6 +41,8 @@ public class Robot extends TimedRobot {
   private final String AutoCenterGoodTeams = "AutoCenterGoodTeams";
   private final String AutoRightGoodTeams = "AutoRightGoodTeams";
 
+  private final String RedAmp3Note = "RedAmp3Note";
+
   // private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   /**
@@ -77,6 +79,8 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("AutoCenterGoodTeams", AutoCenterGoodTeams);
     m_chooser.addOption("AutoLeftGoodTeams", AutoRightGoodTeams);
 
+    m_chooser.addOption("RedAmp3Note", RedAmp3Note);
+
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 
@@ -112,10 +116,6 @@ public class Robot extends TimedRobot {
 
   
 
-  }
-  // Return the instance of the gyroscope
-  public static Pigeon2 getGYRO() {
-    return GYRO;
   }
   // Zero the gyroscope
   public static void zeroGYRO() {
