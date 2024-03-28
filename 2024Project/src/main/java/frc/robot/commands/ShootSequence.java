@@ -31,6 +31,6 @@ public class ShootSequence extends SequentialCommandGroup {
     this.mDeviceSubsystem = mDeviceSubsystem;
     // Add your commands in the addCommands() call, e.g.
     //addCommands(new FooCommand(), new BarCommand());
-    addCommands(ShooterMotors(1),waitwait(1), IntakeMotors(1), waitwait(.25), IntakeMotors(0), ShooterMotors(0));
+    addCommands(ShooterMotors(1),waitwait(1), IntakeMotors(1), waitwait(.5), IntakeMotors(0), ShooterMotors(0));
   }
 }
