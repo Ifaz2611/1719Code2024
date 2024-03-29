@@ -4,19 +4,17 @@
 
 package frc.robot;
 
-
+// Phoenix
 import com.ctre.phoenix6.hardware.Pigeon2;
 
+// WPILIB
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
-
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -25,10 +23,12 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
+  // Autonomous command
   private Command m_autonomousCommand;
+  // Robot container
   private RobotContainer m_robotContainer;
+  // Gyroscope
   public static Pigeon2 GYRO = new Pigeon2(Constants.CAN_GYRO_PORT);
-
   // Robot auton choices
   private final String RedOnePosition = "RedAmp2note";
   private final String RedThreePosition = "RedClimber2note";
@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
 
   private final String RedAmp3Note = "RedAmp3Note";
 
-  // private String m_autoSelected;
+  // Chooser for auton modes
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -51,28 +51,22 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
+    // Start camera capture
     CameraServer.startAutomaticCapture();
     UsbCamera USBCAM = CameraServer.startAutomaticCapture();
     USBCAM.setResolution(720, 540);
-
-
-    // makes a new camera I HOPE :)
+    // Second camera maybe??
     CameraServer.startAutomaticCapture();
-
+    // Instantiate our RobotContainer. This will perform all our button bindings
     m_robotContainer = new RobotContainer();
+    // Reset gyro
     GYRO.reset();
- 
-   // autonomousCommand = new ;
-
     // Setup smart dashboard to choose auton
     m_chooser.setDefaultOption("RedOrBlueCenter2note", TwoPosition);
     m_chooser.addOption("RedAmp2note", RedOnePosition);
     m_chooser.addOption("RedClimber2note", RedThreePosition);
     m_chooser.addOption("BlueAmp2note", BlueThreePosition);
     m_chooser.addOption("BlueClimber2note", BlueOnePosition);
-    // m_chooser.addOption("RedOrBlueCenter2note", TwoPosition); THIS IS COMMENTED BECAUSE IT IS DEFAULT OPTION
     m_chooser.addOption("Center3note(test)", TEST3NOTE);
 
     m_chooser.addOption("AutoRightGoodTeams", AutoLeftGoodTeams);
@@ -81,6 +75,7 @@ public class Robot extends TimedRobot {
 
     m_chooser.addOption("RedAmp3Note", RedAmp3Note);
 
+    // Put choices on smart dashboard
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 
@@ -110,13 +105,10 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    //System.out.println("WORKING");
-   m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_chooser.getSelected());
-      // m_autonomousCommand = m_robotContainer.getAutonomousCommand("default");
-
-  
-
+    // Get the currently selected auton command
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_chooser.getSelected());
   }
+
   // Zero the gyroscope
   public static void zeroGYRO() {
     GYRO.reset();
@@ -125,7 +117,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
- 
+    // Schedule the autonomous command 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }

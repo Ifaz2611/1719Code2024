@@ -9,39 +9,33 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-// import com.revrobotics.CANSparkLowLevel.MotorType;
-// import com.revrobotics.CANSparkMax;
 
+// WPILIB
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+// ROBOT
 import frc.robot.Constants;
 
 public class ClimbSubsystem extends SubsystemBase {
-    private static DoubleSolenoid m_pistons;
+  private static DoubleSolenoid m_pistons;
 
   /** Creates a new climbSubsystem. */
   public ClimbSubsystem() {
-
-    //PNEUMATICS
+    // Initialize pneumatics
     m_pistons = new DoubleSolenoid(Constants.COMPRESSOR_MODULE_NUMBER, PneumaticsModuleType.REVPH, Constants.FORWARDS_SOLENOID_PIN, Constants.BACKWARDS_SOLENOID_PIN);
-    m_pistons.set(DoubleSolenoid.Value.kReverse);
-
-
-      
+    m_pistons.set(DoubleSolenoid.Value.kReverse);      
   }
 
-  // this function should make both the left piston and the right piston raise
+  // Raise both left and right pistons
   public void raise() {
-        m_pistons.toggle();
-
+    m_pistons.toggle();
   }
 
-  // this function should make them lower
+  // Lower both left and right pistons
   public void lower(){
-        m_pistons.set(DoubleSolenoid.Value.kReverse);
-
+    m_pistons.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override

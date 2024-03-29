@@ -18,7 +18,6 @@ import frc.robot.subsystems.SwerveSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoMovePIDCommand extends PIDCommand {
   /** Creates a new AutoMovePIDCommand. */
-
   public AutoMovePIDCommand(double direction, double distance, SwerveSubsystem m_swerve) {
     super(
         // The controller that the command will use

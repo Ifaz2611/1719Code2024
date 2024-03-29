@@ -4,16 +4,18 @@
 
 package frc.robot.subsystems;
 
+// JAVA
 import java.util.function.DoubleSupplier;
+
+// REV
 import com.revrobotics.CANSparkMax;
 
+// WPILIB
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class SwerveDriveWheel extends SubsystemBase
-{
- 
+public class SwerveDriveWheel extends SubsystemBase {
     public int directionMotorpin;
     public boolean directionInvert;
     public CANSparkMax speedMotor;
@@ -23,41 +25,36 @@ public class SwerveDriveWheel extends SubsystemBase
     public CANSparkMax directionMotor;
     SwerveDirectionPIDSubsystem directionController;
     
-
-    public SwerveDriveWheel(CANSparkMax speedMotor, SwerveDirectionPIDSubsystem directionController)
-    {
+    public SwerveDriveWheel(CANSparkMax speedMotor, SwerveDirectionPIDSubsystem directionController) {
         this.speedMotor = speedMotor;
-this.directionController = directionController;
-directionController.enable();
-
-   
+        this.directionController = directionController;
+        directionController.enable();   
+    }
+    // Return the setpoint
+    public double getSetpointWheel() {
+        return this.setpoint;
     }
 
-public double getSetpointWheel() {
+    // Set the speed of the motors
+    public void speedMotors(double output) {
+        speedMotor.set(output);
+    }
 
-   return this.setpoint;
-}
+    // Set the direction of the motors
+    public void setDirection(double angle){
+        directionController.setDirection(angle);
+    }
 
+    // Set the swerve state given power and angle
+    public void SwerveStateSet(double power, double angle){
+        speedMotor.set(power);
+        directionController.setDirection(angle);
+        this.m_SwerveModuleState = new SwerveModuleState(power,Rotation2d.fromDegrees(angle));
+    }
 
-
-public void speedMotors(double output) {
-    speedMotor.set(output);
-}
-public void setDirection(double angle){
-directionController.setDirection(angle);
-
-}
-public void SwerveStateSet(double power, double angle){
-speedMotor.set(power);
-directionController.setDirection(angle);
-this.m_SwerveModuleState = new SwerveModuleState(power,Rotation2d.fromDegrees(angle));
-}
-public void SwerveSetWithState(SwerveModuleState moduleState){
-speedMotor.set(moduleState.speedMetersPerSecond);
-directionController.setDirection(moduleState.angle.getDegrees());
-}
-
-
- 
-    
+    // Set the swerve state given a module state
+    public void SwerveSetWithState(SwerveModuleState moduleState){
+        speedMotor.set(moduleState.speedMetersPerSecond);
+        directionController.setDirection(moduleState.angle.getDegrees());
+    }
 }

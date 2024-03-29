@@ -4,9 +4,12 @@
 
 package frc.robot.commands;
 
+// WPILIB
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+
+// ROBOT
 import frc.robot.Constants;
 import frc.robot.subsystems.DeviceSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
@@ -15,28 +18,34 @@ import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 
-public class IntakeSequence extends SequentialCommandGroup {
-  /** Creates a new ShootSequence. */
+public class IntakeSequence extends SequentialCommandGroup {  
   DeviceSubsystem mDeviceSubsystem;
-
   private double ANGLEAIM;
 
+  // Waits for x seconds
   public WaitCommand waitwait(double time) {
     return new WaitCommand(time);
   }
+
+  // Spins intake motors with given direction
   public InstantCommand IntakeMotors(String direction) {
-    // "finShooter" --> -1
+    // "inShooter" --> -1
     // "outShooter" --> 1
     // otherwise stop --> 0
     return new InstantCommand(()->mDeviceSubsystem.turnIntakeMotors((direction == "inShooter") ? -1 : (direction == "outShooter") ? 1 : (direction == "off") ? 0 : 0));
   }
+
+  // Sets the state of intake to true or false (true is intaking)
   public InstantCommand setIntakeState(ShooterAnglePIDSubsystem m_angler, boolean state) {
     return new InstantCommand(()-> m_angler.setIntakeState(state));
   }
+
+  // Sets the setpoint for the arm angle
   public InstantCommand setIntakeSetpoint(ShooterAnglePIDSubsystem m_angler) {
     return new InstantCommand(()->m_angler.setSetpoint(ANGLEAIM));
   }
 
+  /* Creates a new IntakeSequence. */
   public IntakeSequence(DeviceSubsystem mDeviceSubsystem, ShooterAnglePIDSubsystem m_angler, String action, double ANGLEAIM) {
     this.mDeviceSubsystem = mDeviceSubsystem;
     this.ANGLEAIM = ANGLEAIM;

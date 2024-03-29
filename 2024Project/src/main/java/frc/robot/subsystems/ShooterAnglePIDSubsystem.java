@@ -10,86 +10,68 @@
 
 package frc.robot.subsystems;
 
+// REV
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+// WPILIB
 import edu.wpi.first.math.controller.PIDController;
-
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
+// ROBOT
 import frc.robot.Constants;
 
-
 public class ShooterAnglePIDSubsystem extends PIDSubsystem {
-  /** Creates a new ShooterAnglePIDSubsystem. */
-
-  // public DigitalInput armLowerLimit = new DigitalInput(Constants.BOTTOM_LIMIT_SWITCH_PIN);
   public DutyCycleEncoder ShootAngleEncoder;
-  public CANSparkMax ShootAngleMotor;
-
-  // used by intake state
-  public boolean isIntaking = false;
-
-  // used to control manual control
+  public CANSparkMax ShootAngleMotor;  
+  // Intake state (true is currently intaking)
+  public boolean isIntaking = false;  
+  // Manual control (true is using manual control)
   public boolean manualControl = false;
   
-  //change to actual encoder
+  /* Creates a new ShooterAnglePIDSubsystem. */
   public ShooterAnglePIDSubsystem() {
     super(
-        // The PIDController used by the subsystem
-        new PIDController(Constants.ShootAngleP, Constants.ShootAngleI, Constants.ShootAngleD));
-         {
-          
-        };
-
-        // This is the through bore encoder
-        this.ShootAngleEncoder = new DutyCycleEncoder(Constants.ShootAngleEncoder_PIN);
-
-        // This motor controls the arm
-        this.ShootAngleMotor = new CANSparkMax(Constants.ShootAngleMotorPin,MotorType.kBrushless);
+      // The PIDController used by the subsystem
+      new PIDController(Constants.ShootAngleP, Constants.ShootAngleI, Constants.ShootAngleD)
+    );
+    // Initialize the through bore encoder
+    this.ShootAngleEncoder = new DutyCycleEncoder(Constants.ShootAngleEncoder_PIN);
+    // Initialize the motor to control the arm
+    this.ShootAngleMotor = new CANSparkMax(Constants.ShootAngleMotorPin,MotorType.kBrushless);
   }
 
-  // Sets if we're intaking or not
+  // Sets intake state (true is currently intaking)
   public void setIntakeState(boolean state) {
     this.isIntaking = state;
   }
 
-  // gets manual control TODO: make this just a public thing its the same
+  // Returns the intake state
   public boolean getIntakeState() {
     return this.isIntaking;
   }
 
-    // sets manual control
-    public void setManualControl(boolean state) {
-      manualControl = state;
-    }
-
-  public double shootAngle() {
-      return getMeasurement();   
-          }
-
-  // sets the motor based on the output
-  @Override
-  public void useOutput(double output, double setpoint) {
-
-    // TODO: implement limit switch
-    // if (armLowerLimit.get() && output > 0){
-    //   output = 0;
-    // } 
-ShootAngleMotor.set(output);
+  // Sets manual control (true is using manual control)
+  public void setManualControl(boolean state) {
+    manualControl = state;
   }
 
-  //this sets the arm position in degrees
+  // Returns the shoot angle
+  public double shootAngle() {
+    return getMeasurement();   
+  }
+
+  // Sets the motor based on the output
+  @Override
+  public void useOutput(double output, double setpoint) {
+    ShootAngleMotor.set(output);
+  }
+
+  // Returns the arm position in degrees
   @Override
   public double getMeasurement() {
     double AngleDegrees = ShootAngleEncoder.getAbsolutePosition()*360.0 - Constants.SHOOTER_ANGLE_ZEROPOINT_OFFSET - Constants.SHOOTER_ANGLE_CORRECTION;
-    
-    // // Return the process variable measurement here
-    // System.out.println(AngleDegrees);
     return AngleDegrees;
-    
   }
 }
-
-
