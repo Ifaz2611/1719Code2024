@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // ROBOT
 import frc.robot.subsystems.DeviceSubsystem;
-import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterAnglePIDSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -28,11 +27,9 @@ public class Autos {
   ShooterAnglePIDSubsystem m_AnglePIDSubsystem;
   DeviceSubsystem m_DeviceSubsystem;
   SwerveSubsystem m_swerveDrive;
-  LedSubsystem m_kLedSubsystem;
 
     public static Command RedAmp2note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
-      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
-    m_ledSubsystem.set_led_color(-.25);
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive) {
     // SmartDashboard.putNumber("Before Command Sequence", 0);
         //return new ShootSequence(m_DeviceSubsystem);  
     return new SequentialCommandGroup(
@@ -73,14 +70,11 @@ public class Autos {
   }
 
   public static Command RedOrBlueCenter2note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
-      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
-    m_ledSubsystem.set_led_color(Constants.RAINBOW_GLITTER);
-
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive) {
     return new SequentialCommandGroup(
         new WaitCommand(.5),
         //ONE NOTE
         new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
-
         //TWO NOTE
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOn", Constants.
         MAX_SHOOTER_ANGLE),
@@ -111,7 +105,7 @@ public class Autos {
   }
 
   public static Command RedClimber2note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
-      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive) {
   return new SequentialCommandGroup(
         //AUTO LEFT
         new WaitCommand(.5),
@@ -157,8 +151,7 @@ new WaitCommand(1),
     }
     
     public static Command BlueClimber2note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
-      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
-    m_ledSubsystem.set_led_color(-.25);
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive) {
     // SmartDashboard.putNumber("Before Command Sequence", 0);
         //return new ShootSequence(m_DeviceSubsystem);  
     return new SequentialCommandGroup(
@@ -198,8 +191,7 @@ new WaitCommand(1),
   }
 
   public static Command BlueAmp2note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
-      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
-    m_ledSubsystem.set_led_color(-.25);
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive) {
     // SmartDashboard.putNumber("Before Command Sequence", 0);
         //return new ShootSequence(m_DeviceSubsystem);  
     return new SequentialCommandGroup(
@@ -239,7 +231,7 @@ new WaitCommand(1),
   }
 
  public static Command AutoRightofDriverGoodTeam(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
-      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive) {
         return new SequentialCommandGroup(
             new WaitCommand(.5),
             //ONE NOTE
@@ -254,7 +246,7 @@ new WaitCommand(1),
       }
 
   public static Command AutoCenterGoodTeam(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
-      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive) {
         return new SequentialCommandGroup(
             new WaitCommand(.5),
             // ONE NOTE
@@ -267,7 +259,7 @@ new WaitCommand(1),
       }
 
   public static Command AutoLeftofDriverGoodTeam(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
-      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive) {
         return new SequentialCommandGroup(
             new WaitCommand(.5),
             //ONE NOTE
@@ -282,7 +274,7 @@ new WaitCommand(1),
       } //CODE FOR AUTOS WITH GOOD TEAMMATES DO NOT UNCODE UNTIL TESTED - neel
 
   public static Command Test3note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem,
-      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+      LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive) {
     return new SequentialCommandGroup(
         //AUTO LEFT
         new WaitCommand(.5),
@@ -321,7 +313,7 @@ new WaitCommand(1),
   }
 
   // Red Amp 3 Note Auto
-  public static Command RedAmp3Note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem, LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive, LedSubsystem m_ledSubsystem) {
+  public static Command RedAmp3Note(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem, LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive) {
     return new SequentialCommandGroup(
         new WaitCommand(.5),
         // Zero Gyro

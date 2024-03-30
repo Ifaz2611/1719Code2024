@@ -123,7 +123,7 @@ public final class Constants {
              + SHOOTER_ARM_LENGTH*Math.sin(Math.toRadians(DEFAULT_SHOOTER_ANGLE+SHOOTER_ARM_ANGLE));
 
   // Controlls the motor led pin
-  public static final int LED_PWM_PIN = 9;
+  public static final int LED_PWM_PIN = 1;
 
   // Stablizes the angle of the shooter
   public static final double ShootAngleP = 0.02;
@@ -152,16 +152,18 @@ public final class Constants {
   ***************************************/
 
   // Static colors during match
-  public static final double NO_NOTE_BASELINE_GOLD = -0.85;
-  public static final double NO_TAG_PURPLE = 0.91;
-  public static final double SPEAKER_GREEN = 0.77;
-  public static final double AMP_BLUE = 0.83;
-  public static final double AUTON_YELLOW = 0.25;
+  public static final double LED_TIMING_DELAY = 0.4; // How many seconds in between updates for LED Subsystem
+
+  public static final double BASELINE_COLOR = 0.93; // WHITE
+  public static final double HAS_NOTE_COLOR = 0.63; // RED ORANGE
+  public static final double SPEAKER_COLOR = 0.77; // GREEN
+  public static final double AMP_COLOR = 0.83; // BLUE
   // Extra colors
   public static final double WHITE = 0.93;
   public static final double RED = 0.61;
+  public static final double VIOLET = 0.91;
   // Patterns
-  public static final double LARSON_SCANNER = 0.19;
+  public static final double LARSON_SCANNER = -0.35;
   public static final double RAINBOW_GLITTER = -0.89;
 
   // Limelight Move Command PID's

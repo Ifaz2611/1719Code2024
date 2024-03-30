@@ -73,7 +73,7 @@ public class RobotContainer {
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterAnglePIDSubsystem m_AnglePIDSubsystem = new ShooterAnglePIDSubsystem();
   private final DeviceSubsystem m_DeviceSubsystem = new DeviceSubsystem();
-  private final LedSubsystem m_LedSubsystem = new LedSubsystem(m_limelight);
+  private final LedSubsystem m_LedSubsystem = new LedSubsystem(m_limelight, m_DeviceSubsystem);
   private final ClimbSubsystem m_ClimbSubsystem = new ClimbSubsystem();
 
   // Joystick Controllers
@@ -152,17 +152,10 @@ public class RobotContainer {
     // Shoot into Amp - BUTTON 6 (HELPER)
     new JoystickButton(m_helperController, 6).onTrue(
       new SequentialCommandGroup(
-        // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "setAngle", Constants.MIN_SHOOTER_ANGLE),
-        // new WaitCommand(1.5),
-        // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "ampShoot", Constants.MIN_SHOOTER_ANGLE)
-        // new InstantCommand(() -> {
-        //   m_swerveDrive.resetDistanceMotors();
-        // }),
-        // new PIDCompositionDriveCommand(m_swerveDrive, 0, 190, 0).withTimeout(5)
-        // new PIDCompositionDriveCommand(m_swerveDrive, 0, 50, 0).withTimeout(5),
-        // new PIDCompositionDriveCommand(m_swerveDrive, 0, 50, 0).withTimeout(5),
-        // new PIDCompositionDriveCommand(m_swerveDrive, 0, 50, 0).withTimeout(5)
-        )
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "setAngle", Constants.MIN_SHOOTER_ANGLE),
+        new WaitCommand(1.5),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "ampShoot", Constants.MIN_SHOOTER_ANGLE)
+      )
     );
 
     // Reset Gyro - BUTTON 7 (HELPER)
@@ -224,27 +217,27 @@ public class RobotContainer {
   public Command getAutonomousCommand(String m_autoSelected) {
     // returns the correct auto called from the smart dashboard
     if (m_autoSelected.equals("RedAmp2note")) {
-      return Autos.RedAmp2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+      return Autos.RedAmp2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else if (m_autoSelected.equals("RedClimber2note")) {
-      return Autos.RedClimber2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+      return Autos.RedClimber2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else if (m_autoSelected.equals("BlueClimber2note")) {
-      return Autos.BlueClimber2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+      return Autos.BlueClimber2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else if (m_autoSelected.equals("RedOrBlueCenter2note")) {
-      return Autos.RedOrBlueCenter2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+      return Autos.RedOrBlueCenter2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else if (m_autoSelected.equals("BlueAmp2note")) {
-      return Autos.BlueAmp2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+      return Autos.BlueAmp2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else if (m_autoSelected.equals("Center3note(test)")) {
-      return Autos.Test3note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+      return Autos.Test3note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else if (m_autoSelected.equals("AutoRightGoodTeams")) {
-      return Autos.AutoRightofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+      return Autos.AutoRightofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else if (m_autoSelected.equals("AutoCenterGoodTeams")) {
-      return Autos.AutoCenterGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+      return Autos.AutoCenterGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else if (m_autoSelected.equals("AutoLeftGoodTeams")) {
-      return Autos.AutoLeftofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+      return Autos.AutoLeftofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else if (m_autoSelected.equals("RedAmp3Note")) {
-      return Autos.RedAmp3Note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+      return Autos.RedAmp3Note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else {
-      return Autos.RedOrBlueCenter2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive, m_LedSubsystem);
+      return Autos.RedOrBlueCenter2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     }
   }
 }
