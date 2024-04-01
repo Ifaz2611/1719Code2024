@@ -198,10 +198,11 @@ public final class Constants {
   // Joystick scale factors
   public static final double JOYSTICK_SCALE_FACTOR = 2.0;
   public static final double TWIST_SCALE_FACTOR = 3.0;
+  public static final double TWIST_DEAD_ZONE = 0.5;
 
   // Shooter intake support
   public static final double SHOOTERINTAKESUPPORT = -0.01;
 
   // Error Correction Ratio of 41:30 - Robot went 41 inches when we provide 30
-  public static final double LINEAR_MOVE_RATIO = (41./30.);
+  public static final double LINEAR_MOVE_RATIO = (44./30.);
 } 

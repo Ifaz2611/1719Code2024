@@ -47,6 +47,9 @@ public class Robot extends TimedRobot {
 
   // Chooser for auton modes
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+    private final SendableChooser<Boolean> m_side = new SendableChooser<>();
+
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -63,9 +66,16 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     // Reset gyro
     GYRO.reset();
+
+    // sets up sides
+    m_side.addOption("Red Side", true);
+    m_side.addOption("Blue Side", false);
+
     // Setup smart dashboard to choose auton
-    m_chooser.setDefaultOption("RedOrBlueCenter2note", TwoPosition);
+    m_chooser.setDefaultOption("Center2note", TwoPosition);
+
     m_chooser.addOption("RedAmp2note", RedOnePosition);
+    
     m_chooser.addOption("RedClimber2note", RedThreePosition);
     m_chooser.addOption("BlueAmp2note", BlueThreePosition);
     m_chooser.addOption("BlueClimber2note", BlueOnePosition);
@@ -110,7 +120,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     // Get the currently selected auton command
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_chooser.getSelected());
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_chooser.getSelected(), m_side.getSelected());
   }
 
   // Zero the gyroscope

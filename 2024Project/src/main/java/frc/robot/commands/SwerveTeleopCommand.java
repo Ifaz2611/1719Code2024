@@ -50,10 +50,10 @@ public class SwerveTeleopCommand extends Command {
     double phi = this.m_getTwist.getAsDouble();
 
     // Scaled x and y positions
-    double scaledX = scaleJoystickInput(x,Constants.JOYSTICK_SCALE_FACTOR);
-    double scaledY = scaleJoystickInput(y,Constants.JOYSTICK_SCALE_FACTOR);
-    double scaledPhi = scaleJoystickInput(phi,Constants.TWIST_SCALE_FACTOR);
-
+    double scaledX = scaleJoystickInput(x,Constants.JOYSTICK_SCALE_FACTOR,0);
+    double scaledY = scaleJoystickInput(y,Constants.JOYSTICK_SCALE_FACTOR,0);
+    double scaledPhi = scaleJoystickInput(phi,Constants.TWIST_SCALE_FACTOR,Constants.TWIST_DEAD_ZONE);
+//System.out.println("phi" + phi + " x:" + scaledPhi);
     // Update table "countCall"
     this.table.getEntry("countCall").setNumber(this.countCall++);
     // Update table "m_getLefty", smart dashboard shows unscaled y
@@ -93,7 +93,10 @@ public class SwerveTeleopCommand extends Command {
   }
   
   // Return scaled joystick input given a scale factor
-  public double scaleJoystickInput(double input, double scale_factor) {
-    return (Math.signum(input) * Math.pow(Math.abs(input), scale_factor));
+  public double scaleJoystickInput(double input, double scale_factor, double dead_zone) {
+    double v = Math.abs(input);
+    if (v < dead_zone) return 0;
+
+    return Math.signum(input) * (Math.pow((v-dead_zone)/(1-dead_zone), scale_factor));
   }
 }

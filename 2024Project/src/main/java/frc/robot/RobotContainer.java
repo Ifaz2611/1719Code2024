@@ -8,6 +8,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -16,12 +17,14 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 // Robot Commands
 import frc.robot.commands.ShootAngleControlCommand;
+import frc.robot.commands.ShootSequence;
 import frc.robot.commands.IntakeSequence;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AutoMovePIDCommand;
 import frc.robot.commands.Autos;
 import frc.robot.commands.PIDCommandTurnToAngle;
 import frc.robot.commands.PIDCompositionDriveCommand;
+import frc.robot.commands.PIDGyroCommand;
 import frc.robot.commands.SwerveTeleopCommand;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DeviceSubsystem;
@@ -151,10 +154,12 @@ public class RobotContainer {
 
     // Shoot into Amp - BUTTON 6 (HELPER)
     new JoystickButton(m_helperController, 6).onTrue(
-      new SequentialCommandGroup(
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "setAngle", Constants.MIN_SHOOTER_ANGLE),
-        new WaitCommand(1.5),
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "ampShoot", Constants.MIN_SHOOTER_ANGLE)
+      new ParallelCommandGroup(
+        // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "setAngle", Constants.MIN_SHOOTER_ANGLE),
+        // new WaitCommand(1.5),
+        // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "ampShoot", Constants.MIN_SHOOTER_ANGLE)
+        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
+        new PIDGyroCommand(60, m_swerveDrive).withTimeout(.5)
       )
     );
 
@@ -214,10 +219,19 @@ public class RobotContainer {
    *
    * @ the command to run in autonomous
    */
-  public Command getAutonomousCommand(String m_autoSelected) {
+  public Command getAutonomousCommand(String m_autoSelected, Boolean m_selectedSide) {
+
+    //red is TRUE, bkue is FALSE
+    
+
+    // if (m_selectedSide) {
+
+    // } else {
+
+    // }
     // returns the correct auto called from the smart dashboard
     if (m_autoSelected.equals("RedAmp2note")) {
-      return Autos.RedAmp2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+      return Autos.ThreeNoteRedAmp(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else if (m_autoSelected.equals("RedClimber2note")) {
       return Autos.RedClimber2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else if (m_autoSelected.equals("BlueClimber2note")) {
