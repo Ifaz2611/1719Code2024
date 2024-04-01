@@ -43,6 +43,8 @@ public class Robot extends TimedRobot {
 
   private final String RedAmp3Note = "RedAmp3Note";
 
+  private final String ThreeNoteRedAmp = "ThreeNoteRedAmp";
+
   // Chooser for auton modes
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   /**
@@ -74,6 +76,8 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("AutoLeftGoodTeams", AutoRightGoodTeams);
 
     m_chooser.addOption("RedAmp3Note", RedAmp3Note);
+
+    m_chooser.addOption("ThreeNoteRedAmp", ThreeNoteRedAmp);
 
     // Put choices on smart dashboard
     SmartDashboard.putData("Auto choices", m_chooser);

@@ -108,7 +108,7 @@ public class RobotContainer {
       this.m_swerveDrive, 
       m_driverController::getY, 
       m_driverController::getX,
-      m_driverController::getTwist
+      m_helperController::getTwist
     );
     this.m_swerveDrive.setDefaultCommand(DriveMode);
     
@@ -236,6 +236,8 @@ public class RobotContainer {
       return Autos.AutoLeftofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else if (m_autoSelected.equals("RedAmp3Note")) {
       return Autos.RedAmp3Note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    } else if (m_autoSelected.equals("ThreeNoteRedAmp")) {
+      return Autos.ThreeNoteRedAmp(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     } else {
       return Autos.RedOrBlueCenter2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     }
