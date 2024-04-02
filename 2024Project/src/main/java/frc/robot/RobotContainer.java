@@ -230,30 +230,91 @@ public class RobotContainer {
 
     // }
     // returns the correct auto called from the smart dashboard
-    if (m_autoSelected.equals("RedAmp2note")) {
-      return Autos.ThreeNoteRedAmp(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    } else if (m_autoSelected.equals("RedClimber2note")) {
-      return Autos.RedClimber2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    } else if (m_autoSelected.equals("BlueClimber2note")) {
-      return Autos.BlueClimber2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    } else if (m_autoSelected.equals("RedOrBlueCenter2note")) {
-      return Autos.RedOrBlueCenter2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    } else if (m_autoSelected.equals("BlueAmp2note")) {
-      return Autos.BlueAmp2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    } else if (m_autoSelected.equals("Center3note(test)")) {
-      return Autos.Test3note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    } else if (m_autoSelected.equals("AutoRightGoodTeams")) {
-      return Autos.AutoRightofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    } else if (m_autoSelected.equals("AutoCenterGoodTeams")) {
-      return Autos.AutoCenterGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    } else if (m_autoSelected.equals("AutoLeftGoodTeams")) {
-      return Autos.AutoLeftofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    } else if (m_autoSelected.equals("RedAmp3Note")) {
-      return Autos.RedAmp3Note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    } else if (m_autoSelected.equals("ThreeNoteRedAmp")) {
-      return Autos.ThreeNoteRedAmp(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    } else {
-      return Autos.RedOrBlueCenter2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    // if (m_autoSelected.equals("RedAmp2note")) {
+    //   return Autos.ThreeNoteRedAmp(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    // } else if (m_autoSelected.equals("RedClimber2note")) {
+    //   return Autos.RedClimber2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    // } else if (m_autoSelected.equals("BlueClimber2note")) {
+    //   return Autos.BlueClimber2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    // } else if (m_autoSelected.equals("RedOrBlueCenter2note")) {
+    //   return Autos.RedOrBlueCenter2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    // } else if (m_autoSelected.equals("BlueAmp2note")) {
+    //   return Autos.BlueAmp2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    // } else if (m_autoSelected.equals("Center3note(test)")) {
+    //   return Autos.Test3note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    // } else if (m_autoSelected.equals("AutoRightGoodTeams")) {
+    //   return Autos.AutoRightofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    // } else if (m_autoSelected.equals("AutoCenterGoodTeams")) {
+    //   return Autos.AutoCenterGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    // } else if (m_autoSelected.equals("AutoLeftGoodTeams")) {
+    //   return Autos.AutoLeftofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    // } else if (m_autoSelected.equals("RedAmp3Note")) {
+    //   return Autos.RedAmp3Note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    // } else if (m_autoSelected.equals("ThreeNoteRedAmp")) {
+    //   return Autos.ThreeNoteRedAmp(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    // } else {
+    //   return Autos.RedOrBlueCenter2note(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    // }
+
+    if (m_autoSelected.equals("Blue_SA")) {
+      return Autos.Blue_SA(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    } 
+    else if (m_autoSelected.equals("Blue_SC")) {
+      return Autos.Blue_SC(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
     }
+    else if (m_autoSelected.equals("Red_SK")) {
+      return Autos.Red_SK(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+    else if (m_autoSelected.equals("Red_SI")) {
+      return Autos.Red_SI(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+    else if (m_autoSelected.equals("RedorBlue_SB_or_SJ")) {
+      return Autos.RedorBlue_SB_or_SJ(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+    else if (m_autoSelected.equals("AutoLeftofDriverGoodTeam")) {
+      return Autos.AutoLeftofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+    else if (m_autoSelected.equals("AutoCenterofDriverGoodTeam")) {
+      return Autos.AutoCenterGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+    else if (m_autoSelected.equals("AutoRightofDriverGoodTeam")) {
+      return Autos.AutoRightofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+    else if (m_autoSelected.equals("AutoRightofDriverGoodTeam")) {
+      return Autos.AutoRightofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+    else if (m_autoSelected.equals("Blue_SAD")) {
+      return Autos.Blue_SAD(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+    //Alliance notes
+    else if (m_autoSelected.equals("Blue_SAB")) {
+      return Autos.Blue_SAB(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+    else if (m_autoSelected.equals("Blue_SBC")) {
+      return Autos.Blue_SBC(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+    else if (m_autoSelected.equals("Blue_SCB")) {
+      return Autos.Blue_SCB(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+    else if (m_autoSelected.equals("Blue_SBA")) {
+      return Autos.Blue_SBA(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+    //4 note alliance notes
+    else if (m_autoSelected.equals("RedorBlue_SABC_or_SKJI")) {
+      return Autos.RedorBlue_SABC_or_SKJI(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+    
+
+    
+
+    
+    
+    
+    
+    
+    else {
+      return Autos.Blue_SA(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+    }
+
   }
 }

@@ -31,25 +31,49 @@ public class Robot extends TimedRobot {
   public static Pigeon2 GYRO = new Pigeon2(Constants.CAN_GYRO_PORT);
   // Robot auton choices
 
-  public final String TwoNoteAmp = "2noteamp";
+
+  //Variables for Autos
+  //public final String TwoNoteAmp = "2noteamp";
   // private final String RedOnePosition = "RedAmp2note";
-  private final String RedThreePosition = "RedClimber2note";
-  private final String BlueOnePosition = "BlueClimber2note";
-  private final String TwoPosition = "RedOrBlueCenter2note";
+  // private final String RedThreePosition = "RedClimber2note";
+  // private final String BlueOnePosition = "BlueClimber2note";
+  // private final String TwoPosition = "RedOrBlueCenter2note";
   // private final String BlueThreePosition = "BlueAmp2note";
-  private final String TEST3NOTE = "Center3note(test)";
+  // private final String TEST3NOTE = "Center3note(test)";
 
   private final String AutoLeftGoodTeams = "AutoLeftGoodTeams";
   private final String AutoCenterGoodTeams = "AutoCenterGoodTeams";
   private final String AutoRightGoodTeams = "AutoRightGoodTeams";
 
-  private final String RedAmp3Note = "RedAmp3Note";
 
-  private final String ThreeNoteRedAmp = "ThreeNoteRedAmp";
+  //2 note autonomous
+  private final String Red_SK = "Red_SK";
+  private final String Red_SI = "Red_SI";
+  private final String Blue_SA = "Blue_SA";
+  private final String Blue_SC = "Blue_SC";
+  private final String RedorBlue_SB_or_SJ = "RedorBlue_SB_or_SJ";
+
+
+  //3 note autonomous
+  private final String Blue_SAD = "Blue_SAD";
+  // private final String Blue_SBE = "Blue_SBE";
+  // private final String Blue_SCH = "Blue_SCH";
+  // private final String Red_SKH = "Red_SKH";
+  // private final String Red_SJE = "Red_SJE";
+  // private final String Red_SID = "Red_SID";
+
+  private final String Blue_SAB = "Blue_SAB";
+  private final String Blue_SBC = "Blue_SBC";
+  private final String Blue_SCB = "Blue_SCB";
+  private final String Blue_SBA = "Blue_SBA";
+
+  //4 note autonomous
+  private final String RedorBlue_SABC_or_SKJI = "RedorBlue_SABC_or_SKJI";
+  private final String FastRed_SKHG = "FastRed_SKHG";
 
   // Chooser for auton modes
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-    private final SendableChooser<Boolean> m_side = new SendableChooser<>();
+  private final SendableChooser<Boolean> m_side = new SendableChooser<>();
 
 
   /**
@@ -70,26 +94,44 @@ public class Robot extends TimedRobot {
     GYRO.reset();
 
     // sets up sides
-    m_side.addOption("Red Side", true);
-    m_side.addOption("Blue Side", false);
+    // m_side.addOption("Red Side", true);
+    // m_side.addOption("Blue Side", false);
 
     // Setup smart dashboard to choose auton
-    m_chooser.setDefaultOption("Center2note", TwoPosition);
+    // m_chooser.setDefaultOption("Center2note", TwoPosition);
 
-    m_chooser.addOption("RedAmp2note", RedOnePosition);
+    // m_chooser.addOption("RedAmp2note", RedOnePosition);
 
-    m_chooser.addOption("RedClimber2note", RedThreePosition);
-    m_chooser.addOption("amp 2 note", BlueThreePosition);
-    m_chooser.addOption("Climber 2 note", BlueOnePosition);
-    m_chooser.addOption("Center3note(test)", TEST3NOTE);
+    // m_chooser.addOption("RedClimber2note", RedThreePosition);
+    // m_chooser.addOption("amp 2 note", BlueThreePosition);
+    // m_chooser.addOption("Climber 2 note", BlueOnePosition);
+    // m_chooser.addOption("Center3note(test)", TEST3NOTE);
 
+    m_chooser.addOption("Red_SK", Red_SK);
+    m_chooser.addOption("Red_SI", Red_SI);
+    m_chooser.addOption("Blue_SA", Blue_SA);
+    m_chooser.addOption("Blue_SC", Blue_SC);
+    m_chooser.addOption("RedorBlue_SB_or_SJ", RedorBlue_SB_or_SJ);
+
+
+    m_chooser.addOption("Blue_SAD", Blue_SAD);
     m_chooser.addOption("AutoRightGoodTeams", AutoLeftGoodTeams);
     m_chooser.addOption("AutoCenterGoodTeams", AutoCenterGoodTeams);
     m_chooser.addOption("AutoLeftGoodTeams", AutoRightGoodTeams);
 
-    m_chooser.addOption("RedAmp3Note", RedAmp3Note);
+    m_chooser.addOption("Blue_SAB", Blue_SAB);
+    m_chooser.addOption("Blue_SBC", Blue_SBC);
+    m_chooser.addOption("Blue_SCB", Blue_SCB);
+    m_chooser.addOption("Blue_SBA", Blue_SBA);
+    m_chooser.addOption("RedorBlue_SABC_or_SKJI", AutoRightGoodTeams);
 
-    m_chooser.addOption("ThreeNoteRedAmp", ThreeNoteRedAmp);
+
+    // m_chooser.addOption("RedAmp3Note", RedAmp3Note);
+
+    // m_chooser.addOption("ThreeNoteRedAmp", ThreeNoteRedAmp);
+
+   
+
 
     // Put choices on smart dashboard
     SmartDashboard.putData("Auto choices", m_chooser);

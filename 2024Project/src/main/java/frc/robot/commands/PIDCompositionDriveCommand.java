@@ -55,6 +55,7 @@ public class PIDCompositionDriveCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    swerveSubsystem.resetDistanceMotors(); //Add this instead of adding this before each move command
     // Calculate power and angle
     double translatePower = MoveP.calculate(swerveSubsystem.returnAverageDistance(), this.distance);
     double phi = TurnP.calculate(swerveSubsystem.getGYROAngle(), this.gyroAngle);
