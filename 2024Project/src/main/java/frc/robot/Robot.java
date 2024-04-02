@@ -47,22 +47,14 @@ public class Robot extends TimedRobot {
 
 
   //2 note autonomous
-  private final String Red_SK = "Red_SK";
-  private final String Red_SI = "Red_SI";
-  private final String Blue_SA = "Blue_SA";
-  private final String Blue_SC = "Blue_SC";
-  private final String RedorBlue_SB_or_SJ = "RedorBlue_SB_or_SJ";
-
+  private final String sA = "SA";
+  private final String sS = "SC";
+  private final String sC = "SC";
 
   //3 note autonomous
-  private final String Blue_SAD = "Blue_SAD";
-  // private final String Blue_SBE = "Blue_SBE";
-  // private final String Blue_SCH = "Blue_SCH";
-  // private final String Red_SKH = "Red_SKH";
-  // private final String Red_SJE = "Red_SJE";
-  // private final String Red_SID = "Red_SID";
+  private final String sAaFive = "sAA5";
 
-  private final String Blue_SAB = "Blue_SAB";
+  private final String Bc = "Blue_SAB";
   private final String Blue_SBC = "Blue_SBC";
   private final String Blue_SCB = "Blue_SCB";
   private final String Blue_SBA = "Blue_SBA";
@@ -107,23 +99,26 @@ public class Robot extends TimedRobot {
     // m_chooser.addOption("Climber 2 note", BlueOnePosition);
     // m_chooser.addOption("Center3note(test)", TEST3NOTE);
 
-    m_chooser.addOption("Red_SK", Red_SK);
-    m_chooser.addOption("Red_SI", Red_SI);
-    m_chooser.addOption("Blue_SA", Blue_SA);
-    m_chooser.addOption("Blue_SC", Blue_SC);
-    m_chooser.addOption("RedorBlue_SB_or_SJ", RedorBlue_SB_or_SJ);
+    // 2 notes
+    m_chooser.addOption("aA", "aA");
+    m_chooser.addOption("cC", "cC");
+    m_chooser.addOption("sS", "sS");
 
+    m_chooser.addOption("cCS", "cCS");
+    m_chooser.addOption("sSA", "sSA");
+    m_chooser.addOption("sSC", "sSC");
 
-    m_chooser.addOption("Blue_SAD", Blue_SAD);
+    m_chooser.addOption("aAS", "aAS");
+
+    m_chooser.addOption("aAFIVE", "aA5");
+
+    // 4 note
+    m_chooser.addOption("sCSA","sCSA");
+
+    // auto with good teams i think
     m_chooser.addOption("AutoRightGoodTeams", AutoLeftGoodTeams);
     m_chooser.addOption("AutoCenterGoodTeams", AutoCenterGoodTeams);
     m_chooser.addOption("AutoLeftGoodTeams", AutoRightGoodTeams);
-
-    m_chooser.addOption("Blue_SAB", Blue_SAB);
-    m_chooser.addOption("Blue_SBC", Blue_SBC);
-    m_chooser.addOption("Blue_SCB", Blue_SCB);
-    m_chooser.addOption("Blue_SBA", Blue_SBA);
-    m_chooser.addOption("RedorBlue_SABC_or_SKJI", AutoRightGoodTeams);
 
 
     // m_chooser.addOption("RedAmp3Note", RedAmp3Note);
