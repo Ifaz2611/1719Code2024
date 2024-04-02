@@ -30,11 +30,13 @@ public class Robot extends TimedRobot {
   // Gyroscope
   public static Pigeon2 GYRO = new Pigeon2(Constants.CAN_GYRO_PORT);
   // Robot auton choices
-  private final String RedOnePosition = "RedAmp2note";
+
+  public final String TwoNoteAmp = "2noteamp";
+  // private final String RedOnePosition = "RedAmp2note";
   private final String RedThreePosition = "RedClimber2note";
   private final String BlueOnePosition = "BlueClimber2note";
   private final String TwoPosition = "RedOrBlueCenter2note";
-  private final String BlueThreePosition = "BlueAmp2note";
+  // private final String BlueThreePosition = "BlueAmp2note";
   private final String TEST3NOTE = "Center3note(test)";
 
   private final String AutoLeftGoodTeams = "AutoLeftGoodTeams";
@@ -75,10 +77,10 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Center2note", TwoPosition);
 
     m_chooser.addOption("RedAmp2note", RedOnePosition);
-    
+
     m_chooser.addOption("RedClimber2note", RedThreePosition);
-    m_chooser.addOption("BlueAmp2note", BlueThreePosition);
-    m_chooser.addOption("BlueClimber2note", BlueOnePosition);
+    m_chooser.addOption("amp 2 note", BlueThreePosition);
+    m_chooser.addOption("Climber 2 note", BlueOnePosition);
     m_chooser.addOption("Center3note(test)", TEST3NOTE);
 
     m_chooser.addOption("AutoRightGoodTeams", AutoLeftGoodTeams);
