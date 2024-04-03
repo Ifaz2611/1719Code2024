@@ -72,6 +72,8 @@ public class ShooterAnglePIDSubsystem extends PIDSubsystem {
   @Override
   public double getMeasurement() {
     double AngleDegrees = ShootAngleEncoder.getAbsolutePosition()*360.0 - Constants.SHOOTER_ANGLE_ZEROPOINT_OFFSET - Constants.SHOOTER_ANGLE_CORRECTION;
+        // System.out.println(AngleDegrees);
+
     return AngleDegrees;
   }
 }
