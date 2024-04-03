@@ -41,9 +41,9 @@ public class Robot extends TimedRobot {
   // private final String BlueThreePosition = "BlueAmp2note";
   // private final String TEST3NOTE = "Center3note(test)";
 
-  private final String AutoLeftGoodTeams = "AutoLeftGoodTeams";
-  private final String AutoCenterGoodTeams = "AutoCenterGoodTeams";
-  private final String AutoRightGoodTeams = "AutoRightGoodTeams";
+  // private final String AutoLeftGoodTeams = "AutoLeftGoodTeams";
+  // private final String AutoCenterGoodTeams = "AutoCenterGoodTeams";
+  // private final String AutoRightGoodTeams = "AutoRightGoodTeams";
 
 
   //2 note autonomous
@@ -65,7 +65,7 @@ public class Robot extends TimedRobot {
 
   // Chooser for auton modes
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-  private final SendableChooser<Boolean> m_side = new SendableChooser<>();
+  private final SendableChooser<String> m_side = new SendableChooser<>();
 
 
   /**
@@ -75,19 +75,21 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Start camera capture
-    CameraServer.startAutomaticCapture();
+    // CameraServer.startAutomaticCapture();
     UsbCamera USBCAM = CameraServer.startAutomaticCapture();
     USBCAM.setResolution(720, 540);
     // Second camera maybe??
-    CameraServer.startAutomaticCapture();
+    // CameraServer.startAutomaticCapture();
     // Instantiate our RobotContainer. This will perform all our button bindings
     m_robotContainer = new RobotContainer();
     // Reset gyro
     GYRO.reset();
 
     // sets up sides
-    // m_side.addOption("Red Side", true);
-    // m_side.addOption("Blue Side", false);
+    m_side.setDefaultOption("blue but default", "blue");
+    m_side.addOption("Red Side", "red");
+    m_side.addOption("Blue Side", "blue");
+
 
     // Setup smart dashboard to choose auton
     // m_chooser.setDefaultOption("Center2note", TwoPosition);
@@ -110,15 +112,15 @@ public class Robot extends TimedRobot {
 
     m_chooser.addOption("aAS", "aAS");
 
-    m_chooser.addOption("aAFIVE", "aA5");
+    m_chooser.addOption("aAFIVE", "aAFIVE");
 
     // 4 note
     m_chooser.addOption("sCSA","sCSA");
 
     // auto with good teams i think
-    m_chooser.addOption("AutoRightGoodTeams", AutoLeftGoodTeams);
-    m_chooser.addOption("AutoCenterGoodTeams", AutoCenterGoodTeams);
-    m_chooser.addOption("AutoLeftGoodTeams", AutoRightGoodTeams);
+    // m_chooser.addOption("AutoRightGoodTeams", AutoLeftGoodTeams);
+    // m_chooser.addOption("AutoCenterGoodTeams", AutoCenterGoodTeams);
+    // m_chooser.addOption("AutoLeftGoodTeams", AutoRightGoodTeams);
 
 
     // m_chooser.addOption("RedAmp3Note", RedAmp3Note);
@@ -130,6 +132,8 @@ public class Robot extends TimedRobot {
 
     // Put choices on smart dashboard
     SmartDashboard.putData("Auto choices", m_chooser);
+        SmartDashboard.putData("Alliance", m_side);
+
   }
 
   /**
@@ -158,8 +162,10 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    boolean isRed = m_side.getSelected().equals("red") ? true : false;
     // Get the currently selected auton command
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_chooser.getSelected(), m_side.getSelected());
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_chooser.getSelected(), isRed);
+
   }
 
   // Zero the gyroscope
