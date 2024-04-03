@@ -219,9 +219,10 @@ public class RobotContainer {
    *
    * @ the command to run in autonomous
    */
-  public Command getAutonomousCommand(String m_autoSelected, Boolean m_selectedSide) {
-
-    // red is TRUE, bkue is FALSE. i long for the sweet release of death
+  public Command getAutonomousCommand(String m_autoSelected, boolean m_selectedSide) {
+    System.out.println("Selecting auto");
+    System.out.println(m_selectedSide ? "Red" : "Blue");
+    //red is TRUE, blue is FALSE. i long for the sweet release of death
     if (m_selectedSide) {
       
       if (m_autoSelected.equals("sS")){
@@ -249,7 +250,7 @@ public class RobotContainer {
         return Autos.Red_SKH(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
         
       } else if (m_autoSelected.equals("sCSA")) { 
-        return Autos.RedorBlue_SABC_or_SKJI(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
+        return Autos.Red_SI(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
         
       } 
 
@@ -279,76 +280,12 @@ public class RobotContainer {
       } else if (m_autoSelected.equals("aAFIVE")) { 
         return Autos.Blue_SCH(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
         
-      } else if (m_autoSelected.equals("cCSA")) { 
+      } else if (m_autoSelected.equals("sCSA")) { 
         return Autos.RedorBlue_SABC_or_SKJI(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
         
       } 
-
-    
-    
-    
     }
-
-
-    if (m_autoSelected.equals("Blue_SA")) {
-      return Autos.Blue_SA(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    } 
-    else if (m_autoSelected.equals("Blue_SC")) {
-      return Autos.Blue_SC(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    else if (m_autoSelected.equals("Red_SK")) {
-      return Autos.Red_SK(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    else if (m_autoSelected.equals("Red_SI")) {
-      return Autos.Red_SI(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    else if (m_autoSelected.equals("RedorBlue_SB_or_SJ")) {
-      return Autos.RedorBlue_SB_or_SJ(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    else if (m_autoSelected.equals("AutoLeftofDriverGoodTeam")) {
-      return Autos.AutoLeftofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    else if (m_autoSelected.equals("AutoCenterofDriverGoodTeam")) {
-      return Autos.AutoCenterGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    else if (m_autoSelected.equals("AutoRightofDriverGoodTeam")) {
-      return Autos.AutoRightofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    else if (m_autoSelected.equals("AutoRightofDriverGoodTeam")) {
-      return Autos.AutoRightofDriverGoodTeam(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    else if (m_autoSelected.equals("Blue_SAD")) {
-      return Autos.Blue_SAD(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    //Alliance notes
-    else if (m_autoSelected.equals("Blue_SAB")) {
-      return Autos.Blue_SAB(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    else if (m_autoSelected.equals("Blue_SBC")) {
-      return Autos.Blue_SBC(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    else if (m_autoSelected.equals("Blue_SCB")) {
-      return Autos.Blue_SCB(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    else if (m_autoSelected.equals("Blue_SBA")) {
-      return Autos.Blue_SBA(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    //4 note alliance notes
-    else if (m_autoSelected.equals("RedorBlue_SABC_or_SKJI")) {
-      return Autos.RedorBlue_SABC_or_SKJI(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
-    
-
-    
-
-    
-    
-    
-    
-    
-    else {
-      return Autos.Blue_SA(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
-    }
+    return Autos.Blue_SA(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
 
   }
 }
