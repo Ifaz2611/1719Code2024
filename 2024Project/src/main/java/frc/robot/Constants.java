@@ -96,7 +96,7 @@ public final class Constants {
   // Offset of limelight center in inches from floor
   public static final  double LIMELIGHT_LENS_HEIGHT_INCHES = 7.5; 
   // Maximum arm angle allowed (deg)
-  public static final double MAX_SHOOTER_ANGLE = 51.5; // might set 1-2 lower
+  public static final double MAX_SHOOTER_ANGLE = 50; // might set 1-2 lower
   // Minimum arm angle allowed (deg)
   public static final double MIN_SHOOTER_ANGLE = 0; // horizontal shooter
   // Arm angle when shooting platform (lexan) is horizontal
