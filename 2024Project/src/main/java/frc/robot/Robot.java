@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
     UsbCamera USBCAM = CameraServer.startAutomaticCapture();
     USBCAM.setResolution(720, 540);
     CameraServer.startAutomaticCapture();
-
+    
     // Instantiate our RobotContainer. This will perform all our button bindings
     m_robotContainer = new RobotContainer();
     // Reset gyro
