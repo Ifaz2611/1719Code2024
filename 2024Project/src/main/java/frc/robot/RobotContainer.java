@@ -222,6 +222,7 @@ public class RobotContainer {
   public Command getAutonomousCommand(String m_autoSelected, boolean m_selectedSide) {
     System.out.println("Selecting auto");
     System.out.println(m_selectedSide ? "Red" : "Blue");
+    
     //red is TRUE, blue is FALSE. i long for the sweet release of death
     if (m_selectedSide) {
       

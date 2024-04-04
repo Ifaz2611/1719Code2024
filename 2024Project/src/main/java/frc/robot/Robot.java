@@ -31,41 +31,9 @@ public class Robot extends TimedRobot {
   public static Pigeon2 GYRO = new Pigeon2(Constants.CAN_GYRO_PORT);
   // Robot auton choices
 
-
-  //Variables for Autos
-  //public final String TwoNoteAmp = "2noteamp";
-  // private final String RedOnePosition = "RedAmp2note";
-  // private final String RedThreePosition = "RedClimber2note";
-  // private final String BlueOnePosition = "BlueClimber2note";
-  // private final String TwoPosition = "RedOrBlueCenter2note";
-  // private final String BlueThreePosition = "BlueAmp2note";
-  // private final String TEST3NOTE = "Center3note(test)";
-
-  // private final String AutoLeftGoodTeams = "AutoLeftGoodTeams";
-  // private final String AutoCenterGoodTeams = "AutoCenterGoodTeams";
-  // private final String AutoRightGoodTeams = "AutoRightGoodTeams";
-
-
-  //2 note autonomous
-  private final String sA = "SA";
-  private final String sS = "SC";
-  private final String sC = "SC";
-
-  //3 note autonomous
-  private final String sAaFive = "sAA5";
-
-  private final String Bc = "Blue_SAB";
-  private final String Blue_SBC = "Blue_SBC";
-  private final String Blue_SCB = "Blue_SCB";
-  private final String Blue_SBA = "Blue_SBA";
-
-  //4 note autonomous
-  private final String RedorBlue_SABC_or_SKJI = "RedorBlue_SABC_or_SKJI";
-  private final String FastRed_SKHG = "FastRed_SKHG";
-
   // Chooser for auton modes
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-  private final SendableChooser<String> m_side = new SendableChooser<>();
+  private final SendableChooser<String> m_side = new SendableChooser<>(); // this is for the alliance
 
 
   /**
@@ -75,11 +43,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Start camera capture
-    // CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture();
     UsbCamera USBCAM = CameraServer.startAutomaticCapture();
     USBCAM.setResolution(720, 540);
-    // Second camera maybe??
-    // CameraServer.startAutomaticCapture();
+
     // Instantiate our RobotContainer. This will perform all our button bindings
     m_robotContainer = new RobotContainer();
     // Reset gyro

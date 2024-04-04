@@ -734,65 +734,76 @@ public static Command Blue_SCB(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePI
         new InstantCommand(() -> {
             m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         }),
-        new PIDCompositionDriveCommand(m_swerveDrive, 0, 50, 0).withTimeout(1.5), // Drive to 45 inches
+        new PIDCompositionDriveCommand(m_swerveDrive, 7.5, 50, 0).withTimeout(1.5), // Drive to 45 inches
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOff", Constants.MAX_SHOOTER_ANGLE).withTimeout(0.25), // Turn intake off
-        new PIDGyroCommand(-45, m_swerveDrive).withTimeout(.5), // Turn to 22 degrees
+        new PIDGyroCommand(-25, m_swerveDrive).withTimeout(.5), // Turn to 22 degrees
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(0.2), // Align to april tag
         new WaitCommand(1), // Wait to allow time for arm to adjust
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "outtake", Constants.DEFAULT_SHOOTER_ANGLE), // Outtake a little
         new ShootSequence(m_DeviceSubsystem).withTimeout(1.7), // Shoot
         //THIRD NOTE
-        new PIDGyroCommand(90,m_swerveDrive).withTimeout(.75),
+        new PIDGyroCommand(90,m_swerveDrive).withTimeout(1),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOn", Constants.MAX_SHOOTER_ANGLE),
         new InstantCommand(() -> {
             m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         }),
-        new PIDCompositionDriveCommand(m_swerveDrive, -90, 60, 0).withTimeout(1.5), // Drive to 45 inches
+        new WaitCommand(.2),
+        new PIDCompositionDriveCommand(m_swerveDrive, -115, 70, 115).withTimeout(2), // Drive to 45 inches
         // new InstantCommand(() -> {
         //     m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         // }),
         // new PIDCompositionDriveCommand(m_swerveDrive, 0, 50, 0).withTimeout(1.5), // Drive to 45 inches
-        new PIDGyroCommand(0, m_swerveDrive).withTimeout(.75),
+        new PIDGyroCommand(0, m_swerveDrive).withTimeout(1.25),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOff", Constants.MAX_SHOOTER_ANGLE).withTimeout(0.25), // Turn intake off
         new WaitCommand(1), // Wait to allow time for arm to adjust
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "outtake", Constants.DEFAULT_SHOOTER_ANGLE), // Outtake a little
-        new ShootSequence(m_DeviceSubsystem).withTimeout(1.7) // Shoot
+        new ShootSequence(m_DeviceSubsystem).withTimeout(1.7), // Shoot
+        new WaitCommand(100)
     );
 }
 
 public static Command Blue_SBA(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePIDSubsystem m_AnglePIDSubsystem, LimelightSubsystem m_limelight, SwerveSubsystem m_swerveDrive) {
-    return new SequentialCommandGroup(
+        return new SequentialCommandGroup(
+        //AUTO LEFT
         new WaitCommand(.5),
-        // Zero Gyro
-        new InstantCommand(() -> {
-            Robot.zeroGYRO();
-        }),
-        /* FIRST NOTE */
-        new ShootSequence(m_DeviceSubsystem).withTimeout(1.7), // Shoot
-        /* SECOND NOTE */
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOn", Constants.MAX_SHOOTER_ANGLE), // Turn on intake
-        new InstantCommand(() -> {
-            m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
-        }),
-        new PIDCompositionDriveCommand(m_swerveDrive, 0, 40, 0).withTimeout(1.5), // Drive to 45 inches
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOff", Constants.MAX_SHOOTER_ANGLE).withTimeout(0.25), // Turn intake off
-        new WaitCommand(1), // Wait to allow time for arm to adjust
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "outtake", Constants.DEFAULT_SHOOTER_ANGLE), // Outtake a little
-        new ShootSequence(m_DeviceSubsystem).withTimeout(1.7), // Shoot
+        //ONE NOTE
+
+        //new AutoMovePIDCommand(0,20, m_swerveDrive.returnAverageDistance(), m_swerveDrive).withTimeout(1),
+        new PIDGyroCommand(60, m_swerveDrive).withTimeout(.5),
+        new WaitCommand(.5),
+        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(1),
+        //new PIDGyroCommand(45, m_swerveDrive), keep this commented out
+        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
+
+    //TWO NOTE
+    
+    new PIDGyroCommand(0, m_swerveDrive).withTimeout(1),
+    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOn",
+    Constants.MAX_SHOOTER_ANGLE),
+    new WaitCommand(1),
+    new AutoMovePIDCommand(0, 40, m_swerveDrive).until(m_DeviceSubsystem::checkRing).withTimeout(2),
+    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOff", Constants.
+    MAX_SHOOTER_ANGLE).withTimeout(1),
+
+    new PIDGyroCommand(-30, m_swerveDrive).withTimeout(.8),
+    new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(.5),
+    new WaitCommand(1),
+    new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "outtake", Constants.DEFAULT_SHOOTER_ANGLE),
+    new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
+
         //THIRD NOTE
         new InstantCommand(() -> {
             m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         }),
-        new PIDCompositionDriveCommand(m_swerveDrive, 145, 80, 0).withTimeout(1.5), // Drive to 45 inches
+        new PIDCompositionDriveCommand(m_swerveDrive, 130, 70, 0).withTimeout(1.5), // Drive to 45 inches
         new InstantCommand(() -> {
             m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         }),
-        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOn", Constants.MAX_SHOOTER_ANGLE),
-        new PIDGyroCommand(0,m_swerveDrive).withTimeout(0.3),
+        new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOn", Constants.MAX_SHOOTER_ANGLE), // Turn on intake
+            new PIDGyroCommand(0, m_swerveDrive).withTimeout(.25),
 
         new PIDCompositionDriveCommand(m_swerveDrive, 0, 50, 0).withTimeout(1.5), // Drive to 45 inches
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOff", Constants.MAX_SHOOTER_ANGLE).withTimeout(0.25), // Turn intake off
-        new PIDGyroCommand(30, m_swerveDrive).withTimeout(.5),
-        new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(.1),
         new WaitCommand(1), // Wait to allow time for arm to adjust
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "outtake", Constants.DEFAULT_SHOOTER_ANGLE), // Outtake a little
         new ShootSequence(m_DeviceSubsystem).withTimeout(1.7), // Shoot
@@ -818,29 +829,31 @@ public static Command Red_SKJ(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePID
         new InstantCommand(() -> {
             m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         }),
-        new PIDCompositionDriveCommand(m_swerveDrive, 0, 50, 0).withTimeout(1.5), // Drive to 45 inches
+        new PIDCompositionDriveCommand(m_swerveDrive, 7.5, 50, 0).withTimeout(1.5), // Drive to 45 inches
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOff", Constants.MAX_SHOOTER_ANGLE).withTimeout(0.25), // Turn intake off
-        new PIDGyroCommand(45, m_swerveDrive).withTimeout(.5), // Turn to 22 degrees
+        new PIDGyroCommand(25, m_swerveDrive).withTimeout(.5), // Turn to 22 degrees
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(0.2), // Align to april tag
         new WaitCommand(1), // Wait to allow time for arm to adjust
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "outtake", Constants.DEFAULT_SHOOTER_ANGLE), // Outtake a little
         new ShootSequence(m_DeviceSubsystem).withTimeout(1.7), // Shoot
         //THIRD NOTE
-        new PIDGyroCommand(-90,m_swerveDrive).withTimeout(.75),
+        new PIDGyroCommand(-90,m_swerveDrive).withTimeout(1),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOn", Constants.MAX_SHOOTER_ANGLE),
         new InstantCommand(() -> {
             m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         }),
-        new PIDCompositionDriveCommand(m_swerveDrive, -90, 60, 0).withTimeout(1.5), // Drive to 45 inches
+        new WaitCommand(.2),
+        new PIDCompositionDriveCommand(m_swerveDrive, -115, 70, -115).withTimeout(2), // Drive to 45 inches
         // new InstantCommand(() -> {
         //     m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         // }),
         // new PIDCompositionDriveCommand(m_swerveDrive, 0, 50, 0).withTimeout(1.5), // Drive to 45 inches
-        new PIDGyroCommand(0, m_swerveDrive).withTimeout(.75),
+        new PIDGyroCommand(0, m_swerveDrive).withTimeout(1.25),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOff", Constants.MAX_SHOOTER_ANGLE).withTimeout(0.25), // Turn intake off
         new WaitCommand(1), // Wait to allow time for arm to adjust
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "outtake", Constants.DEFAULT_SHOOTER_ANGLE), // Outtake a little
-        new ShootSequence(m_DeviceSubsystem).withTimeout(1.7) // Shoot
+        new ShootSequence(m_DeviceSubsystem).withTimeout(1.7), // Shoot
+        new WaitCommand(100)
     );
 }
 
@@ -878,7 +891,8 @@ public static Command Red_SJI(DeviceSubsystem m_DeviceSubsystem, ShooterAnglePID
         new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(.1),
         new WaitCommand(1), // Wait to allow time for arm to adjust
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "outtake", Constants.DEFAULT_SHOOTER_ANGLE), // Outtake a little
-        new ShootSequence(m_DeviceSubsystem).withTimeout(1.7) // Shoot
+        new ShootSequence(m_DeviceSubsystem).withTimeout(1.7),
+        new WaitCommand(10) // Shoot
     );
 }
 
