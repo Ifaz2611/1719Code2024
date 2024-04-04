@@ -1034,9 +1034,10 @@ public static Command RedorBlue_SABC_or_SKJI(DeviceSubsystem m_DeviceSubsystem, 
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "outtake", 0),
         //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(.25),
         new ParallelCommandGroup(
-            new PIDCompositionDriveCommand(m_swerveDrive, 135, 85, 0).withTimeout(1.5), // Move over 66 inches
+            new PIDCompositionDriveCommand(m_swerveDrive, 130, 87, 0).withTimeout(1.5), // Move over 66 inches
             new ShootSequence(m_DeviceSubsystem).withTimeout(2.4)
         ).withTimeout(2.5),
+        new PIDGyroCommand(0, m_swerveDrive).withTimeout(.2),
         
         /* THIRD NOTE */
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOn", Constants.MAX_SHOOTER_ANGLE),
@@ -1050,6 +1051,7 @@ public static Command RedorBlue_SABC_or_SKJI(DeviceSubsystem m_DeviceSubsystem, 
             m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         }),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "outtake", 0),
+        new PIDGyroCommand(0, m_swerveDrive).withTimeout(.2),
         new ParallelCommandGroup(
             new PIDCompositionDriveCommand(m_swerveDrive, 180, 45, 0).withTimeout(1.5), // Move over 66 inches
             new ShootSequence(m_DeviceSubsystem).withTimeout(2.4)
@@ -1060,18 +1062,23 @@ public static Command RedorBlue_SABC_or_SKJI(DeviceSubsystem m_DeviceSubsystem, 
         new InstantCommand(() -> {
             m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         }),
-        new PIDGyroCommand(30, m_swerveDrive).withTimeout(.5),
-        new PIDCompositionDriveCommand(m_swerveDrive, 52.5, 75, 30).withTimeout(1.5), // Move over 66 inches
+        new PIDGyroCommand(45, m_swerveDrive).withTimeout(.5),
+        new PIDCompositionDriveCommand(m_swerveDrive, 45, 75, 40).withTimeout(1.5), // Move over 66 inches
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOff", Constants.MAX_SHOOTER_ANGLE),
         new InstantCommand(() -> {
             m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         }),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "outtake", 0),
         //new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(.25),
+        new PIDGyroCommand(0, m_swerveDrive).withTimeout(.2),
         new ParallelCommandGroup(
-            new PIDCompositionDriveCommand(m_swerveDrive, -127.5, 75, 0).withTimeout(1.5), // Move over 66 inches
+            new PIDCompositionDriveCommand(m_swerveDrive, -130, 75, 0).withTimeout(1.5), // Move over 66 inches
             new ShootSequence(m_DeviceSubsystem).withTimeout(2.4)
         ),
+        new InstantCommand(() -> {
+            m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
+        }),
+        new PIDCompositionDriveCommand(m_swerveDrive, 0, 40, 0),
         
         new WaitCommand(100) //DO NOT COMMENT
     );

@@ -126,9 +126,9 @@ public final class Constants {
   public static final int LED_PWM_PIN = 1;
 
   // Stablizes the angle of the shooter
-  public static final double ShootAngleP = 0.02;
-  public static final double ShootAngleI = 0.0;
-  public static final double ShootAngleD = 0;
+  public static final double ShootAngleP = 0.02; //Do not change
+  public static final double ShootAngleI = 0.003; //Tune
+  public static final double ShootAngleD = 0.000;
 
   // These pins controls the angle of the shooter
   public static final int ShootAngleEncoder_PIN = 0; // encoder
