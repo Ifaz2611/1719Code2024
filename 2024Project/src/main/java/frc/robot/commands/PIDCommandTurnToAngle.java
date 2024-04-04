@@ -4,13 +4,15 @@
 
 package frc.robot.commands;
 
+// WPILIB
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
+
+// ROBOT
 import frc.robot.Constants;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
-import frc.robot.subsystems.SwerveSubsystem.SwerveDriveCoordinator; // unused import
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,39 +20,30 @@ import frc.robot.subsystems.SwerveSubsystem.SwerveDriveCoordinator; // unused im
 public class PIDCommandTurnToAngle extends PIDCommand {
   public double ANGLEAIM;
   /** Creates a new PIDCommandTurnToAngle. */
-  public PIDCommandTurnToAngle(LimelightSubsystem mLimelightSubsystem , SwerveSubsystem mSwerveSubsystem/*, LimelightSwerveManager mLimelightSwerveManager */) {
+  public PIDCommandTurnToAngle(LimelightSubsystem mLimelightSubsystem , SwerveSubsystem mSwerveSubsystem) {
     super(
-        // The controller that the command will use
-        new PIDController(Constants.PTurnToAngle, Constants.ITurnToAngle, Constants.DTurnToAngle),
-        // This should return the measurement
-        
-         () -> mLimelightSubsystem.getAngleToSpeaker(),
-         //mLimelightSubsystem.getAngleToSpeaker()
-        // This should return the setpoint (can also be a constant)
-        ()-> 0,
-        // This uses the output
-        output -> {
-          //System.out.println("Speaker angle horz: " + mLimelightSubsystem.getAngleToSpeaker());
-         mSwerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0, 0, -output);
-         
-        //  if (mLimelightSubsystem.getAngleToSpeaker()){
-            //mLimelightSwerveManager.setAnglePID(output, mLimelightSubsystem.getAngleToSpeaker());
-
-        //  }
-        });
-        
-        getController().setTolerance(Constants.LimeLightDegreesTolerance, Constants.LimeLightVelocityTolerance);
+      // The controller that the command will use
+      new PIDController(Constants.PTurnToAngle, Constants.ITurnToAngle, Constants.DTurnToAngle),
+      // This should return the measurement (current angle to speaker from limelight)      
+      () -> mLimelightSubsystem.getAngleToSpeaker(),
+      // This should return the setpoint (wants to end at a 0 degree angle)
+      ()-> 0,
+      // This uses the output
+      output -> {
+        // Sends command to turn to align with april tag
+        mSwerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(0, 0, -output);
+      }
+    );
+    // Configure additional PID options by calling `getController` here.    
+    getController().setTolerance(Constants.LimeLightDegreesTolerance, Constants.LimeLightVelocityTolerance);
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(mSwerveSubsystem, mLimelightSubsystem);
-
-    // Configure additional PID options by calling `getController` here.    
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
-          SmartDashboard.putNumber("Before Command Sequence in pid aim y", 2);
+    SmartDashboard.putNumber("Before Command Sequence in pid aim y", 2);
     return this.m_controller.atSetpoint();
   }
 }

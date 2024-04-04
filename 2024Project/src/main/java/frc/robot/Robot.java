@@ -4,27 +4,17 @@
 
 package frc.robot;
 
-import com.ctre.phoenix6.configs.MountPoseConfigs;
-import com.ctre.phoenix6.configs.Pigeon2Configuration;
+// Phoenix
 import com.ctre.phoenix6.hardware.Pigeon2;
 
+// WPILIB
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.cameraserver.CameraServer;
-
-import frc.robot.commands.Autos;
-import frc.robot.subsystems.SwerveSubsystem;
-import frc.robot.subsystems.DeviceSubsystem;
-import frc.robot.subsystems.ShooterAnglePIDSubsystem;
-import frc.robot.subsystems.SwerveDirectionPIDSubsystem;
-import frc.robot.subsystems.LimelightSubsystem;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -33,59 +23,85 @@ import frc.robot.subsystems.LimelightSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
+  // Autonomous command
   private Command m_autonomousCommand;
+  // Robot container
   private RobotContainer m_robotContainer;
+  // Gyroscope
   public static Pigeon2 GYRO = new Pigeon2(Constants.CAN_GYRO_PORT);
-
   // Robot auton choices
-  private final String RedOnePosition = "RedAmp2note";
-  private final String RedThreePosition = "RedClimber2note";
-  private final String BlueOnePosition = "BlueClimber2note";
-  private final String TwoPosition = "RedOrBlueCenter2note";
-  private final String BlueThreePosition = "BlueAmp2note";
-  private final String TEST3NOTE = "Center3note(test)";
 
-  private final String AutoLeftGoodTeams = "AutoLeftGoodTeams";
-  private final String AutoCenterGoodTeams = "AutoCenterGoodTeams";
-  private final String AutoRightGoodTeams = "AutoRightGoodTeams";
-
-  // private String m_autoSelected;
+  // Chooser for auton modes
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  private final SendableChooser<String> m_side = new SendableChooser<>(); // this is for the alliance
+
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
+    // Start camera capture
     CameraServer.startAutomaticCapture();
     UsbCamera USBCAM = CameraServer.startAutomaticCapture();
     USBCAM.setResolution(720, 540);
-
-
-    // makes a new camera I HOPE :)
     CameraServer.startAutomaticCapture();
-
+    
+    // Instantiate our RobotContainer. This will perform all our button bindings
     m_robotContainer = new RobotContainer();
+    // Reset gyro
     GYRO.reset();
- 
-   // autonomousCommand = new ;
+
+    // sets up sides
+    m_side.setDefaultOption("blue but default", "blue");
+    m_side.addOption("Red Side", "red");
+    m_side.addOption("Blue Side", "blue");
+
 
     // Setup smart dashboard to choose auton
-    m_chooser.setDefaultOption("RedOrBlueCenter2note", TwoPosition);
-    m_chooser.addOption("RedAmp2note", RedOnePosition);
-    m_chooser.addOption("RedClimber2note", RedThreePosition);
-    m_chooser.addOption("BlueAmp2note", BlueThreePosition);
-    m_chooser.addOption("BlueClimber2note", BlueOnePosition);
-    // m_chooser.addOption("RedOrBlueCenter2note", TwoPosition); THIS IS COMMENTED BECAUSE IT IS DEFAULT OPTION
-    m_chooser.addOption("Center3note(test)", TEST3NOTE);
+    // m_chooser.setDefaultOption("Center2note", TwoPosition);
 
-    m_chooser.addOption("AutoRightGoodTeams", AutoLeftGoodTeams);
-    m_chooser.addOption("AutoCenterGoodTeams", AutoCenterGoodTeams);
-    m_chooser.addOption("AutoLeftGoodTeams", AutoRightGoodTeams);
+    // m_chooser.addOption("RedAmp2note", RedOnePosition);
 
+    // m_chooser.addOption("RedClimber2note", RedThreePosition);
+    // m_chooser.addOption("amp 2 note", BlueThreePosition);
+    // m_chooser.addOption("Climber 2 note", BlueOnePosition);
+    // m_chooser.addOption("Center3note(test)", TEST3NOTE);
+
+    // 2 notes
+    m_chooser.addOption("aA", "aA");
+    m_chooser.addOption("cC", "cC");
+    m_chooser.addOption("sS", "sS");
+
+    m_chooser.addOption("cCS", "cCS");
+    m_chooser.addOption("sSA", "sSA");
+    m_chooser.addOption("sSC", "sSC");
+
+    m_chooser.addOption("aAS", "aAS");
+
+    m_chooser.addOption("aAFIVE", "aAFIVE");
+
+    // 4 note
+    m_chooser.addOption("sCSA","sCSA");
+
+    // auto with good teams i think
+    // m_chooser.addOption("AutoRightGoodTeams", AutoLeftGoodTeams);
+    // m_chooser.addOption("AutoCenterGoodTeams", AutoCenterGoodTeams);
+    // m_chooser.addOption("AutoLeftGoodTeams", AutoRightGoodTeams);
+
+
+    // m_chooser.addOption("RedAmp3Note", RedAmp3Note);
+
+    // m_chooser.addOption("ThreeNoteRedAmp", ThreeNoteRedAmp);
+
+   
+
+
+    // Put choices on smart dashboard
     SmartDashboard.putData("Auto choices", m_chooser);
+        SmartDashboard.putData("Alliance", m_side);
+
   }
 
   /**
@@ -114,18 +130,12 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    //System.out.println("WORKING");
-   m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_chooser.getSelected());
-      // m_autonomousCommand = m_robotContainer.getAutonomousCommand("default");
-
-    // Autos.defaultAuto(new DeviceSubsystem(), new ShooterAnglePIDSubsystem(), new LimelightSubsystem(), new SwerveSubsystem(Constants.m_leftFrontDirection, Constants.m_leftBackDirection,
-    // Constants.m_rightFrontDirection, Constants.m_rightBackDirection));
+    boolean isRed = m_side.getSelected().equals("red") ? true : false;
+    // Get the currently selected auton command
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_chooser.getSelected(), isRed);
 
   }
-  // Return the instance of the gyroscope
-  public static Pigeon2 getGYRO() {
-    return GYRO;
-  }
+
   // Zero the gyroscope
   public static void zeroGYRO() {
     GYRO.reset();
@@ -134,7 +144,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    //m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_autoSelected);
+    // Schedule the autonomous command 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
