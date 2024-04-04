@@ -1,32 +1,55 @@
 # 1719Code2024
-Code projects this year
-
-LAST YEAR STUFF, not accurate to this year yet:
+Code for 1719's 2024 robot: RINGO! 
 
 ## CAN IDs
 
 | Motor Label   | Motor Location | CAN ID |
 | ------------- | -------------- | ------ |
-| Motor #1      | Left Drive     | 1      |
-| Motor #2      | Left Drive     | 2      |
-| Motor #3      | Right Drive    | 3      |
-| Motor #4      | Right Drive    | 4      |
-| Motor #5      | Intake         | 5      |
-| Motor #6      | Shooter        | 6      |
-| Motor #7      | Queue Loading  | 7      |
-| Motor #8      | Queue Shooter  | 8      |
+| Motor #1      | Left Front Drive     | 1      |
+| Motor #2      | Left Front Rotation Motor    | 2      |
+| Motor #3      | Left Front CANCoder    | 3      |
+| Motor #4      | Right Front Drive    | 4      |
+| Motor #5      | Right Front Rotation Motor       | 5      |
+| Motor #6      | Right Front CANCoder       | 6      |
+| Motor #7      | Left Back Drive    | 7      |
+| Motor #8      | Left Back Rotation Motor | 8      |
+| Motor #9      | Left Back CANCoder | 9    |
+| Motor #10     | Right Back Drive |10      |
+| Motor #11     | Right Back Rotation Motor |11      |
+| Motor #12     | Right Back CANCoder |12      |
+| Gyro #13     | Gyro Port |13      |
+| Motor #14     | Intake |14      |
+| Motor #15     | Shooter |15     |
+| Motor #16     | arm motor |16      |
+| Motor #17     | Climber Drive Motor | 17      |
+
+
+
+
+
+
+
 
 ## Button Mappings:
 ### Driver Controller: 
       Left Axis: Controls left motors /n
       Right Axis: Controls right motors /n
+      Button 5: Turns the robot towards the limelight /n
 ### Helper Controller:
-      Left Stick: Push out balls from intake /n
-      Right Stick: Pull in balls into intake /n
-      A: Start shoot queue /n
-      B: Stop shoot queue /n
-      X: Start shooting /n
-      Y: Stop shooting /n
+      Moving X axis on Joystick + Button ???: Moves the climber motors left or right/n
+      Moving Y axis on Joystick + Button 10: Enables manual arm control\n
+      Button 1: Shoots /n
+      Button 2: Suck in note /n
+      Button 3: Intake sequence /n
+      Button 6: Amp shoot /n
+      Button 7: Resets the Gyro /n
+      Button 11: Raises the climbers /n
+      Button 12: Lowers the climbers /n
+      TODO: add a propper button for climb motors :)
+      
+      
+      
+      
 
 
 ## Instructions
@@ -63,6 +86,8 @@ Note: Just use the built in visual studio code git stuff, it's easiar. I'm leavi
 
 ```git push``` push your commits to github
 
+```git checkout (-b) <branch goes here>``` Creates / pulls a branch from github. Use -b when checking out a new branch!
+
 ## Programmers:
 
 ------------------------------------------------------
@@ -70,12 +95,16 @@ Sam Rabb-Jaros  @GethrexFe(Lead programmer 1)
 -------------------------------------------------------
 Jai Setty @IBHishere(Cool deaL Programmer)
 _______________________________________________________
+Tegan Hakim @TeganHakim
+_______________________________________________________
 Harrison @Hbg1010 
 _______________________________________________________
-Andrew Makarevich @andrewm24 (Space Programmer)
+Neel @realrealneel
 ___________________________________________________
 Owen @Owr333
 _______________________________________________________
+Cece @cece1233
+
 
 
 
