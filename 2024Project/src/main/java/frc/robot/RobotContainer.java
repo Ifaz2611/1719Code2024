@@ -250,7 +250,7 @@ public class RobotContainer {
       } else if (m_autoSelected.equals("aAFIVE")) { 
         return Autos.Red_SKH(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
         
-      } else if (m_autoSelected.equals("sCSA")) { 
+      } else if (m_autoSelected.equals("sASC")) { 
         return Autos.Red_SI(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
         
       } 
@@ -281,7 +281,7 @@ public class RobotContainer {
       } else if (m_autoSelected.equals("aAFIVE")) { 
         return Autos.Blue_SCH(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
         
-      } else if (m_autoSelected.equals("sCSA")) { 
+      } else if (m_autoSelected.equals("sASC")) { 
         return Autos.RedorBlue_SABC_or_SKJI(m_DeviceSubsystem, m_AnglePIDSubsystem, m_limelight, m_swerveDrive);
         
       } 

@@ -83,7 +83,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("aAFIVE", "aAFIVE");
 
     // 4 note
-    m_chooser.addOption("sCSA","sCSA");
+    m_chooser.addOption("sASC","sASC");
 
     // auto with good teams i think
     // m_chooser.addOption("AutoRightGoodTeams", AutoLeftGoodTeams);

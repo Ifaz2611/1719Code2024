@@ -1024,17 +1024,18 @@ public static Command RedorBlue_SABC_or_SKJI(DeviceSubsystem m_DeviceSubsystem, 
         new InstantCommand(() -> {
             m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         }),
-        new PIDCompositionDriveCommand(m_swerveDrive, 35, 75, 22).withTimeout(1.5), // Move over 66 inches
+        new PIDGyroCommand(-30, m_swerveDrive).withTimeout(.5),
+        new PIDCompositionDriveCommand(m_swerveDrive, -35, 85, -30).withTimeout(1.5), // Move over 66 inches
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOff", Constants.MAX_SHOOTER_ANGLE),
         new InstantCommand(() -> {
             m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         }),
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "outtake", 0),
         new ParallelCommandGroup(
-            new PIDCompositionDriveCommand(m_swerveDrive, -145, 75, 0).withTimeout(1.5), // Move over 66 inches
+            new PIDCompositionDriveCommand(m_swerveDrive, 145, 85, 0).withTimeout(1.5), // Move over 66 inches
             new PIDCommandTurnToAngle(m_limelight, m_swerveDrive).withTimeout(.25),
             new ShootSequence(m_DeviceSubsystem).withTimeout(2.4)
-        ),
+        ).withTimeout(2.5),
         
         /* THIRD NOTE */
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOn", Constants.MAX_SHOOTER_ANGLE),
@@ -1056,7 +1057,8 @@ public static Command RedorBlue_SABC_or_SKJI(DeviceSubsystem m_DeviceSubsystem, 
         new InstantCommand(() -> {
             m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
         }),
-        new PIDCompositionDriveCommand(m_swerveDrive, -35, 75, -22).withTimeout(1.5), // Move over 66 inches
+        new PIDGyroCommand(30, m_swerveDrive).withTimeout(.5),
+        new PIDCompositionDriveCommand(m_swerveDrive, 35, 75, 30).withTimeout(1.5), // Move over 66 inches
         new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "intakeOff", Constants.MAX_SHOOTER_ANGLE),
         new InstantCommand(() -> {
             m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
