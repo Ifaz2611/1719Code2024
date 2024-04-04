@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import java.time.Instant;
+
 // WPILIB Methods
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -154,12 +156,16 @@ public class RobotContainer {
 
     // Shoot into Amp - BUTTON 6 (HELPER)
     new JoystickButton(m_helperController, 6).onTrue(
-      new ParallelCommandGroup(
+      new SequentialCommandGroup(
+        new InstantCommand(() -> {
+          m_swerveDrive.resetDistanceMotors(); // Reset distance motors (CURCIAL TO DRIVING)
+      }),
+        new PIDCompositionDriveCommand(m_swerveDrive, 0, 30, 0).withTimeout(1)
         // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "setAngle", Constants.MIN_SHOOTER_ANGLE),
         // new WaitCommand(1.5),
         // new IntakeSequence(m_DeviceSubsystem, m_AnglePIDSubsystem, "ampShoot", Constants.MIN_SHOOTER_ANGLE)
-        new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
-        new PIDGyroCommand(60, m_swerveDrive).withTimeout(.5)
+        //new ShootSequence(m_DeviceSubsystem).withTimeout(2.4),
+        //new PIDGyroCommand(60, m_swerveDrive).withTimeout(.5)
       )
     );
 

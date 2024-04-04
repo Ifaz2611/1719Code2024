@@ -17,12 +17,17 @@ import com.ctre.phoenix6.hardware.CANcoder;
 
 // WPILIB
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
 // ROBOT
 import frc.robot.Constants;
 
 public class SwerveDirectionPIDSubsystem extends PIDSubsystem {
+
+  public double absEncoderVal = 0;
+  private double lastRunTime = Timer.getFPGATimestamp();
+
   SwerveDriveWheel m_DriveWheel;
   CANcoder directionSensor;
   public int directionMotorpin;
@@ -51,7 +56,13 @@ public class SwerveDirectionPIDSubsystem extends PIDSubsystem {
   // Return the direction sensors measurement
   @Override
   public double getMeasurement() {
-    return directionSensor.getAbsolutePosition().getValueAsDouble() * 360;    
+
+    double currentTime = Timer.getFPGATimestamp();
+    if (currentTime - lastRunTime > Constants.ENCODER_TIMING_DELAY) {
+     absEncoderVal = directionSensor.getAbsolutePosition().getValueAsDouble() * 360;
+      lastRunTime = Timer.getFPGATimestamp();
+    }
+    return absEncoderVal;    
   }
 
   // Set direction given a setpoint

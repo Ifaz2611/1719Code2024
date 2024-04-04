@@ -152,7 +152,7 @@ public final class Constants {
   ***************************************/
 
   // Static colors during match
-  public static final double LED_TIMING_DELAY = 0.4; // How many seconds in between updates for LED Subsystem
+  public static final double ENCODER_TIMING_DELAY = 0.2; // How many seconds in between updates for LED Subsystem
 
   public static final double BASELINE_COLOR = 0.93; // WHITE
   public static final double HAS_NOTE_COLOR = 0.63; // RED ORANGE
@@ -204,5 +204,5 @@ public final class Constants {
   public static final double SHOOTERINTAKESUPPORT = -0.01;
 
   // Error Correction Ratio of 41:30 - Robot went 41 inches when we provide 30
-  public static final double LINEAR_MOVE_RATIO = (44./30.);
+  public static final double LINEAR_MOVE_RATIO = (44.*95.5/(30.*100.));
 } 
