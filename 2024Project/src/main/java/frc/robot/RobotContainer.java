@@ -111,7 +111,7 @@ public class RobotContainer {
       this.m_swerveDrive, 
       m_driverController::getY, 
       m_driverController::getX,
-      m_helperController::getTwist
+      m_driverController::getTwist
     );
     this.m_swerveDrive.setDefaultCommand(DriveMode);
     
