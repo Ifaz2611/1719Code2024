@@ -204,5 +204,5 @@ public final class Constants {
   public static final double SHOOTERINTAKESUPPORT = -0.01;
 
   // Error Correction Ratio of 41:30 - Robot went 41 inches when we provide 30
-  public static final double LINEAR_MOVE_RATIO = (44.*95.5/(30.*100.));
+  public static final double LINEAR_MOVE_RATIO = (40.*30.75/900.);
 } 

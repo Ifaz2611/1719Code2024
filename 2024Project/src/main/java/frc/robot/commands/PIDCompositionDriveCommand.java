@@ -39,7 +39,7 @@ public class PIDCompositionDriveCommand extends Command {
     this.swerveSubsystem = swerveSubsystem;
     this.direction = direction;
     // Convert distance using LINEAR_MOVE_RATIO
-    this.distance = (distance / Constants.LINEAR_MOVE_RATIO);
+    this.distance = (distance/Constants.LINEAR_MOVE_RATIO);
     this.gyroAngle = gyroAngle;
     swerveSubsystem.resetDistanceMotors();
   }

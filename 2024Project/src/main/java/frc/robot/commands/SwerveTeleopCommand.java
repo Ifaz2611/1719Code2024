@@ -7,6 +7,7 @@ package frc.robot.commands;
 // JAVA
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 // WPILIB
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -48,6 +49,7 @@ public class SwerveTeleopCommand extends Command {
     double x = this.m_getX.getAsDouble();
     double y = this.m_getY.getAsDouble();
     double phi = this.m_getTwist.getAsDouble();
+    
 
     // Scaled x and y positions
     double scaledX = scaleJoystickInput(x,Constants.JOYSTICK_SCALE_FACTOR,0);
@@ -62,8 +64,10 @@ public class SwerveTeleopCommand extends Command {
     double translatePower = Math.sqrt((Math.pow(scaledY, 2) + Math.pow(-scaledX, 2)) / 2);
     double direction = angleFromXY(-scaledX, scaledY);
     // Send the command to move given direction and angle
-    this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(direction, translatePower*Constants.TELEOPSPEEDMODIFIER, scaledPhi*Constants.TELEOPTWISTMODIFIER);
-  }
+    this.m_swerveSubsystem.SWERVE_DRIVE_COORDINATOR.drifTranslate(direction, 
+    translatePower*Constants.TELEOPSPEEDMODIFIER, //limit the translate power
+    scaledPhi*Constants.TELEOPTWISTMODIFIER);
+  } 
 
   // Called once the command ends or is interrupted.
   @Override
